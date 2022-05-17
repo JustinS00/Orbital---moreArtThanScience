@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class Terrain : MonoBehaviour {
 
-    [Header("Lighting")]
     /*
+    [Header("Lighting")]
     public Texture2D worldBlocksMap;
     public Material lightShader;
     public float lightThreshold;
@@ -47,7 +47,6 @@ public class Terrain : MonoBehaviour {
     private List<Vector2> worldBlocks = new List<Vector2>();
     private List<GameObject> worldBlocksObject = new List<GameObject>();
 
-
     private int spawnX = 0;
     private int spawnY = 0;
 
@@ -85,8 +84,6 @@ public class Terrain : MonoBehaviour {
         }
         worldBlocksMap.Apply();
         */
-
-        
         player.spawnPos = new Vector2(spawnX, spawnY + 2);
         player.Spawn();
 
@@ -198,8 +195,6 @@ public class Terrain : MonoBehaviour {
             /*
             RemoveLightSource(x,y);
             */
-
-
             //Normal Code
             GameObject newBlock = new GameObject();
             int chunkCoordinate = getChunkNo(x, y);
@@ -220,7 +215,7 @@ public class Terrain : MonoBehaviour {
     public void destroyBlock(int x, int y) {
         if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
             Vector2 pos = new Vector2(x, y);
-            Destroy(worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))]);
+            Destroy(worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))].gameObject);
             //worldBlocksMap.SetPixel(x,y, Color.white);
             //LightBlock(x, y, 1f, 0);
             GameObject newBlockDrop = Instantiate(blockDrop, new Vector2(x, y + 0.5f), Quaternion.identity);
