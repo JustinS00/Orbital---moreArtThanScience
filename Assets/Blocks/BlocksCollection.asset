@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af31ac4ee751f14a9ca7054e57916a3, type: 3}
+  m_Name: BlocksCollection
+  m_EditorClassIdentifier: 
+  stone: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
+  dirt: {fileID: 11400000, guid: 1862ea7880732074db360993eb0b3825, type: 2}
+  grass: {fileID: 11400000, guid: ac297b99d0213c6409f5762b8c3be42b, type: 2}
+  log: {fileID: 11400000, guid: abf3c35a14e04a84e90dce7bb2961db7, type: 2}
+  leaves: {fileID: 11400000, guid: e81dccb93fe311a4f96638090930872b, type: 2}
