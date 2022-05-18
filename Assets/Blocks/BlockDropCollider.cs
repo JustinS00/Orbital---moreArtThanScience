@@ -5,10 +5,12 @@ using UnityEngine;
 public class BlockDropCollider : MonoBehaviour
 {   
     public bool touchingPlayer;
+    public ItemClass item;
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
             touchingPlayer = true;
+            col.GetComponent<Inventory>().Add(item);
             Destroy(this.gameObject);
             //Add to player inv
         }
