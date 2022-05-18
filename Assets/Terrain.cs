@@ -215,11 +215,16 @@ public class Terrain : MonoBehaviour {
     public void destroyBlock(int x, int y) {
         if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
             Vector2 pos = new Vector2(x, y);
-            Destroy(worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))].gameObject);
+            GameObject obj = worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))];
+            Destroy(obj.gameObject);
             //worldBlocksMap.SetPixel(x,y, Color.white);
             //LightBlock(x, y, 1f, 0);
             GameObject newBlockDrop = Instantiate(blockDrop, new Vector2(x, y + 0.5f), Quaternion.identity);
-            newBlockDrop.GetComponent<SpriteRenderer>().sprite = worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))].GetComponent<SpriteRenderer>().sprite;
+            newBlockDrop.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
+
+            ItemClass tileDropItem = new ItemClass(obj);
+            newBlockDrop.GetComponent<BlockDropCollider>().item = tileDropItem;
+            
 
             worldBlocksObject.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
             worldBlocks.Remove(new Vector2(x,y));

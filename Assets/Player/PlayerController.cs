@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {  
+    public bool showInv = false;
+    public Inventory inventory;
     public BlockClass selectedBlock;
 
     public float moveSpeed = 5;
@@ -15,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     public bool hit;
     public bool place;
+    public float jump;
+    public bool siu;
 
     public Vector2 spawnPos;
     public Vector2Int mousePos;
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         GetComponent<Transform>().position = spawnPos;
+        inventory = GetComponent<Inventory>();
     }
 
     private void OnTriggerStay2D(Collider2D col) {
@@ -36,15 +41,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        horizontal = Input.GetAxis("Horizontal");
-        float jump = Input.GetAxis("Jump");
-        hit = Input.GetMouseButton(0);
-        place = Input.GetMouseButton(1);
-        if (horizontal > 0) {
-            transform.localScale = new Vector3(-1,1,1);
-        } else if (horizontal < 0)  {
-            transform.localScale = new Vector3(1,1,1);
-        }
 
         Vector2 movement = new Vector2(horizontal * moveSpeed, rb.velocity.y);
 
@@ -72,10 +68,42 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update() {
+        horizontal = Input.GetAxis("Horizontal");
+        jump = Input.GetAxis("Jump");
+        hit = Input.GetMouseButton(0);
+        place = Input.GetMouseButton(1);
+        
+        if (Input.GetKeyDown(KeyCode.E)) {
+            showInv = !showInv;
+        }
+        
+
+        /*
+        if (horizontal > 0) {
+            transform.localScale = new Vector3(-1,1,1);
+        } else if (horizontal < 0)  {
+            transform.localScale = new Vector3(1,1,1);
+            
+        }
+        */
+
+        if (horizontal > 0) {
+            transform.eulerAngles = new Vector3(0,-180,0);
+        } else if (horizontal < 0)  {
+            transform.eulerAngles = new Vector3(0,0,0);
+        }
+        
+        siu = Input.GetKeyDown(KeyCode.UpArrow);
         anim.SetFloat("horizontal", horizontal);
         anim.SetBool("hit", hit);
+        anim.SetBool("siu", siu);
+        if (siu) {
+            jump = 1.0f;
+        }
         mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - 0.5f);
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
+
+        inventory.InventoryUI.SetActive(showInv);
     }
 
 }
