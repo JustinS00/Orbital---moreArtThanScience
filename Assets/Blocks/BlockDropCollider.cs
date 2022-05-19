@@ -10,10 +10,10 @@ public class BlockDropCollider : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
             touchingPlayer = true;
-            col.GetComponent<Inventory>().Add(item);
-            Destroy(this.gameObject);
             //Add to player inv
+            if (col.GetComponent<Inventory>().Add(item)) {
+                Destroy(this.gameObject);
+            } 
         }
     }
-
 }

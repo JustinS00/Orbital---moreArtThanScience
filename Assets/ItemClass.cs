@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//public class ItemClass : MonoBehaviour {
+
+[System.Serializable]
 public class ItemClass {
 
     public enum ItemType {block, tool};
@@ -23,13 +27,16 @@ public class ItemClass {
         sprite = _block.blockSprite;
         isStackable = true;
         itemType = ItemType.block;
+        block = block;
     }
 
     public ItemClass(ToolClass _tool) {
         name = _tool.toolName;
         sprite = _tool.sprite;
         isStackable = false;
+        itemType = ItemType.tool;
         toolType = _tool.toolType;
+        tool = _tool;
     }
 
     public ItemClass(GameObject _obj) {

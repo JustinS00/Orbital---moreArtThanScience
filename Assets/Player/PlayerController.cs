@@ -6,7 +6,10 @@ public class PlayerController : MonoBehaviour
 {  
     public bool showInv = false;
     public Inventory inventory;
-    public BlockClass selectedBlock;
+    public ItemClass selectedItem;
+
+    public int selectionIndex = 0;
+    public GameObject hotBarSelector;
 
     public float moveSpeed = 5;
     public float jumpForce = 10;
@@ -37,7 +40,6 @@ public class PlayerController : MonoBehaviour
         if (col.CompareTag("Ground")) {
             onGround = true;
         }
-
     }
 
     private void FixedUpdate() {
@@ -55,38 +57,50 @@ public class PlayerController : MonoBehaviour
         //destroy or place blocks
         if (hit) {
             terrain.destroyBlock(mousePos.x, mousePos.y);
-        } else if (place) {
-            //Debug.Log(GetComponent<Transform>().position.GetType());
+        } else if (place && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
             int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
             int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
             int minY = Mathf.FloorToInt(GetComponent<Transform>().position.y);
             int maxY = Mathf.CeilToInt(GetComponent<Transform>().position.y);
+
             if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
-                terrain.placeBlock(mousePos.x, mousePos.y, selectedBlock.blockSprite);
+                if(selectedItem.block) { //Not sure why needed but giving errors if not included
+                    terrain.placeBlock(mousePos.x, mousePos.y, selectedItem.block.blockSprite);
+                }
             }
         }
     }
 
     private void Update() {
+        //Hotbar
+        //can use number keys as well to add later
+        if (Input.GetAxis("Mouse ScrollWheel") > 0) {
+                selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
+        } else if ((Input.GetAxis("Mouse ScrollWheel") < 0)) {
+            selectionIndex = (selectionIndex - 1 + inventory.inventoryWidth) % inventory.inventoryWidth;
+        }
+
+        hotBarSelector.transform.position = inventory.hotbarUISlots[selectionIndex].transform.position;
+        InventorySlot selected = inventory.inventory[selectionIndex, inventory.inventoryHeight - 1];
+        if (selected != null) {
+            selectedItem = selected.item;
+        } else {
+            selectedItem = null;
+        }
+        //Debug.Log(selectedItem);
+
+        // Toggle Inventory
+        if (Input.GetKeyDown(KeyCode.E)) {
+            showInv = !showInv;
+        }
+        inventory.InventoryUI.SetActive(showInv);
+
+        // Movement
         horizontal = Input.GetAxis("Horizontal");
         jump = Input.GetAxis("Jump");
         hit = Input.GetMouseButton(0);
         place = Input.GetMouseButton(1);
         
-        if (Input.GetKeyDown(KeyCode.E)) {
-            showInv = !showInv;
-        }
-        
-
-        /*
-        if (horizontal > 0) {
-            transform.localScale = new Vector3(-1,1,1);
-        } else if (horizontal < 0)  {
-            transform.localScale = new Vector3(1,1,1);
-            
-        }
-        */
-
         if (horizontal > 0) {
             transform.eulerAngles = new Vector3(0,-180,0);
         } else if (horizontal < 0)  {
@@ -103,7 +117,6 @@ public class PlayerController : MonoBehaviour
         mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - 0.5f);
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
 
-        inventory.InventoryUI.SetActive(showInv);
     }
 
 }

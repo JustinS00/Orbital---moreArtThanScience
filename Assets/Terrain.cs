@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// TODO
-
+// TODO refactor code
 public class Terrain : MonoBehaviour {
 
     /*
@@ -46,6 +45,7 @@ public class Terrain : MonoBehaviour {
 
     private List<Vector2> worldBlocks = new List<Vector2>();
     private List<GameObject> worldBlocksObject = new List<GameObject>();
+    private List<BlockClass> worldBlockClasses = new List<BlockClass>();
 
     private int spawnX = 0;
     private int spawnY = 0;
@@ -111,7 +111,7 @@ public class Terrain : MonoBehaviour {
      private int getChunkNo(int x) {
         return Mathf.FloorToInt(x / (float) chunkSize);
     }
-
+    
     public void GenerateNoiseTexture() {
         noiseTexture = new Texture2D(worldSize, worldHeight);
 
@@ -125,9 +125,7 @@ public class Terrain : MonoBehaviour {
     }
 
     public void GenerateChunks() {
-      
         int numChunks = Mathf.CeilToInt(worldSize / (float) chunkSize);
-
         worldChunks = new GameObject[numChunks];
         for (int i = 0; i < numChunks; i ++) {
             GameObject newChunk = new GameObject();
@@ -142,9 +140,8 @@ public class Terrain : MonoBehaviour {
         for (int i = 0; i < worldSize; i++) {
             float height = Mathf.PerlinNoise(i * terrainFreq, seed * terrainFreq) * heightMulitplier + heightAddition;
             for (int j = 0; j < height; j++) {
-                Sprite blockSprite;
+                Sprite blockSprite; // change to BlockClass block
                 if (j < height - dirtLayerHeight) {
-                    //Debug.Log(blocksCollection);
                     blockSprite = blocksCollection.stone.blockSprite;
                 } else if (j < height - 1) {
                     blockSprite = blocksCollection.dirt.blockSprite;
@@ -176,7 +173,6 @@ public class Terrain : MonoBehaviour {
                 placeBlock(x + i, y + j, blocksCollection.leaves.blockSprite);
             }
         }
-
         for (int i = -1; i < 2; i++) {
             for (int j = treeHeight + 2; j < treeHeight + 3; j++) {
                 placeBlock(x + i, y + j, blocksCollection.leaves.blockSprite);
@@ -184,7 +180,7 @@ public class Terrain : MonoBehaviour {
         }
     }
 
-    public void placeBlock(int x, int y, Sprite block) {
+    public void placeBlock(int x, int y, Sprite block) {//change sprite block to blockclass block
         //setting spawnPoint of player - should not be here
         if (x == spawnX & y > spawnY) {
             spawnY = y;
@@ -225,7 +221,6 @@ public class Terrain : MonoBehaviour {
             ItemClass tileDropItem = new ItemClass(obj);
             newBlockDrop.GetComponent<BlockDropCollider>().item = tileDropItem;
             
-
             worldBlocksObject.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
             worldBlocks.Remove(new Vector2(x,y));
             //worldBlocksMap.Apply();
