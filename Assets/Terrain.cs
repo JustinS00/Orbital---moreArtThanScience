@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// TODO
-
+// TODO refactor code
 public class Terrain : MonoBehaviour {
 
     /*
@@ -46,6 +45,7 @@ public class Terrain : MonoBehaviour {
 
     private List<Vector2> worldBlocks = new List<Vector2>();
     private List<GameObject> worldBlocksObject = new List<GameObject>();
+    private List<BlockClass> worldBlockClasses = new List<BlockClass>();
 
     private int spawnX = 0;
     private int spawnY = 0;
@@ -111,7 +111,7 @@ public class Terrain : MonoBehaviour {
      private int getChunkNo(int x) {
         return Mathf.FloorToInt(x / (float) chunkSize);
     }
-
+    
     public void GenerateNoiseTexture() {
         noiseTexture = new Texture2D(worldSize, worldHeight);
 
@@ -125,9 +125,7 @@ public class Terrain : MonoBehaviour {
     }
 
     public void GenerateChunks() {
-      
         int numChunks = Mathf.CeilToInt(worldSize / (float) chunkSize);
-
         worldChunks = new GameObject[numChunks];
         for (int i = 0; i < numChunks; i ++) {
             GameObject newChunk = new GameObject();
@@ -142,18 +140,17 @@ public class Terrain : MonoBehaviour {
         for (int i = 0; i < worldSize; i++) {
             float height = Mathf.PerlinNoise(i * terrainFreq, seed * terrainFreq) * heightMulitplier + heightAddition;
             for (int j = 0; j < height; j++) {
-                Sprite blockSprite;
+                BlockClass block; // change to BlockClass block
                 if (j < height - dirtLayerHeight) {
-                    //Debug.Log(blocksCollection);
-                    blockSprite = blocksCollection.stone.blockSprite;
+                    block = blocksCollection.stone;
                 } else if (j < height - 1) {
-                    blockSprite = blocksCollection.dirt.blockSprite;
+                    block = blocksCollection.dirt;
                 } else {
-                    blockSprite = blocksCollection.grass.blockSprite;
+                    block = blocksCollection.grass;
                 }
                 if (noiseTexture.GetPixel(i,j).r > surfaceValue) {
-                    placeBlock(i, j, blockSprite);
-                    if (blockSprite == blocksCollection.grass.blockSprite) {
+                    placeBlock(i, j, block);
+                    if (block == blocksCollection.grass) {
                         float spawnTreeChance = Random.Range(0.0f, 1.0f);
                         if (spawnTreeChance < treeChance) {
                             generateTree(i, j + 1);
@@ -169,28 +166,31 @@ public class Terrain : MonoBehaviour {
     public void generateTree(int x, int y) {
         int treeHeight = Random.Range(minTreeHeight, maxTreeHeight) + 1;
         for (int i = 0; i < treeHeight; i ++) {
-            placeBlock(x, y + i, blocksCollection.log.blockSprite);
+            placeBlock(x, y + i, blocksCollection.log);
         }
         for (int i = -2; i < 3; i++) {
             for (int j = treeHeight; j < treeHeight + 2; j++) {
-                placeBlock(x + i, y + j, blocksCollection.leaves.blockSprite);
+                placeBlock(x + i, y + j, blocksCollection.leaves);
             }
         }
-
         for (int i = -1; i < 2; i++) {
             for (int j = treeHeight + 2; j < treeHeight + 3; j++) {
-                placeBlock(x + i, y + j, blocksCollection.leaves.blockSprite);
+                placeBlock(x + i, y + j, blocksCollection.leaves);
             }
         }
     }
 
-    public void placeBlock(int x, int y, Sprite block) {
+    public bool canPlace(int x, int y) {
+        return !worldBlocks.Contains(new Vector2(x, y));
+    }
+
+    public void placeBlock(int x, int y, BlockClass block) {//change sprite block to blockclass block
         //setting spawnPoint of player - should not be here
         if (x == spawnX & y > spawnY) {
             spawnY = y;
         }
 
-        if (!worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x < worldSize && y >= 0 && y < worldHeight) {
+        if (canPlace(x, y) && x >= 0 && x < worldSize && y >= 0 && y < worldHeight) {
             //lighting remove lighting if tile is placed
             /*
             RemoveLightSource(x,y);
@@ -203,12 +203,13 @@ public class Terrain : MonoBehaviour {
             newBlock.AddComponent<BoxCollider2D>();
             newBlock.GetComponent<BoxCollider2D>().size = Vector2.one;
             newBlock.tag = "Ground";
-            newBlock.GetComponent<SpriteRenderer>().sprite = block;
-            newBlock.name = block.name;
+            newBlock.GetComponent<SpriteRenderer>().sprite = block.blockSprite;
+            newBlock.name = block.blockName;
             newBlock.transform.position = new Vector2(x + 0.5f, y + 0.5f);
 
             worldBlocks.Add(newBlock.transform.position - (Vector3.one * 0.5f));
             worldBlocksObject.Add(newBlock);
+            worldBlockClasses.Add(block);
         }
     }
 
@@ -216,17 +217,18 @@ public class Terrain : MonoBehaviour {
         if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
             Vector2 pos = new Vector2(x, y);
             GameObject obj = worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))];
+            BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];
             Destroy(obj.gameObject);
             //worldBlocksMap.SetPixel(x,y, Color.white);
             //LightBlock(x, y, 1f, 0);
             GameObject newBlockDrop = Instantiate(blockDrop, new Vector2(x, y + 0.5f), Quaternion.identity);
             newBlockDrop.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
 
-            ItemClass tileDropItem = new ItemClass(obj);
+            ItemClass tileDropItem = new ItemClass(block);
             newBlockDrop.GetComponent<BlockDropCollider>().item = tileDropItem;
             
-
             worldBlocksObject.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
+            worldBlockClasses.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
             worldBlocks.Remove(new Vector2(x,y));
             //worldBlocksMap.Apply();
         }

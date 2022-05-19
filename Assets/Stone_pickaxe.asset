@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toolName: Stone Pickaxe
   sprite: {fileID: 21300000, guid: b30f20794fcd59a4d90b6805899766b3, type: 3}
+  toolType: 1

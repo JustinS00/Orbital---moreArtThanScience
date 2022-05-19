@@ -1,5 +1,66 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &783866488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 783866489}
+  - component: {fileID: 783866490}
+  - component: {fileID: 783866491}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &783866489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783866488}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6179212869377884424}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &783866490
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783866488}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 314f3fcdae03d56419b721a583bd51f5, type: 2}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.9}
+  m_Size: {x: 0.3, y: 0.0001}
+  m_Direction: 0
+--- !u!114 &783866491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 783866488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea31261403faf26428e0f349929e0143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6179212868967375869
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +240,6 @@ GameObject:
   - component: {fileID: 6179212869377884424}
   - component: {fileID: 6179212869377884431}
   - component: {fileID: 6179212869377884430}
-  - component: {fileID: 6179212869377884429}
   - component: {fileID: 6179212869377884428}
   - component: {fileID: 6883612742827730492}
   - component: {fileID: 6179212869121307435}
@@ -208,6 +268,7 @@ Transform:
   - {fileID: 6179212870785976929}
   - {fileID: 6179212870245706799}
   - {fileID: 6179212870795895417}
+  - {fileID: 783866489}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -279,22 +340,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.03548616}
   m_Size: {x: 0.44, y: 1.7578188}
   m_Direction: 0
---- !u!70 &6179212869377884429
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6179212869377884435}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 314f3fcdae03d56419b721a583bd51f5, type: 2}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.85}
-  m_Size: {x: 0.3, y: 0.0001}
-  m_Direction: 0
 --- !u!50 &6179212869377884428
 Rigidbody2D:
   serializedVersion: 4
@@ -329,8 +374,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showInv: 0
-  inventory: {fileID: 0}
-  selectedBlock: {fileID: 11400000, guid: 1862ea7880732074db360993eb0b3825, type: 2}
+  inventory: {fileID: 4873271426336679123}
+  selectedItem:
+    itemType: 0
+    toolType: 0
+    block: {fileID: 0}
+    tool: {fileID: 0}
+    name: 
+    sprite: {fileID: 0}
+    isStackable: 0
+  selectionIndex: 0
+  hotBarSelector: {fileID: 0}
   moveSpeed: 5
   jumpForce: 10
   onGround: 0
@@ -373,9 +427,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 887d72a25a504164d9ab88d5bdea477b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tool: {fileID: 11400000, guid: 3261910b8376ae74e881ccc4b93ce774, type: 2}
+  offsetInv: {x: -300, y: -100}
+  offsetHotbar: {x: -300, y: 0}
+  multiplierInv: {x: 75, y: 75}
+  multiplierHotbar: {x: 75, y: 75}
   InventoryUI: {fileID: 0}
+  HotbarUI: {fileID: 0}
+  inventorySlotPrefab: {fileID: 8566277836835497527, guid: 77598743b1251754891b011467a709ff, type: 3}
   inventoryWidth: 9
   inventoryHeight: 4
+  hotbarUISlots: []
 --- !u!1 &6179212870245706798
 GameObject:
   m_ObjectHideFlags: 0
