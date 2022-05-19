@@ -36,13 +36,26 @@ public class PlayerController : MonoBehaviour
         inventory = GetComponent<Inventory>();
     }
 
-    private void OnTriggerStay2D(Collider2D col) {
-        if (col.CompareTag("Ground")) {
-            onGround = true;
-        }
-    }
+
 
     private void FixedUpdate() {
+        //destroy or place blocks
+        if (hit) {
+            terrain.destroyBlock(mousePos.x, mousePos.y);
+        } else if (place && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
+            //check not placing on player
+            int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
+            int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
+            int minY = Mathf.FloorToInt(GetComponent<Transform>().position.y);
+            int maxY = Mathf.CeilToInt(GetComponent<Transform>().position.y);
+
+            if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
+                if(selectedItem != null && selectedItem.block != null && terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
+                    terrain.placeBlock(mousePos.x, mousePos.y, selectedItem.block);
+                    inventory.Remove(selectedItem, selectionIndex);
+                }
+            }
+        }
 
         Vector2 movement = new Vector2(horizontal * moveSpeed, rb.velocity.y);
 
@@ -53,25 +66,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         rb.velocity = movement;
-
-        //destroy or place blocks
-        if (hit) {
-            terrain.destroyBlock(mousePos.x, mousePos.y);
-        } else if (place && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
-            int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
-            int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
-            int minY = Mathf.FloorToInt(GetComponent<Transform>().position.y);
-            int maxY = Mathf.CeilToInt(GetComponent<Transform>().position.y);
-
-            if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
-                if(selectedItem.block) { //Not sure why needed but giving errors if not included
-                    terrain.placeBlock(mousePos.x, mousePos.y, selectedItem.block.blockSprite);
-                }
-            }
-        }
     }
 
     private void Update() {
+        
+
         //Hotbar
         //can use number keys as well to add later
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
@@ -81,13 +80,15 @@ public class PlayerController : MonoBehaviour
         }
 
         hotBarSelector.transform.position = inventory.hotbarUISlots[selectionIndex].transform.position;
-        InventorySlot selected = inventory.inventory[selectionIndex, inventory.inventoryHeight - 1];
-        if (selected != null) {
-            selectedItem = selected.item;
-        } else {
-            selectedItem = null;
+        if (inventory) { // Not really needed but some times giving error at the start
+            InventorySlot selected = inventory.inventory[selectionIndex, inventory.inventoryHeight - 1];
+            if (selected != null) {
+                selectedItem = selected.item;
+            } else {
+                selectedItem = null;
+            }
+            //Debug.Log(selectedItem);
         }
-        //Debug.Log(selectedItem);
 
         // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {

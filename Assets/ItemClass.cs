@@ -27,7 +27,7 @@ public class ItemClass {
         sprite = _block.blockSprite;
         isStackable = true;
         itemType = ItemType.block;
-        block = block;
+        block = _block;
     }
 
     public ItemClass(ToolClass _tool) {
@@ -37,13 +37,6 @@ public class ItemClass {
         itemType = ItemType.tool;
         toolType = _tool.toolType;
         tool = _tool;
-    }
-
-    public ItemClass(GameObject _obj) {
-        name = _obj.name;
-        sprite = _obj.GetComponent<SpriteRenderer>().sprite;
-        isStackable = true;
-        itemType = ItemType.block;
     }
 
 }

@@ -64,6 +64,9 @@ public class Inventory : MonoBehaviour {
         //Update main inventory
         for (int x = 0; x < inventoryWidth; x++) {
             for (int y = 0; y < inventoryHeight; y++) {
+                if (inventory[x,y] != null && inventory[x,y].quantity <= 0) {
+                    inventory[x,y] = null;
+                }
                 if (inventory[x,y] == null) {
                     uiSlots[x,y].transform.GetChild(0).GetComponent<Image>().sprite = null;
                     uiSlots[x,y].transform.GetChild(0).GetComponent<Image>().enabled = false;
@@ -81,7 +84,7 @@ public class Inventory : MonoBehaviour {
         }
         //Update hot bar
         for (int x = 0; x < inventoryWidth; x++) {
-            if (inventory[x, inventoryHeight - 1] == null) {
+            if (inventory[x, inventoryHeight - 1] == null || inventory[x, inventoryHeight - 1].quantity <= 0) {
                 hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().sprite = null;
                 hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().enabled = false;
 
@@ -96,20 +99,7 @@ public class Inventory : MonoBehaviour {
             }
         }
     }
-    /*
-    public void Add(ItemClass item) {
-        for (int y = inventoryHeight - 1; y >= 0; y--) {
-            for (int x = 0; x < inventoryWidth; x++) {
-                //if slot is empty
-                if (inventory[x,y] == null) {
-                    inventory[x,y] = new InventorySlot(item, new Vector2Int(x,y), 1);
-                    UpdateInventoryUI();
-                    return;
-                }
-            }
-        }
-    }
-    */
+
 
     public bool Add(ItemClass item) {
         for (int y = inventoryHeight - 1; y >= 0; y--) {
@@ -129,8 +119,10 @@ public class Inventory : MonoBehaviour {
         return false;
     }
 
-
-    public void Remove(ItemClass item) {
-
+    public void Remove(ItemClass item, int index) {
+        if (inventory[index, inventoryHeight - 1] != null && inventory[index, inventoryHeight - 1].item.name == item.name) {
+            inventory[index, inventoryHeight - 1].quantity = inventory[index, inventoryHeight - 1].quantity - 1;
+            UpdateInventoryUI();
+        } 
     }
 }

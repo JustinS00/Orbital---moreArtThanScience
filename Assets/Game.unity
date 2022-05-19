@@ -440,17 +440,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
   m_PrefabInstance: {fileID: 2115824706}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &242252549 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-  m_PrefabInstance: {fileID: 2115824706}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 887d72a25a504164d9ab88d5bdea477b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &271834412
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,69 +2927,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: tool
-      value: 
-      objectReference: {fileID: 11400000, guid: 3261910b8376ae74e881ccc4b93ce774, type: 2}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: HotbarUI
       value: 
       objectReference: {fileID: 381140618}
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: offset.x
-      value: -280
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: offset.y
-      value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: InventoryUI
       value: 
       objectReference: {fileID: 943676796}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: offsetInv.x
-      value: -300
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: offsetInv.y
-      value: -100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: multiplier.x
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: multiplier.y
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: offsetHotbar.x
-      value: -300
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: offsetHotbar.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: multiplierInv.x
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: multiplierInv.y
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: multiplierHotbar.x
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: multiplierHotbar.y
-      value: 75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: inventorySlotPrefab
-      value: 
-      objectReference: {fileID: 8566277836835497527, guid: 77598743b1251754891b011467a709ff, type: 3}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3050,21 +2983,9 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: showInv
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: terrain
       value: 
       objectReference: {fileID: 486374319}
-    - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: inventory
-      value: 
-      objectReference: {fileID: 242252549}
-    - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
-      propertyPath: moveSpeed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: hotBarSelector
       value: 
