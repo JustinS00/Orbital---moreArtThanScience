@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update() {
         
-
         //Hotbar
         //can use number keys as well to add later
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
@@ -79,8 +78,28 @@ public class PlayerController : MonoBehaviour
             selectionIndex = (selectionIndex - 1 + inventory.inventoryWidth) % inventory.inventoryWidth;
         }
 
+        if (Input.GetKeyDown("1")) {
+            selectionIndex = 0;
+        } else if (Input.GetKeyDown("2")) {
+            selectionIndex = 1;
+        } else if (Input.GetKeyDown("3")) {
+            selectionIndex = 2;
+        } else if (Input.GetKeyDown("4")) {
+            selectionIndex = 3;                    
+        } else if (Input.GetKeyDown("5")) {
+            selectionIndex = 4;
+        } else if (Input.GetKeyDown("6")) {
+            selectionIndex = 5;       
+        } else if (Input.GetKeyDown("7")) {
+            selectionIndex = 6;    
+        } else if (Input.GetKeyDown("8")) {
+            selectionIndex = 7;    
+        } else if (Input.GetKeyDown("9")) {
+            selectionIndex = 8;
+        }
+            
         hotBarSelector.transform.position = inventory.hotbarUISlots[selectionIndex].transform.position;
-        if (inventory) { // Not really needed but some times giving error at the start
+        if (inventory != null && inventory.inventory != null) { // Not really needed but some times giving error at the start
             InventorySlot selected = inventory.inventory[selectionIndex, inventory.inventoryHeight - 1];
             if (selected != null) {
                 selectedItem = selected.item;

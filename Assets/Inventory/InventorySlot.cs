@@ -13,6 +13,12 @@ public class InventorySlot {
         this.position = position;
         this.quantity = quantity;
     }
+
+    public InventorySlot(InventorySlot slot) {
+        this.item = slot.item;
+        this.position = slot.position;
+        this.quantity = slot.quantity;
+    }
     
     
 

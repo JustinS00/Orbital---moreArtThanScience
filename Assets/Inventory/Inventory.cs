@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {   
-
+    //should not be here
     private int maxItemsPerStack = 64;
-
+    //starter tools
     public ToolClass tool;
 
     public Vector2 offsetInv;
@@ -23,10 +23,15 @@ public class Inventory : MonoBehaviour {
 
     public InventorySlot[] hotbar;
     public InventorySlot[,] inventory;
-    
 
     public GameObject[] hotbarUISlots;
     public GameObject[,] uiSlots;
+
+    public int THRESHOLD = 40; // half of the size of each slot
+    private InventorySlot movingSlot;
+    private bool isMovingItem;
+
+    public GameObject itemCursor;
     
     // Start is called before the first frame update
     private void Start() {
@@ -38,6 +43,22 @@ public class Inventory : MonoBehaviour {
         UpdateInventoryUI();
         Add(new ItemClass(tool));
 
+    }
+
+    private void Update() {
+        itemCursor.SetActive(isMovingItem);
+        itemCursor.transform.position = Input.mousePosition;
+        if (isMovingItem) {
+            itemCursor.GetComponent<Image>().sprite = movingSlot.item.sprite;
+        }
+        
+        if (Input.GetMouseButtonDown(0)) {
+            if (isMovingItem) {
+                EndItemMove();
+            } else {
+                BeginItemMove();
+            }
+        }
     }
 
     void SetupUI() {
@@ -73,7 +94,7 @@ public class Inventory : MonoBehaviour {
 
                     uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().text = new string("0");
                     uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().enabled = false;
-                } else if (inventory[x,y] != null) {
+                } else if (inventory[x,y] != null) { // minecraft style if quantity == 1 do not display
                     uiSlots[x,y].transform.GetChild(0).GetComponent<Image>().enabled = true;
                     uiSlots[x,y].transform.GetChild(0).GetComponent<Image>().sprite = inventory[x,y].item.sprite;
 
@@ -100,7 +121,6 @@ public class Inventory : MonoBehaviour {
         }
     }
 
-
     public bool Add(ItemClass item) {
         for (int y = inventoryHeight - 1; y >= 0; y--) {
             for (int x = 0; x < inventoryWidth; x++) {
@@ -115,7 +135,7 @@ public class Inventory : MonoBehaviour {
                     return true;
                 }
             }
-        }
+        } //inventory is full
         return false;
     }
 
@@ -125,4 +145,76 @@ public class Inventory : MonoBehaviour {
             UpdateInventoryUI();
         } 
     }
-}
+
+    private Vector2Int GetClosestSlot() {
+        //Debug.Log("Called GetClosestSlot()");
+        for (int i = 0; i < inventoryWidth; i ++) {
+            for (int j = 0; j < inventoryHeight; j ++) {
+                if (Input.mousePosition != null && uiSlots[i,j].transform.position != null && Vector2.Distance(uiSlots[i,j].transform.position, Input.mousePosition) <= THRESHOLD) {
+                    return new Vector2Int(i,j);
+                }
+            }
+        }
+        return new Vector2Int(-1,-1);
+    }
+
+    private bool BeginItemMove() {
+        //Debug.Log("Called BeginItemMove()");
+        Vector2Int pos = GetClosestSlot();
+        if (pos == new Vector2Int(-1,-1) ) {
+            return false;
+        }
+        //Debug.Log(pos);
+        InventorySlot originalSlot = inventory[pos.x, pos.y];
+        //Debug.Log(originalSlot.item);
+        if (originalSlot == null || originalSlot.item == null) {
+            return false;
+        }
+        movingSlot = new InventorySlot(originalSlot);
+        inventory[pos.x, pos.y] = null;
+        UpdateInventoryUI();
+        isMovingItem = true;
+        return true;
+    }
+
+    private bool EndItemMove() {
+        Vector2Int pos = GetClosestSlot();
+        if (pos == new Vector2Int(-1,-1) ) { 
+            // click outside inventory, either add back to inventory or (-> this) throw away (To be implemented)
+            return false;
+        }
+         InventorySlot originalSlot = inventory[pos.x, pos.y];
+        if (originalSlot == null) {
+            inventory[pos.x, pos.y] = new InventorySlot(movingSlot);
+            movingSlot = null;
+            isMovingItem = false;
+            UpdateInventoryUI();
+            return true;
+        } else if (originalSlot.item != null && movingSlot.item != null) {
+            if (originalSlot.item.name == movingSlot.item.name && originalSlot.item.isStackable
+                && originalSlot.quantity < maxItemsPerStack) {
+                int totalQuantity = originalSlot.quantity + movingSlot.quantity;
+                originalSlot.quantity = Mathf.Min(totalQuantity, maxItemsPerStack);
+                movingSlot.quantity = totalQuantity - originalSlot.quantity;
+                if (movingSlot.quantity == 0) {
+                    movingSlot = null;
+                    UpdateInventoryUI();
+                    isMovingItem = false;
+                    return true;
+                }
+                UpdateInventoryUI();
+                return false;
+            } else if (originalSlot.item.name != movingSlot.item.name)  {
+                InventorySlot tempSlot = new InventorySlot(originalSlot);
+                inventory[pos.x, pos.y] = new InventorySlot(movingSlot);
+                movingSlot = tempSlot;
+                UpdateInventoryUI();
+                return false;
+            }
+        } 
+        return false;
+    }
+
+
+
+} 
