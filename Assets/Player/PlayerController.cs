@@ -40,9 +40,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate() {
         //destroy or place blocks
-        if (hit) {
+        if (hit && !showInv) {
             terrain.destroyBlock(mousePos.x, mousePos.y);
-        } else if (place && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
+        } else if (place && !showInv && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
             //check not placing on player
             int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
             int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);

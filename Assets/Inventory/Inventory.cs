@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,6 +58,13 @@ public class Inventory : MonoBehaviour {
             } else {
                 BeginItemMove();
             }
+        } else if (Input.GetMouseButtonDown(1)) {
+            if (isMovingItem) {
+                EndItemMoveSingle();
+
+            } else {
+                BeginItemMoveHalf();
+            }
         }
     }
 
@@ -72,7 +79,7 @@ public class Inventory : MonoBehaviour {
 
         //set up main inventory
         for (int x = 0; x < inventoryWidth; x++) {
-            for (int y = 0; y < inventoryHeight; y++) {
+            for (int y = inventoryHeight - 1; y >= 0; y--) {
                 GameObject inventorySlot = Instantiate(inventorySlotPrefab, InventoryUI.transform.GetChild(0).transform);
                 inventorySlot.GetComponent<RectTransform>().localPosition = new Vector3(x * multiplierInv.x + offsetInv.x ,y * multiplierInv.y + offsetInv.y);
                 uiSlots[x,y] = inventorySlot;
@@ -84,7 +91,7 @@ public class Inventory : MonoBehaviour {
     void UpdateInventoryUI() {
         //Update main inventory
         for (int x = 0; x < inventoryWidth; x++) {
-            for (int y = 0; y < inventoryHeight; y++) {
+            for (int y = inventoryHeight - 1; y >= 0; y--) {
                 if (inventory[x,y] != null && inventory[x,y].quantity <= 0) {
                     inventory[x,y] = null;
                 }
@@ -105,24 +112,24 @@ public class Inventory : MonoBehaviour {
         }
         //Update hot bar
         for (int x = 0; x < inventoryWidth; x++) {
-            if (inventory[x, inventoryHeight - 1] == null || inventory[x, inventoryHeight - 1].quantity <= 0) {
+            if (inventory[x, 0] == null || inventory[x, 0].quantity <= 0) {
                 hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().sprite = null;
                 hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().enabled = false;
 
                 hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().text = new string("0");
                 hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().enabled = false;
-            } else if (inventory[x, inventoryHeight - 1] != null) {
+            } else if (inventory[x, 0] != null) {
                 hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().enabled = true;
-                hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().sprite = inventory[x, inventoryHeight - 1].item.sprite;
+                hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().sprite = inventory[x, 0].item.sprite;
 
-                hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().text = inventory[x, inventoryHeight - 1].quantity.ToString();
+                hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().text = inventory[x, 0].quantity.ToString();
                 hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().enabled = true;
             }
         }
     }
 
     public bool Add(ItemClass item) {
-        for (int y = inventoryHeight - 1; y >= 0; y--) {
+        for (int y = 0; y < inventoryHeight; y++) {
             for (int x = 0; x < inventoryWidth; x++) {
                 //if slot is empty
                 if (inventory[x,y] != null && inventory[x,y].item.name == item.name && inventory[x,y].quantity < maxItemsPerStack && item.isStackable) {
@@ -130,7 +137,7 @@ public class Inventory : MonoBehaviour {
                     UpdateInventoryUI();
                     return true;
                 } else if (inventory[x,y] == null) {
-                    inventory[x,y] = new InventorySlot(item, new Vector2Int(x,y), 1);
+                    inventory[x,y] = new InventorySlot(item, 1);
                     UpdateInventoryUI();
                     return true;
                 }
@@ -140,8 +147,8 @@ public class Inventory : MonoBehaviour {
     }
 
     public void Remove(ItemClass item, int index) {
-        if (inventory[index, inventoryHeight - 1] != null && inventory[index, inventoryHeight - 1].item.name == item.name) {
-            inventory[index, inventoryHeight - 1].quantity = inventory[index, inventoryHeight - 1].quantity - 1;
+        if (inventory[index, 0] != null && inventory[index, 0].item.name == item.name) {
+            inventory[index, 0].quantity = inventory[index, 0].quantity - 1;
             UpdateInventoryUI();
         } 
     }
@@ -172,6 +179,26 @@ public class Inventory : MonoBehaviour {
         }
         movingSlot = new InventorySlot(originalSlot);
         inventory[pos.x, pos.y] = null;
+        UpdateInventoryUI();
+        isMovingItem = true;
+        return true;
+    }
+    
+    private bool BeginItemMoveHalf() {
+        //Debug.Log("Called BeginItemMove()");
+        Vector2Int pos = GetClosestSlot();
+        if (pos == new Vector2Int(-1,-1) ) {
+            return false;
+        }
+        //Debug.Log(pos);
+        InventorySlot originalSlot = inventory[pos.x, pos.y];
+        //Debug.Log(originalSlot.item);
+        if (originalSlot == null || originalSlot.item == null) {
+            return false;
+        }
+        int quantityMove = Mathf.FloorToInt(originalSlot.quantity / 2);
+        movingSlot = new InventorySlot(originalSlot.item, quantityMove);
+        inventory[pos.x, pos.y] = new InventorySlot(originalSlot.item, originalSlot.quantity - quantityMove);
         UpdateInventoryUI();
         isMovingItem = true;
         return true;
@@ -215,6 +242,30 @@ public class Inventory : MonoBehaviour {
         return false;
     }
 
+    private bool EndItemMoveSingle() {
+        Vector2Int pos = GetClosestSlot();
+        if (pos == new Vector2Int(-1,-1) ) {
+            return false;
+        } 
+        InventorySlot originalSlot = inventory[pos.x, pos.y];
+        if (originalSlot == null) {
+            inventory[pos.x, pos.y] = new InventorySlot(movingSlot.item, 1);
+            movingSlot.quantity -= 1;
+        } else if (originalSlot.item.name == movingSlot.item.name 
+        && originalSlot.item.isStackable && originalSlot.quantity < maxItemsPerStack) {
+            movingSlot.quantity -= 1;
+            originalSlot.quantity += 1;
+        }
+        if (movingSlot.quantity == 0) {
+            isMovingItem = false;
+            movingSlot = null;
+        } else {
+            isMovingItem = true;
+        }
 
+        UpdateInventoryUI();
+        return true;
+        
+    }
 
 } 
