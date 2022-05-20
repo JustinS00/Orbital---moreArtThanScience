@@ -35,6 +35,12 @@ sysinfo.txt
 .DS_Store
 .DS_Store?
 ._*
+
+###
+# Builds
+###
+*.apk
+*.log
 .Spotlight-V100
 .Trashes
 Icon?
