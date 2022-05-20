@@ -23,11 +23,20 @@ public class PlayerController : MonoBehaviour
     public float jump;
     public bool siu;
 
+    public int maxHealth = 100;
+	public int currentHealth;
+
+	public HealthBar healthBar;
+
     public Vector2 spawnPos;
     public Vector2Int mousePos;
 
     public Terrain terrain;
 
+    void Start() {
+		currentHealth = maxHealth;
+		healthBar.SetMaxHealth(maxHealth);
+    }
 
     public void Spawn() {
         rb = GetComponent<Rigidbody2D>();
@@ -136,7 +145,11 @@ public class PlayerController : MonoBehaviour
         }
         mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - 0.5f);
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
-
     }
 
+    void TakeDamage(int damage) {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
+    }
 }
