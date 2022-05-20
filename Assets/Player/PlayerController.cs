@@ -28,19 +28,12 @@ public class PlayerController : MonoBehaviour
 
     public Terrain terrain;
 
-    public int maxHealth = 100;
-    public int currentHealth;
-
-    public HealthBar healthBar;
-
 
     public void Spawn() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         GetComponent<Transform>().position = spawnPos;
         inventory = GetComponent<Inventory>();
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
     }
 
 
@@ -144,15 +137,6 @@ public class PlayerController : MonoBehaviour
         mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - 0.5f);
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
 
-        if(Input.GetMouseButtonDown(0)) {
-            TakeDamage(10);
-            Debug.Log("Space key is pressed.");
-        }
     }
 
-    void TakeDamage(int damage) {
-        currentHealth -= damage;
-
-        healthBar.SetHealth(currentHealth);
-    }
 }
