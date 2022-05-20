@@ -42,7 +42,6 @@ public class Inventory : MonoBehaviour {
         SetupUI();
         UpdateInventoryUI();
         Add(new ItemClass(tool));
-
     }
 
     private void Update() {
@@ -61,7 +60,6 @@ public class Inventory : MonoBehaviour {
         } else if (Input.GetMouseButtonDown(1)) {
             if (isMovingItem) {
                 EndItemMoveSingle();
-
             } else {
                 BeginItemMoveHalf();
             }
@@ -197,6 +195,9 @@ public class Inventory : MonoBehaviour {
             return false;
         }
         int quantityMove = Mathf.FloorToInt(originalSlot.quantity / 2);
+        if (quantityMove == 0) {
+            return false;
+        }
         movingSlot = new InventorySlot(originalSlot.item, quantityMove);
         inventory[pos.x, pos.y] = new InventorySlot(originalSlot.item, originalSlot.quantity - quantityMove);
         UpdateInventoryUI();
@@ -262,7 +263,6 @@ public class Inventory : MonoBehaviour {
         } else {
             isMovingItem = true;
         }
-
         UpdateInventoryUI();
         return true;
         

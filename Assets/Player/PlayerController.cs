@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
             
         hotBarSelector.transform.position = inventory.hotbarUISlots[selectionIndex].transform.position;
         if (inventory != null && inventory.inventory != null) { // Not really needed but some times giving error at the start
-            InventorySlot selected = inventory.inventory[selectionIndex, inventory.inventoryHeight - 1];
+            InventorySlot selected = inventory.inventory[selectionIndex, 0];
             if (selected != null) {
                 selectedItem = selected.item;
             } else {
