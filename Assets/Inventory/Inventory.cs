@@ -195,6 +195,10 @@ public class Inventory : MonoBehaviour {
             return false;
         }
         int quantityMove = Mathf.FloorToInt(originalSlot.quantity / 2);
+        if (quantityMove == 0) {
+            return false;
+        }
+        
         movingSlot = new InventorySlot(originalSlot.item, quantityMove);
         inventory[pos.x, pos.y] = new InventorySlot(originalSlot.item, originalSlot.quantity - quantityMove);
         UpdateInventoryUI();
