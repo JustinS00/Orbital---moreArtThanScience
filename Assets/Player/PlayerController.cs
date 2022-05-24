@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public bool showInv = false;
     public Inventory inventory;
     public ItemClass selectedItem;
+    public GameObject selectedItemDisplay;
 
     public int selectionIndex = 0;
     public GameObject hotBarSelector;
@@ -61,7 +62,7 @@ public class PlayerController : MonoBehaviour
             if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
                 if(selectedItem != null && selectedItem.block != null && terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
                     terrain.placeBlock(mousePos.x, mousePos.y, selectedItem.block);
-                    inventory.Remove(selectedItem, selectionIndex);
+                    inventory.RemoveFromHotBar(selectedItem, selectionIndex);
                 }
             }
         }
@@ -117,7 +118,16 @@ public class PlayerController : MonoBehaviour
             }
             //Debug.Log(selectedItem);
         }
-
+        if (selectedItem != null) {
+            selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = selectedItem.sprite;
+            if (selectedItem.itemType == ItemClass.ItemType.block) {
+                selectedItemDisplay.transform.localScale = Vector3.one * 0.5f;
+            } else { //might have to change in the future depending on the other items implemented
+                selectedItemDisplay.transform.localScale = Vector3.one;
+            }
+        } else {
+            selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = null;
+        }
         // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {
             showInv = !showInv;
