@@ -778,7 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867a35d3d10e10541947754051237bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 242252543}
+  gameManager: {fileID: 1747037435}
   blockDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}
   blocksCollection: {fileID: 11400000, guid: 72de6673147141b4c957e2979a08c9b5, type: 2}
   seed: 100
@@ -845,8 +845,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -220, y: 190}
-  m_SizeDelta: {x: 315, y: 60}
+  m_AnchoredPosition: {x: -310, y: 187.7}
+  m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &520434664
 MonoBehaviour:
@@ -893,9 +893,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 20
   m_WholeNumbers: 1
-  m_Value: 100
+  m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -939,8 +939,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: -0.062378}
-  m_SizeDelta: {x: 81.25, y: 75}
+  m_AnchoredPosition: {x: -1, y: 0}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &731329761
 MonoBehaviour:
@@ -2473,6 +2473,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1747037434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1747037436}
+  - component: {fileID: 1747037435}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1747037435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747037434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec5eb3ddd0a22d42978382544fcc22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 242252543}
+  terrain: {fileID: 486374319}
+--- !u!4 &1747037436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1747037434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.2797283, y: -1.2186425, z: -0.014116665}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1812601416
 GameObject:
   m_ObjectHideFlags: 0
@@ -3060,6 +3106,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: tool
+      value: 
+      objectReference: {fileID: 11400000, guid: 00696dfacf4f6e64e80fc220762cfb31, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: HotbarUI
       value: 
       objectReference: {fileID: 381140618}
@@ -3127,6 +3177,14 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 792932088}
+    - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1747037435}
+    - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: selectedItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 00696dfacf4f6e64e80fc220762cfb31, type: 2}
     - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: hotBarSelector
       value: 
@@ -3446,6 +3504,10 @@ PrefabInstance:
     - target: {fileID: 4066678306133046553, guid: c2e0a648c0826c74babcadb2e09edaec, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066678306133046555, guid: c2e0a648c0826c74babcadb2e09edaec, type: 3}
+      propertyPath: m_ReferencePixelsPerUnit
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 4066678306133046757, guid: c2e0a648c0826c74babcadb2e09edaec, type: 3}
       propertyPath: m_Pivot.x
