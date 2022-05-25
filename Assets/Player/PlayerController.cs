@@ -32,36 +32,41 @@ public class PlayerController : MonoBehaviour
     public Vector2 spawnPos;
     public Vector2Int mousePos;
 
-    public Terrain terrain;
-
-    void Start() {
-		currentHealth = maxHealth;
-		healthBar.SetMaxHealth(maxHealth);
-    }
+    //public Terrain terrain;
+    public GameManager gameManager;
 
     public void Spawn() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         GetComponent<Transform>().position = spawnPos;
         inventory = GetComponent<Inventory>();
+        currentHealth = maxHealth;
+		healthBar.SetMaxHealth(maxHealth);
     }
-
 
 
     private void FixedUpdate() {
         //destroy or place blocks
         if (hit && !showInv) {
-            terrain.destroyBlock(mousePos.x, mousePos.y);
+            //terrain.destroyBlock(mousePos.x, mousePos.y);
+            gameManager.terrain.destroyBlock(mousePos.x, mousePos.y);
         } else if (place && !showInv && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
             //check not placing on player
             int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
             int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
             int minY = Mathf.FloorToInt(GetComponent<Transform>().position.y);
             int maxY = Mathf.CeilToInt(GetComponent<Transform>().position.y);
+            /*
+            if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
+                if(terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
+                    terrain.placeBlock(mousePos.x, mousePos.y, (BlockClass) selectedItem);
+                    inventory.RemoveFromHotBar(selectedItem, selectionIndex);
+                }
+            }*/
 
             if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
-                if(selectedItem != null && selectedItem.block != null && terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
-                    terrain.placeBlock(mousePos.x, mousePos.y, selectedItem.block);
+                if(gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
+                    gameManager.terrain.placeBlock(mousePos.x, mousePos.y, (BlockClass) selectedItem);
                     inventory.RemoveFromHotBar(selectedItem, selectionIndex);
                 }
             }
@@ -81,7 +86,6 @@ public class PlayerController : MonoBehaviour
     private void Update() {
         
         //Hotbar
-        //can use number keys as well to add later
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
                 selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
         } else if ((Input.GetAxis("Mouse ScrollWheel") < 0)) {
@@ -119,7 +123,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(selectedItem);
         }
         if (selectedItem != null) {
-            selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = selectedItem.sprite;
+            selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = selectedItem.itemSprite;
             if (selectedItem.itemType == ItemClass.ItemType.block) {
                 selectedItemDisplay.transform.localScale = Vector3.one * 0.5f;
             } else { //might have to change in the future depending on the other items implemented
@@ -159,7 +163,6 @@ public class PlayerController : MonoBehaviour
 
     void TakeDamage(int damage) {
         currentHealth -= damage;
-
         healthBar.SetHealth(currentHealth);
     }
 }
