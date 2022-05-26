@@ -44,6 +44,13 @@ public class PlayerController : MonoBehaviour
 		healthBar.SetMaxHealth(maxHealth);
     }
 
+    public void Respawn() {
+        //not clearing inventory for now
+        GetComponent<Transform>().position = spawnPos;;
+        currentHealth = maxHealth;
+		healthBar.SetMaxHealth(maxHealth);
+    }
+
 
     private void FixedUpdate() {
         //destroy or place blocks
@@ -162,7 +169,19 @@ public class PlayerController : MonoBehaviour
     }
 
     public void TakeDamage(int damage) {
-        currentHealth -= damage;
+        currentHealth = Mathf.Max(0, currentHealth - damage);
+        healthBar.SetHealth(currentHealth);
+
+        if(currentHealth == 0) {
+            Respawn();
+        }
+        
+    }
+
+    public void AddHealth(int health) {
+        currentHealth = Mathf.Min(maxHealth, health + currentHealth);
         healthBar.SetHealth(currentHealth);
     }
+
+    
 }
