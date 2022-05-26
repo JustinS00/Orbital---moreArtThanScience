@@ -19,7 +19,7 @@ public class Terrain : MonoBehaviour {
     // Can do the same for cameracontroller
     public GameManager gameManager;
     //public PlayerController player;
-    public GameObject blockDrop;
+    public GameObject itemDrop;
 
     [Header("Blocks")]
     public BlocksCollection blocksCollection;
@@ -230,7 +230,7 @@ public class Terrain : MonoBehaviour {
             BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];
             //worldBlocksMap.SetPixel(x,y, Color.white);
             //LightBlock(x, y, 1f, 0);
-            GameObject newBlockDrop = Instantiate(blockDrop, new Vector2(x, y + 0.5f), Quaternion.identity);
+            GameObject newBlockDrop = Instantiate(itemDrop, new Vector2(x, y + 0.5f), Quaternion.identity);
             newBlockDrop.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
 
             //BlockClass tileDropItem = new BlockClass(block);
@@ -247,8 +247,8 @@ public class Terrain : MonoBehaviour {
             tileDropItem.preferredTool = block.preferredTool;
             */
 
-            newBlockDrop.GetComponent<BlockDropCollider>().item = block;
-            
+            newBlockDrop.GetComponent<ItemDropCollider>().item = block;
+            newBlockDrop.GetComponent<ItemDropCollider>().quantity = 1;
             Destroy(obj.gameObject);
             worldBlocksObject.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
             worldBlockClasses.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));

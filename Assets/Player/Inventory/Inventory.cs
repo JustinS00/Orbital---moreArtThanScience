@@ -123,6 +123,13 @@ public class Inventory : MonoBehaviour {
             }
         }
     }
+    public int AddedItems (ItemClass item, int quantity) {
+        int addedItems = 0;
+        for (int i = 0; i < quantity; i++) {
+            addedItems += Add(item) ? 1 : 0;
+        }
+        return addedItems;
+    }
 
     public bool Add(ItemClass item) {
         for (int y = 0; y < inventoryHeight; y++) {
