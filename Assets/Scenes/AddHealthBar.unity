@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 23612319}
   - component: {fileID: 23612321}
   - component: {fileID: 23612320}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rocks_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: b43b02000e2d04c49860afbfc424d38c, type: 3}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 85751043}
   - component: {fileID: 85751045}
   - component: {fileID: 85751044}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rocks_3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3eeb2f33a05d7a1478503cf2ed44569b, type: 3}
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 211313450}
   - component: {fileID: 211313452}
   - component: {fileID: 211313451}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clouds_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 76d36bedbf10c6947817031ccf1770b0, type: 3}
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 271834413}
   - component: {fileID: 271834415}
   - component: {fileID: 271834414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clouds_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +527,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: 5b8ba5bef02773c429c0f2a0d9819027, type: 3}
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 391165543}
   - component: {fileID: 391165545}
   - component: {fileID: 391165544}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pines (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +636,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 5f88926fa084af148946a26d40eaaf53, type: 3}
@@ -661,7 +661,7 @@ GameObject:
   - component: {fileID: 465989411}
   - component: {fileID: 465989413}
   - component: {fileID: 465989412}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clouds_2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,7 +735,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 0911e7827c6ccb04c8fd7557295d37b0, type: 3}
@@ -1111,7 +1111,7 @@ GameObject:
   - component: {fileID: 798221697}
   - component: {fileID: 798221699}
   - component: {fileID: 798221698}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sky (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1185,7 +1185,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7b575da6bd6af23428443fb223abfdbd, type: 3}
@@ -1210,7 +1210,7 @@ GameObject:
   - component: {fileID: 898842565}
   - component: {fileID: 898842567}
   - component: {fileID: 898842566}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rocks_2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1284,7 +1284,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: b43b02000e2d04c49860afbfc424d38c, type: 3}
@@ -1309,7 +1309,7 @@ GameObject:
   - component: {fileID: 923788280}
   - component: {fileID: 923788282}
   - component: {fileID: 923788281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rocks_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1385,7 +1385,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3eeb2f33a05d7a1478503cf2ed44569b, type: 3}
@@ -1415,7 +1415,7 @@ GameObject:
   - component: {fileID: 991020000}
   - component: {fileID: 991020002}
   - component: {fileID: 991020001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rocks_1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1489,7 +1489,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 71d8be23f401f304b9dd8bf8725a11f7, type: 3}
@@ -1514,7 +1514,7 @@ GameObject:
   - component: {fileID: 996094014}
   - component: {fileID: 996094016}
   - component: {fileID: 996094015}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pines (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1588,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 5f88926fa084af148946a26d40eaaf53, type: 3}
@@ -1613,7 +1613,7 @@ GameObject:
   - component: {fileID: 1153445918}
   - component: {fileID: 1153445920}
   - component: {fileID: 1153445919}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1689,7 +1689,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 5f88926fa084af148946a26d40eaaf53, type: 3}
@@ -1714,7 +1714,7 @@ GameObject:
   - component: {fileID: 1269505642}
   - component: {fileID: 1269505644}
   - component: {fileID: 1269505643}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clouds_3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1788,7 +1788,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 76d36bedbf10c6947817031ccf1770b0, type: 3}
@@ -1946,7 +1946,7 @@ GameObject:
   - component: {fileID: 1328664344}
   - component: {fileID: 1328664346}
   - component: {fileID: 1328664345}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sky (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2020,7 +2020,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7b575da6bd6af23428443fb223abfdbd, type: 3}
@@ -2045,7 +2045,7 @@ GameObject:
   - component: {fileID: 1332739488}
   - component: {fileID: 1332739490}
   - component: {fileID: 1332739489}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clouds_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2121,7 +2121,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 0911e7827c6ccb04c8fd7557295d37b0, type: 3}
@@ -2146,7 +2146,7 @@ GameObject:
   - component: {fileID: 1507484413}
   - component: {fileID: 1507484415}
   - component: {fileID: 1507484414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clouds_2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2220,7 +2220,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 7
   m_Sprite: {fileID: 21300000, guid: 0911e7827c6ccb04c8fd7557295d37b0, type: 3}
@@ -2245,7 +2245,7 @@ GameObject:
   - component: {fileID: 1532004981}
   - component: {fileID: 1532004983}
   - component: {fileID: 1532004982}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rocks_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2321,7 +2321,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 71d8be23f401f304b9dd8bf8725a11f7, type: 3}
@@ -2346,7 +2346,7 @@ GameObject:
   - component: {fileID: 1573067009}
   - component: {fileID: 1573067011}
   - component: {fileID: 1573067010}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rocks_1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2420,7 +2420,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: 71d8be23f401f304b9dd8bf8725a11f7, type: 3}
@@ -2443,7 +2443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1608412762}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2530,7 +2530,7 @@ GameObject:
   - component: {fileID: 1812601417}
   - component: {fileID: 1812601419}
   - component: {fileID: 1812601418}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clouds_1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2604,7 +2604,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: 5b8ba5bef02773c429c0f2a0d9819027, type: 3}
@@ -2629,7 +2629,7 @@ GameObject:
   - component: {fileID: 1841186350}
   - component: {fileID: 1841186352}
   - component: {fileID: 1841186351}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: sky
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2705,7 +2705,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7b575da6bd6af23428443fb223abfdbd, type: 3}
@@ -2907,7 +2907,7 @@ GameObject:
   - component: {fileID: 1956321047}
   - component: {fileID: 1956321049}
   - component: {fileID: 1956321048}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rocks_2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2981,7 +2981,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: b43b02000e2d04c49860afbfc424d38c, type: 3}
@@ -3006,7 +3006,7 @@ GameObject:
   - component: {fileID: 2115052880}
   - component: {fileID: 2115052882}
   - component: {fileID: 2115052881}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clouds_3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3080,7 +3080,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 76d36bedbf10c6947817031ccf1770b0, type: 3}
@@ -3206,7 +3206,7 @@ GameObject:
   - component: {fileID: 2143361527}
   - component: {fileID: 2143361529}
   - component: {fileID: 2143361528}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clouds_1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3280,7 +3280,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: 5b8ba5bef02773c429c0f2a0d9819027, type: 3}
@@ -3305,7 +3305,7 @@ GameObject:
   - component: {fileID: 2147139941}
   - component: {fileID: 2147139943}
   - component: {fileID: 2147139942}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: rocks_3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3379,7 +3379,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2086304137
+  m_SortingLayerID: -1844085813
   m_SortingLayer: -1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3eeb2f33a05d7a1478503cf2ed44569b, type: 3}
