@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{  
+public class PlayerController : MonoBehaviour {  
+
     public bool showInv = false;
     public Inventory inventory;
     public ItemClass selectedItem;
@@ -35,6 +35,13 @@ public class PlayerController : MonoBehaviour
     //public Terrain terrain;
     public GameManager gameManager;
 
+    public PlayerCombat playerCombat;
+
+    public float knockback;
+    public float knockbackLength;
+    public float knockbackCount;
+    public bool knockFromRight;
+
     public void Spawn() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -43,7 +50,6 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
 		healthBar.SetMaxHealth(maxHealth);
     }
-
 
     private void FixedUpdate() {
         //destroy or place blocks
@@ -80,7 +86,18 @@ public class PlayerController : MonoBehaviour
                 onGround = false;
             }
         }
-        rb.velocity = movement;
+
+        if (knockbackCount <= 0) {
+            rb.velocity = movement;
+        } else {
+            if (knockFromRight) {
+                rb.velocity = new Vector2(-knockback, knockback/3);
+            } else { 
+                rb.velocity = new Vector2(knockback, knockback/3);
+            }
+            knockbackCount--;
+        }
+
     }
 
     private void Update() {
@@ -122,6 +139,7 @@ public class PlayerController : MonoBehaviour
             }
             //Debug.Log(selectedItem);
         }
+
         if (selectedItem != null) {
             selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = selectedItem.itemSprite;
             if (selectedItem.itemType == ItemClass.ItemType.block) {
@@ -152,8 +170,17 @@ public class PlayerController : MonoBehaviour
         
         siu = Input.GetKeyDown(KeyCode.UpArrow);
         anim.SetFloat("horizontal", horizontal);
-        anim.SetBool("hit", hit);
         anim.SetBool("siu", siu);
+
+        if (selectedItem && selectedItem.itemType == ItemClass.ItemType.equipment) {
+            EquipmentClass temp = (EquipmentClass) selectedItem;
+            if (hit && temp.equipmentType == EquipmentClass.EquipmentType.weapon) {
+                playerCombat.Attack();
+            }
+        } else {
+            anim.SetBool("hit", hit);
+        }
+        
         if (siu) {
             jump = 1.0f;
         }
@@ -161,8 +188,11 @@ public class PlayerController : MonoBehaviour
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage, bool fromRight) {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+
+        knockbackCount = 1;
+        knockFromRight = fromRight;
     }
 }

@@ -6,11 +6,21 @@ public class Zombie : MonoBehaviour {
 
 	[Header("Zombie Settings")]
 	public int zombieDamage = 10;
+	public int maxHealth = 100;
+	int currentHealth;
 
 	public Transform player;
 
-	public bool isFlipped = false;
+	private bool isFlipped = false;
 
+	private Rigidbody2D rb;
+	public int knockback = 10;
+
+	void Start() {
+		currentHealth = maxHealth;
+		rb = GetComponent<Rigidbody2D>();
+	}
+	
   //Just to help zombie turn
 	public void LookAtPlayer() {
 		Vector3 flipped = transform.localScale;
@@ -28,9 +38,35 @@ public class Zombie : MonoBehaviour {
 		}
 	}
 
+	public void TakeDamage(int damage, bool fromRight) {
+		currentHealth -= damage;
+
+		//knockback
+		if (fromRight)
+			rb.AddForce(new Vector2(-2, 2), ForceMode2D.Impulse);
+		else 
+			rb.AddForce(new Vector2(2, 2), ForceMode2D.Impulse);
+
+		// damage animation
+
+		if (currentHealth <= 0) {
+			Die();
+		}
+	}
+
+	void Die() {
+		// die animation
+
+		// disable enemy
+		gameObject.SetActive(false);
+	}
+
 	private void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag == "Player") {	
-			other.gameObject.GetComponent<PlayerController>().TakeDamage(zombieDamage);
+			bool fromRight = other.transform.position.x < transform.position.x
+				? true
+				: false;
+			other.gameObject.GetComponent<PlayerController>().TakeDamage(zombieDamage, fromRight);
 		}
 	}
 
