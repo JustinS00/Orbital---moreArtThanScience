@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour {   
     //starter tools
     public ToolClass tool;
+    public WeaponClass weapon;
 
     public Vector2 offsetInv;
     public Vector2 offsetHotbar;
@@ -40,6 +41,7 @@ public class Inventory : MonoBehaviour {
         SetupUI();
         UpdateInventoryUI();
         Add(tool);
+        Add(weapon);
     }
 
     private void Update() {
