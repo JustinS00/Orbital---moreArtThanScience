@@ -17,6 +17,7 @@ public class Zombie : MonoBehaviour {
 
 	private Rigidbody2D rb;
 	public int knockback = 10;
+	private bool fromRight;
 
 	void Start() {
 		currentHealth = maxHealth;
@@ -65,23 +66,12 @@ public class Zombie : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Player") {	
-			bool fromRight = other.transform.position.x < transform.position.x
+		if (other.gameObject.tag == "Player") {
+			fromRight = other.transform.position.x < transform.position.x
 				? true
-				: false;
-			other.gameObject.GetComponent<PlayerController>().TakeDamage(zombieDamage, fromRight);
-		}
-	}
-	
-
-	/* Might be better to change to OnCollisionEnter2D with Invoke Repeating */
-
-
-	/*
-	private void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.tag == "Player") {	
+				: false;	
 			target = other.gameObject.GetComponent<PlayerController>();
-			InvokeRepeating("Attack", 0.1f, 2.0f);
+			InvokeRepeating("Attack", 0.1f, 1.0f);
 		} 
 	}
 
@@ -94,10 +84,8 @@ public class Zombie : MonoBehaviour {
 
 	private void Attack() {
 		if (target != null) {
-			target.TakeDamage(zombieDamage);
+			target.TakeDamage(zombieDamage, fromRight);
 		}
 	}
-
-	*/
 	
 }

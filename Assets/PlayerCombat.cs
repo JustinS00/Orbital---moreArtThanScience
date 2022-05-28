@@ -28,8 +28,7 @@ public class PlayerCombat : MonoBehaviour {
             bool fromRight = enemy.GetComponent<Transform>().position.x < transform.position.x
 				? true
 				: false;
-            enemy.GetComponent<Zombie>().TakeDamage(attackDamage, fromRight);
-            
+            enemy.GetComponent<Zombie>().TakeDamage(attackDamage, fromRight); 
         }
     }
     /*
