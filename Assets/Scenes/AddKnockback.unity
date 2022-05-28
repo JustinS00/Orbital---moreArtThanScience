@@ -688,8 +688,8 @@ MonoBehaviour:
   minTreeHeight: 4
   maxTreeHeight: 8
   surfaceValue: 0.25
-  caveFreq: 0
-  terrainFreq: 0
+  caveFreq: 0.03
+  terrainFreq: 0.1
   noiseTexture: {fileID: 0}
   worldChunks: []
 --- !u!4 &486374320
@@ -2385,6 +2385,30 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5600480978298633493, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.b
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600480978298633493, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.g
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600480978298633493, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.r
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160009581691129164, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.b
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160009581691129164, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.g
+      value: 0.75686276
+      objectReference: {fileID: 0}
+    - target: {fileID: 6160009581691129164, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.r
+      value: 0.75686276
+      objectReference: {fileID: 0}
     - target: {fileID: 6786682196209842469, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -2405,6 +2429,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6786682196385659099, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786682196385659099, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786682196385659099, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6786682197172065740, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -2412,6 +2448,18 @@ PrefabInstance:
     - target: {fileID: 6786682197172065740, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786682197172065741, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786682197172065741, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786682197172065741, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6786682197438670502, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
       propertyPath: m_Name
@@ -2488,6 +2536,18 @@ PrefabInstance:
     - target: {fileID: 6786682197820050898, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786682197820050899, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786682197820050899, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6786682197820050899, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8202342581055386922, guid: 08642efd17bdc71438a33b2e43103eba, type: 3}
       propertyPath: m_Layer
@@ -2626,7 +2686,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attackRange: 0.2
-  attackDamage: 50
+  attackDamage: 10
 --- !u!1 &1645554962
 GameObject:
   m_ObjectHideFlags: 0
@@ -3512,6 +3572,30 @@ PrefabInstance:
       propertyPath: InventoryUI
       value: 
       objectReference: {fileID: 943676796}
+    - target: {fileID: 6179212868967375871, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212868967375871, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212868967375871, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212869244219514, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212869244219514, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212869244219514, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -3568,6 +3652,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6179212870245706792, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212870245706792, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212870245706792, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212870785976930, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212870785976930, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212870785976930, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6179212870795895417, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -3588,6 +3696,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6179212870795895418, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212870795895418, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179212870795895418, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: terrain
       value: 
@@ -3598,7 +3718,7 @@ PrefabInstance:
       objectReference: {fileID: 792932088}
     - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: knockback
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: gameManager

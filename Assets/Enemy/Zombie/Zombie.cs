@@ -10,6 +10,7 @@ public class Zombie : MonoBehaviour {
 	int currentHealth;
 
 	public Transform player;
+	private Animator anim;
 
 	private bool isFlipped = false;
 
@@ -22,6 +23,7 @@ public class Zombie : MonoBehaviour {
 	void Start() {
 		currentHealth = maxHealth;
 		rb = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator>();
 	}
 
   //Just to help zombie turn
@@ -52,6 +54,9 @@ public class Zombie : MonoBehaviour {
 			rb.AddForce(new Vector2(2, 2), ForceMode2D.Impulse);
 
 		// damage animation
+		anim.SetTrigger("damaged");
+
+		// add IFrame TODO
 
 		if (currentHealth <= 0) {
 			Die();
