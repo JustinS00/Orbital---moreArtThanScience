@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 46b8e74c2fb9f6f41ac29597553bbb26
+guid: fd07450ee9192ec4382acd9d9f506205
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -38,7 +38,7 @@ TextureImporter:
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: nurse_head_0
+      name: merchant_head_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 78
-        height: 87
+        x: 5
+        y: 14
+        width: 67
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8740c757309d3346a7fecbc43593c85
-      internalID: 1118766235
+      spriteID: 5be3fde68d6430e43985e920c15d61d3
+      internalID: -357878894
       vertices: []
       indices: 
       edges: []
@@ -139,7 +139,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 4c1c2b6e5471d06499c8665d0c4af707
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      nurse_head_0: 1118766235
+      merchant_head_0: -357878894
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
