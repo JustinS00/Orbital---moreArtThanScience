@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour {
 
     public PlayerCombat playerCombat;
 
-    public float knockback;
-    public float knockbackLength;
-    public float knockbackCount;
-    public bool knockFromRight;
+    public float knockback = 30;
+    private float knockbackLength;
+    private float knockbackCount;
+    private bool knockFromRight;
 
     public void Spawn() {
         rb = GetComponent<Rigidbody2D>();
@@ -203,6 +203,11 @@ public class PlayerController : MonoBehaviour {
         if(currentHealth == 0) {
             Respawn();
         }
+
+        // hit animation
+        anim.SetTrigger("damaged");
+
+        // add IFrame TODO
 
         knockbackCount = 1;
         knockFromRight = fromRight;
