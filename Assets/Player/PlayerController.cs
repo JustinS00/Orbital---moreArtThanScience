@@ -42,6 +42,10 @@ public class PlayerController : MonoBehaviour {
     private float knockbackCount;
     private bool knockFromRight;
 
+    [SerializeField]
+    private float invincibilityDurationSeconds = 1.0f;
+    private bool isInvincible;
+
     public void Spawn() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -197,6 +201,9 @@ public class PlayerController : MonoBehaviour {
 
 
     public void TakeDamage(int damage, bool fromRight) {
+
+        if (isInvincible) return;
+
         currentHealth = Mathf.Max(0, currentHealth - damage);
         healthBar.SetHealth(currentHealth);
 
@@ -207,7 +214,10 @@ public class PlayerController : MonoBehaviour {
         // hit animation
         anim.SetTrigger("damaged");
 
-        // add IFrame TODO
+        // add IFrame
+        if (!isInvincible) {
+            StartCoroutine(BecomeTemporarilyInvincible());
+        }
 
         knockbackCount = 1;
         knockFromRight = fromRight;
@@ -219,5 +229,11 @@ public class PlayerController : MonoBehaviour {
         healthBar.SetHealth(currentHealth);
     }
 
-    
+    private IEnumerator BecomeTemporarilyInvincible() {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(invincibilityDurationSeconds);
+
+        isInvincible = false;
+    }
 }

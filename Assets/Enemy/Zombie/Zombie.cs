@@ -20,6 +20,10 @@ public class Zombie : MonoBehaviour {
 	public int knockback = 10;
 	private bool fromRight;
 
+	[SerializeField]
+  	private float invincibilityDurationSeconds = 1.0f;
+  	private bool isInvincible;
+
 	void Start() {
 		currentHealth = maxHealth;
 		rb = GetComponent<Rigidbody2D>();
@@ -45,18 +49,24 @@ public class Zombie : MonoBehaviour {
 
 
 	public void TakeDamage(int damage, bool fromRight) {
+
+		if (isInvincible) return;
+
 		currentHealth -= damage;
 
 		//knockback
 		if (fromRight)
-			rb.AddForce(new Vector2(-2, 2), ForceMode2D.Impulse);
+			rb.AddForce(new Vector2(-3, 3), ForceMode2D.Impulse);
 		else 
-			rb.AddForce(new Vector2(2, 2), ForceMode2D.Impulse);
+			rb.AddForce(new Vector2(3, 3), ForceMode2D.Impulse);
 
 		// damage animation
 		anim.SetTrigger("damaged");
 
-		// add IFrame TODO
+		// IFrame
+		if (!isInvincible) {
+            StartCoroutine(BecomeTemporarilyInvincible());
+        }
 
 		if (currentHealth <= 0) {
 			Die();
@@ -93,4 +103,13 @@ public class Zombie : MonoBehaviour {
 		}
 	}
 	
+	private IEnumerator BecomeTemporarilyInvincible() {
+        Debug.Log("Z turned invincible!");
+        isInvincible = true;
+
+        yield return new WaitForSeconds(invincibilityDurationSeconds);
+
+        isInvincible = false;
+        Debug.Log("Z is no longer invincible!");
+    }
 }
