@@ -8,7 +8,6 @@ using UnityEngine;
 public class BlockClass : ItemClass
 {
     public bool isSolid = true;
-    public bool inBackground = false;
     public bool isBreakable = true;
     public int hardness;
     public ToolType preferredTool;

@@ -7,7 +7,7 @@ public class Zombie : MonoBehaviour {
 	[Header("Zombie Settings")]
 	public int zombieDamage = 10;
 	public int maxHealth = 100;
-	int currentHealth;
+	public int currentHealth;
 
 	public Transform player;
 	private Animator anim;
@@ -22,7 +22,7 @@ public class Zombie : MonoBehaviour {
 
 	[SerializeField]
   	private float invincibilityDurationSeconds = 1.0f;
-  	private bool isInvincible;
+  	public bool isInvincible;
 
 	void Start() {
 		currentHealth = maxHealth;

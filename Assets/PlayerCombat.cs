@@ -19,7 +19,6 @@ public class PlayerCombat : MonoBehaviour {
     public void Attack() {
         // Play attack animation
         anim.SetTrigger("attack");
-
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 

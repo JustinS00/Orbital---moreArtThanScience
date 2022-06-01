@@ -9,6 +9,13 @@ public class CameraController : MonoBehaviour
 
     public Transform playerTransform;
 
+    public void moveTo(Vector2 newPos) {
+        Vector3 pos = GetComponent<Transform>().position;
+        pos.x = newPos.x;
+        pos.y = newPos.y;
+        GetComponent<Transform>().position = pos;
+    }
+
     public void FixedUpdate() {
         Vector3 pos = GetComponent<Transform>().position;
         

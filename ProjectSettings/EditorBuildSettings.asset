@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 70af89261f5fe2f45b1914dc838f43ad
   - enabled: 1
-    path: Assets/Scenes/AddKnockback.unity
+    path: Assets/Scenes/Poster Scene.unity
     guid: 35b820046e5ed404681d382a31c75962
   m_configObjects: {}

@@ -9,6 +9,13 @@ public class ItemDropCollider : MonoBehaviour
     public ItemClass item;
     public int quantity;
 
+    /*
+    Ignore triggers/collision for other layers
+    private void Start() {
+        Physics2D.IgnoreLayerCollision(7, 8, true);
+    }
+    */
+
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
             touchingPlayer = true;
@@ -31,6 +38,8 @@ public class ItemDropCollider : MonoBehaviour
                     Destroy(col.gameObject);
                 }
             }
-        }   
+        }  else if (col.gameObject.CompareTag("Enemy")) {
+            Physics2D.IgnoreCollision(col.GetComponent<Collider2D>(), GetComponent<Collider2D>(),true);
+        }
     }
 }
