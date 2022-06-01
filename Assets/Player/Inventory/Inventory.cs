@@ -8,6 +8,8 @@ public class Inventory : MonoBehaviour {
     public ToolClass tool;
     public WeaponClass weapon;
 
+    public bool isShowing;
+
     public Vector2 offsetInv;
     public Vector2 offsetHotbar;
     public Vector2 multiplierInv;
@@ -32,6 +34,7 @@ public class Inventory : MonoBehaviour {
 
     public GameObject itemCursor;
     
+    
     // Start is called before the first frame update
     private void Start() {
         inventory = new InventorySlot[inventoryWidth, inventoryHeight];
@@ -40,28 +43,31 @@ public class Inventory : MonoBehaviour {
         hotbarUISlots = new GameObject[inventoryWidth];
         SetupUI();
         UpdateInventoryUI();
+        isShowing = false;
         Add(tool);
         Add(weapon);
     }
 
     private void Update() {
-        itemCursor.SetActive(isMovingItem);
-        itemCursor.transform.position = Input.mousePosition;
-        if (isMovingItem) {
-            itemCursor.GetComponent<Image>().sprite = movingSlot.item.itemSprite;
-        }
-        if (Input.GetMouseButtonDown(0)) {
+        if (isShowing) {
+            itemCursor.SetActive(isMovingItem);
+            itemCursor.transform.position = Input.mousePosition;
             if (isMovingItem) {
-                EndItemMove();
-            } else {
-                BeginItemMove();
+                itemCursor.GetComponent<Image>().sprite = movingSlot.item.itemSprite;
             }
-        } else if (Input.GetMouseButtonDown(1)) {
-            if (isMovingItem) {
-                EndItemMoveSingle();
+            if (Input.GetMouseButtonDown(0)) {
+                if (isMovingItem) {
+                    EndItemMove();
+                } else {
+                    BeginItemMove();
+                }
+            } else if (Input.GetMouseButtonDown(1)) {
+                if (isMovingItem) {
+                    EndItemMoveSingle();
 
-            } else {
-                BeginItemMoveHalf();
+                } else {
+                    BeginItemMoveHalf();
+                }
             }
         }
     }

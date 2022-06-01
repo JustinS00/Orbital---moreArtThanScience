@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b2687b0f2468894fa607827596d27b5, type: 3}
-  m_Name: Grass
+  m_Name: Grass Block
   m_EditorClassIdentifier: 
   itemType: 0
-  itemName: grass
-  itemSprite: {fileID: 21300000, guid: 48c3b0f0d86595843834b234d3fc6d5e, type: 3}
+  itemName: grass_block
+  itemSprite: {fileID: 21300000, guid: 42d3ed7677b60bc42a8e8949f59d2a07, type: 3}
   isStackable: 1
   maxItemsPerStack: 64
-  isSolid: 0
+  isSolid: 1
   isBreakable: 1
   hardness: 0
   preferredTool: 0
