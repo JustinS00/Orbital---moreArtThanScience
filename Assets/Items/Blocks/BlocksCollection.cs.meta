@@ -6,9 +6,12 @@ MonoImporter:
   defaultReferences:
   - stone: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
   - dirt: {fileID: 11400000, guid: 1862ea7880732074db360993eb0b3825, type: 2}
-  - grass: {fileID: 11400000, guid: ac297b99d0213c6409f5762b8c3be42b, type: 2}
+  - grass_block: {fileID: 11400000, guid: ac297b99d0213c6409f5762b8c3be42b, type: 2}
   - log: {fileID: 11400000, guid: abf3c35a14e04a84e90dce7bb2961db7, type: 2}
   - leaves: {fileID: 11400000, guid: e81dccb93fe311a4f96638090930872b, type: 2}
+  - grass: {fileID: 11400000, guid: ac297b99d0213c6409f5762b8c3be42b, type: 2}
+  - mushroom_red: {fileID: 11400000, guid: 04dffe2c6d4c2dc48984e2eaf54750a1, type: 2}
+  - mushroom_brown: {fileID: 11400000, guid: d18dab26beecb594891827968fe7d3d9, type: 2}
   - coal_ore: {fileID: 11400000, guid: 2f0a2a0a2dc9d8b4f90f13c24a2743e2, type: 2}
   - iron_ore: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
   - gold_ore: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}

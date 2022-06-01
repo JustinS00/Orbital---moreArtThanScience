@@ -36,10 +36,12 @@ public class Terrain : MonoBehaviour {
     [Header("Blocks")]
     public BlocksCollection blocksCollection; 
 
-    [Header("Tree Settings")]
+    [Header("Surface Features Settings")]
     public float treeChance = 0.03f;
     public int minTreeHeight = 6;
     public int maxTreeHeight = 10;
+    public float mushroomChance = 0.02f;
+    public float grassChance = 0.03f;
 
     [Header("Ore Settings")]
     public int coalOreHeight = 128;
@@ -68,6 +70,7 @@ public class Terrain : MonoBehaviour {
     private int spawnY = 0;
 
     public GameObject[] worldChunks;
+    private int numChunks;
 
     #region Initialisation
     /* For Visualisation
@@ -149,7 +152,7 @@ public class Terrain : MonoBehaviour {
     }
 
     public void GenerateChunks() {
-        int numChunks = Mathf.CeilToInt(worldSize / (float) chunkSize);
+        numChunks = Mathf.CeilToInt(worldSize / (float) chunkSize);
         worldChunks = new GameObject[numChunks];
         for (int i = 0; i < numChunks; i ++) {
             GameObject newChunk = new GameObject();
@@ -182,16 +185,26 @@ public class Terrain : MonoBehaviour {
                     } else if (j < height - 1) {
                         block = blocksCollection.dirt;
                     } else {
-                        block = blocksCollection.grass;
-                    }
-
+                        block = blocksCollection.grass_block;
+                    } 
                     placeBackGroundBlock(i,j, block);
                     if (noiseTexture.GetPixel(i,j) == Color.white) {
                         placeBlock(i, j, block);
-                        if (block == blocksCollection.grass) {
+                        if (block == blocksCollection.grass_block) {
                             float spawnTreeChance = Random.Range(0.0f, 1.0f);
+                            float spawnMushroomChance = Random.Range(0.0f, 1.0f);
+                            float spawnGrassChance = Random.Range(0.0f, 1.0f);
                             if (spawnTreeChance < treeChance) {
                                 generateTree(i, j + 1);
+                            } else if (spawnMushroomChance < mushroomChance) {
+                                float redOrBrown =  Random.Range(0.0f, 1.0f);
+                                if (redOrBrown < 0.5f) {
+                                    placeBlock(i, j + 1, blocksCollection.mushroom_brown);
+                                } else {
+                                    placeBlock(i, j + 1, blocksCollection.mushroom_red);
+                                }
+                            } else if (spawnGrassChance < grassChance) {
+                                placeBlock(i, j + 1, blocksCollection.grass);
                             }
                         }
                     }
@@ -213,10 +226,16 @@ public class Terrain : MonoBehaviour {
         for (int i = 0; i < worldChunks.Length; i ++) {
             worldChunks[i].SetActive(false);
         }
-        int xLeft = Mathf.FloorToInt(gameManager.player.transform.position.x - Camera.main.orthographicSize * 3f);
-        int xRight = Mathf.CeilToInt(gameManager.player.transform.position.x + Camera.main.orthographicSize * 3f);
+        int xLeft = Mathf.FloorToInt(gameManager.player.transform.position.x - Camera.main.orthographicSize * 4f);
+        int xRight = Mathf.CeilToInt(gameManager.player.transform.position.x + Camera.main.orthographicSize * 4f);
         for (int i = xLeft; i <= xRight; i += chunkSize) {
-            worldChunks[getChunkNo(i)].SetActive(true);
+            int chunkNo = getChunkNo(i);
+            if (chunkNo >= numChunks) {
+                chunkNo = numChunks - 1;
+            } else if (chunkNo < 0) {
+                chunkNo = 0;
+            }
+            worldChunks[chunkNo].SetActive(true);
         }
     }
 
@@ -268,8 +287,10 @@ public class Terrain : MonoBehaviour {
             int chunkCoordinate = getChunkNo(x, y);
             newBlock.transform.parent = worldChunks[chunkCoordinate].transform;          
             newBlock.AddComponent<SpriteRenderer>();
-            newBlock.AddComponent<BoxCollider2D>();
-            newBlock.GetComponent<BoxCollider2D>().size = Vector2.one;
+            if(block.isSolid) {
+                newBlock.AddComponent<BoxCollider2D>();
+                newBlock.GetComponent<BoxCollider2D>().size = Vector2.one;
+            }
             newBlock.tag = "Ground";
             newBlock.GetComponent<SpriteRenderer>().sprite = block.itemSprite;
             newBlock.name = block.itemName;
@@ -288,9 +309,9 @@ public class Terrain : MonoBehaviour {
         newBlock.AddComponent<SpriteRenderer>();
         Sprite sprite = blocksCollection.stone.itemSprite;
         string name = "stone_background";
-        if (block.itemName == "grass") {
-            sprite = blocksCollection.grass.itemSprite;
-            name = "grass_background";
+        if (block.itemName == "grass_block") {
+            sprite = blocksCollection.grass_block.itemSprite;
+            name = "grassblock_background";
         } else if (block.itemName == "dirt") {
             sprite = blocksCollection.dirt.itemSprite;
             name = "dirt_background";
@@ -320,20 +341,6 @@ public class Terrain : MonoBehaviour {
             //LightBlock(x, y, 1f, 0);
             GameObject newBlockDrop = Instantiate(itemDrop, new Vector2(x, y + 0.5f), Quaternion.identity);
             newBlockDrop.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
-
-            //BlockClass tileDropItem = new BlockClass(block);
-            /*
-            BlockClass tileDropItem = ScriptableObject.CreateInstance<BlockClass>();
-            tileDropItem.itemName = block.itemName;
-            tileDropItem.itemSprite = block.itemSprite;
-            tileDropItem.isStackable = block.isStackable;
-            tileDropItem.maxItemsPerStack = block.maxItemsPerStack;
-            tileDropItem.isSolid = block.isSolid;
-            tileDropItem.inBackground = block.inBackground;
-            tileDropItem.isBreakable = block.isBreakable;
-            tileDropItem.hardness = block.hardness;
-            tileDropItem.preferredTool = block.preferredTool;
-            */
 
             newBlockDrop.GetComponent<ItemDropCollider>().item = block;
             newBlockDrop.GetComponent<ItemDropCollider>().quantity = 1;

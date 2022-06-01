@@ -9,9 +9,15 @@ public class BlocksCollection : ScriptableObject
     #region Normal Blocks
     public BlockClass stone;
     public BlockClass dirt;
-    public BlockClass grass;
+    public BlockClass grass_block;
     public BlockClass log;
     public BlockClass leaves;
+    #endregion
+
+    #region Surface Blocks
+    public BlockClass grass;
+    public BlockClass mushroom_red;
+    public BlockClass mushroom_brown;
     #endregion
 
     #region Ores

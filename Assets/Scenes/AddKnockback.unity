@@ -688,9 +688,11 @@ MonoBehaviour:
   terrainFreq: 0.1
   noiseTexture: {fileID: 0}
   blocksCollection: {fileID: 11400000, guid: 72de6673147141b4c957e2979a08c9b5, type: 2}
-  treeChance: 0.1
+  treeChance: 0.05
   minTreeHeight: 4
   maxTreeHeight: 8
+  mushroomChance: 0.02
+  grassChance: 0.03
   coalOreHeight: 128
   ironOreHeight: 64
   goldOreHeight: 32
@@ -1631,7 +1633,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882413114}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 80, z: 0}
+  m_LocalPosition: {x: 0, y: 128, z: -10}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2082,6 +2084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothTime: 0.1
+  worldSize: 500
   playerTransform: {fileID: 242252548}
 --- !u!81 &1315311853
 AudioListener:

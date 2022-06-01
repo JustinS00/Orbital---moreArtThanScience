@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b2687b0f2468894fa607827596d27b5, type: 3}
-  m_Name: Grass
+  m_Name: Mushroom Red
   m_EditorClassIdentifier: 
   itemType: 0
-  itemName: grass
-  itemSprite: {fileID: 21300000, guid: 48c3b0f0d86595843834b234d3fc6d5e, type: 3}
+  itemName: mushroom_red
+  itemSprite: {fileID: 21300000, guid: 5235d8d62b013e9428c93e5128951abd, type: 3}
   isStackable: 1
   maxItemsPerStack: 64
   isSolid: 0

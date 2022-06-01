@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {  
 
-    public bool showInv = false;
+    public bool showInv;
     public Inventory inventory;
     public ItemClass selectedItem;
     public GameObject selectedItemDisplay;
@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour {
         // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {
             showInv = !showInv;
+            inventory.isShowing = !inventory.isShowing;
         }
         inventory.InventoryUI.SetActive(showInv);
 
@@ -197,6 +198,10 @@ public class PlayerController : MonoBehaviour {
         }
         mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - 0.5f);
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
+
+        if (GetComponent<Transform>().position.y < 0) {
+            Respawn();
+        }
     }
 
 
