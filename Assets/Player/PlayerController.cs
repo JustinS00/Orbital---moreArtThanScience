@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
         //destroy or place blocks
         if (hit && !showInv) {
             //terrain.destroyBlock(mousePos.x, mousePos.y);
-            gameManager.terrain.destroyBlock(mousePos.x, mousePos.y);
+            gameManager.terrain.mineBlock(mousePos.x, mousePos.y);
         } else if (place && !showInv && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
             //check not placing on player
             int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);

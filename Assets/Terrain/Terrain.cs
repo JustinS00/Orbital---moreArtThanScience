@@ -15,14 +15,8 @@ public class Terrain : MonoBehaviour {
     List<Vector2Int> unlitBlocks = new List<Vector2Int>();
     */
 
-
-    // Can do the same for cameracontroller
     public GameManager gameManager;
-    //public PlayerController player;
     public GameObject itemDrop;
-
-    [Header("Blocks")]
-    public BlocksCollection blocksCollection;
 
     [Header("World Settings")]
     public float seed;
@@ -33,16 +27,38 @@ public class Terrain : MonoBehaviour {
     public int dirtLayerHeight = 5;
     private int chunkSize = 16;
 
-    [Header("Tree Settings")]
-    public float treeChance = 0.03f;
-    public int minTreeHeight = 6;
-    public int maxTreeHeight = 10;
-
     [Header("Generation Settings")]
     public float surfaceValue = 0.25f;
     public float caveFreq = 0.03f;
     public float terrainFreq = 0.10f;
     public Texture2D noiseTexture;//2d array
+
+    [Header("Blocks")]
+    public BlocksCollection blocksCollection; 
+
+    [Header("Tree Settings")]
+    public float treeChance = 0.03f;
+    public int minTreeHeight = 6;
+    public int maxTreeHeight = 10;
+
+    [Header("Ore Settings")]
+    public int coalOreHeight = 128;
+    public int ironOreHeight = 64;
+    public int goldOreHeight = 32;
+    public int diamondOreHeight = 16;
+    public float coalRarity = 0.1f;
+    public float ironRarity = 0.08f;
+    public float goldRarity = 0.07f;
+    public float diamondRarity = 0.06f;
+    public float coalVeinSize = 0.76f;
+    public float ironVeinSize = 0.8f;
+    public float goldVeinSize = 0.85f;
+    public float diamondVeinSize = 0.84f;
+    /*Change to public to view map of ores spread*/
+    private Texture2D coalTexture;
+    private Texture2D ironTexture;
+    private Texture2D goldTexture;
+    private Texture2D diamondTexture;   
 
     private List<Vector2> worldBlocks = new List<Vector2>();
     private List<GameObject> worldBlocksObject = new List<GameObject>();
@@ -51,10 +67,26 @@ public class Terrain : MonoBehaviour {
     private int spawnX = 0;
     private int spawnY = 0;
 
-
     public GameObject[] worldChunks;
 
-    private void Start() {
+    #region Initialisation
+    /* For Visualisation
+    private void OnValidate() {
+        if (noiseTexture == null) {
+            noiseTexture = new Texture2D(worldSize, worldHeight);
+            coalTexture = new Texture2D(worldSize, worldHeight);
+            ironTexture = new Texture2D(worldSize, worldHeight);
+            goldTexture = new Texture2D(worldSize, worldHeight);    
+            diamondTexture = new Texture2D(worldSize, worldHeight);
+        }
+        GenerateNoiseTexture(noiseTexture, caveFreq, surfaceValue);
+        GenerateNoiseTexture(coalTexture, coalRarity, (float) coalVeinSize);
+        GenerateNoiseTexture(ironTexture, ironRarity, (float) ironVeinSize);
+        GenerateNoiseTexture(goldTexture, goldRarity, (float) goldVeinSize);
+        GenerateNoiseTexture(diamondTexture, diamondRarity, (float) diamondVeinSize);   
+    }
+    */ 
+    public void StartTerrainGeneration() {
         //lighting
         /*
         worldBlocksMap = new Texture2D(worldSize, worldHeight);
@@ -69,9 +101,21 @@ public class Terrain : MonoBehaviour {
         worldBlocksMap.Apply();
         */
 
-        seed = Random.Range(-10000,10000);
+        seed = Random.Range(-100000,100000);
         spawnX = worldSize / 2;
-        GenerateNoiseTexture();
+        if (noiseTexture == null) {
+            noiseTexture = new Texture2D(worldSize, worldHeight);
+            coalTexture = new Texture2D(worldSize, worldHeight);
+            ironTexture = new Texture2D(worldSize, worldHeight);
+            goldTexture = new Texture2D(worldSize, worldHeight);
+            diamondTexture = new Texture2D(worldSize, worldHeight);
+        }
+
+        GenerateNoiseTexture(noiseTexture, caveFreq, surfaceValue);
+        GenerateNoiseTexture(coalTexture, coalRarity, (float) coalVeinSize);
+        GenerateNoiseTexture(ironTexture, ironRarity, (float) ironVeinSize);
+        GenerateNoiseTexture(goldTexture, goldRarity, (float) goldVeinSize);
+        GenerateNoiseTexture(diamondTexture, diamondRarity, (float) diamondVeinSize);   
         GenerateChunks();
         GenerateTerrain();
 
@@ -85,50 +129,20 @@ public class Terrain : MonoBehaviour {
         }
         worldBlocksMap.Apply();
         */
-
-        /*
-        player.spawnPos = new Vector2(spawnX, spawnY + 2);
-        player.Spawn();
-        */
-        gameManager.player.spawnPos = new Vector2(spawnX, spawnY + 2);
-        gameManager.player.Spawn();
-
+        gameManager.spawnPos = new Vector2(spawnX, spawnY + 2);
+ 
     }
 
-    private void Update() {
-        RefreshChunks();
-    }
-
-    void RefreshChunks() {
-        for (int i = 0; i < worldChunks.Length; i ++) {
-            worldChunks[i].SetActive(false);
-        }
-        /*
-        int xLeft = Mathf.FloorToInt(player.transform.position.x - Camera.main.orthographicSize * 3f);
-        int xRight = Mathf.CeilToInt(player.transform.position.x + Camera.main.orthographicSize * 3f);
-        */
-        int xLeft = Mathf.FloorToInt(gameManager.player.transform.position.x - Camera.main.orthographicSize * 3f);
-        int xRight = Mathf.CeilToInt(gameManager.player.transform.position.x + Camera.main.orthographicSize * 3f);
-        for (int i = xLeft; i <= xRight; i += chunkSize) {
-            worldChunks[getChunkNo(i)].SetActive(true);
-        }
-    }
-
-    private int getChunkNo(int x, int y) {
-        return getChunkNo(x);
-    }
-
-     private int getChunkNo(int x) {
-        return Mathf.FloorToInt(x / (float) chunkSize);
-    }
-    
-    public void GenerateNoiseTexture() {
-        noiseTexture = new Texture2D(worldSize, worldHeight);
+    public void GenerateNoiseTexture(Texture2D noiseTexture,float freq, float limit) {
 
         for (int x = 0; x < noiseTexture.width; x++) {
             for (int y = 0; y < noiseTexture.height; y++) {
-                float value = Mathf.PerlinNoise((x + seed) * caveFreq, (y + seed) * caveFreq);
-                noiseTexture.SetPixel(x, y, new Color(value, value, value));
+                float value = Mathf.PerlinNoise((x + seed) * freq, (y + seed) * freq);
+                if (value > limit) {
+                    noiseTexture.SetPixel(x, y, Color.white);
+                } else {
+                    noiseTexture.SetPixel(x,y, Color.black);
+                }
             }
         }
         noiseTexture.Apply();
@@ -145,34 +159,77 @@ public class Terrain : MonoBehaviour {
         }
     }
 
-
     public void GenerateTerrain() {
         for (int i = 0; i < worldSize; i++) {
             float height = Mathf.PerlinNoise(i * terrainFreq, seed * terrainFreq) * heightMulitplier + heightAddition;
             for (int j = 0; j < height; j++) {
-                BlockClass block; // change to BlockClass block
-                if (j < height - dirtLayerHeight) {
-                    block = blocksCollection.stone;
-                } else if (j < height - 1) {
-                    block = blocksCollection.dirt;
+                if (j == 0) {
+                    placeBlock(i, j, blocksCollection.bedrock);
                 } else {
-                    block = blocksCollection.grass;
-                }
-                if (noiseTexture.GetPixel(i,j).r > surfaceValue) {
-                    placeBlock(i, j, block);
-                    if (block == blocksCollection.grass) {
-                        float spawnTreeChance = Random.Range(0.0f, 1.0f);
-                        if (spawnTreeChance < treeChance) {
-                            generateTree(i, j + 1);
+                    BlockClass block;
+                    if (j < height - dirtLayerHeight) {
+                        if (coalTexture.GetPixel(i,j) == Color.white && j < coalOreHeight) {
+                            block = blocksCollection.coal_ore;
+                        } else if (ironTexture.GetPixel(i,j) == Color.white && j < ironOreHeight) {
+                            block = blocksCollection.iron_ore;
+                        } else if (goldTexture.GetPixel(i,j) == Color.white && j < goldOreHeight) {
+                            block = blocksCollection.gold_ore;
+                        } else if (diamondTexture.GetPixel(i,j) == Color.white && j < diamondOreHeight) {
+                            block = blocksCollection.diamond_ore;
+                        } else {
+                            block = blocksCollection.stone;
+                        }
+                    } else if (j < height - 1) {
+                        block = blocksCollection.dirt;
+                    } else {
+                        block = blocksCollection.grass;
+                    }
+
+                    placeBackGroundBlock(i,j, block);
+                    if (noiseTexture.GetPixel(i,j) == Color.white) {
+                        placeBlock(i, j, block);
+                        if (block == blocksCollection.grass) {
+                            float spawnTreeChance = Random.Range(0.0f, 1.0f);
+                            if (spawnTreeChance < treeChance) {
+                                generateTree(i, j + 1);
+                            }
                         }
                     }
                 }
             }
         }
-
         //worldBlocksMap.Apply();
     }
+    #endregion
 
+   
+
+    #region Update
+    private void Update() {
+        RefreshChunks();
+    }
+
+    void RefreshChunks() {
+        for (int i = 0; i < worldChunks.Length; i ++) {
+            worldChunks[i].SetActive(false);
+        }
+        int xLeft = Mathf.FloorToInt(gameManager.player.transform.position.x - Camera.main.orthographicSize * 3f);
+        int xRight = Mathf.CeilToInt(gameManager.player.transform.position.x + Camera.main.orthographicSize * 3f);
+        for (int i = xLeft; i <= xRight; i += chunkSize) {
+            worldChunks[getChunkNo(i)].SetActive(true);
+        }
+    }
+
+    private int getChunkNo(int x, int y) {
+        return getChunkNo(x);
+    }
+
+     private int getChunkNo(int x) {
+        return Mathf.FloorToInt(x / (float) chunkSize);
+    }
+    #endregion
+    
+    #region Structures
     public void generateTree(int x, int y) {
         int treeHeight = Random.Range(minTreeHeight, maxTreeHeight) + 1;
         for (int i = 0; i < treeHeight; i ++) {
@@ -189,13 +246,14 @@ public class Terrain : MonoBehaviour {
             }
         }
     }
+    #endregion
 
+    #region Functions
     public bool canPlace(int x, int y) {
         return !worldBlocks.Contains(new Vector2(x, y));
     }
 
-    public void placeBlock(int x, int y, BlockClass block) {//change sprite block to blockclass block
-        //setting spawnPoint of player - should not be here
+    public void placeBlock(int x, int y, BlockClass block) {
         if (x == spawnX & y > spawnY) {
             spawnY = y;
         }
@@ -221,6 +279,36 @@ public class Terrain : MonoBehaviour {
             worldBlocksObject.Add(newBlock);
             worldBlockClasses.Add(block);
         }
+    }
+
+    private void placeBackGroundBlock(int x, int y, BlockClass block) {
+        GameObject newBlock = new GameObject();
+        int chunkCoordinate = getChunkNo(x, y);
+        newBlock.transform.parent = worldChunks[chunkCoordinate].transform; 
+        newBlock.AddComponent<SpriteRenderer>();
+        Sprite sprite = blocksCollection.stone.itemSprite;
+        string name = "stone_background";
+        if (block.itemName == "grass") {
+            sprite = blocksCollection.grass.itemSprite;
+            name = "grass_background";
+        } else if (block.itemName == "dirt") {
+            sprite = blocksCollection.dirt.itemSprite;
+            name = "dirt_background";
+        }
+        newBlock.name = name;    
+        newBlock.GetComponent<SpriteRenderer>().sprite = sprite;
+        newBlock.GetComponent<SpriteRenderer>().sortingOrder = -5;
+        newBlock.GetComponent<SpriteRenderer>().color = new Color(0.7f,0.7f,0.7f);
+        newBlock.transform.position = new Vector2(x + 0.5f, y + 0.5f);
+    }
+
+    public void mineBlock(int x, int y) {
+         if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
+            BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];   
+            if (block.isBreakable) {
+                destroyBlock(x,y);
+            }    
+         }
     }
 
     public void destroyBlock(int x, int y) {
@@ -256,6 +344,7 @@ public class Terrain : MonoBehaviour {
             //worldBlocksMap.Apply();
         }
     }
+    #endregion
 
 
     //Lighting (Breaking game rn)
