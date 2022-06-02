@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 	public int currentHealth;
 
 	public HealthBar healthBar;
+    public Health health;
 
     public Vector2 spawnPos;
     public Vector2Int mousePos;
@@ -37,29 +38,28 @@ public class PlayerController : MonoBehaviour {
 
     public PlayerCombat playerCombat;
 
+    /*
+    to make into knockback script
     public float knockback = 30;
     private float knockbackLength;
     private float knockbackCount;
     private bool knockFromRight;
-
-    [SerializeField]
-    private float invincibilityDurationSeconds = 1.0f;
-    private bool isInvincible;
+    */
 
     public void Spawn() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         GetComponent<Transform>().position = spawnPos;
         inventory = GetComponent<Inventory>();
-        currentHealth = maxHealth;
 		healthBar.SetMaxHealth(maxHealth);
+        health = GetComponent<Health>();
     }
 
     public void Respawn() {
         //not clearing inventory for now
-        GetComponent<Transform>().position = spawnPos;;
-        currentHealth = maxHealth;
+        GetComponent<Transform>().position = spawnPos;
 		healthBar.SetMaxHealth(maxHealth);
+        health.SetFullHealth();
     }
 
     private void FixedUpdate() {
@@ -97,9 +97,11 @@ public class PlayerController : MonoBehaviour {
                 onGround = false;
             }
         }
-
+        rb.velocity = movement;
+        /*
+        to make into knockback script
         if (knockbackCount <= 0) {
-            rb.velocity = movement;
+            
         } else {
             if (knockFromRight) {
                 rb.velocity = new Vector2(-knockback, knockback/3);
@@ -108,6 +110,7 @@ public class PlayerController : MonoBehaviour {
             }
             knockbackCount--;
         }
+        */
 
     }
 
@@ -199,46 +202,14 @@ public class PlayerController : MonoBehaviour {
         mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - 0.5f);
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
 
-        if (GetComponent<Transform>().position.y < 0) {
-            Respawn();
-        }
-    }
-
-
-    public void TakeDamage(int damage, bool fromRight) {
-
-        if (isInvincible) return;
-
-        currentHealth = Mathf.Max(0, currentHealth - damage);
-        healthBar.SetHealth(currentHealth);
-
-        if(currentHealth == 0) {
+        if (GetComponent<Transform>().position.y < 0 || GetComponent<Health>().getHealth() <= 0) {
             Respawn();
         }
 
-        // hit animation
-        anim.SetTrigger("damaged");
-
-        // add IFrame
-        if (!isInvincible) {
-            StartCoroutine(BecomeTemporarilyInvincible());
+        int curHealth = GetComponent<Health>().getHealth();
+        healthBar.SetHealth(curHealth);
+        if (curHealth <= 0) {
+            Respawn();
         }
-
-        knockbackCount = 1;
-        knockFromRight = fromRight;
-
-    }
-
-    public void AddHealth(int health) {
-        currentHealth = Mathf.Min(maxHealth, health + currentHealth);
-        healthBar.SetHealth(currentHealth);
-    }
-
-    private IEnumerator BecomeTemporarilyInvincible() {
-        isInvincible = true;
-
-        yield return new WaitForSeconds(invincibilityDurationSeconds);
-
-        isInvincible = false;
     }
 }

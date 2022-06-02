@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Zombie : MonoBehaviour {
+/*
+DEPRECATED TO REMOVE
+DEPRECATED TO REMOVE
+DEPRECATED TO REMOVE
+DEPRECATED TO REMOVE
+DEPRECATED TO REMOVE
+DEPRECATED TO REMOVE
+DEPRECATED TO REMOVE
+DEPRECATED TO REMOVE
 
 	[Header("Zombie Settings")]
 	public int zombieDamage = 10;
@@ -104,12 +113,13 @@ public class Zombie : MonoBehaviour {
 	}
 	
 	private IEnumerator BecomeTemporarilyInvincible() {
-        Debug.Log("Z turned invincible!");
+        Debug.Log("Enemy turned invincible!");
         isInvincible = true;
 
         yield return new WaitForSeconds(invincibilityDurationSeconds);
 
         isInvincible = false;
-        Debug.Log("Z is no longer invincible!");
+        Debug.Log("Enemy is no longer invincible!");
     }
+	*/
 }
