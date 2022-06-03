@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd72e8a68a7dc8f4ba93eb48fb918584, type: 3}
+  m_Name: leather_chestplate
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemName: leather_chestplate
+  itemSprite: {fileID: 1298691589, guid: a2fab086fac63d84d845ae3a827b7b3c, type: 3}
+  isStackable: 0
+  maxItemsPerStack: 1
+  equipmentType: 1
+  durability: 80
+  armourType: 1
+  armourTier: 0
+  protectionValue: 3
+  chestplate1_sideview: {fileID: 21300000, guid: ec4770a6b52e4c94792f679bda20dfb7, type: 3}
+  chestplate2_0_sideview: {fileID: 21300000, guid: 7cd72ed401f0ac04cb95f02f913328a8, type: 3}
+  chestplate2_1_sideview: {fileID: 21300000, guid: 7cd72ed401f0ac04cb95f02f913328a8, type: 3}

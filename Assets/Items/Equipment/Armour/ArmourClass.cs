@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Armour Class", menuName = "Item/Equipment/Armour")]
-public class ArmourClass : EquipmentClass{
+
+public abstract class ArmourClass : EquipmentClass{
     
     public ArmourType armourType;
     public enum ArmourType {helmet, chestplate, leggings, boots};

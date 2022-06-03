@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd72e8a68a7dc8f4ba93eb48fb918584, type: 3}
+  m_Name: golden_chestplate
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemName: golden_chestplate
+  itemSprite: {fileID: 1596701437, guid: a2fab086fac63d84d845ae3a827b7b3c, type: 3}
+  isStackable: 0
+  maxItemsPerStack: 1
+  equipmentType: 1
+  durability: 112
+  armourType: 1
+  armourTier: 2
+  protectionValue: 5
+  chestplate1_sideview: {fileID: 21300000, guid: b19c8f5d0d594f149b79670c79268b24, type: 3}
+  chestplate2_0_sideview: {fileID: 21300000, guid: fabca887bd7e86740be571e5732d0eea, type: 3}
+  chestplate2_1_sideview: {fileID: 21300000, guid: fabca887bd7e86740be571e5732d0eea, type: 3}
