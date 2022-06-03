@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {  
 
-
-
     public bool showInv;
     public Inventory inventory;
     public ItemClass selectedItem;
@@ -25,6 +23,8 @@ public class PlayerController : MonoBehaviour {
     public ChestplateClass chestplate;
     public LeggingsClass leggings;
     public BootsClass boots;
+
+    public int armourProtectionValue;
 
     public int selectionIndex = 0;
     public GameObject hotBarSelector;
@@ -185,26 +185,33 @@ public class PlayerController : MonoBehaviour {
         inventory.InventoryUI.SetActive(showInv);
 
 
-        
+        //Armour Related
+        armourProtectionValue = 0;
         if (helmet != null) {
             helmetDisplay.GetComponent<SpriteRenderer>().sprite = helmet.helmet_sideview;
+            armourProtectionValue += helmet.protectionValue;
         } 
         
         if (chestplate!= null) {
             chestplate1Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate1_sideview;
             chestplate2_0_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_0_sideview;
             chestplate2_1_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_1_sideview;
+            armourProtectionValue += chestplate.protectionValue;
         }
         
         if (leggings!= null) {
             leggings_0_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_0_sideview;
             leggings_1_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_1_sideview;
+            armourProtectionValue += leggings.protectionValue;
         }
         
         if (boots!= null) {
             boots_0_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_0_sideview;
             boots_1_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_1_sideview;
+            armourProtectionValue += boots.protectionValue;
         }
+
+        health.protectionValue = armourProtectionValue;
 
         // Movement
         horizontal = Input.GetAxis("Horizontal");

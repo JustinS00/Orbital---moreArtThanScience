@@ -215,8 +215,6 @@ public class Terrain : MonoBehaviour {
     }
     #endregion
 
-   
-
     #region Update
     private void Update() {
         RefreshChunks();
@@ -353,7 +351,7 @@ public class Terrain : MonoBehaviour {
     }
     #endregion
 
-
+    #region Lightings
     //Lighting (Breaking game rn)
     /*
     void LightBlock(int x, int y, float intensity, int iteration) {
@@ -421,4 +419,5 @@ public class Terrain : MonoBehaviour {
         unlitBlocks.Add(new Vector2Int(x,y));
     }
     */
+    #endregion
 }
