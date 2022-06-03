@@ -15,6 +15,8 @@ public class Health : MonoBehaviour {
 
     private int MAX_HEALTH = 100;
 
+    public int protectionValue;
+
     void Start() {
 		anim = GetComponent<Animator>();
     }
@@ -48,8 +50,9 @@ public class Health : MonoBehaviour {
         if (damage < 0) {
             throw new System.ArgumentOutOfRangeException("No negative damage");
         }
-
-        this.health -= damage;
+        int newDamage = Mathf.RoundToInt(damage * (100 - 2 * protectionValue) / 100.0f);
+        Debug.Log(newDamage);
+        this.health -= newDamage;
         Debug.Log(this.name + "got hit");
         // hit animation
         anim.SetTrigger("damaged");

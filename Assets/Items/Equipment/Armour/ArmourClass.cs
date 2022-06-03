@@ -9,7 +9,7 @@ public abstract class ArmourClass : EquipmentClass{
     public enum ArmourType {helmet, chestplate, leggings, boots};
     public ArmourTier armourTier;
     public enum ArmourTier {leather, iron, gold, diamond};
-    public float protectionValue;
+    public int protectionValue;
     
     public override ItemClass GetItem() {return this;}
 
