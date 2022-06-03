@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc73562fe3a5bc488822dd773a1bc9a, type: 3}
+  m_Name: golden_leggings
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemName: golden_leggings
+  itemSprite: {fileID: -1635495646, guid: a2fab086fac63d84d845ae3a827b7b3c, type: 3}
+  isStackable: 0
+  maxItemsPerStack: 1
+  equipmentType: 1
+  durability: 105
+  armourType: 2
+  armourTier: 2
+  protectionValue: 3
+  leggings_0_sideview: {fileID: 21300000, guid: 1707e206617ab7f41bfb3c0d5be7504b, type: 3}
+  leggings_1_sideview: {fileID: 21300000, guid: 1707e206617ab7f41bfb3c0d5be7504b, type: 3}

@@ -4,10 +4,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {  
 
+
+
     public bool showInv;
     public Inventory inventory;
     public ItemClass selectedItem;
     public GameObject selectedItemDisplay;
+
+    [Header("Armour Display")]
+    public GameObject helmetDisplay;
+    public GameObject chestplate1Display;
+    public GameObject chestplate2_0_Display;
+    public GameObject chestplate2_1_Display;
+    public GameObject leggings_0_Display;
+    public GameObject leggings_1_Display;
+    public GameObject boots_0_Display;
+    public GameObject boots_1_Display;
+
+    public HelmetClass helmet;
+    public ChestplateClass chestplate;
+    public LeggingsClass leggings;
+    public BootsClass boots;
 
     public int selectionIndex = 0;
     public GameObject hotBarSelector;
@@ -24,6 +41,7 @@ public class PlayerController : MonoBehaviour {
     public float jump;
     public bool siu;
 
+    [Header("Health")]
     public int maxHealth = 100;
 	public int currentHealth;
 
@@ -35,7 +53,6 @@ public class PlayerController : MonoBehaviour {
 
     //public Terrain terrain;
     public GameManager gameManager;
-
     public PlayerCombat playerCombat;
 
     /*
@@ -53,6 +70,9 @@ public class PlayerController : MonoBehaviour {
         inventory = GetComponent<Inventory>();
 		healthBar.SetMaxHealth(maxHealth);
         health = GetComponent<Health>();
+        health.SetFullHealth();
+
+        /*For Testing*/
     }
 
     public void Respawn() {
@@ -73,13 +93,6 @@ public class PlayerController : MonoBehaviour {
             int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
             int minY = Mathf.FloorToInt(GetComponent<Transform>().position.y);
             int maxY = Mathf.CeilToInt(GetComponent<Transform>().position.y);
-            /*
-            if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
-                if(terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
-                    terrain.placeBlock(mousePos.x, mousePos.y, (BlockClass) selectedItem);
-                    inventory.RemoveFromHotBar(selectedItem, selectionIndex);
-                }
-            }*/
 
             if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
                 if(gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
@@ -170,6 +183,28 @@ public class PlayerController : MonoBehaviour {
             inventory.isShowing = !inventory.isShowing;
         }
         inventory.InventoryUI.SetActive(showInv);
+
+
+        
+        if (helmet != null) {
+            helmetDisplay.GetComponent<SpriteRenderer>().sprite = helmet.helmet_sideview;
+        } 
+        
+        if (chestplate!= null) {
+            chestplate1Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate1_sideview;
+            chestplate2_0_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_0_sideview;
+            chestplate2_1_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_1_sideview;
+        }
+        
+        if (leggings!= null) {
+            leggings_0_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_0_sideview;
+            leggings_1_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_1_sideview;
+        }
+        
+        if (boots!= null) {
+            boots_0_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_0_sideview;
+            boots_1_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_1_sideview;
+        }
 
         // Movement
         horizontal = Input.GetAxis("Horizontal");
