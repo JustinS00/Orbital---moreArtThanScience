@@ -184,31 +184,47 @@ public class PlayerController : MonoBehaviour {
         }
         inventory.InventoryUI.SetActive(showInv);
 
-
+        helmet = inventory.GetHelmet();
+        chestplate = inventory.GetChestplate();
+        leggings = inventory.GetLeggings();
+        boots = inventory.GetBoots();
+        
         //Armour Related
         armourProtectionValue = 0;
         if (helmet != null) {
             helmetDisplay.GetComponent<SpriteRenderer>().sprite = helmet.helmet_sideview;
             armourProtectionValue += helmet.protectionValue;
-        } 
+        } else {
+            helmetDisplay.GetComponent<SpriteRenderer>().sprite = null;
+        }
         
         if (chestplate!= null) {
             chestplate1Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate1_sideview;
             chestplate2_0_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_0_sideview;
             chestplate2_1_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_1_sideview;
             armourProtectionValue += chestplate.protectionValue;
+        } else {
+            chestplate1Display.GetComponent<SpriteRenderer>().sprite = null; 
+            chestplate2_0_Display.GetComponent<SpriteRenderer>().sprite = null;
+            chestplate2_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
         
         if (leggings!= null) {
             leggings_0_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_0_sideview;
             leggings_1_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_1_sideview;
             armourProtectionValue += leggings.protectionValue;
+        } else {
+            leggings_0_Display.GetComponent<SpriteRenderer>().sprite = null;
+            leggings_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
         
         if (boots!= null) {
             boots_0_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_0_sideview;
             boots_1_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_1_sideview;
             armourProtectionValue += boots.protectionValue;
+        } else {
+            boots_0_Display.GetComponent<SpriteRenderer>().sprite = null;
+            boots_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
 
         health.protectionValue = armourProtectionValue;

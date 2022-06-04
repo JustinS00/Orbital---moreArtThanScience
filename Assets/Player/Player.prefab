@@ -1010,10 +1010,11 @@ MonoBehaviour:
   leggings_1_Display: {fileID: 3727029989557195859}
   boots_0_Display: {fileID: 126705575043870135}
   boots_1_Display: {fileID: 5941894109791430008}
-  helmet: {fileID: 11400000, guid: 95e4e53fb9719724db5c717d40fb3261, type: 2}
-  chestplate: {fileID: 11400000, guid: 97d17c5282ed6734b9069196747ce9a3, type: 2}
-  leggings: {fileID: 11400000, guid: a75bdff19ab23a94e88961e886b31ff9, type: 2}
-  boots: {fileID: 11400000, guid: 7cdbd073c6f757a45a2235d54391a0e4, type: 2}
+  helmet: {fileID: 0}
+  chestplate: {fileID: 0}
+  leggings: {fileID: 0}
+  boots: {fileID: 0}
+  armourProtectionValue: 0
   selectionIndex: 0
   hotBarSelector: {fileID: 0}
   moveSpeed: 5
@@ -1065,17 +1066,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tool: {fileID: 11400000, guid: 00696dfacf4f6e64e80fc220762cfb31, type: 2}
   weapon: {fileID: 11400000, guid: 2295e3656d53f7946a0a5c5d2ddd0103, type: 2}
+  armours:
+  - {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+  - {fileID: 11400000, guid: e4881485f67147e479e7f0e6287678f9, type: 2}
+  - {fileID: 11400000, guid: 95e4e53fb9719724db5c717d40fb3261, type: 2}
+  - {fileID: 11400000, guid: 28f86c8fed74e6a40935ef8d5190cdef, type: 2}
+  - {fileID: 11400000, guid: f8374ce3e892f0341ba28aa970f84254, type: 2}
+  - {fileID: 11400000, guid: 62662ca9ee1748a49848092535d6757f, type: 2}
+  - {fileID: 11400000, guid: b8b90fb2910d11d45822ae9937971d45, type: 2}
+  - {fileID: 11400000, guid: a75bdff19ab23a94e88961e886b31ff9, type: 2}
+  - {fileID: 11400000, guid: a41ea965b40047e429ad606d3afd5684, type: 2}
+  - {fileID: 11400000, guid: 97d17c5282ed6734b9069196747ce9a3, type: 2}
+  - {fileID: 11400000, guid: 9cdd31d7fb361e048a6c7194c51f6f64, type: 2}
+  - {fileID: 11400000, guid: 682fa14f9d8a51c4386b6233ff474815, type: 2}
+  - {fileID: 11400000, guid: 7cdbd073c6f757a45a2235d54391a0e4, type: 2}
+  - {fileID: 11400000, guid: 9b793bb9be6d1c948bef4faa7b8ab38f, type: 2}
+  - {fileID: 11400000, guid: 33d5fb87d3203e34e8f734ab350b03d5, type: 2}
+  - {fileID: 11400000, guid: b7aa679ae2d6b5540a7be093b1810e96, type: 2}
   isShowing: 0
-  offsetInv: {x: -300, y: -100}
-  offsetHotbar: {x: -300, y: 0}
-  multiplierInv: {x: 75, y: 75}
-  multiplierHotbar: {x: 75, y: 75}
+  offsetInv: {x: -160, y: -110}
+  offsetHotbar: {x: -160, y: 0}
+  multiplierInv: {x: 40, y: 40}
+  multiplierHotbar: {x: 40, y: 40}
   InventoryUI: {fileID: 0}
   HotbarUI: {fileID: 0}
   inventorySlotPrefab: {fileID: 8566277836835497527, guid: 77598743b1251754891b011467a709ff, type: 3}
+  helmetSlotPrefab: {fileID: 8566277836835497527, guid: 1a0c34e610001e74ca027cdd0bb2c4c5, type: 3}
+  chestplateSlotPrefab: {fileID: 1161552749414641862, guid: 4e557d9fd9c2f4c4a9855cac0b974ae5, type: 3}
+  leggingsSlotPrefab: {fileID: 8566277836835497527, guid: efca46a7ddbd5e7409453069d757b16b, type: 3}
+  bootsSlotPrefab: {fileID: 8566277836835497527, guid: 051b1407db7753b4cb501ceb16055c0b, type: 3}
   inventoryWidth: 9
   inventoryHeight: 4
   hotbarUISlots: []
+  armourSlotsUI: []
   THRESHOLD: 40
   itemCursor: {fileID: 0}
 --- !u!114 &1639873183
@@ -1112,6 +1135,7 @@ MonoBehaviour:
   health: 100
   invincibilityDurationSeconds: 1
   isInvincible: 0
+  protectionValue: 0
 --- !u!1 &6179212870245706798
 GameObject:
   m_ObjectHideFlags: 0

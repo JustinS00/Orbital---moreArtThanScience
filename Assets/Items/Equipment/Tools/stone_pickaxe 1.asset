@@ -19,6 +19,7 @@ MonoBehaviour:
   maxItemsPerStack: 1
   equipmentType: 0
   durability: 131
+  durabilityRemaining: 131
   toolType: 0
   toolTier: 1
   miningSpeed: 0.95
