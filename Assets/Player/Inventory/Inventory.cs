@@ -7,11 +7,7 @@ public class Inventory : MonoBehaviour {
     //starter tools
     public ToolClass tool;
     public WeaponClass weapon;
-    public HelmetClass helmet1;
-    public HelmetClass helmet2;
-    public HelmetClass helmet3;
-    public ChestplateClass chestplate;
-
+    public ArmourClass[] armours;
     public bool isShowing;
 
     public Vector2 offsetInv;
@@ -40,7 +36,7 @@ public class Inventory : MonoBehaviour {
     public GameObject[,] uiSlots;
     public GameObject[] armourSlotsUI;
 
-    public int THRESHOLD = 40; //slot size
+    public int THRESHOLD = 20; //slot size
     private InventorySlot movingSlot;
     private bool isMovingItem;
 
@@ -60,10 +56,9 @@ public class Inventory : MonoBehaviour {
         isShowing = false;
         Add(tool);
         Add(weapon);
-        Add(helmet1);
-        Add(helmet2);
-        Add(helmet3);
-        Add(chestplate);
+        foreach (ArmourClass arm in armours) {
+            Add(arm);
+        }
     }
 
     void SetupUI() {
@@ -71,6 +66,7 @@ public class Inventory : MonoBehaviour {
         for (int x = 0; x < inventoryWidth; x++) {
             GameObject inventorySlot = Instantiate(inventorySlotPrefab, HotbarUI.transform.GetChild(0).transform);
             inventorySlot.GetComponent<RectTransform>().localPosition = new Vector3(x * multiplierHotbar.x + offsetHotbar.x , offsetHotbar.y);
+            inventorySlot.transform.GetChild(2).gameObject.SetActive(false);
             hotbarUISlots[x] = inventorySlot;
             hotbar[x] = null;
         }
@@ -78,6 +74,7 @@ public class Inventory : MonoBehaviour {
         for (int x = 0; x < inventoryWidth; x++) {
             for (int y = inventoryHeight - 1; y >= 0; y--) {
                 GameObject inventorySlot = Instantiate(inventorySlotPrefab, InventoryUI.transform.GetChild(0).transform);
+                inventorySlot.transform.GetChild(2).gameObject.SetActive(false);
                 inventorySlot.GetComponent<RectTransform>().localPosition = new Vector3(x * multiplierInv.x + offsetInv.x ,y * multiplierInv.y + offsetInv.y);
                 uiSlots[x,y] = inventorySlot;
                 inventory[x,y] = null;
@@ -95,6 +92,7 @@ public class Inventory : MonoBehaviour {
         for (int i = 0; i < NO_PIECES_OF_ARMOUR; i++) {
             armourSlotsUI[i].GetComponent<RectTransform>().localPosition = new Vector3(i * multiplierInv.x + offsetInv.x , inventoryHeight * multiplierInv.y + offsetInv.y + EQUIPMENT_SECTION_Y_OFFSET);
             armourSlotsUI[i].transform.GetChild(1).GetComponent<Text>().enabled = false;
+            armourSlotsUI[i].transform.GetChild(2).gameObject.SetActive(false);
         }
     }
 
@@ -102,6 +100,7 @@ public class Inventory : MonoBehaviour {
         //Update main inventory
         for (int x = 0; x < inventoryWidth; x++) {
             for (int y = inventoryHeight - 1; y >= 0; y--) {
+                uiSlots[x,y].transform.GetChild(2).gameObject.SetActive(false);
                 if (inventory[x,y] != null && inventory[x,y].quantity <= 0) {
                     inventory[x,y] = null;
                 }
@@ -111,27 +110,44 @@ public class Inventory : MonoBehaviour {
 
                     uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().text = new string("0");
                     uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().enabled = false;
-                } else if (inventory[x,y] != null) { // minecraft style if quantity == 1 do not display
+
+                } else if (inventory[x,y] != null) { 
                     uiSlots[x,y].transform.GetChild(0).GetComponent<Image>().enabled = true;
                     uiSlots[x,y].transform.GetChild(0).GetComponent<Image>().sprite = inventory[x,y].item.itemSprite;
-
-                    uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().text = inventory[x,y].quantity.ToString();
-                    uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().enabled = true;
+                    if (!inventory[x,y].item.isStackable) {
+                        uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().enabled = false;
+                        if (inventory[x,y].item.itemType == ItemClass.ItemType.equipment) {
+                            EquipmentClass item = (EquipmentClass) inventory[x,y].item;
+                            uiSlots[x,y].transform.GetChild(2).gameObject.SetActive(true);
+                            uiSlots[x,y].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetMaxDurability(item.getTotalDurability());
+                            uiSlots[x,y].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetDurability(item.getCurrentDurability());
+                        }
+                    } else {
+                        uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().text = inventory[x,y].quantity.ToString();
+                        uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().enabled = true;
+                    }
                 }
             }
         }
 
         for (int x = 0; x < NO_PIECES_OF_ARMOUR; x++) {
+            armourSlotsUI[x].transform.GetChild(2).gameObject.SetActive(false);
             if (armourSlots[x] == null) {
                 armourSlotsUI[x].transform.GetChild(0).GetComponent<Image>().color = new Color32(0,0,0,100);
             } else {
                 armourSlotsUI[x].transform.GetChild(0).GetComponent<Image>().sprite = armourSlots[x].item.itemSprite;
                 armourSlotsUI[x].transform.GetChild(0).GetComponent<Image>().color = new Color32(255,255,225,255);
+                EquipmentClass item = (EquipmentClass) armourSlots[x].item;
+                armourSlotsUI[x].transform.GetChild(2).gameObject.SetActive(true);
+                armourSlotsUI[x].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetMaxDurability(item.getTotalDurability());
+                armourSlotsUI[x].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetDurability(item.getCurrentDurability());                
+                
             }
         }
 
         //Update hot bar
         for (int x = 0; x < inventoryWidth; x++) {
+            hotbarUISlots[x].transform.GetChild(2).gameObject.SetActive(false);
             if (inventory[x, 0] == null || inventory[x, 0].quantity <= 0) {
                 hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().sprite = null;
                 hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().enabled = false;
@@ -142,8 +158,19 @@ public class Inventory : MonoBehaviour {
                 hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().enabled = true;
                 hotbarUISlots[x].transform.GetChild(0).GetComponent<Image>().sprite = inventory[x, 0].item.itemSprite;
 
-                hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().text = inventory[x, 0].quantity.ToString();
-                hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().enabled = true;
+                if (!inventory[x, 0].item.isStackable) {
+                    hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().enabled = false;
+                    if (inventory[x, 0].item.itemType == ItemClass.ItemType.equipment) {
+                        EquipmentClass item = (EquipmentClass) inventory[x, 0].item;
+                        hotbarUISlots[x].transform.GetChild(2).gameObject.SetActive(true);
+                        hotbarUISlots[x].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetMaxDurability(item.getTotalDurability());
+                        hotbarUISlots[x].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetDurability(item.getCurrentDurability());            
+                        
+                    }
+                } else {
+                    hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().text = inventory[x,0].quantity.ToString();
+                    hotbarUISlots[x].transform.GetChild(1).GetComponent<Text>().enabled = true;
+                }
             }
         }
     }
@@ -208,21 +235,27 @@ public class Inventory : MonoBehaviour {
     }
 
     private Vector2Int GetClosestSlot() {
+
+        Vector2Int slot = new Vector2Int(-1,-1);
+        float distance = float.MaxValue;
         //Debug.Log("Called GetClosestSlot()");
         for (int i = 0; i < inventoryWidth; i ++) {
             for (int j = 0; j < inventoryHeight; j ++) {
-                if (Input.mousePosition != null && uiSlots[i,j].transform.position != null && Vector2.Distance(uiSlots[i,j].transform.position, Input.mousePosition) <= THRESHOLD) {
-                    return new Vector2Int(i,j);
+                float currDistance = Vector2.Distance(uiSlots[i,j].transform.position, Input.mousePosition);
+                if (Input.mousePosition != null && uiSlots[i,j].transform.position != null && currDistance <= THRESHOLD && currDistance <= distance) {
+                    slot = new Vector2Int(i,j);
+                    distance = currDistance;
                 }
             }
         }
-
         for (int i = 0; i < NO_PIECES_OF_ARMOUR; i++) {
-            if (Input.mousePosition != null && armourSlotsUI[i].transform.position != null && Vector2.Distance(armourSlotsUI[i].transform.position, Input.mousePosition) <= THRESHOLD) {
-                return new Vector2Int(i,-1);
+            float currDistance = Vector2.Distance(armourSlotsUI[i].transform.position, Input.mousePosition);
+            if (Input.mousePosition != null && armourSlotsUI[i].transform.position != null && currDistance <= THRESHOLD) {
+                    slot = new Vector2Int(i,-1);
+                    distance = currDistance;
             }
         }
-        return new Vector2Int(-1,-1);
+        return slot;
     }
 
     private bool BeginItemMove() {
@@ -231,10 +264,8 @@ public class Inventory : MonoBehaviour {
         if (pos == new Vector2Int(-1,-1) ) {
             return false;
         }
-        Debug.Log(pos);
         bool isArmourSlot = pos.y < 0;
         InventorySlot originalSlot = isArmourSlot ? armourSlots[pos.x] : inventory[pos.x, pos.y];
-        Debug.Log(originalSlot.item);
 
         if (originalSlot == null || originalSlot.item == null) {
             return false;
@@ -410,5 +441,36 @@ public class Inventory : MonoBehaviour {
         UpdateInventoryUI();
         return true;
     }
+
+    #region Getters
+    public HelmetClass GetHelmet() {
+        if (armourSlots[0] != null) {
+            return (HelmetClass) armourSlots[0].item;
+        }
+        return null;
+    }
+
+    public ChestplateClass GetChestplate() {
+        if (armourSlots[1] != null) {
+            return (ChestplateClass) armourSlots[1].item;
+        }
+        return null;
+    }
+
+    public LeggingsClass GetLeggings() {
+        if (armourSlots[2] != null) {
+            return (LeggingsClass) armourSlots[2].item;
+        }
+        return null;
+    }
+
+    public BootsClass GetBoots() {
+        if (armourSlots[3] != null) {
+            return (BootsClass) armourSlots[3].item;
+        }
+        return null;
+    }
+
+    #endregion
 
 } 

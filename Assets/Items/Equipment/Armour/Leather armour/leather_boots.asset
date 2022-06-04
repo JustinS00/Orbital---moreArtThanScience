@@ -19,6 +19,7 @@ MonoBehaviour:
   maxItemsPerStack: 1
   equipmentType: 1
   durability: 65
+  durabilityRemaining: 65
   armourType: 3
   armourTier: 0
   protectionValue: 1

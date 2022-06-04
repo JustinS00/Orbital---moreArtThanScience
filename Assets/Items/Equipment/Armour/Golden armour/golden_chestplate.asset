@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd72e8a68a7dc8f4ba93eb48fb918584, type: 3}
   m_Name: golden_chestplate
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 1
   itemName: golden_chestplate
   itemSprite: {fileID: 1596701437, guid: a2fab086fac63d84d845ae3a827b7b3c, type: 3}
   isStackable: 0
   maxItemsPerStack: 1
   equipmentType: 1
   durability: 112
+  durabilityRemaining: 112
   armourType: 1
   armourTier: 2
   protectionValue: 5

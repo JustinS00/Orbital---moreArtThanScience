@@ -19,6 +19,7 @@ MonoBehaviour:
   maxItemsPerStack: 1
   equipmentType: 2
   durability: 59
+  durabilityRemaining: 59
   weaponType: 0
   damage: 4
   swordTier: 1
