@@ -81,12 +81,9 @@ public class Health : MonoBehaviour {
     }
 
     private IEnumerator BecomeTemporarilyInvincible() {
-        Debug.Log("Enemy turned invincible!");
         isInvincible = true;
-
         yield return new WaitForSeconds(invincibilityDurationSeconds);
 
         isInvincible = false;
-        Debug.Log("Enemy is no longer invincible!");
     }
 }

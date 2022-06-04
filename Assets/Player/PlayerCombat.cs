@@ -28,9 +28,6 @@ public class PlayerCombat : MonoBehaviour {
 
         // Damage them
         foreach(Collider2D enemy in hitEnemies) {
-            bool fromRight = enemy.GetComponent<Transform>().position.x < transform.position.x
-				? true
-				: false;
             enemy.GetComponent<Health>().Damage(attackDamage); 
         }
     }
