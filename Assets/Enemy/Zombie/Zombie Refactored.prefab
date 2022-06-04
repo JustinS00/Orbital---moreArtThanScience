@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 590064806267451645}
   - component: {fileID: 6160009581691129164}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: zombie_leg (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6786682196209842470}
   - component: {fileID: 6786682196209842488}
   - component: {fileID: 6786682196209842471}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6786682196385659100}
   - component: {fileID: 6786682196385659099}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: zombie_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6786682197172065742}
   - component: {fileID: 6786682197172065741}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: zombie_arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,9 +327,10 @@ GameObject:
   - component: {fileID: 6786682197438670523}
   - component: {fileID: 6786682197438670524}
   - component: {fileID: -4360629322226856863}
-  m_Layer: 0
+  - component: {fileID: 1164388890820825013}
+  m_Layer: 11
   m_Name: Zombie Refactored
-  m_TagString: Ground
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,7 +479,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   speed: 1.5
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 0128f82aa18d7d140b9b5c5e4b2fb30a, type: 2}
+--- !u!114 &1164388890820825013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6786682197438670502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62786b0da2fc5a8409d58c97c3c99225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  invincibilityDurationSeconds: 1
+  isInvincible: 0
+  protectionValue: 0
 --- !u!1 &6786682197820050898
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6786682197820050900}
   - component: {fileID: 6786682197820050899}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: zombie_leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -573,7 +590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8114929041423384973}
   - component: {fileID: 5600480978298633493}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: zombie_arm (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
