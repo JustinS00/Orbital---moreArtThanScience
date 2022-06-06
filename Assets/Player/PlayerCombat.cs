@@ -20,6 +20,19 @@ public class PlayerCombat : MonoBehaviour {
     void Update() {
     }
 
+    public void Attack(WeaponClass weapon) {
+        // Play attack animation
+        anim.SetTrigger("attack");
+        // Detect enemies in range of attack
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        // Damage them
+        foreach(Collider2D enemy in hitEnemies) {
+            enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(weapon.damage));
+            weapon.reduceDurability(1);
+        }
+    }
+
     public void Attack() {
         // Play attack animation
         anim.SetTrigger("attack");
@@ -28,7 +41,7 @@ public class PlayerCombat : MonoBehaviour {
 
         // Damage them
         foreach(Collider2D enemy in hitEnemies) {
-            enemy.GetComponent<Health>().Damage(attackDamage); 
+            enemy.GetComponent<Health>().Damage(attackDamage);
         }
     }
     /*

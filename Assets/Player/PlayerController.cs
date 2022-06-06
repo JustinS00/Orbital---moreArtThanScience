@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject selectedItemDisplay;
 
     [Header("Armour Display")]
+
     public GameObject helmetDisplay;
     public GameObject chestplate1Display;
     public GameObject chestplate2_0_Display;
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour {
 
     public Vector2 spawnPos;
     public Vector2Int mousePos;
+    private Vector2Int currentTarget;
+    private float DEFAULT_MINING_SPEED = 2;
 
     //public Terrain terrain;
     public GameManager gameManager;
@@ -71,8 +74,6 @@ public class PlayerController : MonoBehaviour {
 		healthBar.SetMaxHealth(maxHealth);
         health = GetComponent<Health>();
         health.SetFullHealth();
-
-        /*For Testing*/
     }
 
     public void Respawn() {
@@ -83,33 +84,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        //destroy or place blocks
-        if (hit && !showInv) {
-            //terrain.destroyBlock(mousePos.x, mousePos.y);
-            gameManager.terrain.mineBlock(mousePos.x, mousePos.y);
-        } else if (place && !showInv && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
-            //check not placing on player
-            int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
-            int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
-            int minY = Mathf.FloorToInt(GetComponent<Transform>().position.y);
-            int maxY = Mathf.CeilToInt(GetComponent<Transform>().position.y);
-
-            if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
-                if(gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
-                    gameManager.terrain.placeBlock(mousePos.x, mousePos.y, (BlockClass) selectedItem);
-                    inventory.RemoveFromHotBar(selectedItem, selectionIndex);
-                }
-            }
-        }
-
         Vector2 movement = new Vector2(horizontal * moveSpeed, rb.velocity.y);
 
-        if (jump > 0.1f) {
-            if (onGround) {
-                movement.y = jumpForce;
-                onGround = false;
-            }
-        }
         rb.velocity = movement;
         /*
         to make into knockback script
@@ -128,7 +104,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
-        
         //Hotbar
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
                 selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
@@ -164,20 +139,22 @@ public class PlayerController : MonoBehaviour {
             } else {
                 selectedItem = null;
             }
-            //Debug.Log(selectedItem);
         }
 
         if (selectedItem != null) {
             selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = selectedItem.itemSprite;
-            if (selectedItem.itemType == ItemClass.ItemType.block) {
-                selectedItemDisplay.transform.localScale = Vector3.one * 0.5f;
-            } else { //might have to change in the future depending on the other items implemented
-                selectedItemDisplay.transform.localScale = Vector3.one;
+            selectedItemDisplay.transform.localScale = Vector3.one * 0.5f;
+            if (selectedItem.itemType == ItemClass.ItemType.equipment) {
+                EquipmentClass equipment = (EquipmentClass) selectedItem;
+                if (equipment.equipmentType == EquipmentClass.EquipmentType.tool || equipment.equipmentType == EquipmentClass.EquipmentType.weapon) {
+                    selectedItemDisplay.transform.localScale = Vector3.one;
+                }
             }
         } else {
             selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = null;
         }
-        // Toggle Inventory
+
+         // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {
             showInv = !showInv;
             inventory.isShowing = !inventory.isShowing;
@@ -188,6 +165,88 @@ public class PlayerController : MonoBehaviour {
         chestplate = inventory.GetChestplate();
         leggings = inventory.GetLeggings();
         boots = inventory.GetBoots();
+
+
+
+        // Movement and action
+        horizontal = Input.GetAxis("Horizontal");
+        jump = Input.GetAxis("Jump");
+        hit = Input.GetMouseButton(0);
+        place = Input.GetMouseButton(1);
+        siu = Input.GetKeyDown(KeyCode.UpArrow);
+
+        anim.SetFloat("horizontal", horizontal);
+        anim.SetBool("siu", siu);
+        anim.SetBool("hit", hit);
+
+        if (siu) {
+            jump = 1.0f;
+        }
+
+        if (jump > 0.1f) {
+            if (onGround) {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpForce);
+                onGround = false;
+            }
+        }
+
+        mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - 0.5f);
+        mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
+
+        //destroy or place blocks
+        if (!showInv) {
+            if (hit) {
+                //terrain.destroyBlock(mousePos.x, mousePos.y);
+                if (selectedItem && selectedItem.itemType == ItemClass.ItemType.equipment) {
+                    EquipmentClass temp = (EquipmentClass) selectedItem;
+           
+                    if (temp.equipmentType == EquipmentClass.EquipmentType.weapon) {
+                        WeaponClass weapon = (WeaponClass) temp;
+                        hit = false;
+                        anim.SetBool("hit", hit);
+                        playerCombat.Attack(weapon);
+                    } else if (temp.equipmentType == EquipmentClass.EquipmentType.tool) {
+                        ToolClass tool = (ToolClass) temp;
+                        mineBlock(mousePos.x, mousePos.y, tool);
+                    }
+                } else {
+                    mineBlock(mousePos.x, mousePos.y);
+                }
+            } else if (place && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
+                //check not placing on player
+                int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
+                int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
+                
+                int minY = Mathf.CeilToInt(GetComponent<Transform>().position.y - 1);
+                int maxY = Mathf.FloorToInt(GetComponent<Transform>().position.y + 1);
+
+                if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
+                    if(gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
+                        gameManager.terrain.placeBlock(mousePos.x, mousePos.y, (BlockClass) selectedItem);
+                        inventory.RemoveFromHotBar(selectedItem, selectionIndex);
+                    }
+                }
+                timeElapsed = 0f;
+            } else {
+                timeElapsed = 0f;
+            }
+        }
+
+        if (horizontal > 0) {
+            transform.eulerAngles = new Vector3(0,-180,0);
+        } else if (horizontal < 0)  {
+            transform.eulerAngles = new Vector3(0,0,0);
+        }
+
+        if (GetComponent<Transform>().position.y < 0 || GetComponent<Health>().getHealth() <= 0) {
+            Respawn();
+        }
+
+        int curHealth = GetComponent<Health>().getHealth();
+        healthBar.SetHealth(curHealth);
+        if (curHealth <= 0) {
+            Respawn();
+        }
         
         //Armour Related
         armourProtectionValue = 0;
@@ -228,46 +287,49 @@ public class PlayerController : MonoBehaviour {
         }
 
         health.protectionValue = armourProtectionValue;
+    }
 
-        // Movement
-        horizontal = Input.GetAxis("Horizontal");
-        jump = Input.GetAxis("Jump");
-        hit = Input.GetMouseButton(0);
-        place = Input.GetMouseButton(1);
-        
-        if (horizontal > 0) {
-            transform.eulerAngles = new Vector3(0,-180,0);
-        } else if (horizontal < 0)  {
-            transform.eulerAngles = new Vector3(0,0,0);
-        }
-        
-        siu = Input.GetKeyDown(KeyCode.UpArrow);
-        anim.SetFloat("horizontal", horizontal);
-        anim.SetBool("siu", siu);
+    private float timeElapsed = 0f;
+    
 
-        if (selectedItem && selectedItem.itemType == ItemClass.ItemType.equipment) {
-            EquipmentClass temp = (EquipmentClass) selectedItem;
-            if (hit && temp.equipmentType == EquipmentClass.EquipmentType.weapon) {
-                playerCombat.Attack();
+    public void mineBlock(int x, int y) {
+        mineBlock(x, y, null);
+    }
+
+    public void mineBlock(int x, int y, ToolClass tool) {
+        Vector2Int target = new Vector2Int(x,y);
+        BlockClass block = gameManager.terrain.GetBlock(x,y);
+        if (target == currentTarget && block != null && block.isBreakable) {
+            bool isPreferredTool = false;
+            float miningSpeed = DEFAULT_MINING_SPEED;
+            if (tool) {
+                isPreferredTool = (block.preferredTool == ToolType.all || block.preferredTool == tool.toolType);
+                miningSpeed = isPreferredTool ? tool.miningSpeed : DEFAULT_MINING_SPEED;
+            }
+            timeElapsed += Time.deltaTime * 1 / miningSpeed;
+            if (timeElapsed > block.hardness) {
+                gameManager.terrain.mineBlock(x,y, isPreferredTool);
+                timeElapsed = 0f;
+                if (tool) {
+                    tool.reduceDurability(1);
+                }
             }
         } else {
-            anim.SetBool("hit", hit);
-        }
-        
-        if (siu) {
-            jump = 1.0f;
-        }
-        mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - 0.5f);
-        mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
-
-        if (GetComponent<Transform>().position.y < 0 || GetComponent<Health>().getHealth() <= 0) {
-            Respawn();
-        }
-
-        int curHealth = GetComponent<Health>().getHealth();
-        healthBar.SetHealth(curHealth);
-        if (curHealth <= 0) {
-            Respawn();
+            currentTarget = target;
+            timeElapsed = 0;
+            Debug.Log("Reset target block");
         }
     }
+
+
+    /*
+    public void mineBlock(int x, int y) {
+         if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
+            BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];   
+            if (block.isBreakable) {
+                destroyBlock(x,y);
+            }    
+         }
+    }
+    */
 }

@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {   
     //starter tools
-    public ToolClass tool;
-    public WeaponClass weapon;
-    public ArmourClass[] armours;
+    public EquipmentClass[] starter_equipment;
     public bool isShowing;
 
     public Vector2 offsetInv;
@@ -54,10 +52,8 @@ public class Inventory : MonoBehaviour {
         SetupUI();
         UpdateInventoryUI();
         isShowing = false;
-        Add(tool);
-        Add(weapon);
-        foreach (ArmourClass arm in armours) {
-            Add(arm);
+        foreach (EquipmentClass equipment in starter_equipment) {
+            Add(Instantiate(equipment));
         }
     }
 
@@ -118,9 +114,13 @@ public class Inventory : MonoBehaviour {
                         uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().enabled = false;
                         if (inventory[x,y].item.itemType == ItemClass.ItemType.equipment) {
                             EquipmentClass item = (EquipmentClass) inventory[x,y].item;
-                            uiSlots[x,y].transform.GetChild(2).gameObject.SetActive(true);
-                            uiSlots[x,y].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetMaxDurability(item.getTotalDurability());
-                            uiSlots[x,y].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetDurability(item.getCurrentDurability());
+                            if(item.isBroken()) {
+                                inventory[x,y] = null;
+                            } else {
+                                uiSlots[x,y].transform.GetChild(2).gameObject.SetActive(true);
+                                uiSlots[x,y].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetMaxDurability(item.getTotalDurability());
+                                uiSlots[x,y].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetDurability(item.getCurrentDurability());
+                            }
                         }
                     } else {
                         uiSlots[x,y].transform.GetChild(1).GetComponent<Text>().text = inventory[x,y].quantity.ToString();
@@ -138,10 +138,13 @@ public class Inventory : MonoBehaviour {
                 armourSlotsUI[x].transform.GetChild(0).GetComponent<Image>().sprite = armourSlots[x].item.itemSprite;
                 armourSlotsUI[x].transform.GetChild(0).GetComponent<Image>().color = new Color32(255,255,225,255);
                 EquipmentClass item = (EquipmentClass) armourSlots[x].item;
-                armourSlotsUI[x].transform.GetChild(2).gameObject.SetActive(true);
-                armourSlotsUI[x].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetMaxDurability(item.getTotalDurability());
-                armourSlotsUI[x].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetDurability(item.getCurrentDurability());                
-                
+                if (item.isBroken()) {
+                    armourSlots[x] = null;
+                } else {
+                    armourSlotsUI[x].transform.GetChild(2).gameObject.SetActive(true);
+                    armourSlotsUI[x].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetMaxDurability(item.getTotalDurability());
+                    armourSlotsUI[x].transform.GetChild(2).GetComponent<EquipmentDurabilityBar>().SetDurability(item.getCurrentDurability());      
+                }          
             }
         }
 
@@ -198,6 +201,7 @@ public class Inventory : MonoBehaviour {
                 }
             }
         }
+        UpdateInventoryUI();
     }
 
 

@@ -3364,6 +3364,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 381140618}
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: pickaxe2
+      value: 
+      objectReference: {fileID: 11400000, guid: edb180ab9e3b5ba4386615a2644c99f8, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: THRESHOLD
       value: 40
       objectReference: {fileID: 0}
@@ -3381,11 +3385,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 43
+      value: 42.911
       objectReference: {fileID: 0}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 300
+      value: 300.005
       objectReference: {fileID: 0}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_LocalPosition.z

@@ -10,7 +10,7 @@ public abstract class EquipmentClass :  ItemClass
     
     public int durability;
     public int durabilityRemaining;
-    private bool isBroken;
+    private bool broken;
 
     public int getTotalDurability() {
         return durability;
@@ -23,7 +23,7 @@ public abstract class EquipmentClass :  ItemClass
     public void setDurability (int dur) {
         durabilityRemaining = Mathf.Min(durability, dur);
         if (durabilityRemaining <= 0) {
-            isBroken = true;
+            broken = true;
         }
     }
 
@@ -31,8 +31,8 @@ public abstract class EquipmentClass :  ItemClass
         setDurability(durabilityRemaining - reduction);
     }
 
-    public bool isEquipmentBroken() {
-        return isBroken;
+    public bool isBroken() {
+        return broken;
     }
 
 }

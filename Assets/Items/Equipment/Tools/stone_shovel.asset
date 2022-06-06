@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eacfc49381e8785459037f32f563d818, type: 3}
-  m_Name: stone_pickaxe 1
+  m_Name: stone_shovel
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: stone_pickaxe
-  itemSprite: {fileID: -1981844378, guid: aaf446e24be073b409e2a26a11b86c25, type: 3}
+  itemName: stone_shovel
+  itemSprite: {fileID: 21300000, guid: 9a0ffb241d4ef8d4c99a95b72b319b95, type: 3}
   isStackable: 0
   maxItemsPerStack: 1
   equipmentType: 0
   durability: 131
   durabilityRemaining: 131
-  toolType: 1
+  toolType: 3
   toolTier: 1
   miningSpeed: 0.95
