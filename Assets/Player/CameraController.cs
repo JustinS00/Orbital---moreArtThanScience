@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour
         Vector3 pos = GetComponent<Transform>().position;
         pos.x = Mathf.Lerp(pos.x, playerTransform.position.x, smoothTime);
         pos.y = Mathf.Lerp(pos.y, playerTransform.position.y, smoothTime);
-        pos.x = Mathf.Clamp(pos.x, 0 + GetComponent<Camera>().orthographicSize * 2 + 2, worldSize - GetComponent<Camera>().orthographicSize * 2 - 2);
+        pos.x = Mathf.Clamp(pos.x, 0 + GetComponent<Camera>().orthographicSize * 2 + 5, worldSize - GetComponent<Camera>().orthographicSize * 2 - 5);
         GetComponent<Transform>().position = pos;
     }
 

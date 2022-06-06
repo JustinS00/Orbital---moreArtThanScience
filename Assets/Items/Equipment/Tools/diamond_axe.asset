@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d363fbb4f8e28743a583edfd279485b, type: 3}
-  m_Name: stone_sword
+  m_Script: {fileID: 11500000, guid: eacfc49381e8785459037f32f563d818, type: 3}
+  m_Name: diamond_axe
   m_EditorClassIdentifier: 
   itemType: 1
-  itemName: stone_Sword
-  itemSprite: {fileID: 21300000, guid: 35a663b059198c04cb0c19b5e7057b1c, type: 3}
+  itemName: diamond_axe
+  itemSprite: {fileID: 21300000, guid: e83ae9555d4c22845b8884141f7e625e, type: 3}
   isStackable: 0
   maxItemsPerStack: 1
-  equipmentType: 2
-  durability: 59
-  durabilityRemaining: 59
-  weaponType: 0
-  damage: 5
-  swordTier: 1
+  equipmentType: 0
+  durability: 1562
+  durabilityRemaining: 1562
+  toolType: 2
+  toolTier: 4
+  miningSpeed: 0.5

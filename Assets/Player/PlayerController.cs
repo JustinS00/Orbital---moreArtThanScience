@@ -11,15 +11,15 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Armour Display")]
 
-    public GameObject helmetDisplay;
-    public GameObject chestplate1Display;
-    public GameObject chestplate2_0_Display;
-    public GameObject chestplate2_1_Display;
-    public GameObject leggings_0_Display;
-    public GameObject leggings_1_Display;
-    public GameObject boots_0_Display;
-    public GameObject boots_1_Display;
-
+    [HideInInspector] public GameObject helmetDisplay;
+    [HideInInspector] public GameObject chestplate1Display;
+    [HideInInspector] public GameObject chestplate2_0_Display;
+    [HideInInspector] public GameObject chestplate2_1_Display;
+    [HideInInspector] public GameObject leggings_0_Display;
+    [HideInInspector] public GameObject leggings_1_Display;
+    [HideInInspector] public GameObject boots_0_Display;
+    [HideInInspector] public GameObject boots_1_Display;
+    
     public HelmetClass helmet;
     public ChestplateClass chestplate;
     public LeggingsClass leggings;
@@ -194,12 +194,11 @@ public class PlayerController : MonoBehaviour {
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
 
         //destroy or place blocks
-        if (!showInv) {
+        if (!showInv) { //unity does not support covariant, will have to do a lot of type casting
             if (hit) {
                 //terrain.destroyBlock(mousePos.x, mousePos.y);
                 if (selectedItem && selectedItem.itemType == ItemClass.ItemType.equipment) {
                     EquipmentClass temp = (EquipmentClass) selectedItem;
-           
                     if (temp.equipmentType == EquipmentClass.EquipmentType.weapon) {
                         WeaponClass weapon = (WeaponClass) temp;
                         hit = false;
@@ -285,13 +284,12 @@ public class PlayerController : MonoBehaviour {
             boots_0_Display.GetComponent<SpriteRenderer>().sprite = null;
             boots_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
-
         health.protectionValue = armourProtectionValue;
     }
-
+    
+    //Mining, breaking of blocks
     private float timeElapsed = 0f;
     
-
     public void mineBlock(int x, int y) {
         mineBlock(x, y, null);
     }
@@ -303,12 +301,12 @@ public class PlayerController : MonoBehaviour {
             bool isPreferredTool = false;
             float miningSpeed = DEFAULT_MINING_SPEED;
             if (tool) {
-                isPreferredTool = (block.preferredTool == ToolType.all || block.preferredTool == tool.toolType);
+                isPreferredTool = (block.preferredTool == ToolType.all || block.preferredTool == tool.toolType || tool.toolType == ToolType.all);
                 miningSpeed = isPreferredTool ? tool.miningSpeed : DEFAULT_MINING_SPEED;
             }
             timeElapsed += Time.deltaTime * 1 / miningSpeed;
             if (timeElapsed > block.hardness) {
-                gameManager.terrain.mineBlock(x,y, isPreferredTool);
+                gameManager.terrain.mineBlock(x, y, isPreferredTool);
                 timeElapsed = 0f;
                 if (tool) {
                     tool.reduceDurability(1);
@@ -317,19 +315,6 @@ public class PlayerController : MonoBehaviour {
         } else {
             currentTarget = target;
             timeElapsed = 0;
-            Debug.Log("Reset target block");
         }
     }
-
-
-    /*
-    public void mineBlock(int x, int y) {
-         if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
-            BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];   
-            if (block.isBreakable) {
-                destroyBlock(x,y);
-            }    
-         }
-    }
-    */
 }
