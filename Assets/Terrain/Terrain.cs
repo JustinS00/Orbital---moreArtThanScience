@@ -270,6 +270,15 @@ public class Terrain : MonoBehaviour {
         return !worldBlocks.Contains(new Vector2(x, y));
     }
 
+    public BlockClass GetBlock(int x, int y) {
+        if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
+            Vector2 pos = new Vector2(x, y);
+            BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];
+            return block;
+        } 
+        return null;
+    }
+
     public void placeBlock(int x, int y, BlockClass block) {
         if (x == spawnX & y > spawnY) {
             spawnY = y;
@@ -321,13 +330,25 @@ public class Terrain : MonoBehaviour {
         newBlock.transform.position = new Vector2(x + 0.5f, y + 0.5f);
     }
 
-    public void mineBlock(int x, int y) {
-         if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
-            BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];   
-            if (block.isBreakable) {
-                destroyBlock(x,y);
-            }    
-         }
+    public void mineBlock(int x, int y, bool isPreferredTool) {
+        if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
+            Vector2 pos = new Vector2(x, y);
+            GameObject obj = worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))];
+            BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];
+            //worldBlocksMap.SetPixel(x,y, Color.white);
+            //LightBlock(x, y, 1f, 0);
+            if (isPreferredTool) {
+                GameObject newBlockDrop = Instantiate(itemDrop, new Vector2(x, y + 0.5f), Quaternion.identity);
+                newBlockDrop.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
+                newBlockDrop.GetComponent<ItemDropCollider>().item = block;
+                newBlockDrop.GetComponent<ItemDropCollider>().quantity = 1;
+            }
+            Destroy(obj.gameObject);
+            worldBlocksObject.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
+            worldBlockClasses.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
+            worldBlocks.Remove(new Vector2(x,y));
+            //worldBlocksMap.Apply();
+        }
     }
 
     public void destroyBlock(int x, int y) {

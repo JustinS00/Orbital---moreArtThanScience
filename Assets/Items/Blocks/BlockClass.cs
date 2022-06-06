@@ -11,7 +11,7 @@ public class BlockClass : ItemClass
     public bool isBreakable = true;
     public int hardness;
     public ToolType preferredTool;
-    public enum ToolType {all, pickaxe, axe, shovel, none};
+    
     
     public override ItemClass GetItem() {
         return this;
