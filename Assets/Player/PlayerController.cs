@@ -71,9 +71,11 @@ public class PlayerController : MonoBehaviour {
         anim = GetComponent<Animator>();
         GetComponent<Transform>().position = spawnPos;
         inventory = GetComponent<Inventory>();
+        inventory.InventoryUI.SetActive(showInv);
 		healthBar.SetMaxHealth(maxHealth);
         health = GetComponent<Health>();
         health.SetFullHealth();
+        
     }
 
     public void Respawn() {
@@ -156,10 +158,8 @@ public class PlayerController : MonoBehaviour {
 
          // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {
-            showInv = !showInv;
-            inventory.isShowing = !inventory.isShowing;
+            ToggleInventory();
         }
-        inventory.InventoryUI.SetActive(showInv);
 
         helmet = inventory.GetHelmet();
         chestplate = inventory.GetChestplate();
@@ -317,4 +317,12 @@ public class PlayerController : MonoBehaviour {
             timeElapsed = 0;
         }
     }
+
+    public void ToggleInventory() {
+        showInv = !showInv;
+        inventory.isShowing = !inventory.isShowing;
+        inventory.InventoryUI.SetActive(showInv);
+        Debug.Log("inventory toggled");
+    }
+
 }

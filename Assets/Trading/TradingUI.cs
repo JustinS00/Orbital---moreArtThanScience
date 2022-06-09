@@ -27,8 +27,7 @@ public class TradingUI : MonoBehaviour
     private int colOffset = -100;
     private int rowOffset = 125;
     private int multiplierRow = -50;
-    private int multiplierCol = 200;
-    private int itemsPerCol = 6;
+    private int multiplierCol = 200;    //private int itemsPerCol = 6;
     private int noOfCols = 2;
 
     private int itemGivenXOffset = -10;
@@ -36,6 +35,7 @@ public class TradingUI : MonoBehaviour
     private int itemGivenMultiplierRow = 40;
 
     public Trade[] trades;
+    private PlayerController player;
 
     private void Awake() {
         canvas = transform.Find("Canvas");
@@ -43,12 +43,14 @@ public class TradingUI : MonoBehaviour
         tradeTemplate = tradeUI.Find("tradeTemplate");
         tradeTemplate.gameObject.SetActive(false);
         slot = tradeTemplate.Find("ItemGiven");
+        
     }
 
     private void Start() {
         for (int i = 0; i < trades.Length; i++) {
         CreateItemButton(trades[i], colOffset + multiplierCol * (i % noOfCols) , rowOffset + multiplierRow * (i / noOfCols));
         }
+        gameObject.SetActive(false);
     }
     // Start is called before the first frame update
 
@@ -85,11 +87,48 @@ public class TradingUI : MonoBehaviour
     private void TryTradeItem(Trade trade) {
         string s = "Trading ";
         foreach (ItemSet items in trade.itemsGiven) {
-            s += items.quantity.ToString() + " " + items.item.itemName;
+            s += items.quantity.ToString() + " " + items.item.itemName + " ";
         }
         s += " for ";
         s += trade.itemRecieve.item.itemName;
-
         Debug.Log(s);
+        Debug.Log(player);
+        Debug.Log("something is wrong");
+        Debug.Log("player is" + player);
+        if (player != null) {
+            bool haveItemsRequired = FindItems(player, trade.itemsGiven);
+            if (haveItemsRequired) {
+                RemoveItems(player, trade.itemsGiven);
+                AddItems(player, trade.itemRecieve);
+            } else {
+                //Error message
+            }
+        }
+    }
+
+    private bool FindItems(PlayerController player, ItemSet[] items) {
+        return true;
+    }
+
+    private void RemoveItems(PlayerController player, ItemSet[] items) {
+        return;
+    }
+
+    private void AddItems(PlayerController player, ItemSet item) {
+        Debug.Log(item.item);
+        player.inventory.AddedItems(item.item, item.quantity);
+    }
+
+
+    public void Show(PlayerController player) {
+        this.player = player;
+        player.ToggleInventory();
+        gameObject.SetActive(true);
+    }
+
+    public void Hide(PlayerController player) {
+        player.ToggleInventory();
+        player = null;
+        gameObject.SetActive(false);
     }
 }
