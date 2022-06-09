@@ -203,7 +203,7 @@ public class Inventory : MonoBehaviour {
         }
         UpdateInventoryUI();
     }
-
+    
 
     public int AddedItems (ItemClass item, int quantity) {
         int addedItems = 0;
@@ -229,6 +229,39 @@ public class Inventory : MonoBehaviour {
             }
         } //inventory is full
         return false;
+    }
+
+    public bool HasItemInInventory(ItemClass item, int quantity) {
+        int quantityRemaining = quantity;
+
+        for (int y = 0; y < inventoryHeight; y++) {
+            for (int x = 0; x < inventoryWidth; x++) { 
+                if (inventory[x,y] != null && inventory[x,y].item.itemName == item.itemName) {
+                    quantityRemaining  -= inventory[x,y].quantity;
+                }
+            }        
+        }
+        return (quantityRemaining <= 0);
+    }
+
+
+    public void RemoveItemFromInventory(ItemClass item, int quantity) {
+        int quantityRemaining = quantity;
+        
+        for (int y = 0; y < inventoryHeight; y++) {
+            for (int x = 0; x < inventoryWidth; x++) { 
+                if (inventory[x,y] != null && inventory[x,y].item.itemName == item.itemName) {
+                    int currentQuantity = inventory[x,y].quantity;
+                    if (currentQuantity <= quantityRemaining) {
+                        inventory[x,y] = null;
+                    } else{
+                        inventory[x,y].quantity -= quantityRemaining;
+                    }
+                    quantityRemaining -= currentQuantity;
+                }
+            }        
+        }
+        UpdateInventoryUI();
     }
 
     public void RemoveFromHotBar(ItemClass item, int index) {
@@ -262,6 +295,7 @@ public class Inventory : MonoBehaviour {
         return slot;
     }
 
+    #region Move Items
     private bool BeginItemMove() {
         //Debug.Log("Called BeginItemMove()");
         Vector2Int pos = GetClosestSlot();
@@ -445,6 +479,7 @@ public class Inventory : MonoBehaviour {
         UpdateInventoryUI();
         return true;
     }
+    #endregion
 
     #region Getters
     public HelmetClass GetHelmet() {

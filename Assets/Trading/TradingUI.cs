@@ -92,9 +92,6 @@ public class TradingUI : MonoBehaviour
         s += " for ";
         s += trade.itemRecieve.item.itemName;
         Debug.Log(s);
-        Debug.Log(player);
-        Debug.Log("something is wrong");
-        Debug.Log("player is" + player);
         if (player != null) {
             bool haveItemsRequired = FindItems(player, trade.itemsGiven);
             if (haveItemsRequired) {
@@ -102,16 +99,25 @@ public class TradingUI : MonoBehaviour
                 AddItems(player, trade.itemRecieve);
             } else {
                 //Error message
+                Debug.Log("Insufficent Items");
+                ToolTip.ShowToolTip_Static("Insufficent Items");
             }
         }
     }
 
     private bool FindItems(PlayerController player, ItemSet[] items) {
+        foreach(ItemSet item in items) {
+            if (!player.inventory.HasItemInInventory(item.item, item.quantity)) {
+                return false;
+            }
+        }
         return true;
     }
 
     private void RemoveItems(PlayerController player, ItemSet[] items) {
-        return;
+        foreach(ItemSet item in items) {
+            player.inventory.RemoveItemFromInventory(item.item, item.quantity);
+        }
     }
 
     private void AddItems(PlayerController player, ItemSet item) {
