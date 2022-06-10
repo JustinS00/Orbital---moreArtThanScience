@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
+    public int damage = 5;
     [SerializeField]
-    private int damage = 5;
-    [SerializeField]
-    private float speed = 1.5f;
+    protected float speed = 1.5f;
 
     [SerializeField]
     private EnemyData data;
 
-    private GameObject player;
+    protected GameObject player;
     private GameObject target;
 
     private bool isFlipped = false;
+
+    [SerializeField]
+    private bool isRanged = false;
 
     // Start is called before the first frame update
     void Start() {
@@ -25,7 +27,8 @@ public class Enemy : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        RunAtPlayer(); 
+        LookAtPlayer(); 
+        AttackPlayer();
     }
 
     private void SetEnemyValues() {
@@ -34,11 +37,7 @@ public class Enemy : MonoBehaviour {
         speed = data.speed;
     }
 
-    private void RunAtPlayer() {
-        // run to player
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-        
-        // looking at player
+    protected void LookAtPlayer() {
         Vector3 flipped = transform.localScale;
 		flipped.z *= -1f;
 
@@ -52,6 +51,13 @@ public class Enemy : MonoBehaviour {
 			transform.Rotate(0f, 180f, 0f);
 			isFlipped = true;
 		}
+    }
+
+    public virtual void AttackPlayer() {
+        // run to player
+        if (!isRanged) {
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other) {

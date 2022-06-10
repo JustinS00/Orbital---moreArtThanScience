@@ -50,9 +50,10 @@ public class Health : MonoBehaviour {
         if (damage < 0) {
             throw new System.ArgumentOutOfRangeException("No negative damage");
         }
+
         int newDamage = Mathf.RoundToInt(damage * (100 - 2 * protectionValue) / 100.0f);
-        Debug.Log(newDamage);
         this.health -= newDamage;
+
         Debug.Log(this.name + "got hit");
         // hit animation
         anim.SetTrigger("damaged");
@@ -61,7 +62,6 @@ public class Health : MonoBehaviour {
         if (!isInvincible) {
             StartCoroutine(BecomeTemporarilyInvincible());
         }
-
     }
 
     public void Heal(int heal) {
