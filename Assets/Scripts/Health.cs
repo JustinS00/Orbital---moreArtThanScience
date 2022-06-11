@@ -54,6 +54,12 @@ public class Health : MonoBehaviour {
         int newDamage = Mathf.RoundToInt(damage * (100 - 2 * protectionValue) / 100.0f);
         this.health -= newDamage;
 
+        // Armour durability related
+        if (gameObject.tag == "Player") {
+            int durabilityLost = Mathf.Max(1, damage / 10);
+            GetComponent<PlayerController>().armourDamage(durabilityLost);
+        }
+
         Debug.Log(this.name + "got hit");
         // hit animation
         anim.SetTrigger("damaged");

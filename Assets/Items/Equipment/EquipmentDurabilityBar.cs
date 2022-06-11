@@ -10,6 +10,7 @@ public class EquipmentDurabilityBar : MonoBehaviour {
 	public Image fill;
 
 	public void SetMaxDurability(int durability) {
+		this.gameObject.SetActive(false);
 		slider.maxValue = durability;
 		slider.value = durability;
 
@@ -17,6 +18,10 @@ public class EquipmentDurabilityBar : MonoBehaviour {
 	}
 
     public void SetDurability(int durability) {
+		if (durability < slider.maxValue) {
+			this.gameObject.SetActive(true);
+		}
+
 		slider.value = durability;
 
 		fill.color = gradient.Evaluate(slider.normalizedValue);

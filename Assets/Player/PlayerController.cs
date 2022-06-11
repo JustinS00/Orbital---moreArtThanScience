@@ -325,4 +325,10 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("inventory toggled");
     }
 
+    public void armourDamage(int value) {
+        if (helmet) helmet.reduceDurability(value);
+        if (chestplate) chestplate.reduceDurability(value);
+        if (leggings) leggings.reduceDurability(value);
+        if (boots) boots.reduceDurability(value);
+    }
 }
