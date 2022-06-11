@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour {   
     //starter tools
     public EquipmentClass[] starter_equipment;
+    public ConsumableClass apple;
     public bool isShowing;
 
     public Vector2 offsetInv;
@@ -55,6 +56,8 @@ public class Inventory : MonoBehaviour {
         foreach (EquipmentClass equipment in starter_equipment) {
             Add(Instantiate(equipment));
         }
+        for (int i = 0; i < 20; i++)
+        Add(apple);
     }
 
     void SetupUI() {

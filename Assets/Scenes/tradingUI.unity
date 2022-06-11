@@ -4004,6 +4004,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: apple
+      value: 
+      objectReference: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: HotbarUI
       value: 
       objectReference: {fileID: 381140618}
@@ -4017,7 +4021,7 @@ PrefabInstance:
       objectReference: {fileID: 943676796}
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: starter_equipment.Array.size
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: starter_equipment.Array.data[0]
@@ -4079,6 +4083,10 @@ PrefabInstance:
       propertyPath: starter_equipment.Array.data[14]
       value: 
       objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -4127,6 +4135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: apple
+      value: 
+      objectReference: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
     - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: healthBar
       value: 
