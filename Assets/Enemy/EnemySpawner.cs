@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour {
 
     [SerializeField]
+    private EnemyCollection enemyCollection;
     private GameObject[] enemyPrefabs;
 
     [SerializeField]
@@ -22,13 +23,11 @@ public class EnemySpawner : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
-        numberOfPossibleEnemies = enemyPrefabs.Length;
-        StartCoroutine(spawnEnemy(spawnInterval, enemyPrefabs[Random.Range(0, numberOfPossibleEnemies)]));
-    }
+        enemyPrefabs = enemyCollection.enemyPrefabs;
 
-    // Update is called once per frame
-    void Update() {
+        numberOfPossibleEnemies = enemyPrefabs.Length;
         
+        StartCoroutine(spawnEnemy(spawnInterval, enemyPrefabs[Random.Range(0, numberOfPossibleEnemies)]));
     }
 
     private IEnumerator spawnEnemy(float interval, GameObject enemy) {
