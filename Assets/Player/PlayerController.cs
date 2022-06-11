@@ -298,6 +298,13 @@ public class PlayerController : MonoBehaviour {
             boots_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
         health.protectionValue = armourProtectionValue;
+
+        //Pause game if inventory showing
+        if (inventory.isShowing) {
+            Time.timeScale = 0;
+        } else {
+            Time.timeScale = 1;
+        }
     }
     
     public void mineBlock(int x, int y) {
