@@ -19,6 +19,7 @@ public class ToolTip : MonoBehaviour
         instance = this;
         backgroundRectTransform = transform.Find("Background").GetComponent<RectTransform>();
         toolTipText = transform.Find("Text").GetComponent<Text>();
+        HideToolTip();
     }
 
     private void Update() {

@@ -57,7 +57,7 @@ public class Inventory : MonoBehaviour {
             Add(Instantiate(equipment));
         }
         for (int i = 0; i < 20; i++)
-        Add(apple);
+            Add(Instantiate(apple));
     }
 
     void SetupUI() {

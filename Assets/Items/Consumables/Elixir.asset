@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9fe77e65c638b40b00c894b06dfaa5, type: 3}
   m_Name: Elixir
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 3
   itemName: Elixir
   itemSprite: {fileID: 21300000, guid: f80d62402a1934f6485720a5d98d600a, type: 3}
   isStackable: 1
