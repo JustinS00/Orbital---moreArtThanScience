@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Nurse: NPC
+public class Nurse : NPC
 {   
-
     public override void startAction(PlayerController player) {
-        Heal(player);
+        player.healthBar.SetMaxHealth(player.maxHealth);
+        player.health.SetFullHealth();
     }
     public override void stopAction(PlayerController player) {
-    }
-
-    private void Heal(PlayerController player) {
+        return;
     }
 }

@@ -28,4 +28,6 @@ public class BlocksCollection : ScriptableObject
     #endregion
 
     public BlockClass bedrock;
+    public BlockClass boundary;
+
 }

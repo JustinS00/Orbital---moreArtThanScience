@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody2D rb;
     private Animator anim;
     private float horizontal;
-    public bool hit;
-    public bool place;
-    public float jump;
-    public bool siu;
+    private bool hit;
+    private bool place;
+    private float jump;
+    private bool siu;
 
     [Header("Health")]
     public int maxHealth = 100;
@@ -84,6 +84,10 @@ public class PlayerController : MonoBehaviour {
         health = GetComponent<Health>();
         health.SetFullHealth();
         
+    }
+
+    public void moveTo(Vector2 location) {
+        GetComponent<Transform>().position = location;
     }
 
     public void Respawn() {
@@ -331,15 +335,14 @@ public class PlayerController : MonoBehaviour {
             }
         } else {
             currentTarget = target;
-            timeElapsedBlockBreak = 0;
+            timeElapsedBlockBreak = 0f;
         }
     }
 
     public void ToggleInventory() {
         showInv = !showInv;
         inventory.isShowing = !inventory.isShowing;
-        inventory.InventoryUI.SetActive(showInv);
-        Debug.Log("inventory toggled");
+        inventory.InventoryUI.SetActive(showInv);     
     }
 
     public void armourDamage(int value) {
@@ -350,10 +353,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Consume(ConsumableClass consumable, int selectionIndex) {
-        Debug.Log("ate" + consumable);
-
         nextEatTime = Time.time + eatRate;
-
         inventory.RemoveFromHotBar(consumable, selectionIndex);
         health.Heal(consumable.healthAdded);
     }

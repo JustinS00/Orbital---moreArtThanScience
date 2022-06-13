@@ -85,22 +85,13 @@ public class TradingUI : MonoBehaviour
     }
 
     private void TryTradeItem(Trade trade) {
-        string s = "Trading ";
-        foreach (ItemSet items in trade.itemsGiven) {
-            s += items.quantity.ToString() + " " + items.item.itemName + " ";
-        }
-        s += " for ";
-        s += trade.itemRecieve.item.itemName;
-        Debug.Log(s);
         if (player != null) {
             bool haveItemsRequired = FindItems(player, trade.itemsGiven);
             if (haveItemsRequired) {
                 RemoveItems(player, trade.itemsGiven);
                 AddItems(player, trade.itemRecieve);
             } else {
-                //Error message
-                Debug.Log("Insufficent Items");
-                ToolTip.ShowToolTip_Static("Insufficent Items");
+                ToolTip.ShowToolTip_Static("  Insufficent Items");
             }
         }
     }
@@ -121,19 +112,16 @@ public class TradingUI : MonoBehaviour
     }
 
     private void AddItems(PlayerController player, ItemSet item) {
-        Debug.Log(item.item);
         player.inventory.AddedItems(item.item, item.quantity);
     }
 
 
     public void Show(PlayerController player) {
         this.player = player;
-        player.ToggleInventory();
         gameObject.SetActive(true);
     }
 
     public void Hide(PlayerController player) {
-        player.ToggleInventory();
         player = null;
         gameObject.SetActive(false);
     }
