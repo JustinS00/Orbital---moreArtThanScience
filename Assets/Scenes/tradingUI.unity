@@ -2997,8 +2997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52634ec88b20310488d6c69e5002f621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 6786682197438670502, guid: eac1c08ea695b0d4bbe56b8ebe141766, type: 3}
+  enemyCollection: {fileID: 11400000, guid: a299ac489af068a4bad39f2196a3d11e, type: 2}
   spawnInterval: 3.5
   maxNumEnemies: 5
 --- !u!4 &1557103352
@@ -4004,6 +4003,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: apple
+      value: 
+      objectReference: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: HotbarUI
       value: 
       objectReference: {fileID: 381140618}
@@ -4017,7 +4020,7 @@ PrefabInstance:
       objectReference: {fileID: 943676796}
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: starter_equipment.Array.size
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: starter_equipment.Array.data[0]
@@ -4079,6 +4082,10 @@ PrefabInstance:
       propertyPath: starter_equipment.Array.data[14]
       value: 
       objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[15]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -4127,6 +4134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: apple
+      value: 
+      objectReference: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
     - target: {fileID: 6883612742827730492, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: healthBar
       value: 

@@ -58,6 +58,14 @@ public class PlayerController : MonoBehaviour {
     public GameManager gameManager;
     public PlayerCombat playerCombat;
 
+    //temp
+    public ConsumableClass apple;
+
+    //Mining, breaking of blocks
+    private float timeElapsedBlockBreak = 0f;
+    private float eatRate = 2.0f;
+    private float nextEatTime;
+
     /*
     to make into knockback script
     public float knockback = 30;
@@ -166,8 +174,6 @@ public class PlayerController : MonoBehaviour {
         leggings = inventory.GetLeggings();
         boots = inventory.GetBoots();
 
-
-
         // Movement and action
         horizontal = Input.GetAxis("Horizontal");
         jump = Input.GetAxis("Jump");
@@ -197,37 +203,44 @@ public class PlayerController : MonoBehaviour {
         if (!showInv) { //unity does not support covariant, will have to do a lot of type casting
             if (hit) {
                 //terrain.destroyBlock(mousePos.x, mousePos.y);
-                if (selectedItem && selectedItem.itemType == ItemClass.ItemType.equipment) {
-                    EquipmentClass temp = (EquipmentClass) selectedItem;
-                    if (temp.equipmentType == EquipmentClass.EquipmentType.weapon) {
-                        WeaponClass weapon = (WeaponClass) temp;
-                        hit = false;
-                        anim.SetBool("hit", hit);
-                        playerCombat.Attack(weapon);
-                    } else if (temp.equipmentType == EquipmentClass.EquipmentType.tool) {
-                        ToolClass tool = (ToolClass) temp;
-                        mineBlock(mousePos.x, mousePos.y, tool);
+                if (selectedItem) {
+                    if (selectedItem.itemType == ItemClass.ItemType.equipment) {
+                        EquipmentClass temp = (EquipmentClass) selectedItem;
+                        if (temp.equipmentType == EquipmentClass.EquipmentType.weapon) {
+                            WeaponClass weapon = (WeaponClass) temp;
+                            hit = false;
+                            anim.SetBool("hit", hit);
+                            playerCombat.Attack(weapon);
+                        } else if (temp.equipmentType == EquipmentClass.EquipmentType.tool) {
+                            ToolClass tool = (ToolClass) temp;
+                            mineBlock(mousePos.x, mousePos.y, tool);
+                        }
+                    } else if (selectedItem.itemType == ItemClass.ItemType.consumable && nextEatTime < Time.time) {
+                        ConsumableClass consumable = (ConsumableClass) selectedItem;
+                        Consume(consumable, selectionIndex);
                     }
                 } else {
                     mineBlock(mousePos.x, mousePos.y);
                 }
-            } else if (place && selectedItem != null && selectedItem.itemType == ItemClass.ItemType.block) {
-                //check not placing on player
-                int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
-                int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
-                
-                int minY = Mathf.CeilToInt(GetComponent<Transform>().position.y - 1);
-                int maxY = Mathf.FloorToInt(GetComponent<Transform>().position.y + 1);
+            } else if (place && selectedItem != null) {
+                if (selectedItem.itemType == ItemClass.ItemType.block) {
+                    //check not placing on player
+                    int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
+                    int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
+                    
+                    int minY = Mathf.CeilToInt(GetComponent<Transform>().position.y - 1);
+                    int maxY = Mathf.FloorToInt(GetComponent<Transform>().position.y + 1);
 
-                if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
-                    if(gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
-                        gameManager.terrain.placeBlock(mousePos.x, mousePos.y, (BlockClass) selectedItem);
-                        inventory.RemoveFromHotBar(selectedItem, selectionIndex);
+                    if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
+                        if(gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
+                            gameManager.terrain.placeBlock(mousePos.x, mousePos.y, (BlockClass) selectedItem);
+                            inventory.RemoveFromHotBar(selectedItem, selectionIndex);
+                        }
                     }
+                    timeElapsedBlockBreak = 0f;
                 }
-                timeElapsed = 0f;
             } else {
-                timeElapsed = 0f;
+                timeElapsedBlockBreak = 0f;
             }
         }
 
@@ -285,10 +298,14 @@ public class PlayerController : MonoBehaviour {
             boots_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
         health.protectionValue = armourProtectionValue;
+
+        //Pause game if inventory showing
+        if (inventory.isShowing) {
+            Time.timeScale = 0;
+        } else {
+            Time.timeScale = 1;
+        }
     }
-    
-    //Mining, breaking of blocks
-    private float timeElapsed = 0f;
     
     public void mineBlock(int x, int y) {
         mineBlock(x, y, null);
@@ -304,17 +321,17 @@ public class PlayerController : MonoBehaviour {
                 isPreferredTool = (block.preferredTool == ToolType.all || block.preferredTool == tool.toolType || tool.toolType == ToolType.all);
                 miningSpeed = isPreferredTool ? tool.miningSpeed : DEFAULT_MINING_SPEED;
             }
-            timeElapsed += Time.deltaTime * 1 / miningSpeed;
-            if (timeElapsed > block.hardness) {
+            timeElapsedBlockBreak += Time.deltaTime * 1 / miningSpeed;
+            if (timeElapsedBlockBreak > block.hardness) {
                 gameManager.terrain.mineBlock(x, y, isPreferredTool);
-                timeElapsed = 0f;
+                timeElapsedBlockBreak = 0f;
                 if (tool) {
                     tool.reduceDurability(1);
                 }
             }
         } else {
             currentTarget = target;
-            timeElapsed = 0;
+            timeElapsedBlockBreak = 0;
         }
     }
 
@@ -325,4 +342,19 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("inventory toggled");
     }
 
+    public void armourDamage(int value) {
+        if (helmet) helmet.reduceDurability(value);
+        if (chestplate) chestplate.reduceDurability(value);
+        if (leggings) leggings.reduceDurability(value);
+        if (boots) boots.reduceDurability(value);
+    }
+
+    private void Consume(ConsumableClass consumable, int selectionIndex) {
+        Debug.Log("ate" + consumable);
+
+        nextEatTime = Time.time + eatRate;
+
+        inventory.RemoveFromHotBar(consumable, selectionIndex);
+        health.Heal(consumable.healthAdded);
+    }
 }
