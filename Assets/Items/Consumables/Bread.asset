@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9fe77e65c638b40b00c894b06dfaa5, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 3
   itemName: Bread
   itemSprite: {fileID: 21300000, guid: c728868677dfad541b6543a1f2aec055, type: 3}
   isStackable: 1

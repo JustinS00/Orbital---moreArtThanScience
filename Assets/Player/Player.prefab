@@ -1032,6 +1032,7 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0}
   gameManager: {fileID: 0}
   playerCombat: {fileID: 1639873183}
+  apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
 --- !u!95 &6179212869121307435
 Animator:
   serializedVersion: 4
@@ -1065,6 +1066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starter_equipment:
+  - {fileID: 11400000, guid: 296b45a0ddf238b41a9f4a3f65552e0f, type: 2}
   - {fileID: 11400000, guid: 00696dfacf4f6e64e80fc220762cfb31, type: 2}
   - {fileID: 11400000, guid: 61de4d9479bfffc4e9564616d006a358, type: 2}
   - {fileID: 11400000, guid: edb180ab9e3b5ba4386615a2644c99f8, type: 2}
@@ -1079,6 +1081,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e4881485f67147e479e7f0e6287678f9, type: 2}
   - {fileID: 11400000, guid: 28f86c8fed74e6a40935ef8d5190cdef, type: 2}
   - {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+  apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
   isShowing: 1
   offsetInv: {x: -160, y: -110}
   offsetHotbar: {x: -160, y: 0}
@@ -1128,7 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62786b0da2fc5a8409d58c97c3c99225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 20
   invincibilityDurationSeconds: 1
   isInvincible: 0
   protectionValue: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9fe77e65c638b40b00c894b06dfaa5, type: 3}
   m_Name: Ribs
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 3
   itemName: Ribs
   itemSprite: {fileID: 21300000, guid: a480ec4b99902534c8e7b392d640d20a, type: 3}
   isStackable: 1

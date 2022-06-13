@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9fe77e65c638b40b00c894b06dfaa5, type: 3}
   m_Name: Steak
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 3
   itemName: Steak
   itemSprite: {fileID: 21300000, guid: 2d32f96b28dc0d9479129a87f6fcc318, type: 3}
   isStackable: 1
