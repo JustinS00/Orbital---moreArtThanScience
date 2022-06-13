@@ -178,6 +178,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6691387456868514663}
   - component: {fileID: 5555969279590717608}
+  - component: {fileID: 6248496931883004991}
+  - component: {fileID: 8597533382667739622}
   m_Layer: 0
   m_Name: Nurse
   m_TagString: Untagged
@@ -257,6 +259,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &6248496931883004991
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3128984725956420294}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4
+--- !u!114 &8597533382667739622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3128984725956420294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f82241ba608ed2469bd6dda6f3a551a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4950499783345996640
 GameObject:
   m_ObjectHideFlags: 0

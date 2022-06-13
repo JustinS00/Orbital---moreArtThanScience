@@ -17,6 +17,7 @@ public class Terrain : MonoBehaviour {
 
     public GameManager gameManager;
     public GameObject itemDrop;
+    public Portal portal;
 
     [Header("World Settings")]
     public float seed;
@@ -121,6 +122,7 @@ public class Terrain : MonoBehaviour {
         GenerateNoiseTexture(diamondTexture, diamondRarity, (float) diamondVeinSize);   
         GenerateChunks();
         GenerateTerrain();
+        SpawnPortal();
 
         /*
         for (int x = 0; x < worldSize; x++) {
@@ -213,6 +215,15 @@ public class Terrain : MonoBehaviour {
         }
         //worldBlocksMap.Apply();
     }
+
+    private void SpawnPortal() {
+        Portal newPortal = Instantiate(portal);
+        newPortal.transform.parent = this.transform;
+        newPortal.SetMessage("Press 'T' to travel to Town Area");
+        newPortal.SetLocation(new Vector2(50, 211));
+        newPortal.transform.localPosition = new Vector2(spawnX, spawnY);
+    }
+
     #endregion
 
     #region Update
@@ -267,7 +278,9 @@ public class Terrain : MonoBehaviour {
 
     #region Functions
     public bool canPlace(int x, int y) {
-        return !worldBlocks.Contains(new Vector2(x, y));
+        if (x >= 0 && x < worldSize && y >= 0 && y < worldHeight)
+            return !worldBlocks.Contains(new Vector2(x, y));
+        return false;
     }
 
     public BlockClass GetBlock(int x, int y) {
@@ -284,7 +297,7 @@ public class Terrain : MonoBehaviour {
             spawnY = y;
         }
 
-        if (canPlace(x, y) && x >= 0 && x < worldSize && y >= 0 && y < worldHeight) {
+        if (canPlace(x, y)) {
             //lighting remove lighting if tile is placed
             /*
             RemoveLightSource(x,y);

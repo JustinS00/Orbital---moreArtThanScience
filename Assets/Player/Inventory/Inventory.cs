@@ -9,10 +9,10 @@ public class Inventory : MonoBehaviour {
     public ConsumableClass apple;
     public bool isShowing;
 
-    public Vector2 offsetInv;
-    public Vector2 offsetHotbar;
-    public Vector2 multiplierInv;
-    public Vector2 multiplierHotbar;
+    private Vector2 offsetInv = new Vector2(-160, -110);
+    private Vector2 offsetHotbar = new Vector2(-160, 0);
+    private Vector2 multiplierInv = new Vector2(40, 40);
+    private Vector2 multiplierHotbar = new Vector2(40, 40);
     private int EQUIPMENT_SECTION_Y_OFFSET = 30;
 
     public GameObject InventoryUI;
@@ -23,19 +23,19 @@ public class Inventory : MonoBehaviour {
     public GameObject leggingsSlotPrefab;
     public GameObject bootsSlotPrefab;
 
-    public int inventoryWidth;
-    public int inventoryHeight;
+    [HideInInspector] public int inventoryWidth = 9;
+    [HideInInspector] public int inventoryHeight = 4;
     private int NO_PIECES_OF_ARMOUR = 4;
 
-    public InventorySlot[] hotbar;
-    public InventorySlot[,] inventory;
-    public InventorySlot[] armourSlots;
+    [HideInInspector] public InventorySlot[] hotbar;
+    [HideInInspector] public InventorySlot[,] inventory;
+    [HideInInspector]  public InventorySlot[] armourSlots;
 
-    public GameObject[] hotbarUISlots;
-    public GameObject[,] uiSlots;
-    public GameObject[] armourSlotsUI;
+    [HideInInspector] public GameObject[] hotbarUISlots;
+    [HideInInspector] public GameObject[,] uiSlots;
+    [HideInInspector] public GameObject[] armourSlotsUI;
 
-    public int THRESHOLD = 20; //slot size
+    private int THRESHOLD = 20; //slot size
     private InventorySlot movingSlot;
     private bool isMovingItem;
 
