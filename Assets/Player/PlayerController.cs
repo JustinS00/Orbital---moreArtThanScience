@@ -119,6 +119,9 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         //Hotbar
+        onGround =  -0.1f <= rb.velocity.y && rb.velocity.y <= 0.1f;
+        Debug.Log(onGround);
+        
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
                 selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
         } else if ((Input.GetAxis("Mouse ScrollWheel") < 0)) {
@@ -171,6 +174,14 @@ public class PlayerController : MonoBehaviour {
          // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {
             ToggleInventory();
+            TogglePause();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            if (showInv) {
+                ToggleInventory();
+                TogglePause();
+            }
         }
 
         helmet = inventory.GetHelmet();
@@ -303,12 +314,6 @@ public class PlayerController : MonoBehaviour {
         }
         health.protectionValue = armourProtectionValue;
 
-        //Pause game if inventory showing
-        if (inventory.isShowing) {
-            Time.timeScale = 0;
-        } else {
-            Time.timeScale = 1;
-        }
     }
     
     public void mineBlock(int x, int y) {
@@ -356,5 +361,13 @@ public class PlayerController : MonoBehaviour {
         nextEatTime = Time.time + eatRate;
         inventory.RemoveFromHotBar(consumable, selectionIndex);
         health.Heal(consumable.healthAdded);
+    }
+
+    private bool gameIsPausedFromPlayer;
+    private void TogglePause() {
+        gameIsPausedFromPlayer = !gameIsPausedFromPlayer;
+        if (gameIsPausedFromPlayer != gameManager.isGamePaused())
+            gameManager.TogglePause();
+
     }
 }
