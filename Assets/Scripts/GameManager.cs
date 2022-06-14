@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public Town town;
 
     public Vector2 spawnPos;
+
+    private bool gamePaused = false;
     
     // Start is called before the first frame update
     void Start()
@@ -25,5 +27,19 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void TogglePause() {
+        gamePaused = !gamePaused;
+        if (gamePaused) {
+            Time.timeScale = 0;
+        } else {
+            Time.timeScale = 1;
+        }
+
+    }
+
+    public bool isGamePaused() {
+        return gamePaused;
     }
 }
