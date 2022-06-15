@@ -120,8 +120,7 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         //Hotbar
         onGround =  -0.1f <= rb.velocity.y && rb.velocity.y <= 0.1f;
-        Debug.Log(onGround);
-        
+
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
                 selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
         } else if ((Input.GetAxis("Mouse ScrollWheel") < 0)) {
@@ -235,7 +234,7 @@ public class PlayerController : MonoBehaviour {
                         Consume(consumable, selectionIndex);
                     }
                 } else {
-                    mineBlock(mousePos.x, mousePos.y);
+                    TryHit(mousePos.x, mousePos.y);
                 }
             } else if (place && selectedItem != null) {
                 if (selectedItem.itemType == ItemClass.ItemType.block) {
@@ -316,8 +315,12 @@ public class PlayerController : MonoBehaviour {
 
     }
     
-    public void mineBlock(int x, int y) {
-        mineBlock(x, y, null);
+    private void TryHit(int x, int y) {
+        if (gameManager.terrain.GetBlock(x,y) != null) {
+            mineBlock(x, y, null);
+        } else {
+            playerCombat.Attack();
+        }
     }
 
     public void mineBlock(int x, int y, ToolClass tool) {
