@@ -24,7 +24,9 @@ public class Merchant : NPC
 
     public void Update() {
         if (Input.GetKeyDown(KeyCode.E)) {
-            
+            ToggleTradeUI();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) && isShowing) {
             ToggleTradeUI();
         }
     }
