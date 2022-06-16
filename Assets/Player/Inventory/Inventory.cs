@@ -43,7 +43,7 @@ public class Inventory : MonoBehaviour {
     
     
     // Start is called before the first frame update
-    private void Start() {
+    private void Awake() {
         inventory = new InventorySlot[inventoryWidth, inventoryHeight];
         hotbar = new InventorySlot[inventoryWidth];
         armourSlots= new InventorySlot[NO_PIECES_OF_ARMOUR];

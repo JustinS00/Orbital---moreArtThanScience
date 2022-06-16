@@ -88,6 +88,7 @@ public class TradingUI : MonoBehaviour
         if (player != null) {
             bool haveItemsRequired = FindItems(player, trade.itemsGiven);
             if (haveItemsRequired) {
+                Achievement.instance.UnlockAchievement(Achievement.AchievementType.besttrade);
                 RemoveItems(player, trade.itemsGiven);
                 AddItems(player, trade.itemRecieve);
             } else {

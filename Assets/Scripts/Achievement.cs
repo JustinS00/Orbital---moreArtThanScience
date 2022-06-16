@@ -1,19 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Achievement : MonoBehaviour
 {   
 
     private GameObject achievementUI;
     private GameManager gameManager;
-    private static Achievement instance;
+    public static Achievement instance;
+    private GameObject[] achievements;
+    public enum AchievementType {willsmith, diamondhands, luna, besttrade, siu, deckedout, emotionaldamage};
 
     private void Awake() {
-        instance = this;
+        
         achievementUI = GameObject.Find("Achievement");
-        achievementUI.SetActive(false);
+        
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        achievements = GameObject.FindGameObjectsWithTag("Achievement Template");
+        foreach (GameObject achievement in achievements) {
+            achievement.transform.Find("Image").gameObject.SetActive(false);
+            achievement.transform.Find("Title").gameObject.SetActive(false);
+        }
+        achievementUI.SetActive(false);
+        instance = this;
+
+
     }
 
     // Update is called once per frame
@@ -21,6 +35,43 @@ public class Achievement : MonoBehaviour
     {
         
     }
+
+
+    public void UnlockAchievement(AchievementType achievement) {
+        switch (achievement) {
+            case AchievementType.willsmith:
+                UpdateAchievement(0);
+                break;
+            case AchievementType.diamondhands:
+                UpdateAchievement(1);
+                break;  
+            case AchievementType.luna:
+                UpdateAchievement(2);
+                break;  
+            case AchievementType.besttrade:
+                UpdateAchievement(3);
+                break;   
+            case AchievementType.siu:
+                UpdateAchievement(4);
+                break;    
+             case AchievementType.deckedout:
+                UpdateAchievement(5);
+                break;   
+            case AchievementType.emotionaldamage:
+                UpdateAchievement(6);
+                break;   
+
+            default:
+                break;         
+        }       
+    }
+
+    private void UpdateAchievement(int achievementIndex) {
+        achievements[achievementIndex].transform.Find("Image").gameObject.SetActive(true);
+        achievements[achievementIndex].transform.Find("Title").gameObject.SetActive(true);
+        Debug.Log(achievements[achievementIndex].transform.Find("Title").gameObject.GetComponent<TextMeshProUGUI>().text);
+    }
+
 
     public void Back() {
         HideAchievement() ;

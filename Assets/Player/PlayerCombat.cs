@@ -43,7 +43,7 @@ public class PlayerCombat : MonoBehaviour {
         // Damage them
         foreach(Collider2D enemy in hitEnemies) {
             enemy.GetComponent<Health>().Damage(attackDamage);
-            Debug.Log("Will Smith Slap");
+            Achievement.instance.UnlockAchievement(Achievement.AchievementType.willsmith);
         }
     }
     /*
