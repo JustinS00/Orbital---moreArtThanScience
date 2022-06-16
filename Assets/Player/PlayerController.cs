@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Respawn() {
+        Achievement.instance.UnlockAchievement(Achievement.AchievementType.emotionaldamage);
         //not clearing inventory for now
         GetComponent<Transform>().position = spawnPos;
 		healthBar.SetMaxHealth(maxHealth);
@@ -99,7 +100,6 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate() {
         Vector2 movement = new Vector2(horizontal * moveSpeed, rb.velocity.y);
-
         rb.velocity = movement;
         /*
         to make into knockback script
@@ -152,6 +152,8 @@ public class PlayerController : MonoBehaviour {
             InventorySlot selected = inventory.inventory[selectionIndex, 0];
             if (selected != null) {
                 selectedItem = selected.item;
+                if (selectedItem.itemName == "diamond_ore")
+                    Achievement.instance.UnlockAchievement(Achievement.AchievementType.diamondhands);
             } else {
                 selectedItem = null;
             }
@@ -201,6 +203,7 @@ public class PlayerController : MonoBehaviour {
 
         if (siu) {
             jump = 1.0f;
+            Achievement.instance.UnlockAchievement(Achievement.AchievementType.siu);
         }
 
         if (jump > 0.1f) {
@@ -312,6 +315,8 @@ public class PlayerController : MonoBehaviour {
             boots_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
         health.protectionValue = armourProtectionValue;
+        if (armourProtectionValue == 20)
+            Achievement.instance.UnlockAchievement(Achievement.AchievementType.deckedout);
 
     }
     

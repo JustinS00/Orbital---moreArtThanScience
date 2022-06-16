@@ -16,6 +16,7 @@ public class SettingsMenu : MonoBehaviour
         if (instance) {
             Destroy(gameObject);
         } else {
+            Debug.Log("new settings");
             instance = this;
             instance.difficulty = GameDifficulty.medium;
         }
