@@ -13,8 +13,10 @@ public class SkeletonAttack : Enemy {
     [SerializeField]
     private GameObject arrowParent;
 
+    private float launchForce = 15.0f;
+
     // 1.0f == 1s
-    private float fireRate = 1.0f;
+    private float fireRate = 4.0f;
     private float nextFireTime;
 
     // Update is called once per frame
@@ -34,7 +36,13 @@ public class SkeletonAttack : Enemy {
     }
 
     private void Shoot() {
-        Instantiate(arrow, arrowParent.transform.position, Quaternion.identity);
+
+        GameObject arrowShot = Instantiate(arrow, arrowParent.transform.position, arrowParent.transform.rotation);
+
+        int direction = base.isFlipped ? 1 : -1;
+        int randYPower = Random.Range(1, 5);
+        arrowShot.GetComponent<Rigidbody2D>().velocity = Vector2.right * direction * launchForce + Vector2.up * randYPower;
+
         nextFireTime = Time.time + fireRate;
     }
 }

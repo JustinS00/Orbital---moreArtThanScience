@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(SettingsMenu.instance.difficulty);
+        //Debug.Log(SettingsMenu.instance.difficulty);
     }
 
     public void TogglePause() {

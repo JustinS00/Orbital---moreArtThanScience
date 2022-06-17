@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
     public GameManager gameManager;
     public PlayerCombat playerCombat;
 
-    //temp
+    //tempEquipment
     public ConsumableClass apple;
 
     //Mining, breaking of blocks
@@ -222,14 +222,20 @@ public class PlayerController : MonoBehaviour {
                 //terrain.destroyBlock(mousePos.x, mousePos.y);
                 if (selectedItem) {
                     if (selectedItem.itemType == ItemClass.ItemType.equipment) {
-                        EquipmentClass temp = (EquipmentClass) selectedItem;
-                        if (temp.equipmentType == EquipmentClass.EquipmentType.weapon) {
-                            WeaponClass weapon = (WeaponClass) temp;
-                            hit = false;
-                            anim.SetBool("hit", hit);
-                            playerCombat.Attack(weapon);
-                        } else if (temp.equipmentType == EquipmentClass.EquipmentType.tool) {
-                            ToolClass tool = (ToolClass) temp;
+                        EquipmentClass tempEquipment = (EquipmentClass) selectedItem;
+                        if (tempEquipment.equipmentType == EquipmentClass.EquipmentType.weapon) {
+                            WeaponClass weapon = (WeaponClass) tempEquipment;
+                            if (weapon.weaponType == WeaponClass.WeaponType.melee) {
+                                hit = false;
+                                anim.SetBool("hit", hit);
+                                playerCombat.Attack(weapon);
+                            } else {
+                                BowClass bow = (BowClass) tempEquipment;
+                                ArrowClass arrow = (ArrowClass) inventory.HasItemInInventoryByString("arrow");
+                                if (arrow) playerCombat.Shoot(bow, arrow);
+                            }
+                        } else if (tempEquipment.equipmentType == EquipmentClass.EquipmentType.tool) {
+                            ToolClass tool = (ToolClass) tempEquipment;
                             mineBlock(mousePos.x, mousePos.y, tool);
                         }
                     } else if (selectedItem.itemType == ItemClass.ItemType.consumable && nextEatTime < Time.time) {
