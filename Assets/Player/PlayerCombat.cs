@@ -12,6 +12,10 @@ public class PlayerCombat : MonoBehaviour {
     public float attackRange = 0.5f;
     public int attackDamage = 1;
 
+    [SerializeField]
+    private ArrowCollection arrowCollection;
+    private float arrowLaunchForce = 2.0f;
+
     void Start() {
         enemyLayers = LayerMask.GetMask("Enemy");
     }
@@ -45,6 +49,18 @@ public class PlayerCombat : MonoBehaviour {
             enemy.GetComponent<Health>().Damage(attackDamage);
             Achievement.instance.UnlockAchievement(Achievement.AchievementType.willsmith);
         }
+    }
+
+    public void Shoot(BowClass bow, ArrowClass arrow) {
+        Vector2 bowPosition = transform.position;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = mousePosition - bowPosition;
+
+        int arrowTypeIndex = (int)arrow.arrowType;
+        GameObject arrowToFire = arrowCollection.arrowPrefabs[arrowTypeIndex];
+
+        GameObject arrowShot = Instantiate(arrowToFire, attackPoint.position, attackPoint.rotation);
+        arrowShot.GetComponent<Rigidbody2D>().velocity = direction * arrowLaunchForce;
     }
     /*
     Can enable this function to see attack circle in scene

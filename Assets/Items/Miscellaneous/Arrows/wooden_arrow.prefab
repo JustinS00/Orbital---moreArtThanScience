@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3002748752267838786}
   - component: {fileID: 7366848042414240813}
   m_Layer: 12
-  m_Name: arrow
+  m_Name: wooden_arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 799e91d0c7f9b524d8ab66fc0c15698f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrowData: {fileID: 11400000, guid: 021486dde9e477f4a8c936c041dd23c7, type: 2}
 --- !u!1 &7394832373539597297
 GameObject:
   m_ObjectHideFlags: 0

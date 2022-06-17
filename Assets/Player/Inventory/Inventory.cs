@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour {
     //starter tools
     public EquipmentClass[] starter_equipment;
     public ConsumableClass apple;
+    public ArrowClass arrow;
     public bool isShowing;
 
     private Vector2 offsetInv = new Vector2(-160, -110);
@@ -56,8 +57,10 @@ public class Inventory : MonoBehaviour {
         foreach (EquipmentClass equipment in starter_equipment) {
             Add(Instantiate(equipment));
         }
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 20; i++){
             Add(Instantiate(apple));
+            Add(Instantiate(arrow));
+        }
     }
 
     void SetupUI() {
@@ -245,6 +248,19 @@ public class Inventory : MonoBehaviour {
             }        
         }
         return (quantityRemaining <= 0);
+    }
+
+    public ItemClass HasItemInInventoryByString(string itemName) {
+
+        for (int y = 0; y < inventoryHeight; y++) {
+            for (int x = 0; x < inventoryWidth; x++) { 
+                if (inventory[x,y] != null && inventory[x,y].item.itemName == itemName) {
+                    return inventory[x,y].item;
+                }
+            }        
+        }
+
+        return null;
     }
 
 

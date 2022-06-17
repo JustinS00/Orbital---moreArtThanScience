@@ -5,19 +5,17 @@ using UnityEngine;
 public class ArrowScript : MonoBehaviour {
 
     private Rigidbody2D rb;
-    
-    private float speed = 10.0f;
-    private int damage;
+
+    [SerializeField]
+    private ArrowClass arrowData;
 
     private bool hasHit;
     private float destroyTimer = 5.0f;
     
     // Start is called before the first frame update
     void Start() {
-        //damage = GetComponent<Enemy>().damage;
         rb = GetComponent<Rigidbody2D>();
 
-        // destroy after 10s
         Destroy(gameObject, destroyTimer);
     }
 
@@ -29,7 +27,6 @@ public class ArrowScript : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        Debug.Log(other.gameObject);
         hasHit = true;
         rb.isKinematic = true;
 
@@ -40,9 +37,9 @@ public class ArrowScript : MonoBehaviour {
         //sets arrow parent to collided object to make it stick
         transform.parent = other.transform;
 
-        if (other.gameObject.tag == "Player") {
-            // TODO get damage
-            other.gameObject.GetComponent<Health>().Damage(5);
+        string colliderTag = other.gameObject.tag;
+        if (colliderTag == "Player" || colliderTag == "Enemy") {
+            other.gameObject.GetComponent<Health>().Damage(arrowData.damage);
         }
     }
 
