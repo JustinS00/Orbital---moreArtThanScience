@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour {
     protected GameObject player;
     private GameObject target;
 
-    private bool isFlipped = false;
+    protected bool isFlipped = false;
 
     [SerializeField]
     private bool isRanged = false;
