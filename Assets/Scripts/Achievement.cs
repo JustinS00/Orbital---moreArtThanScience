@@ -8,14 +8,20 @@ public class Achievement : MonoBehaviour
 {   
 
     private GameObject achievementUI;
+    private GameObject achievementPopUp;
     private GameManager gameManager;
     public static Achievement instance;
     private GameObject[] achievements;
+    private bool[] achievementsUnlocked = new bool[9];
     public enum AchievementType {willsmith, diamondhands, luna, besttrade, siu, deckedout, emotionaldamage};
+    private float popUpTimer = 5f;
+    private float showTimer = 0f;
 
     private void Awake() {
         
         achievementUI = GameObject.Find("Achievement");
+        achievementPopUp = GameObject.Find("Achievement PopUp");
+        achievementPopUp.SetActive(false);
         
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
@@ -24,18 +30,13 @@ public class Achievement : MonoBehaviour
             achievement.transform.Find("Image").gameObject.SetActive(false);
             achievement.transform.Find("Title").gameObject.SetActive(false);
         }
+        
         achievementUI.SetActive(false);
+        achievementPopUp.SetActive(false);
         instance = this;
 
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void UnlockAchievement(AchievementType achievement) {
         switch (achievement) {
@@ -66,10 +67,37 @@ public class Achievement : MonoBehaviour
         }       
     }
 
+    private void Update() {
+        showTimer -= Time.deltaTime;
+        if (showTimer <= 0f) {
+            HidePopUp();
+        }
+    }
+
     private void UpdateAchievement(int achievementIndex) {
-        achievements[achievementIndex].transform.Find("Image").gameObject.SetActive(true);
-        achievements[achievementIndex].transform.Find("Title").gameObject.SetActive(true);
-        Debug.Log(achievements[achievementIndex].transform.Find("Title").gameObject.GetComponent<TextMeshProUGUI>().text);
+        if (!achievementsUnlocked[achievementIndex]) {
+            achievements[achievementIndex].transform.Find("Image").gameObject.SetActive(true);
+            achievements[achievementIndex].transform.Find("Title").gameObject.SetActive(true);
+            ShowPopUp(achievementIndex);
+            Debug.Log(achievements[achievementIndex].transform.Find("Title").gameObject.GetComponent<TextMeshProUGUI>().text);
+            achievementsUnlocked[achievementIndex] = true;
+        }
+    }
+
+    private void ShowPopUp(int achievementIndex) {
+        
+        GameObject achievement = achievements[achievementIndex];
+        achievementPopUp.transform.Find("Achievement Template/Image").gameObject.GetComponent<Image>().sprite = achievement.transform.Find("Image").gameObject.GetComponent<Image>().sprite;
+        achievementPopUp.transform.Find("Achievement Template/Title").gameObject.GetComponent<TextMeshProUGUI>().text = achievement.transform.Find("Title").gameObject.GetComponent<TextMeshProUGUI>().text;
+        achievementPopUp.transform.Find("Achievement Template/Details").gameObject.GetComponent<TextMeshProUGUI>().text = achievement.transform.Find("Details").gameObject.GetComponent<TextMeshProUGUI>().text;
+        
+        achievementPopUp.SetActive(true);
+        showTimer = popUpTimer;
+    }
+
+
+    private void HidePopUp() {
+        achievementPopUp.SetActive(false);
     }
 
 
