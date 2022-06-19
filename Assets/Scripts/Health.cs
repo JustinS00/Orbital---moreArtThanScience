@@ -8,8 +8,8 @@ public class Health : MonoBehaviour {
     private int health = 100;
 
     [SerializeField]
-  	private float invincibilityDurationSeconds = 1.0f;
-  	public bool isInvincible;
+    private float invincibilityDurationSeconds = 1.0f;
+    public bool isInvincible;
 
     private Animator anim;
 
@@ -18,17 +18,12 @@ public class Health : MonoBehaviour {
     public int protectionValue;
 
     void Start() {
-		anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.H)) {
-            Damage(10);
-        } 
-        if (Input.GetKeyDown(KeyCode.L)) {
-            Heal(10);
-        } 
+        if (health <= 0) Die();
     }
 
     public void SetHealth(int maxHealth, int health) {
@@ -83,6 +78,10 @@ public class Health : MonoBehaviour {
     }
 
     private void Die() {
+        if (GetComponent<Enemy>()) {
+            GetComponent<Enemy>().MakeLoot();
+            gameObject.SetActive(false);
+        }
         Debug.Log("Die");
     }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {  
+public class PlayerController : MonoBehaviour {
 
     public bool showInv;
     public Inventory inventory;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector] public GameObject leggings_1_Display;
     [HideInInspector] public GameObject boots_0_Display;
     [HideInInspector] public GameObject boots_1_Display;
-    
+
     public HelmetClass helmet;
     public ChestplateClass chestplate;
     public LeggingsClass leggings;
@@ -44,9 +44,9 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Health")]
     public int maxHealth = 100;
-	public int currentHealth;
+    public int currentHealth;
 
-	public HealthBar healthBar;
+    public HealthBar healthBar;
     public Health health;
 
     public Vector2 spawnPos;
@@ -80,10 +80,10 @@ public class PlayerController : MonoBehaviour {
         GetComponent<Transform>().position = spawnPos;
         inventory = GetComponent<Inventory>();
         inventory.InventoryUI.SetActive(showInv);
-		healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth);
         health = GetComponent<Health>();
         health.SetFullHealth();
-        
+
     }
 
     public void moveTo(Vector2 location) {
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour {
         Achievement.instance.UnlockAchievement(Achievement.AchievementType.emotionaldamage);
         //not clearing inventory for now
         GetComponent<Transform>().position = spawnPos;
-		healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth);
         health.SetFullHealth();
     }
 
@@ -119,10 +119,10 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         //Hotbar
-        onGround =  -0.1f <= rb.velocity.y && rb.velocity.y <= 0.1f;
+        onGround = -0.1f <= rb.velocity.y && rb.velocity.y <= 0.1f;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
-                selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
+            selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
         } else if ((Input.GetAxis("Mouse ScrollWheel") < 0)) {
             selectionIndex = (selectionIndex - 1 + inventory.inventoryWidth) % inventory.inventoryWidth;
         }
@@ -134,19 +134,19 @@ public class PlayerController : MonoBehaviour {
         } else if (Input.GetKeyDown("3")) {
             selectionIndex = 2;
         } else if (Input.GetKeyDown("4")) {
-            selectionIndex = 3;                    
+            selectionIndex = 3;
         } else if (Input.GetKeyDown("5")) {
             selectionIndex = 4;
         } else if (Input.GetKeyDown("6")) {
-            selectionIndex = 5;       
+            selectionIndex = 5;
         } else if (Input.GetKeyDown("7")) {
-            selectionIndex = 6;    
+            selectionIndex = 6;
         } else if (Input.GetKeyDown("8")) {
-            selectionIndex = 7;    
+            selectionIndex = 7;
         } else if (Input.GetKeyDown("9")) {
             selectionIndex = 8;
         }
-            
+
         hotBarSelector.transform.position = inventory.hotbarUISlots[selectionIndex].transform.position;
         if (inventory != null && inventory.inventory != null) { // Not really needed but some times giving error at the start
             InventorySlot selected = inventory.inventory[selectionIndex, 0];
@@ -172,13 +172,13 @@ public class PlayerController : MonoBehaviour {
             selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = null;
         }
 
-         // Toggle Inventory
+        // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {
             ToggleInventory();
             TogglePause();
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
             if (showInv) {
                 ToggleInventory();
                 TogglePause();
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour {
                                 playerCombat.Attack(weapon);
                             } else {
                                 BowClass bow = (BowClass) tempEquipment;
-                                ArrowClass arrow = (ArrowClass) inventory.HasItemInInventoryByString("arrow");
+                                ArrowClass arrow = (ArrowClass) inventory.HasItemInInventoryByString("arrow", 1);
                                 if (arrow) playerCombat.Shoot(bow, arrow);
                             }
                         } else if (tempEquipment.equipmentType == EquipmentClass.EquipmentType.tool) {
@@ -250,12 +250,12 @@ public class PlayerController : MonoBehaviour {
                     //check not placing on player
                     int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
                     int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
-                    
+
                     int minY = Mathf.CeilToInt(GetComponent<Transform>().position.y - 1);
                     int maxY = Mathf.FloorToInt(GetComponent<Transform>().position.y + 1);
 
-                    if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
-                        if(gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
+                    if (!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))) {
+                        if (gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
                             gameManager.terrain.placeBlock(mousePos.x, mousePos.y, (BlockClass) selectedItem);
                             inventory.RemoveFromHotBar(selectedItem, selectionIndex);
                         }
@@ -268,9 +268,9 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (horizontal > 0) {
-            transform.eulerAngles = new Vector3(0,-180,0);
-        } else if (horizontal < 0)  {
-            transform.eulerAngles = new Vector3(0,0,0);
+            transform.eulerAngles = new Vector3(0, -180, 0);
+        } else if (horizontal < 0) {
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
         if (GetComponent<Transform>().position.y < 0 || GetComponent<Health>().getHealth() <= 0) {
@@ -282,7 +282,7 @@ public class PlayerController : MonoBehaviour {
         if (curHealth <= 0) {
             Respawn();
         }
-        
+
         //Armour Related
         armourProtectionValue = 0;
         if (helmet != null) {
@@ -291,19 +291,19 @@ public class PlayerController : MonoBehaviour {
         } else {
             helmetDisplay.GetComponent<SpriteRenderer>().sprite = null;
         }
-        
-        if (chestplate!= null) {
+
+        if (chestplate != null) {
             chestplate1Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate1_sideview;
             chestplate2_0_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_0_sideview;
             chestplate2_1_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_1_sideview;
             armourProtectionValue += chestplate.protectionValue;
         } else {
-            chestplate1Display.GetComponent<SpriteRenderer>().sprite = null; 
+            chestplate1Display.GetComponent<SpriteRenderer>().sprite = null;
             chestplate2_0_Display.GetComponent<SpriteRenderer>().sprite = null;
             chestplate2_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
-        
-        if (leggings!= null) {
+
+        if (leggings != null) {
             leggings_0_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_0_sideview;
             leggings_1_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_1_sideview;
             armourProtectionValue += leggings.protectionValue;
@@ -311,8 +311,8 @@ public class PlayerController : MonoBehaviour {
             leggings_0_Display.GetComponent<SpriteRenderer>().sprite = null;
             leggings_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
-        
-        if (boots!= null) {
+
+        if (boots != null) {
             boots_0_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_0_sideview;
             boots_1_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_1_sideview;
             armourProtectionValue += boots.protectionValue;
@@ -325,9 +325,9 @@ public class PlayerController : MonoBehaviour {
             Achievement.instance.UnlockAchievement(Achievement.AchievementType.deckedout);
 
     }
-    
+
     private void TryHit(int x, int y) {
-        if (gameManager.terrain.GetBlock(x,y) != null) {
+        if (gameManager.terrain.GetBlock(x, y) != null) {
             mineBlock(x, y, null);
         } else {
             playerCombat.Attack();
@@ -335,8 +335,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void mineBlock(int x, int y, ToolClass tool) {
-        Vector2Int target = new Vector2Int(x,y);
-        BlockClass block = gameManager.terrain.GetBlock(x,y);
+        Vector2Int target = new Vector2Int(x, y);
+        BlockClass block = gameManager.terrain.GetBlock(x, y);
         if (target == currentTarget && block != null && block.isBreakable) {
             bool isPreferredTool = false;
             float miningSpeed = DEFAULT_MINING_SPEED;
@@ -361,7 +361,7 @@ public class PlayerController : MonoBehaviour {
     public void ToggleInventory() {
         showInv = !showInv;
         inventory.isShowing = !inventory.isShowing;
-        inventory.InventoryUI.SetActive(showInv);     
+        inventory.InventoryUI.SetActive(showInv);
     }
 
     public void armourDamage(int value) {
