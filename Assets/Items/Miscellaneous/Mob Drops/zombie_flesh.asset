@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: zombie_flesh
   m_EditorClassIdentifier: 
   itemType: 2
-  itemName: 
-  itemSprite: {fileID: 0}
-  isStackable: 0
-  maxItemsPerStack: 0
+  itemName: zombie_flesh
+  itemSprite: {fileID: 21300000, guid: 64ab12e2260f05640b720a6cb7430a4c, type: 3}
+  isStackable: 1
+  maxItemsPerStack: 64
