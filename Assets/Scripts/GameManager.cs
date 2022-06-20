@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour {
     public Vector2 spawnPos;
 
     private bool gamePaused = false;
+    private float timeElapsed = 0f;
+    private int dayNo = 0;
+    private int secondsPerGameDay = 1200;
 
     // Start is called before the first frame update
     void Start() {
@@ -19,6 +22,11 @@ public class GameManager : MonoBehaviour {
         player.Spawn();
         cam.moveTo(spawnPos);
         town.StartTerrainGeneration();
+    }
+
+    void FixedUpdate() {
+        timeElapsed += Time.deltaTime;
+        dayNo = Mathf.FloorToInt(timeElapsed / secondsPerGameDay);
     }
 
     // Update is called once per frame
@@ -38,5 +46,13 @@ public class GameManager : MonoBehaviour {
 
     public bool isGamePaused() {
         return gamePaused;
+    }
+
+    public int getDayNo() {
+        return this.dayNo;
+    }
+
+    public int getTime() {
+        return Mathf.RoundToInt(timeElapsed % secondsPerGameDay);
     }
 }

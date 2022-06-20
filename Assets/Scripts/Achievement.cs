@@ -34,8 +34,6 @@ public class Achievement : MonoBehaviour
         achievementUI.SetActive(false);
         achievementPopUp.SetActive(false);
         instance = this;
-
-
     }
 
     public void UnlockAchievement(AchievementType achievement) {
