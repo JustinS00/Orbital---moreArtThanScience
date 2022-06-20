@@ -80,7 +80,8 @@ public class Health : MonoBehaviour {
     private void Die() {
         if (GetComponent<Enemy>()) {
             GetComponent<Enemy>().MakeLoot();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
+            //gameObject.SetActive(false);
         }
         Debug.Log("Die");
     }
