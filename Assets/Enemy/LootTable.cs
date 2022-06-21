@@ -28,10 +28,14 @@ public class LootTable : ScriptableObject {
             int randNum = Random.Range(0, lootProbabilitySum);
             foreach (Loot item in loots) {
                 if (randNum < item.dropChance) {
-                    GameObject newItemDrop = Instantiate(itemDrop, position, Quaternion.identity);
-                    newItemDrop.GetComponent<SpriteRenderer>().sprite = item.loot.GetComponent<SpriteRenderer>().sprite;
-                    newItemDrop.GetComponent<ItemDropCollider>().item = item.mobDrop;
-                    newItemDrop.GetComponent<ItemDropCollider>().quantity = 1;
+                    if (item != null) {
+                        GameObject newItemDrop = Instantiate(itemDrop, position, Quaternion.identity);
+                        newItemDrop.GetComponent<SpriteRenderer>().sprite = item.loot.GetComponent<SpriteRenderer>().sprite;
+                        newItemDrop.GetComponent<ItemDropCollider>().item = item.mobDrop;
+                        newItemDrop.GetComponent<ItemDropCollider>().quantity = 1;
+                        break;
+                    }
+
                     break;
                 }
             }
