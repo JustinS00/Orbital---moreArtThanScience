@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
     private int secondsPerGameDay = 1200;
 
     // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         terrain.StartTerrainGeneration();
         player.spawnPos = spawnPos;
         player.Spawn();

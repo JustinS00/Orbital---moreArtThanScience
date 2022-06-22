@@ -21,7 +21,7 @@ public class Terrain : MonoBehaviour {
 
     [Header("World Settings")]
     public float seed;
-    public int worldSize = 100;
+    public int worldSize = 500;
     public int worldHeight = 128;
     private int heightAddition = 64;
     private int heightMulitplier = 5;
@@ -161,6 +161,7 @@ public class Terrain : MonoBehaviour {
             newChunk.name = i.ToString();
             worldChunks[i] = newChunk;
             newChunk.transform.parent = this.transform;
+            newChunk.SetActive(false);
         }
     }
 
