@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d20b3e80b4518445950a0b5d0edb990, type: 3}
-  m_Name: LootTableZombie
+  m_Name: SkeletonLootTable
   m_EditorClassIdentifier: 
   loots:
-  - loot: {fileID: 5021095741264230617, guid: 75e8413c922f2e3459e5224d3c0eee39, type: 3}
-    mobDrop: {fileID: 11400000, guid: f57b08252d963f949bd49c0f1030099d, type: 2}
-    dropChance: 50
   - loot: {fileID: 0}
     mobDrop: {fileID: 0}
+    dropChance: 50
+  - loot: {fileID: 6655449034760366642, guid: e4cfd5f2ab863ee4d89974394ba23584, type: 3}
+    mobDrop: {fileID: 11400000, guid: 9b71e2c32e432854eb18ee8acc67135e, type: 2}
     dropChance: 50
   itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}
