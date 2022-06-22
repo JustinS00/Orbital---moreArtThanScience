@@ -231,8 +231,12 @@ public class PlayerController : MonoBehaviour {
                                 playerCombat.Attack(weapon);
                             } else {
                                 BowClass bow = (BowClass) tempEquipment;
-                                ArrowClass arrow = (ArrowClass) inventory.HasItemInInventoryByString("arrow", 1);
-                                if (arrow) playerCombat.Shoot(bow, arrow);
+                                ItemClass arrowItem =  inventory.HasItemInInventoryByString("arrow");
+                                if (arrowItem != null && playerCombat.canFire()) {
+                                    inventory.RemoveItemFromInventory(arrowItem, 1);
+                                    ArrowClass arrow = (ArrowClass) arrowItem;
+                                    playerCombat.Shoot(bow, arrow);
+                                }
                             }
                         } else if (tempEquipment.equipmentType == EquipmentClass.EquipmentType.tool) {
                             ToolClass tool = (ToolClass) tempEquipment;

@@ -250,12 +250,11 @@ public class Inventory : MonoBehaviour {
         return (quantityRemaining <= 0);
     }
 
-    public ItemClass HasItemInInventoryByString(string itemName, int quantityToRemove) {
+    public ItemClass HasItemInInventoryByString(string itemName) {
 
         for (int y = 0; y < inventoryHeight; y++) {
             for (int x = 0; x < inventoryWidth; x++) {
                 if (inventory[x, y] != null && inventory[x, y].item.itemName == itemName && inventory[x, y].quantity > 0) {
-                    inventory[x, y].quantity--;
                     return inventory[x, y].item;
                 }
             }
