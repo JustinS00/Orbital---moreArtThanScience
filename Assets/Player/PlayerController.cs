@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour {
     public int selectionIndex = 0;
     public GameObject hotBarSelector;
 
-    public float moveSpeed = 5;
-    public float jumpForce = 10;
+    public float moveSpeed = 5.0f;
+    public float jumpForce = 10.0f;
     public bool onGround;
 
     private Rigidbody2D rb;

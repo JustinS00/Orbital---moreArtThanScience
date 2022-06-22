@@ -11,6 +11,6 @@ public class LeggingsClass : ArmourClass{
 
     public override ItemClass GetItem() {return this;}
 
-    public LeggingsClass GetChestplate() {return this;}
+    public LeggingsClass GetLeggings() {return this;}
 
 }

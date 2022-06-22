@@ -27,6 +27,8 @@ public class MainMenu : MonoBehaviour {
             float progress = Mathf.Clamp01(operation.progress);
             Debug.Log(progress);
             slider.value = progress;
+
+            
             yield return null;
         }
     }
