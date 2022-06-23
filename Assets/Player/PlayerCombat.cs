@@ -70,9 +70,8 @@ public class PlayerCombat : MonoBehaviour {
         arrowShot.GetComponent<Rigidbody2D>().velocity = direction * arrowLaunchForce;
     }
 
-    public bool canFire()
-    {
-        return Time.time > nextArrowLaunchTime;
+    public bool canFire() {
+        return Time.time > nextArrowLaunchTime && Physics2D.OverlapCircle(attackPoint.position, 0.5f) == null;
     }
     /*
     Can enable this function to see attack circle in scene
