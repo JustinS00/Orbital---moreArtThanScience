@@ -36,6 +36,7 @@ public class SkeletonAttack : Enemy {
     }
 
     private void Shoot() {
+        if (Physics2D.OverlapCircle(arrowParent.transform.position, 0.5f) != null) return;
 
         GameObject arrowShot = Instantiate(arrow, arrowParent.transform.position, arrowParent.transform.rotation);
 
