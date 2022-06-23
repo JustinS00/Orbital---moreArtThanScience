@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8892166406962341794}
   - component: {fileID: 8892166406962341795}
   m_Layer: 5
-  m_Name: Achievement Template
+  m_Name: Achievement Template 4
   m_TagString: Achievement Template
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 8892166407047973081}
   - component: {fileID: 8892166407047973086}
   m_Layer: 5
-  m_Name: Achievement Template
+  m_Name: Achievement Template 0
   m_TagString: Achievement Template
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -998,7 +998,7 @@ GameObject:
   - component: {fileID: 8892166407272530843}
   - component: {fileID: 8892166407272530840}
   m_Layer: 5
-  m_Name: Achievement Template
+  m_Name: Achievement Template 1
   m_TagString: Achievement Template
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1500,7 +1500,7 @@ GameObject:
   - component: {fileID: 8892166407425259237}
   - component: {fileID: 8892166407425259226}
   m_Layer: 5
-  m_Name: Achievement Template
+  m_Name: Achievement Template 8
   m_TagString: Achievement Template
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2196,7 +2196,7 @@ GameObject:
   - component: {fileID: 8892166407718189536}
   - component: {fileID: 8892166407718189537}
   m_Layer: 5
-  m_Name: Achievement Template
+  m_Name: Achievement Template 2
   m_TagString: Achievement Template
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3147,7 +3147,7 @@ GameObject:
   - component: {fileID: 8892166408216232566}
   - component: {fileID: 8892166408216232567}
   m_Layer: 5
-  m_Name: Achievement Template
+  m_Name: Achievement Template 7
   m_TagString: Achievement Template
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4035,7 +4035,7 @@ GameObject:
   - component: {fileID: 8892166408497347616}
   - component: {fileID: 8892166408497347617}
   m_Layer: 5
-  m_Name: Achievement Template
+  m_Name: Achievement Template 6
   m_TagString: Achievement Template
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4326,7 +4326,7 @@ GameObject:
   - component: {fileID: 8892166408590941052}
   - component: {fileID: 8892166408590941053}
   m_Layer: 5
-  m_Name: Achievement Template
+  m_Name: Achievement Template 3
   m_TagString: Achievement Template
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4656,7 +4656,7 @@ GameObject:
   - component: {fileID: 8892166408609195177}
   - component: {fileID: 8892166408609195182}
   m_Layer: 5
-  m_Name: Achievement Template
+  m_Name: Achievement Template 5
   m_TagString: Achievement Template
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

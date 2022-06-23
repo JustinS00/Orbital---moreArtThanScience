@@ -74,17 +74,19 @@ public class Achievement : MonoBehaviour
 
     private void UpdateAchievement(int achievementIndex) {
         if (!achievementsUnlocked[achievementIndex]) {
-            achievements[achievementIndex].transform.Find("Image").gameObject.SetActive(true);
-            achievements[achievementIndex].transform.Find("Title").gameObject.SetActive(true);
-            ShowPopUp(achievementIndex);
-            Debug.Log(achievements[achievementIndex].transform.Find("Title").gameObject.GetComponent<TextMeshProUGUI>().text);
+            string achievement_name = "Achievement Template " + achievementIndex.ToString();
+            GameObject achievement = achievementUI.transform.Find(achievement_name).gameObject;
+            Debug.Log(achievement);
+            achievement.transform.Find("Image").gameObject.SetActive(true);
+            achievement.transform.Find("Title").gameObject.SetActive(true);
+            ShowPopUp(achievement);
+            //Debug.Log(achievements[achievementIndex].transform.Find("Title").gameObject.GetComponent<TextMeshProUGUI>().text);
             achievementsUnlocked[achievementIndex] = true;
         }
     }
 
-    private void ShowPopUp(int achievementIndex) {
+    private void ShowPopUp(GameObject achievement) {
         
-        GameObject achievement = achievements[achievementIndex];
         achievementPopUp.transform.Find("Achievement Template/Image").gameObject.GetComponent<Image>().sprite = achievement.transform.Find("Image").gameObject.GetComponent<Image>().sprite;
         achievementPopUp.transform.Find("Achievement Template/Title").gameObject.GetComponent<TextMeshProUGUI>().text = achievement.transform.Find("Title").gameObject.GetComponent<TextMeshProUGUI>().text;
         achievementPopUp.transform.Find("Achievement Template/Details").gameObject.GetComponent<TextMeshProUGUI>().text = achievement.transform.Find("Details").gameObject.GetComponent<TextMeshProUGUI>().text;
@@ -97,7 +99,6 @@ public class Achievement : MonoBehaviour
     private void HidePopUp() {
         achievementPopUp.SetActive(false);
     }
-
 
     public void Back() {
         HideAchievement() ;
