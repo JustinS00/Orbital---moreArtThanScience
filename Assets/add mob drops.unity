@@ -5954,10 +5954,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AchievementUI
       objectReference: {fileID: 0}
-    - target: {fileID: 8892166408737336098, guid: c21e90f8e6170474fa93b9790a94b389, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c21e90f8e6170474fa93b9790a94b389, type: 3}
 --- !u!1 &1747037434
