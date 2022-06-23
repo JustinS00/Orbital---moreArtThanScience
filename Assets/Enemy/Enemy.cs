@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour {
 
     protected GameObject player;
     private GameObject target;
+    [SerializeField]
+    private int maxDistanceFromPlayer = 50;
 
     protected bool isFlipped = false;
 
@@ -44,6 +46,10 @@ public class Enemy : MonoBehaviour {
     }
 
     protected void LookAtPlayer() {
+        // Despawns enemy if distance > maxDistanceFromPlayer
+        if (Vector2.Distance(player.transform.position, transform.position) > maxDistanceFromPlayer) {
+            Destroy(gameObject);
+        }
         Vector3 flipped = transform.localScale;
         flipped.z *= -1f;
 
