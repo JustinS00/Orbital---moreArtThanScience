@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7769831334758012316}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44,10 +44,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de716b75d4fd341439eaa985cc8a95d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: Theme
-    clip: {fileID: 8300000, guid: fcdd145ee699107499244b101d68080c, type: 3}
-    volume: 0.5
-    pitch: 0
-    loop: 1
+  music:
+  - name: music0
+    clip: {fileID: 8300000, guid: 7b8e09361b484dd4788502a013c2c10e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
+  - name: music1
+    clip: {fileID: 8300000, guid: fcdd145ee699107499244b101d68080c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: music2
+    clip: {fileID: 8300000, guid: 2db470dff0148674c8af1325ff9873e7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  sounds:
+  - name: SIU
+    clip: {fileID: 8300000, guid: 5b5e26cb1ad6b1247bb02ccf5af7a8bc, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: emotional_damage
+    clip: {fileID: 8300000, guid: e8b6e277c05b02a42a695fd28ac2f06c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  musicVolume: 1
+  onMusic: 1
+  soundVolume: 1
+  onSound: 1

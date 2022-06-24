@@ -80,6 +80,7 @@ public class Achievement : MonoBehaviour
             achievement.transform.Find("Image").gameObject.SetActive(true);
             achievement.transform.Find("Title").gameObject.SetActive(true);
             ShowPopUp(achievement);
+     
             //Debug.Log(achievements[achievementIndex].transform.Find("Title").gameObject.GetComponent<TextMeshProUGUI>().text);
             achievementsUnlocked[achievementIndex] = true;
         }
