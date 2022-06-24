@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Respawn() {
         Achievement.instance.UnlockAchievement(Achievement.AchievementType.emotionaldamage);
+        AudioManager.instance.PlaySound("emotional_damage");
         //not clearing inventory for now
         GetComponent<Transform>().position = spawnPos;
         healthBar.SetMaxHealth(maxHealth);
@@ -204,6 +205,7 @@ public class PlayerController : MonoBehaviour {
         if (siu) {
             jump = 1.0f;
             Achievement.instance.UnlockAchievement(Achievement.AchievementType.siu);
+            AudioManager.instance.PlaySound("SIU");
         }
 
         if (jump > 0.1f) {
@@ -277,9 +279,10 @@ public class PlayerController : MonoBehaviour {
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
-        if (GetComponent<Transform>().position.y < 0 || GetComponent<Health>().getHealth() <= 0) {
+        if (GetComponent<Transform>().position.y < 0) {
+            Achievement.instance.UnlockAchievement(Achievement.AchievementType.luna);
             Respawn();
-        }
+        } 
 
         int curHealth = GetComponent<Health>().getHealth();
         healthBar.SetHealth(curHealth);

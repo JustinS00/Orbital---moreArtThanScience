@@ -23,6 +23,7 @@ public class EnemySpawner : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
+
         enemyPrefabs = enemyCollection.enemyPrefabs;
 
         numberOfPossibleEnemies = enemyPrefabs.Length;
@@ -31,6 +32,7 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     private IEnumerator spawnEnemy(float interval, GameObject enemy) {
+        //TODO: if player is in town or if time is day / do not spawn
 
         yield return new WaitForSeconds(interval);
 
@@ -43,7 +45,7 @@ public class EnemySpawner : MonoBehaviour {
         }
 
         spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
-        if (Physics2D.OverlapCircle(spawnLocation, 1.0f) == null) {
+        if (Physics2D.OverlapCircle(spawnLocation, 1.0f) == null && player.transform.position.y <= 128) {
             GameObject newEnemy = Instantiate(enemy, spawnLocation, Quaternion.identity);
         }
 
