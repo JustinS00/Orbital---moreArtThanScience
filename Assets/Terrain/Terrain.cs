@@ -120,7 +120,7 @@ public class Terrain : MonoBehaviour {
         GenerateNoiseTexture(ironTexture, ironRarity, (float) ironVeinSize);
         GenerateNoiseTexture(goldTexture, goldRarity, (float) goldVeinSize);
         GenerateNoiseTexture(diamondTexture, diamondRarity, (float) diamondVeinSize);
-        GenerateChunks();
+        //GenerateChunks();
         GenerateTerrain();
         SpawnPortal();
 
@@ -153,6 +153,7 @@ public class Terrain : MonoBehaviour {
         noiseTexture.Apply();
     }
 
+    /**
     public void GenerateChunks() {
         numChunks = Mathf.CeilToInt(worldSize / (float) chunkSize);
         worldChunks = new GameObject[numChunks];
@@ -164,6 +165,7 @@ public class Terrain : MonoBehaviour {
             newChunk.SetActive(false);
         }
     }
+    **/
 
     public void GenerateTerrain() {
         for (int i = 0; i < worldSize; i++) {
@@ -228,6 +230,8 @@ public class Terrain : MonoBehaviour {
     #endregion
 
     #region Update
+    
+    /**
     private void Update() {
         RefreshChunks();
     }
@@ -256,6 +260,7 @@ public class Terrain : MonoBehaviour {
     private int getChunkNo(int x) {
         return Mathf.FloorToInt(x / (float) chunkSize);
     }
+    **/
     #endregion
 
     #region Structures
@@ -305,8 +310,9 @@ public class Terrain : MonoBehaviour {
             */
             //Normal Code
             GameObject newBlock = new GameObject();
-            int chunkCoordinate = getChunkNo(x, y);
-            newBlock.transform.parent = worldChunks[chunkCoordinate].transform;
+            //int chunkCoordinate = getChunkNo(x, y);
+            //newBlock.transform.parent = worldChunks[chunkCoordinate].transform;
+            newBlock.transform.parent = this.transform;
             newBlock.AddComponent<SpriteRenderer>();
             if (block.isSolid) {
                 newBlock.AddComponent<BoxCollider2D>();
@@ -325,8 +331,9 @@ public class Terrain : MonoBehaviour {
 
     private void placeBackGroundBlock(int x, int y, BlockClass block) {
         GameObject newBlock = new GameObject();
-        int chunkCoordinate = getChunkNo(x, y);
-        newBlock.transform.parent = worldChunks[chunkCoordinate].transform;
+        //int chunkCoordinate = getChunkNo(x, y);
+        //newBlock.transform.parent = worldChunks[chunkCoordinate].transform;
+        newBlock.transform.parent = this.transform;
         newBlock.AddComponent<SpriteRenderer>();
         Sprite sprite = blocksCollection.stone.itemSprite;
         string name = "stone_background";
