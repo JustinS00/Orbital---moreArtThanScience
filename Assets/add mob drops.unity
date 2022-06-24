@@ -14259,14 +14259,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3628420719171395455, guid: 25df2513e12389f48a3e6a2fe575348a, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6119346372268876294, guid: 25df2513e12389f48a3e6a2fe575348a, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6288402802381916696, guid: 25df2513e12389f48a3e6a2fe575348a, type: 3}
       propertyPath: m_Name
       value: Trading Booth
