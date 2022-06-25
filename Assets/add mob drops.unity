@@ -1266,7 +1266,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7769831334758012306, guid: b4e18485afde6d148ad00da57697445b, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7769831334758012306, guid: b4e18485afde6d148ad00da57697445b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1452,7 +1452,7 @@ Transform:
   - {fileID: 690164220}
   - {fileID: 1538866671}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &437805787
 GameObject:
@@ -1993,7 +1993,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &508014009 stripped
 GameObject:
@@ -2490,7 +2490,7 @@ Transform:
   - {fileID: 113045838}
   - {fileID: 189064510}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &616143995
 MonoBehaviour:
@@ -3741,7 +3741,7 @@ Transform:
   - {fileID: 1657465761}
   - {fileID: 1875115431}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &906639801
 GameObject:
@@ -4549,7 +4549,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1305867892
 GameObject:
@@ -4886,7 +4886,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1315311856
 MonoBehaviour:
@@ -5627,7 +5627,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1597665901
 GameObject:
@@ -14294,7 +14294,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_LocalPosition.x

@@ -39,6 +39,12 @@ public class Health : MonoBehaviour {
         this.health = this.MAX_HEALTH;
     }
 
+    public bool canDamage(int damage) {
+        if (isInvincible || damage < 0) 
+            return false;
+        return true;
+    }
+    
     public void Damage(int damage) {
         if (isInvincible) return;
 

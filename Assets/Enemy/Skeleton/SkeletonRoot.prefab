@@ -419,6 +419,10 @@ MonoBehaviour:
   damage: 5
   speed: 1.5
   data: {fileID: 11400000, guid: de23241a6ccc3934e89cccfd19333536, type: 2}
+  maxDistanceFromPlayer: 50
+  isRanged: 0
+  deathEffect: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: 7f87fed713303ac4f9e6e282bccfa53d, type: 2}
 --- !u!114 &4885779288866532331
 MonoBehaviour:
   m_ObjectHideFlags: 0

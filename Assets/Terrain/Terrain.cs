@@ -350,12 +350,26 @@ public class Terrain : MonoBehaviour {
         newBlock.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f);
         newBlock.transform.position = new Vector2(x + 0.5f, y + 0.5f);
     }
+    
+    
+    private bool blockIsSurfaceBlock(int x, int y) {
+        BlockClass block = GetBlock(x, y);
+        if (block) {
+            if (block.itemName == "grass" || block.itemName.Contains("mushroom")) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void mineBlock(int x, int y, bool isPreferredTool) {
         if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
             Vector2 pos = new Vector2(x, y);
             GameObject obj = worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))];
             BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];
+            
+            if (blockIsSurfaceBlock(x, y + 1))
+                mineBlock(x, y + 1, true);
             //worldBlocksMap.SetPixel(x,y, Color.white);
             //LightBlock(x, y, 1f, 0);
             if (isPreferredTool) {
