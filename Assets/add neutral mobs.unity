@@ -1895,7 +1895,6 @@ MonoBehaviour:
   ironVeinSize: 0.8
   goldVeinSize: 0.85
   diamondVeinSize: 0.84
-  worldChunks: []
 --- !u!4 &486374320
 Transform:
   m_ObjectHideFlags: 0
@@ -5430,7 +5429,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1557103351
 MonoBehaviour:
   m_ObjectHideFlags: 0

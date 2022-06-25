@@ -26,7 +26,7 @@ public class Terrain : MonoBehaviour {
     private int heightAddition = 64;
     private int heightMulitplier = 5;
     public int dirtLayerHeight = 5;
-    private int chunkSize = 16;
+
 
     [Header("Generation Settings")]
     public float surfaceValue = 0.25f;
@@ -70,8 +70,6 @@ public class Terrain : MonoBehaviour {
     private int spawnX = 0;
     private int spawnY = 0;
 
-    public GameObject[] worldChunks;
-    private int numChunks;
 
     #region Initialisation
     /* For Visualisation

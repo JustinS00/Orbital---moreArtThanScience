@@ -234,9 +234,11 @@ public class PlayerController : MonoBehaviour {
                             } else {
                                 BowClass bow = (BowClass) tempEquipment;
                                 ItemClass arrowItem =  inventory.HasItemInInventoryByString("arrow");
+                                Debug.Log(arrowItem);
+                                
                                 if (arrowItem != null && playerCombat.canFire()) {
                                     inventory.RemoveItemFromInventory(arrowItem, 1);
-                                    ArrowClass arrow = (ArrowClass) arrowItem;
+                                    ArrowClass arrow = (ArrowClass) arrowItem; //of type mob drop not arrow
                                     playerCombat.Shoot(bow, arrow);
                                 }
                             }

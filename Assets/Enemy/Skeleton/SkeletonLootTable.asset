@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: SkeletonLootTable
   m_EditorClassIdentifier: 
   loots:
-  - loot: {fileID: 6655449034760366642, guid: e4cfd5f2ab863ee4d89974394ba23584, type: 3}
-    mobDrop: {fileID: 11400000, guid: 9b71e2c32e432854eb18ee8acc67135e, type: 2}
+  - mobDrop: {fileID: 11400000, guid: 021486dde9e477f4a8c936c041dd23c7, type: 2}
     dropChance: 50
   itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}

@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: LootTableZombie
   m_EditorClassIdentifier: 
   loots:
-  - loot: {fileID: 5021095741264230617, guid: 75e8413c922f2e3459e5224d3c0eee39, type: 3}
-    mobDrop: {fileID: 11400000, guid: f57b08252d963f949bd49c0f1030099d, type: 2}
-    dropChance: 50
-  - loot: {fileID: 0}
-    mobDrop: {fileID: 0}
+  - mobDrop: {fileID: 11400000, guid: 4ed142992f73eec4ebb04ca5ff732cf7, type: 2}
     dropChance: 50
   itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}
