@@ -5,8 +5,10 @@ using UnityEngine;
 public class NeutralMonster : MonoBehaviour {
 
     private Rigidbody2D rb;
-    private Animator anim;
     private GameObject player;
+
+    private Animator anim;
+    private bool animIsInitialized = false;
 
     [SerializeField]
     protected float speed = 1.5f;
@@ -30,9 +32,11 @@ public class NeutralMonster : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         SetEnemyValues();
+
+        anim = GetComponent<Animator>();
+        StartCoroutine(InitializeAnimator());
         StartCoroutine(MovementBehavior());
     }
 
@@ -44,10 +48,12 @@ public class NeutralMonster : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if (-0.1f <= rb.velocity.x && rb.velocity.x <= 0.1f) {
-            anim.SetBool("toWalk", false);
-        } else {
-            anim.SetBool("toWalk", true);
+        if (animIsInitialized) {
+            if (-0.1f <= rb.velocity.x && rb.velocity.x <= 0.1f) {
+                anim.SetBool("toWalk", false);
+            } else {
+                anim.SetBool("toWalk", true);
+            }
         }
     }
 
@@ -61,6 +67,11 @@ public class NeutralMonster : MonoBehaviour {
             int randNumItems = Random.Range(0, data.maxItemsToDrop + 1);
             lootTable.generateLoot(randNumItems, transform.position);
         }
+    }
+
+    private IEnumerator InitializeAnimator() {
+        yield return new WaitUntil(() => anim.isInitialized);
+        animIsInitialized = true;
     }
 
     private IEnumerator MovementBehavior() {

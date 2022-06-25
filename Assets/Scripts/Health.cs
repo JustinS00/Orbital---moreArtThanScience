@@ -89,6 +89,12 @@ public class Health : MonoBehaviour {
             //Destroy(gameObject);
             gameObject.SetActive(false);
         }
+        // probably can make this better by seperating into a makeloot script instead of duplicating
+        if (GetComponent<NeutralMonster>()) {
+            GetComponent<NeutralMonster>().MakeLoot();
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
         Debug.Log("Die");
     }
 
