@@ -18,4 +18,4 @@ MonoBehaviour:
   isStackable: 1
   maxItemsPerStack: 64
   arrowType: 0
-  damage: 0
+  damage: 4
