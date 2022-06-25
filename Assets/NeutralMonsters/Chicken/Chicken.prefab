@@ -150,8 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.5
   data: {fileID: 11400000, guid: cb52709c30ceb2144a10371bdfc86c2c, type: 2}
-  lootTable: {fileID: 0}
-  maxDistanceFromPlayer: 50
+  lootTable: {fileID: 11400000, guid: c09476255e81b504499513a9fd3f6cfa, type: 2}
+  maxDistanceFromPlayer: 100
 --- !u!114 &8224251699247917944
 MonoBehaviour:
   m_ObjectHideFlags: 0
