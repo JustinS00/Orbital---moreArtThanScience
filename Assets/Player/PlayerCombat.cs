@@ -38,8 +38,10 @@ public class PlayerCombat : MonoBehaviour {
 
         // Damage them
         foreach (Collider2D enemy in hitEnemies) {
-            enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(weapon.damage));
-            weapon.reduceDurability(1);
+            if (enemy.GetComponent<Health>().canDamage(Mathf.RoundToInt(weapon.damage))) {
+                enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(weapon.damage));
+                weapon.reduceDurability(1);
+            }
         }
     }
 
