@@ -8,6 +8,7 @@ TagManager:
   - Drop
   - Enemy
   - Achievement Template
+  - Neutral Monster
   layers:
   - Default
   - TransparentFX

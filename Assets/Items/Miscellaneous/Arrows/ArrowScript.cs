@@ -11,7 +11,7 @@ public class ArrowScript : MonoBehaviour {
 
     private bool hasHit;
     private float destroyTimer = 5.0f;
-    
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +28,7 @@ public class ArrowScript : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other) {
         hasHit = true;
+        rb.velocity = Vector2.zero;
         rb.isKinematic = true;
 
         //disables collision of arrow 
@@ -43,5 +44,5 @@ public class ArrowScript : MonoBehaviour {
         }
     }
 
-    
+
 }
