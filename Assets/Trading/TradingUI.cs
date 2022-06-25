@@ -113,7 +113,8 @@ public class TradingUI : MonoBehaviour
     }
 
     private void AddItems(PlayerController player, ItemSet item) {
-        player.inventory.AddedItems(item.item, item.quantity);
+        ItemClass newItem = Instantiate(item.item);
+        player.inventory.AddedItems(newItem, item.quantity);
     }
 
 

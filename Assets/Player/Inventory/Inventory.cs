@@ -269,14 +269,15 @@ public class Inventory : MonoBehaviour {
 
         for (int y = 0; y < inventoryHeight; y++) {
             for (int x = 0; x < inventoryWidth; x++) {
-                if (inventory[x, y] != null && inventory[x, y].item.itemName == item.itemName) {
+                if (quantityRemaining > 0 && inventory[x, y] != null && inventory[x, y].item.itemName == item.itemName) {
                     int currentQuantity = inventory[x, y].quantity;
                     if (currentQuantity <= quantityRemaining) {
                         inventory[x, y] = null;
+                        quantityRemaining -= currentQuantity;
                     } else {
                         inventory[x, y].quantity -= quantityRemaining;
+                        quantityRemaining = 0;
                     }
-                    quantityRemaining -= currentQuantity;
                 }
             }
         }
