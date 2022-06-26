@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour {
     private bool siu;
 
     [Header("Health")]
-    public int maxHealth = 100;
+    public int maxHealth = 40;
     public int currentHealth;
 
     public HealthBar healthBar;
