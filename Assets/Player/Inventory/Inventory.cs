@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour {
     //starter tools
     public EquipmentClass[] starter_equipment;
+    public BlockClass[] starting_blocks;
     public ConsumableClass apple;
     public ArrowClass arrow;
     public bool isShowing;
@@ -59,7 +60,10 @@ public class Inventory : MonoBehaviour {
         }
         for (int i = 0; i < 5; i++) {
             Add(Instantiate(apple));
-            //Add(Instantiate(arrow));
+            Add(Instantiate(arrow));
+        }
+        foreach (BlockClass block in starting_blocks) {
+            AddedItems(Instantiate(block), 64);
         }
     }
 

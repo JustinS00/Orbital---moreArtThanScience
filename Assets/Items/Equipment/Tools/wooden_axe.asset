@@ -20,6 +20,6 @@ MonoBehaviour:
   equipmentType: 0
   durability: 59
   durabilityRemaining: 59
-  toolType: 3
+  toolType: 2
   toolTier: 0
   miningSpeed: 1.5
