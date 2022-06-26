@@ -1020,10 +1020,6 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   onGround: 0
-  hit: 0
-  place: 0
-  jump: 0
-  siu: 0
   maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 0}
@@ -1082,11 +1078,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 28f86c8fed74e6a40935ef8d5190cdef, type: 2}
   - {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
   apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
+  arrow: {fileID: 0}
   isShowing: 1
-  offsetInv: {x: -160, y: -110}
-  offsetHotbar: {x: -160, y: 0}
-  multiplierInv: {x: 40, y: 40}
-  multiplierHotbar: {x: 40, y: 40}
   InventoryUI: {fileID: 0}
   HotbarUI: {fileID: 0}
   inventorySlotPrefab: {fileID: 8566277836835497527, guid: 77598743b1251754891b011467a709ff, type: 3}
@@ -1098,7 +1091,6 @@ MonoBehaviour:
   inventoryHeight: 4
   hotbarUISlots: []
   armourSlotsUI: []
-  THRESHOLD: 40
   itemCursor: {fileID: 0}
 --- !u!114 &1639873183
 MonoBehaviour:
@@ -1119,6 +1111,7 @@ MonoBehaviour:
     m_Bits: 512
   attackRange: 0.2
   attackDamage: 10
+  arrowCollection: {fileID: 11400000, guid: cd8d3840af7062f44986d6b596e653ed, type: 2}
 --- !u!114 &1639873188
 MonoBehaviour:
   m_ObjectHideFlags: 0
