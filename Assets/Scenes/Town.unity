@@ -1601,7 +1601,6 @@ MonoBehaviour:
   ironVeinSize: 0.8
   goldVeinSize: 0.85
   diamondVeinSize: 0.84
-  worldChunks: []
 --- !u!4 &486374320
 Transform:
   m_ObjectHideFlags: 0
@@ -5048,7 +5047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCollection: {fileID: 11400000, guid: a299ac489af068a4bad39f2196a3d11e, type: 2}
-  spawnInterval: 3.5
+  spawnInterval: 30
   maxNumEnemies: 5
 --- !u!4 &1557103352
 Transform:
@@ -13132,6 +13131,66 @@ PrefabInstance:
       propertyPath: InventoryUI
       value: 
       objectReference: {fileID: 943676796}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2295e3656d53f7946a0a5c5d2ddd0103, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 00696dfacf4f6e64e80fc220762cfb31, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: edb180ab9e3b5ba4386615a2644c99f8, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 33d5fb87d3203e34e8f734ab350b03d5, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b793bb9be6d1c948bef4faa7b8ab38f, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: b7aa679ae2d6b5540a7be093b1810e96, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7cdbd073c6f757a45a2235d54391a0e4, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: e4881485f67147e479e7f0e6287678f9, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[8]
+      value: 
+      objectReference: {fileID: 11400000, guid: 28f86c8fed74e6a40935ef8d5190cdef, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[9]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[11]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[12]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+    - target: {fileID: 4873271426336679123, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
+      propertyPath: starter_equipment.Array.data[13]
+      value: 
+      objectReference: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
     - target: {fileID: 6179212869377884424, guid: 0a7d326cb33de944fa82d3a1454181e8, type: 3}
       propertyPath: m_RootOrder
       value: 4
