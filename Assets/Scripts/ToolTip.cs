@@ -13,7 +13,7 @@ public class ToolTip : MonoBehaviour
     private Text toolTipText;
     private RectTransform backgroundRectTransform;
 
-    private float showTimer = 2f;
+    private float showTimer = 1f;
 
     private void Awake() {
         instance = this;
@@ -26,7 +26,7 @@ public class ToolTip : MonoBehaviour
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), Input.mousePosition, uiCamera, out localPoint);
         transform.localPosition = localPoint;
-        showTimer -= Time.deltaTime;
+        showTimer = Mathf.Max(0, showTimer - Time.deltaTime);
         if (showTimer <= 0f) {
             HideToolTip();
         }
@@ -38,7 +38,7 @@ public class ToolTip : MonoBehaviour
         float textPaddingSize = 4f;
         Vector2 backgroundSize = new Vector2(toolTipText.preferredWidth + textPaddingSize * 3f, toolTipText.preferredHeight + textPaddingSize * 3f);
         backgroundRectTransform.sizeDelta = backgroundSize;
-        showTimer = 2f;
+        showTimer = 1f;
     }
 
     private void HideToolTip() {

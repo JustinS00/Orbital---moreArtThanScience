@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     private IEnumerator spawnEnemy(float interval, GameObject enemy) {
-        //TODO: if player is in town or if time is day / do not spawn
+       
 
         yield return new WaitForSeconds(interval);
 
@@ -45,6 +45,7 @@ public class EnemySpawner : MonoBehaviour {
         }
 
         spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
+         //TODO: if player is in town or if time is day / do not spawn
         if (Physics2D.OverlapCircle(spawnLocation, 1.0f) == null && player.transform.position.y <= 128) {
             GameObject newEnemy = Instantiate(enemy, spawnLocation, Quaternion.identity);
         }

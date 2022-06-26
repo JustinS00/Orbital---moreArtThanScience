@@ -5490,7 +5490,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1557103351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5504,7 +5504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCollection: {fileID: 11400000, guid: a299ac489af068a4bad39f2196a3d11e, type: 2}
-  spawnInterval: 1
+  spawnInterval: 15
   maxNumEnemies: 3
 --- !u!4 &1557103352
 Transform:
