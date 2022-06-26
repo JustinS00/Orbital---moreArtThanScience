@@ -43,6 +43,8 @@ public class Terrain : MonoBehaviour {
     public int maxTreeHeight = 10;
     public float mushroomChance = 0.02f;
     public float grassChance = 0.03f;
+    public ConsumableClass apple;
+    public float appleChance = 0.05f;
 
     [Header("Ore Settings")]
     public int coalOreHeight = 128;
@@ -375,6 +377,15 @@ public class Terrain : MonoBehaviour {
                 newBlockDrop.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
                 newBlockDrop.GetComponent<ItemDropCollider>().item = block;
                 newBlockDrop.GetComponent<ItemDropCollider>().quantity = 1;
+                if (block.itemName == "leaves") {
+                    float spawnAppleChance = Random.Range(0.0f, 1.0f);
+                    if (spawnAppleChance < appleChance) {
+                        GameObject newItemDrop = Instantiate(itemDrop, new Vector2(x, y + 0.5f), Quaternion.identity);
+                        newItemDrop.GetComponent<SpriteRenderer>().sprite = apple.itemSprite;
+                        newItemDrop.GetComponent<ItemDropCollider>().item = apple;
+                        newItemDrop.GetComponent<ItemDropCollider>().quantity = 1;
+                    }
+                }
             }
             Destroy(obj.gameObject);
             worldBlocksObject.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
