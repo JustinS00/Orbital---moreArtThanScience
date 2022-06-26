@@ -1883,6 +1883,8 @@ MonoBehaviour:
   maxTreeHeight: 12
   mushroomChance: 0.02
   grassChance: 0.03
+  apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
+  appleChance: 0.05
   coalOreHeight: 128
   ironOreHeight: 64
   goldOreHeight: 32

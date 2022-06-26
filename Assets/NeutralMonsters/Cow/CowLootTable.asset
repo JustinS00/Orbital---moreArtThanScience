@@ -15,4 +15,6 @@ MonoBehaviour:
   loots:
   - mobDrop: {fileID: 11400000, guid: aafab45b60698134eb577b62a70bd890, type: 2}
     dropChance: 20
+  - mobDrop: {fileID: 11400000, guid: c9382dfaba1456742b8922a5f12c9923, type: 2}
+    dropChance: 50
   itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}
