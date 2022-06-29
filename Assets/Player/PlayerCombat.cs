@@ -5,12 +5,21 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour {
 
     public Animator anim;
-    
+
     public Transform attackPoint;
     public LayerMask enemyLayers;
 
     public float attackRange = 0.5f;
     public int attackDamage = 1;
+
+    #region Bow/Arrow Related
+    [SerializeField]
+    private ArrowCollection arrowCollection;
+    private float arrowLaunchForce = 2.0f;
+    private float nextArrowLaunchTime;
+
+    #endregion
+
 
     void Start() {
         enemyLayers = LayerMask.GetMask("Enemy");
@@ -22,14 +31,17 @@ public class PlayerCombat : MonoBehaviour {
 
     public void Attack(WeaponClass weapon) {
         // Play attack animation
+        Debug.Log(SettingsMenu.instance.GetMultiplier());
         anim.SetTrigger("attack");
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         // Damage them
-        foreach(Collider2D enemy in hitEnemies) {
-            enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(weapon.damage));
-            weapon.reduceDurability(1);
+        foreach (Collider2D enemy in hitEnemies) {
+            if (enemy.GetComponent<Health>().canDamage(Mathf.RoundToInt(weapon.damage))) {
+                enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(weapon.damage));
+                weapon.reduceDurability(1);
+            }
         }
     }
 
@@ -40,9 +52,28 @@ public class PlayerCombat : MonoBehaviour {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
         // Damage them
-        foreach(Collider2D enemy in hitEnemies) {
+        foreach (Collider2D enemy in hitEnemies) {
             enemy.GetComponent<Health>().Damage(attackDamage);
+            Achievement.instance.UnlockAchievement(Achievement.AchievementType.willsmith);
         }
+    }
+
+    public void Shoot(BowClass bow, ArrowClass arrow) {
+        nextArrowLaunchTime = Time.time + bow.fireRate / 60;
+
+        Vector2 bowPosition = transform.position;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = mousePosition - bowPosition;
+
+        int arrowTypeIndex = (int) arrow.arrowType;
+        GameObject arrowToFire = arrowCollection.arrowPrefabs[arrowTypeIndex];
+
+        GameObject arrowShot = Instantiate(arrowToFire, attackPoint.position, attackPoint.rotation);
+        arrowShot.GetComponent<Rigidbody2D>().velocity = direction * arrowLaunchForce;
+    }
+
+    public bool canFire() {
+        return Time.time > nextArrowLaunchTime && Physics2D.OverlapCircle(attackPoint.position, 0.5f) == null;
     }
     /*
     Can enable this function to see attack circle in scene

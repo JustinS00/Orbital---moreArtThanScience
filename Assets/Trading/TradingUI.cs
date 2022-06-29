@@ -88,8 +88,10 @@ public class TradingUI : MonoBehaviour
         if (player != null) {
             bool haveItemsRequired = FindItems(player, trade.itemsGiven);
             if (haveItemsRequired) {
+                Achievement.instance.UnlockAchievement(Achievement.AchievementType.besttrade);
                 RemoveItems(player, trade.itemsGiven);
                 AddItems(player, trade.itemRecieve);
+                ToolTip.HideToolTip_Static();
             } else {
                 ToolTip.ShowToolTip_Static("  Insufficent Items");
             }
@@ -112,7 +114,8 @@ public class TradingUI : MonoBehaviour
     }
 
     private void AddItems(PlayerController player, ItemSet item) {
-        player.inventory.AddedItems(item.item, item.quantity);
+        ItemClass newItem = Instantiate(item.item);
+        player.inventory.AddedItems(newItem, item.quantity);
     }
 
 

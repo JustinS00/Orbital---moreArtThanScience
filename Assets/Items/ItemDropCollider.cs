@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDropCollider : MonoBehaviour
-{   
+public class ItemDropCollider : MonoBehaviour {
     public bool touchingPlayer;
     public bool touchingOtherDrop;
     public ItemClass item;
@@ -23,7 +22,7 @@ public class ItemDropCollider : MonoBehaviour
             int addedItems = col.GetComponent<Inventory>().AddedItems(item, quantity);
             if (addedItems == quantity) {
                 Destroy(this.gameObject);
-            }  else {
+            } else {
                 quantity -= addedItems;
             }
         } else if (col.gameObject.CompareTag("Drop")) {
@@ -38,8 +37,8 @@ public class ItemDropCollider : MonoBehaviour
                     Destroy(col.gameObject);
                 }
             }
-        }  else if (col.gameObject.CompareTag("Enemy")) {
-            Physics2D.IgnoreCollision(col.GetComponent<Collider2D>(), GetComponent<Collider2D>(),true);
+        } else if (col.gameObject.CompareTag("Enemy")) {
+            Physics2D.IgnoreCollision(col.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
         }
     }
 }

@@ -16,5 +16,5 @@ MonoBehaviour:
   itemName: Apple
   itemSprite: {fileID: 21300000, guid: 61d01e8616313344b978a6518fd86ed6, type: 3}
   isStackable: 1
-  maxItemsPerStack: 10
-  healthAdded: 10
+  maxItemsPerStack: 64
+  healthAdded: 5

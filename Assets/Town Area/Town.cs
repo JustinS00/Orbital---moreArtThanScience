@@ -43,7 +43,7 @@ public class Town : MonoBehaviour
         newPortal.transform.parent = this.transform;
         newPortal.SetMessage("Press 'T' to travel to Wildeness");
         newPortal.SetLocation(new Vector2(250, 100));
-        newPortal.transform.localPosition = new Vector2(50, 10);
+        newPortal.transform.localPosition = new Vector2(60, 13);
     }
 
     private void GenerateFlatTerrain() {

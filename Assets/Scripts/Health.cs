@@ -8,8 +8,8 @@ public class Health : MonoBehaviour {
     private int health = 100;
 
     [SerializeField]
-  	private float invincibilityDurationSeconds = 1.0f;
-  	public bool isInvincible;
+    private float invincibilityDurationSeconds = 1.0f;
+    public bool isInvincible;
 
     private Animator anim;
 
@@ -18,17 +18,12 @@ public class Health : MonoBehaviour {
     public int protectionValue;
 
     void Start() {
-		anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.H)) {
-            Damage(10);
-        } 
-        if (Input.GetKeyDown(KeyCode.L)) {
-            Heal(10);
-        } 
+        if (health <= 0) Die();
     }
 
     public void SetHealth(int maxHealth, int health) {
@@ -44,6 +39,12 @@ public class Health : MonoBehaviour {
         this.health = this.MAX_HEALTH;
     }
 
+    public bool canDamage(int damage) {
+        if (isInvincible || damage < 0) 
+            return false;
+        return true;
+    }
+    
     public void Damage(int damage) {
         if (isInvincible) return;
 
@@ -83,6 +84,17 @@ public class Health : MonoBehaviour {
     }
 
     private void Die() {
+        if (GetComponent<Enemy>()) {
+            GetComponent<Enemy>().MakeLoot();
+            Destroy(gameObject);
+            //gameObject.SetActive(false);
+        }
+        // probably can make this better by seperating into a makeloot script instead of duplicating
+        if (GetComponent<NeutralMonster>()) {
+            GetComponent<NeutralMonster>().MakeLoot();
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
         Debug.Log("Die");
     }
 

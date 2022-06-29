@@ -21,12 +21,12 @@ public class Terrain : MonoBehaviour {
 
     [Header("World Settings")]
     public float seed;
-    public int worldSize = 100;
+    public int worldSize = 500;
     public int worldHeight = 128;
     private int heightAddition = 64;
     private int heightMulitplier = 5;
     public int dirtLayerHeight = 5;
-    private int chunkSize = 16;
+
 
     [Header("Generation Settings")]
     public float surfaceValue = 0.25f;
@@ -35,7 +35,7 @@ public class Terrain : MonoBehaviour {
     public Texture2D noiseTexture;//2d array
 
     [Header("Blocks")]
-    public BlocksCollection blocksCollection; 
+    public BlocksCollection blocksCollection;
 
     [Header("Surface Features Settings")]
     public float treeChance = 0.03f;
@@ -43,6 +43,8 @@ public class Terrain : MonoBehaviour {
     public int maxTreeHeight = 10;
     public float mushroomChance = 0.02f;
     public float grassChance = 0.03f;
+    public ConsumableClass apple;
+    public float appleChance = 0.05f;
 
     [Header("Ore Settings")]
     public int coalOreHeight = 128;
@@ -61,7 +63,7 @@ public class Terrain : MonoBehaviour {
     private Texture2D coalTexture;
     private Texture2D ironTexture;
     private Texture2D goldTexture;
-    private Texture2D diamondTexture;   
+    private Texture2D diamondTexture;
 
     private List<Vector2> worldBlocks = new List<Vector2>();
     private List<GameObject> worldBlocksObject = new List<GameObject>();
@@ -70,8 +72,6 @@ public class Terrain : MonoBehaviour {
     private int spawnX = 0;
     private int spawnY = 0;
 
-    public GameObject[] worldChunks;
-    private int numChunks;
 
     #region Initialisation
     /* For Visualisation
@@ -89,7 +89,7 @@ public class Terrain : MonoBehaviour {
         GenerateNoiseTexture(goldTexture, goldRarity, (float) goldVeinSize);
         GenerateNoiseTexture(diamondTexture, diamondRarity, (float) diamondVeinSize);   
     }
-    */ 
+    */
     public void StartTerrainGeneration() {
         //lighting
         /*
@@ -105,7 +105,7 @@ public class Terrain : MonoBehaviour {
         worldBlocksMap.Apply();
         */
 
-        seed = Random.Range(-100000,100000);
+        seed = Random.Range(-100000, 100000);
         spawnX = worldSize / 2;
         if (noiseTexture == null) {
             noiseTexture = new Texture2D(worldSize, worldHeight);
@@ -119,8 +119,8 @@ public class Terrain : MonoBehaviour {
         GenerateNoiseTexture(coalTexture, coalRarity, (float) coalVeinSize);
         GenerateNoiseTexture(ironTexture, ironRarity, (float) ironVeinSize);
         GenerateNoiseTexture(goldTexture, goldRarity, (float) goldVeinSize);
-        GenerateNoiseTexture(diamondTexture, diamondRarity, (float) diamondVeinSize);   
-        GenerateChunks();
+        GenerateNoiseTexture(diamondTexture, diamondRarity, (float) diamondVeinSize);
+        //GenerateChunks();
         GenerateTerrain();
         SpawnPortal();
 
@@ -135,10 +135,10 @@ public class Terrain : MonoBehaviour {
         worldBlocksMap.Apply();
         */
         gameManager.spawnPos = new Vector2(spawnX, spawnY + 2);
- 
+
     }
 
-    public void GenerateNoiseTexture(Texture2D noiseTexture,float freq, float limit) {
+    public void GenerateNoiseTexture(Texture2D noiseTexture, float freq, float limit) {
 
         for (int x = 0; x < noiseTexture.width; x++) {
             for (int y = 0; y < noiseTexture.height; y++) {
@@ -146,23 +146,26 @@ public class Terrain : MonoBehaviour {
                 if (value > limit) {
                     noiseTexture.SetPixel(x, y, Color.white);
                 } else {
-                    noiseTexture.SetPixel(x,y, Color.black);
+                    noiseTexture.SetPixel(x, y, Color.black);
                 }
             }
         }
         noiseTexture.Apply();
     }
 
+    /**
     public void GenerateChunks() {
         numChunks = Mathf.CeilToInt(worldSize / (float) chunkSize);
         worldChunks = new GameObject[numChunks];
-        for (int i = 0; i < numChunks; i ++) {
+        for (int i = 0; i < numChunks; i++) {
             GameObject newChunk = new GameObject();
             newChunk.name = i.ToString();
             worldChunks[i] = newChunk;
             newChunk.transform.parent = this.transform;
+            newChunk.SetActive(false);
         }
     }
+    **/
 
     public void GenerateTerrain() {
         for (int i = 0; i < worldSize; i++) {
@@ -173,13 +176,13 @@ public class Terrain : MonoBehaviour {
                 } else {
                     BlockClass block;
                     if (j < height - dirtLayerHeight) {
-                        if (coalTexture.GetPixel(i,j) == Color.white && j < coalOreHeight) {
+                        if (coalTexture.GetPixel(i, j) == Color.white && j < coalOreHeight) {
                             block = blocksCollection.coal_ore;
-                        } else if (ironTexture.GetPixel(i,j) == Color.white && j < ironOreHeight) {
+                        } else if (ironTexture.GetPixel(i, j) == Color.white && j < ironOreHeight) {
                             block = blocksCollection.iron_ore;
-                        } else if (goldTexture.GetPixel(i,j) == Color.white && j < goldOreHeight) {
+                        } else if (goldTexture.GetPixel(i, j) == Color.white && j < goldOreHeight) {
                             block = blocksCollection.gold_ore;
-                        } else if (diamondTexture.GetPixel(i,j) == Color.white && j < diamondOreHeight) {
+                        } else if (diamondTexture.GetPixel(i, j) == Color.white && j < diamondOreHeight) {
                             block = blocksCollection.diamond_ore;
                         } else {
                             block = blocksCollection.stone;
@@ -188,9 +191,9 @@ public class Terrain : MonoBehaviour {
                         block = blocksCollection.dirt;
                     } else {
                         block = blocksCollection.grass_block;
-                    } 
-                    placeBackGroundBlock(i,j, block);
-                    if (noiseTexture.GetPixel(i,j) == Color.white) {
+                    }
+                    placeBackGroundBlock(i, j, block);
+                    if (noiseTexture.GetPixel(i, j) == Color.white) {
                         placeBlock(i, j, block);
                         if (block == blocksCollection.grass_block) {
                             float spawnTreeChance = Random.Range(0.0f, 1.0f);
@@ -199,7 +202,7 @@ public class Terrain : MonoBehaviour {
                             if (spawnTreeChance < treeChance) {
                                 generateTree(i, j + 1);
                             } else if (spawnMushroomChance < mushroomChance) {
-                                float redOrBrown =  Random.Range(0.0f, 1.0f);
+                                float redOrBrown = Random.Range(0.0f, 1.0f);
                                 if (redOrBrown < 0.5f) {
                                     placeBlock(i, j + 1, blocksCollection.mushroom_brown);
                                 } else {
@@ -221,18 +224,20 @@ public class Terrain : MonoBehaviour {
         newPortal.transform.parent = this.transform;
         newPortal.SetMessage("Press 'T' to travel to Town Area");
         newPortal.SetLocation(new Vector2(50, 211));
-        newPortal.transform.localPosition = new Vector2(spawnX, spawnY);
+        newPortal.transform.localPosition = new Vector2(spawnX, spawnY + 3);
     }
 
     #endregion
 
     #region Update
+    
+    /**
     private void Update() {
         RefreshChunks();
     }
 
     void RefreshChunks() {
-        for (int i = 0; i < worldChunks.Length; i ++) {
+        for (int i = 0; i < worldChunks.Length; i++) {
             worldChunks[i].SetActive(false);
         }
         int xLeft = Mathf.FloorToInt(gameManager.player.transform.position.x - Camera.main.orthographicSize * 4f);
@@ -252,15 +257,16 @@ public class Terrain : MonoBehaviour {
         return getChunkNo(x);
     }
 
-     private int getChunkNo(int x) {
+    private int getChunkNo(int x) {
         return Mathf.FloorToInt(x / (float) chunkSize);
     }
+    **/
     #endregion
-    
+
     #region Structures
     public void generateTree(int x, int y) {
         int treeHeight = Random.Range(minTreeHeight, maxTreeHeight) + 1;
-        for (int i = 0; i < treeHeight; i ++) {
+        for (int i = 0; i < treeHeight; i++) {
             placeBlock(x, y + i, blocksCollection.log);
         }
         for (int i = -2; i < 3; i++) {
@@ -288,7 +294,7 @@ public class Terrain : MonoBehaviour {
             Vector2 pos = new Vector2(x, y);
             BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];
             return block;
-        } 
+        }
         return null;
     }
 
@@ -304,10 +310,11 @@ public class Terrain : MonoBehaviour {
             */
             //Normal Code
             GameObject newBlock = new GameObject();
-            int chunkCoordinate = getChunkNo(x, y);
-            newBlock.transform.parent = worldChunks[chunkCoordinate].transform;          
+            //int chunkCoordinate = getChunkNo(x, y);
+            //newBlock.transform.parent = worldChunks[chunkCoordinate].transform;
+            newBlock.transform.parent = this.transform;
             newBlock.AddComponent<SpriteRenderer>();
-            if(block.isSolid) {
+            if (block.isSolid) {
                 newBlock.AddComponent<BoxCollider2D>();
                 newBlock.GetComponent<BoxCollider2D>().size = Vector2.one;
             }
@@ -324,8 +331,9 @@ public class Terrain : MonoBehaviour {
 
     private void placeBackGroundBlock(int x, int y, BlockClass block) {
         GameObject newBlock = new GameObject();
-        int chunkCoordinate = getChunkNo(x, y);
-        newBlock.transform.parent = worldChunks[chunkCoordinate].transform; 
+        //int chunkCoordinate = getChunkNo(x, y);
+        //newBlock.transform.parent = worldChunks[chunkCoordinate].transform;
+        newBlock.transform.parent = this.transform;
         newBlock.AddComponent<SpriteRenderer>();
         Sprite sprite = blocksCollection.stone.itemSprite;
         string name = "stone_background";
@@ -336,11 +344,22 @@ public class Terrain : MonoBehaviour {
             sprite = blocksCollection.dirt.itemSprite;
             name = "dirt_background";
         }
-        newBlock.name = name;    
+        newBlock.name = name;
         newBlock.GetComponent<SpriteRenderer>().sprite = sprite;
         newBlock.GetComponent<SpriteRenderer>().sortingOrder = -5;
-        newBlock.GetComponent<SpriteRenderer>().color = new Color(0.7f,0.7f,0.7f);
+        newBlock.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f);
         newBlock.transform.position = new Vector2(x + 0.5f, y + 0.5f);
+    }
+    
+    
+    private bool blockIsSurfaceBlock(int x, int y) {
+        BlockClass block = GetBlock(x, y);
+        if (block) {
+            if (block.itemName == "grass" || block.itemName.Contains("mushroom")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void mineBlock(int x, int y, bool isPreferredTool) {
@@ -348,6 +367,9 @@ public class Terrain : MonoBehaviour {
             Vector2 pos = new Vector2(x, y);
             GameObject obj = worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))];
             BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];
+            
+            if (blockIsSurfaceBlock(x, y + 1))
+                mineBlock(x, y + 1, true);
             //worldBlocksMap.SetPixel(x,y, Color.white);
             //LightBlock(x, y, 1f, 0);
             if (isPreferredTool) {
@@ -355,11 +377,20 @@ public class Terrain : MonoBehaviour {
                 newBlockDrop.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<SpriteRenderer>().sprite;
                 newBlockDrop.GetComponent<ItemDropCollider>().item = block;
                 newBlockDrop.GetComponent<ItemDropCollider>().quantity = 1;
+                if (block.itemName == "leaves") {
+                    float spawnAppleChance = Random.Range(0.0f, 1.0f);
+                    if (spawnAppleChance < appleChance) {
+                        GameObject newItemDrop = Instantiate(itemDrop, new Vector2(x, y + 0.5f), Quaternion.identity);
+                        newItemDrop.GetComponent<SpriteRenderer>().sprite = apple.itemSprite;
+                        newItemDrop.GetComponent<ItemDropCollider>().item = apple;
+                        newItemDrop.GetComponent<ItemDropCollider>().quantity = 1;
+                    }
+                }
             }
             Destroy(obj.gameObject);
             worldBlocksObject.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
             worldBlockClasses.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
-            worldBlocks.Remove(new Vector2(x,y));
+            worldBlocks.Remove(new Vector2(x, y));
             //worldBlocksMap.Apply();
         }
     }
@@ -379,7 +410,7 @@ public class Terrain : MonoBehaviour {
             Destroy(obj.gameObject);
             worldBlocksObject.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
             worldBlockClasses.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
-            worldBlocks.Remove(new Vector2(x,y));
+            worldBlocks.Remove(new Vector2(x, y));
             //worldBlocksMap.Apply();
         }
     }

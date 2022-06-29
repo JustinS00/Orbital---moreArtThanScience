@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {  
+public class PlayerController : MonoBehaviour {
 
     public bool showInv;
     public Inventory inventory;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
     [HideInInspector] public GameObject leggings_1_Display;
     [HideInInspector] public GameObject boots_0_Display;
     [HideInInspector] public GameObject boots_1_Display;
-    
+
     public HelmetClass helmet;
     public ChestplateClass chestplate;
     public LeggingsClass leggings;
@@ -30,8 +30,8 @@ public class PlayerController : MonoBehaviour {
     public int selectionIndex = 0;
     public GameObject hotBarSelector;
 
-    public float moveSpeed = 5;
-    public float jumpForce = 10;
+    public float moveSpeed = 5.0f;
+    public float jumpForce = 10.0f;
     public bool onGround;
 
     private Rigidbody2D rb;
@@ -43,10 +43,10 @@ public class PlayerController : MonoBehaviour {
     private bool siu;
 
     [Header("Health")]
-    public int maxHealth = 100;
-	public int currentHealth;
+    public int maxHealth = 40;
+    public int currentHealth;
 
-	public HealthBar healthBar;
+    public HealthBar healthBar;
     public Health health;
 
     public Vector2 spawnPos;
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
     public GameManager gameManager;
     public PlayerCombat playerCombat;
 
-    //temp
+    //tempEquipment
     public ConsumableClass apple;
 
     //Mining, breaking of blocks
@@ -80,10 +80,10 @@ public class PlayerController : MonoBehaviour {
         GetComponent<Transform>().position = spawnPos;
         inventory = GetComponent<Inventory>();
         inventory.InventoryUI.SetActive(showInv);
-		healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth);
         health = GetComponent<Health>();
         health.SetFullHealth();
-        
+
     }
 
     public void moveTo(Vector2 location) {
@@ -91,15 +91,16 @@ public class PlayerController : MonoBehaviour {
     }
 
     public void Respawn() {
+        Achievement.instance.UnlockAchievement(Achievement.AchievementType.emotionaldamage);
+        AudioManager.instance.PlaySound("emotional_damage");
         //not clearing inventory for now
         GetComponent<Transform>().position = spawnPos;
-		healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth);
         health.SetFullHealth();
     }
 
     private void FixedUpdate() {
         Vector2 movement = new Vector2(horizontal * moveSpeed, rb.velocity.y);
-
         rb.velocity = movement;
         /*
         to make into knockback script
@@ -119,11 +120,10 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         //Hotbar
-        onGround =  -0.1f <= rb.velocity.y && rb.velocity.y <= 0.1f;
-        Debug.Log(onGround);
-        
+        onGround = -0.1f <= rb.velocity.y && rb.velocity.y <= 0.1f;
+
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
-                selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
+            selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
         } else if ((Input.GetAxis("Mouse ScrollWheel") < 0)) {
             selectionIndex = (selectionIndex - 1 + inventory.inventoryWidth) % inventory.inventoryWidth;
         }
@@ -135,24 +135,26 @@ public class PlayerController : MonoBehaviour {
         } else if (Input.GetKeyDown("3")) {
             selectionIndex = 2;
         } else if (Input.GetKeyDown("4")) {
-            selectionIndex = 3;                    
+            selectionIndex = 3;
         } else if (Input.GetKeyDown("5")) {
             selectionIndex = 4;
         } else if (Input.GetKeyDown("6")) {
-            selectionIndex = 5;       
+            selectionIndex = 5;
         } else if (Input.GetKeyDown("7")) {
-            selectionIndex = 6;    
+            selectionIndex = 6;
         } else if (Input.GetKeyDown("8")) {
-            selectionIndex = 7;    
+            selectionIndex = 7;
         } else if (Input.GetKeyDown("9")) {
             selectionIndex = 8;
         }
-            
+
         hotBarSelector.transform.position = inventory.hotbarUISlots[selectionIndex].transform.position;
         if (inventory != null && inventory.inventory != null) { // Not really needed but some times giving error at the start
             InventorySlot selected = inventory.inventory[selectionIndex, 0];
             if (selected != null) {
                 selectedItem = selected.item;
+                if (selectedItem.itemName == "diamond_ore")
+                    Achievement.instance.UnlockAchievement(Achievement.AchievementType.diamondhands);
             } else {
                 selectedItem = null;
             }
@@ -171,13 +173,13 @@ public class PlayerController : MonoBehaviour {
             selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = null;
         }
 
-         // Toggle Inventory
+        // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {
             ToggleInventory();
             TogglePause();
         }
 
-        if(Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
             if (showInv) {
                 ToggleInventory();
                 TogglePause();
@@ -202,6 +204,8 @@ public class PlayerController : MonoBehaviour {
 
         if (siu) {
             jump = 1.0f;
+            Achievement.instance.UnlockAchievement(Achievement.AchievementType.siu);
+            AudioManager.instance.PlaySound("SIU");
         }
 
         if (jump > 0.1f) {
@@ -220,14 +224,26 @@ public class PlayerController : MonoBehaviour {
                 //terrain.destroyBlock(mousePos.x, mousePos.y);
                 if (selectedItem) {
                     if (selectedItem.itemType == ItemClass.ItemType.equipment) {
-                        EquipmentClass temp = (EquipmentClass) selectedItem;
-                        if (temp.equipmentType == EquipmentClass.EquipmentType.weapon) {
-                            WeaponClass weapon = (WeaponClass) temp;
-                            hit = false;
-                            anim.SetBool("hit", hit);
-                            playerCombat.Attack(weapon);
-                        } else if (temp.equipmentType == EquipmentClass.EquipmentType.tool) {
-                            ToolClass tool = (ToolClass) temp;
+                        EquipmentClass tempEquipment = (EquipmentClass) selectedItem;
+                        if (tempEquipment.equipmentType == EquipmentClass.EquipmentType.weapon) {
+                            WeaponClass weapon = (WeaponClass) tempEquipment;
+                            if (weapon.weaponType == WeaponClass.WeaponType.melee) {
+                                hit = false;
+                                anim.SetBool("hit", hit);
+                                playerCombat.Attack(weapon);
+                            } else {
+                                BowClass bow = (BowClass) tempEquipment;
+                                ItemClass arrowItem =  inventory.HasItemInInventoryByString("arrow");
+                                Debug.Log(arrowItem);
+                                
+                                if (arrowItem != null && playerCombat.canFire()) {
+                                    inventory.RemoveItemFromInventory(arrowItem, 1);
+                                    ArrowClass arrow = (ArrowClass) arrowItem; //of type mob drop not arrow
+                                    playerCombat.Shoot(bow, arrow);
+                                }
+                            }
+                        } else if (tempEquipment.equipmentType == EquipmentClass.EquipmentType.tool) {
+                            ToolClass tool = (ToolClass) tempEquipment;
                             mineBlock(mousePos.x, mousePos.y, tool);
                         }
                     } else if (selectedItem.itemType == ItemClass.ItemType.consumable && nextEatTime < Time.time) {
@@ -235,19 +251,19 @@ public class PlayerController : MonoBehaviour {
                         Consume(consumable, selectionIndex);
                     }
                 } else {
-                    mineBlock(mousePos.x, mousePos.y);
+                    TryHit(mousePos.x, mousePos.y);
                 }
             } else if (place && selectedItem != null) {
                 if (selectedItem.itemType == ItemClass.ItemType.block) {
                     //check not placing on player
                     int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
                     int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
-                    
+
                     int minY = Mathf.CeilToInt(GetComponent<Transform>().position.y - 1);
                     int maxY = Mathf.FloorToInt(GetComponent<Transform>().position.y + 1);
 
-                    if(!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))){
-                        if(gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
+                    if (!((mousePos.x >= minX) && (mousePos.x < maxX) && (mousePos.y >= minY) && (mousePos.y <= maxY))) {
+                        if (gameManager.terrain.canPlace(mousePos.x, mousePos.y)) { //Not sure why needed but giving errors if not included
                             gameManager.terrain.placeBlock(mousePos.x, mousePos.y, (BlockClass) selectedItem);
                             inventory.RemoveFromHotBar(selectedItem, selectionIndex);
                         }
@@ -260,21 +276,22 @@ public class PlayerController : MonoBehaviour {
         }
 
         if (horizontal > 0) {
-            transform.eulerAngles = new Vector3(0,-180,0);
-        } else if (horizontal < 0)  {
-            transform.eulerAngles = new Vector3(0,0,0);
+            transform.eulerAngles = new Vector3(0, -180, 0);
+        } else if (horizontal < 0) {
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
-        if (GetComponent<Transform>().position.y < 0 || GetComponent<Health>().getHealth() <= 0) {
+        if (GetComponent<Transform>().position.y < 0) {
+            Achievement.instance.UnlockAchievement(Achievement.AchievementType.luna);
             Respawn();
-        }
+        } 
 
         int curHealth = GetComponent<Health>().getHealth();
         healthBar.SetHealth(curHealth);
         if (curHealth <= 0) {
             Respawn();
         }
-        
+
         //Armour Related
         armourProtectionValue = 0;
         if (helmet != null) {
@@ -283,19 +300,19 @@ public class PlayerController : MonoBehaviour {
         } else {
             helmetDisplay.GetComponent<SpriteRenderer>().sprite = null;
         }
-        
-        if (chestplate!= null) {
+
+        if (chestplate != null) {
             chestplate1Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate1_sideview;
             chestplate2_0_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_0_sideview;
             chestplate2_1_Display.GetComponent<SpriteRenderer>().sprite = chestplate.chestplate2_1_sideview;
             armourProtectionValue += chestplate.protectionValue;
         } else {
-            chestplate1Display.GetComponent<SpriteRenderer>().sprite = null; 
+            chestplate1Display.GetComponent<SpriteRenderer>().sprite = null;
             chestplate2_0_Display.GetComponent<SpriteRenderer>().sprite = null;
             chestplate2_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
-        
-        if (leggings!= null) {
+
+        if (leggings != null) {
             leggings_0_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_0_sideview;
             leggings_1_Display.GetComponent<SpriteRenderer>().sprite = leggings.leggings_1_sideview;
             armourProtectionValue += leggings.protectionValue;
@@ -303,8 +320,8 @@ public class PlayerController : MonoBehaviour {
             leggings_0_Display.GetComponent<SpriteRenderer>().sprite = null;
             leggings_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
-        
-        if (boots!= null) {
+
+        if (boots != null) {
             boots_0_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_0_sideview;
             boots_1_Display.GetComponent<SpriteRenderer>().sprite = boots.boots_1_sideview;
             armourProtectionValue += boots.protectionValue;
@@ -313,16 +330,22 @@ public class PlayerController : MonoBehaviour {
             boots_1_Display.GetComponent<SpriteRenderer>().sprite = null;
         }
         health.protectionValue = armourProtectionValue;
+        if (armourProtectionValue == 20)
+            Achievement.instance.UnlockAchievement(Achievement.AchievementType.deckedout);
 
     }
-    
-    public void mineBlock(int x, int y) {
-        mineBlock(x, y, null);
+
+    private void TryHit(int x, int y) {
+        if (gameManager.terrain.GetBlock(x, y) != null) {
+            mineBlock(x, y, null);
+        } else {
+            playerCombat.Attack();
+        }
     }
 
     public void mineBlock(int x, int y, ToolClass tool) {
-        Vector2Int target = new Vector2Int(x,y);
-        BlockClass block = gameManager.terrain.GetBlock(x,y);
+        Vector2Int target = new Vector2Int(x, y);
+        BlockClass block = gameManager.terrain.GetBlock(x, y);
         if (target == currentTarget && block != null && block.isBreakable) {
             bool isPreferredTool = false;
             float miningSpeed = DEFAULT_MINING_SPEED;
@@ -347,7 +370,7 @@ public class PlayerController : MonoBehaviour {
     public void ToggleInventory() {
         showInv = !showInv;
         inventory.isShowing = !inventory.isShowing;
-        inventory.InventoryUI.SetActive(showInv);     
+        inventory.InventoryUI.SetActive(showInv);
     }
 
     public void armourDamage(int value) {

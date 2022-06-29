@@ -17,4 +17,4 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: c728868677dfad541b6543a1f2aec055, type: 3}
   isStackable: 1
   maxItemsPerStack: 10
-  healthAdded: 30
+  healthAdded: 10

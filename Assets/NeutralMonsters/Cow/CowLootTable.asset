@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d20b3e80b4518445950a0b5d0edb990, type: 3}
+  m_Name: CowLootTable
+  m_EditorClassIdentifier: 
+  loots:
+  - mobDrop: {fileID: 11400000, guid: aafab45b60698134eb577b62a70bd890, type: 2}
+    dropChance: 20
+  - mobDrop: {fileID: 11400000, guid: c9382dfaba1456742b8922a5f12c9923, type: 2}
+    dropChance: 50
+  itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}

@@ -1078,6 +1078,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 28f86c8fed74e6a40935ef8d5190cdef, type: 2}
   - {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
   apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
+  arrow: {fileID: 0}
   isShowing: 1
   InventoryUI: {fileID: 0}
   HotbarUI: {fileID: 0}
@@ -1110,6 +1111,7 @@ MonoBehaviour:
     m_Bits: 512
   attackRange: 0.2
   attackDamage: 10
+  arrowCollection: {fileID: 11400000, guid: cd8d3840af7062f44986d6b596e653ed, type: 2}
 --- !u!114 &1639873188
 MonoBehaviour:
   m_ObjectHideFlags: 0

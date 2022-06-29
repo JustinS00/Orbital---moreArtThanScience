@@ -10,7 +10,7 @@ public class DisableArrowAtStart : MonoBehaviour {
     }
 
     private IEnumerator disableAtStart() {
-        yield return new WaitForSeconds(0.001f);
+        yield return new WaitForSeconds(0.01f);
         GetComponent<Collider2D>().enabled = true;
     }
 }

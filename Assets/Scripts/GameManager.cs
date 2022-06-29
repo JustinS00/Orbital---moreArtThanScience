@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     public PlayerController player;
     public Terrain terrain;
     public CameraController cam;
@@ -12,10 +11,12 @@ public class GameManager : MonoBehaviour
     public Vector2 spawnPos;
 
     private bool gamePaused = false;
-    
+    private float timeElapsed = 0f;
+    private int dayNo = 0;
+    private int secondsPerGameDay = 1200;
+
     // Start is called before the first frame update
-    void Start()
-    {
+    void Awake() {
         terrain.StartTerrainGeneration();
         player.spawnPos = spawnPos;
         player.Spawn();
@@ -23,10 +24,14 @@ public class GameManager : MonoBehaviour
         town.StartTerrainGeneration();
     }
 
+    void FixedUpdate() {
+        timeElapsed += Time.deltaTime;
+        dayNo = Mathf.FloorToInt(timeElapsed / secondsPerGameDay);
+    }
+
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
+        //Debug.Log(SettingsMenu.instance.difficulty);
     }
 
     public void TogglePause() {
@@ -41,5 +46,13 @@ public class GameManager : MonoBehaviour
 
     public bool isGamePaused() {
         return gamePaused;
+    }
+
+    public int getDayNo() {
+        return this.dayNo;
+    }
+
+    public int getTime() {
+        return Mathf.RoundToInt(timeElapsed % secondsPerGameDay);
     }
 }

@@ -480,6 +480,9 @@ MonoBehaviour:
   damage: 4
   speed: 1.5
   data: {fileID: 11400000, guid: 0128f82aa18d7d140b9b5c5e4b2fb30a, type: 2}
+  isRanged: 0
+  deathEffect: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: 3da54149722795c4699051f67167bfa2, type: 2}
 --- !u!114 &1164388890820825013
 MonoBehaviour:
   m_ObjectHideFlags: 0
