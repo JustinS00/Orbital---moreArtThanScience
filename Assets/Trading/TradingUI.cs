@@ -19,10 +19,15 @@ public class TradingUI : MonoBehaviour
         public ItemSet[] itemsGiven;
 
     }
-    private Transform slot;
-    private Transform tradeTemplate;
-    private Transform tradeUI;
+
     private Transform canvas;
+    private Transform tradeUI;  
+    private Transform scrollRect;
+    private Transform view;
+    private Transform tradesContent;
+    private Transform tradeTemplate;
+    private Transform slot;
+    
 
     private int colOffset = -100;
     private int rowOffset = 125;
@@ -31,8 +36,9 @@ public class TradingUI : MonoBehaviour
     private int noOfCols = 2;
 
     private int itemGivenXOffset = -10;
-    private int itemGivenYOffset = -0;
+    private int itemGivenYOffset = 0;
     private int itemGivenMultiplierRow = 40;
+
 
     public Trade[] trades;
     private PlayerController player;
@@ -40,7 +46,10 @@ public class TradingUI : MonoBehaviour
     private void Awake() {
         canvas = transform.Find("Canvas");
         tradeUI = canvas.Find("tradeUI");
-        tradeTemplate = tradeUI.Find("tradeTemplate");
+        scrollRect = tradeUI.Find("Scroll Rect");
+        view = scrollRect.Find("View");
+        tradesContent = view.Find("TradesContent");
+        tradeTemplate = tradesContent.Find("tradeTemplate");
         tradeTemplate.gameObject.SetActive(false);
         slot = tradeTemplate.Find("ItemGiven");
         
@@ -55,10 +64,10 @@ public class TradingUI : MonoBehaviour
     // Start is called before the first frame update
 
     private void CreateItemButton(Trade trade, int x, int y) {
-        Transform tradeItemTransform = Instantiate(tradeTemplate, tradeUI);
+        Transform tradeItemTransform = Instantiate(tradeTemplate, tradesContent);
         RectTransform tradeItemRectTransform = tradeItemTransform.GetComponent<RectTransform>();
       
-        tradeItemRectTransform.anchoredPosition = new Vector3(x, y);
+        //tradeItemRectTransform.anchoredPosition = new Vector3(x, y);
 
         tradeItemTransform.Find("ItemRecieved").Find("Image").GetComponent<Image>().sprite= trade.itemRecieve.item.itemSprite;
         tradeItemTransform.Find("ItemRecieved").Find("Quantity").GetComponent<Text>().text = trade.itemRecieve.quantity.ToString();
@@ -72,7 +81,7 @@ public class TradingUI : MonoBehaviour
 
             Transform newSlot = Instantiate(slot, tradeItemTransform);
             RectTransform newSlotRectTransform = newSlot.GetComponent<RectTransform>();
-            newSlotRectTransform.localPosition = new Vector3(itemGivenXOffset + i * itemGivenMultiplierRow, itemGivenYOffset);
+            newSlotRectTransform.anchoredPosition = new Vector3(itemGivenXOffset + i * itemGivenMultiplierRow, itemGivenYOffset);
             
             newSlot.Find("Image").GetComponent<Image>().sprite= item.itemSprite;
             newSlot.Find("Quantity").GetComponent<Text>().text = quantity.ToString();

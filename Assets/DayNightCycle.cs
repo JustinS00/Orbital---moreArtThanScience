@@ -68,6 +68,6 @@ public class DayNightCycle : MonoBehaviour {
     }
 
     private void DisplayTime() {
-        Debug.Log(string.Format("Day {0}, Hours {1}, Mins {2}, Seconds {3}", days, hours, mins, seconds));
+        //Debug.Log(string.Format("Day {0}, Hours {1}, Mins {2}, Seconds {3}", days, hours, mins, seconds));
     }
 }
