@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Respawn() {
         Achievement.instance.UnlockAchievement(Achievement.AchievementType.emotionaldamage);
-        AudioManager.instance.PlaySound("emotional_damage");
+        
         //not clearing inventory for now
         GetComponent<Transform>().position = spawnPos;
         healthBar.SetMaxHealth(maxHealth);

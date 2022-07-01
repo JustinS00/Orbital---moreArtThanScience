@@ -76,6 +76,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: technoblade
+    clip: {fileID: 8300000, guid: 4f2e49ca9e70a304b8a815a2552f0719, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   musicVolume: 1
   onMusic: 1
   soundVolume: 1

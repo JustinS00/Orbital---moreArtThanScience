@@ -3349,10 +3349,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4015195595177090248, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
-      propertyPath: m_Padding.y
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 5870824141983900702, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
