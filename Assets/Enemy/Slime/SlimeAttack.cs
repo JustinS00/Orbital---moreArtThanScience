@@ -15,7 +15,7 @@ public class SlimeAttack : Enemy {
     private bool isFalling = false;
 
     // related to attack cooldown
-    private float idleTime = 2f;
+    private float idleTime = 3f;
     private float nextAttackTime;
     private bool isIdle = true;
 

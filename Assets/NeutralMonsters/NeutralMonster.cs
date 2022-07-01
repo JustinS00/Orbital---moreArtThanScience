@@ -81,7 +81,7 @@ public class NeutralMonster : MonoBehaviour {
             if (rand <= 2) {
                 rb.velocity = Vector2.zero;
                 int timeToIdle = Random.Range(minIdleTime, maxIdleTime);
-                //yield return new WaitForSeconds(timeToIdle);
+                yield return new WaitForSeconds(timeToIdle);
             } else {
                 // direction == 1 right, else left
                 int direction = rand % 2 == 0 ? 1 : -1;
@@ -114,4 +114,9 @@ public class NeutralMonster : MonoBehaviour {
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Neutral Monster") {
+            Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+    }
 }
