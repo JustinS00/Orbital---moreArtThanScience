@@ -13,7 +13,7 @@ public class Achievement : MonoBehaviour
     public static Achievement instance;
     private GameObject[] achievements;
     private bool[] achievementsUnlocked = new bool[9];
-    public enum AchievementType {willsmith, diamondhands, luna, besttrade, siu, deckedout, emotionaldamage};
+    public enum AchievementType {willsmith, diamondhands, luna, besttrade, siu, deckedout, emotionaldamage, technoblade};
     private float popUpTimer = 5f;
     private float showTimer = 0f;
 
@@ -59,10 +59,13 @@ public class Achievement : MonoBehaviour
             case AchievementType.emotionaldamage:
                 UpdateAchievement(6);
                 break;   
-
+            case AchievementType.technoblade:
+                UpdateAchievement(7);
+                break;   
             default:
                 break;         
         }       
+        PlaySound(achievement);
     }
 
     private void Update() {
@@ -94,6 +97,20 @@ public class Achievement : MonoBehaviour
         
         achievementPopUp.SetActive(true);
         showTimer = popUpTimer;
+    
+    }
+
+    private void PlaySound(AchievementType achievement) {
+        switch (achievement) {         
+            case AchievementType.emotionaldamage:
+                AudioManager.instance.PlaySound("emotional_damage");
+                break;   
+            case AchievementType.technoblade:
+                AudioManager.instance.PlaySound("technoblade");
+                break;   
+            default:
+                break;         
+        }     
     }
 
 
