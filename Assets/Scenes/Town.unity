@@ -1579,16 +1579,18 @@ MonoBehaviour:
   worldSize: 500
   worldHeight: 128
   dirtLayerHeight: 5
-  surfaceValue: 0.25
-  caveFreq: 0.03
-  terrainFreq: 0.1
+  surfaceValue: 0
+  caveFreq: 0
+  terrainFreq: 0
   noiseTexture: {fileID: 0}
   blocksCollection: {fileID: 11400000, guid: 72de6673147141b4c957e2979a08c9b5, type: 2}
-  treeChance: 0.05
+  treeChance: 0
   minTreeHeight: 4
   maxTreeHeight: 8
-  mushroomChance: 0.02
-  grassChance: 0.03
+  mushroomChance: 0
+  grassChance: 0
+  apple: {fileID: 0}
+  appleChance: 0
   coalOreHeight: 128
   ironOreHeight: 64
   goldOreHeight: 32
@@ -2830,6 +2832,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3836292593217902119, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5870824141983900702, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2891,12 +2897,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8146707553849600930, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8146707553849600930, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8146707553849600930, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -113
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8146707553849600930, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -389
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
@@ -3681,7 +3695,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1165459872
 GameObject:
@@ -13526,6 +13540,87 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25df2513e12389f48a3e6a2fe575348a, type: 3}
+--- !u!1001 &2829894398136241981
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.7407103
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627597, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829894397768627600, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+      propertyPath: m_Name
+      value: Slime
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+--- !u!1 &2829894398136241982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2829894397768627600, guid: 21571d5d9af36c04daddc532baeb37fb, type: 3}
+  m_PrefabInstance: {fileID: 2829894398136241981}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2829894398136241983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2829894398136241982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fafaf7ed6ae08f4da6b0bfdf9a49975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  speed: 1.5
+  data: {fileID: 0}
+  maxDistanceFromPlayer: 50
+  isRanged: 0
+  deathEffect: {fileID: 0}
+  lootTable: {fileID: 0}
 --- !u!1001 &4066678306805098597
 PrefabInstance:
   m_ObjectHideFlags: 0
