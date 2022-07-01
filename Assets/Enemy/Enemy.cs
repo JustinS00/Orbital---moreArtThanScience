@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour {
 
     protected GameObject player;
     private GameObject target;
+    protected Rigidbody2D rb;
+    protected Animator anim;
+
     [SerializeField]
     private int maxDistanceFromPlayer = 50;
 
@@ -29,9 +32,11 @@ public class Enemy : MonoBehaviour {
     private LootTable lootTable;
 
     // Start is called before the first frame update
-    void Start() {
+    protected void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         SetEnemyValues();
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
