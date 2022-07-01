@@ -221,7 +221,7 @@ public class Terrain : MonoBehaviour {
 
     private void SpawnPortal() {
         Portal newPortal = Instantiate(portal);
-        newPortal.transform.parent = this.transform;
+        newPortal.transform.SetParent(this.transform, false);
         newPortal.SetMessage("Press 'T' to travel to Town Area");
         newPortal.SetLocation(new Vector2(50, 211));
         newPortal.transform.localPosition = new Vector2(spawnX, spawnY + 3);

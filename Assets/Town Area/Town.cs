@@ -40,7 +40,7 @@ public class Town : MonoBehaviour
 
     private void SpawnPortal() {
         Portal newPortal = Instantiate(portal);
-        newPortal.transform.parent = this.transform;
+        newPortal.transform.SetParent(this.transform, false);
         newPortal.SetMessage("Press 'T' to travel to Wildeness");
         newPortal.SetLocation(new Vector2(250, 100));
         newPortal.transform.localPosition = new Vector2(60, 13);
