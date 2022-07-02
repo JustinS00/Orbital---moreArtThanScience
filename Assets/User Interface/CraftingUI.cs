@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class TradingUI : MonoBehaviour
+public class CraftingUI : MonoBehaviour
 {   
 
     private Transform canvas;
@@ -23,6 +23,7 @@ public class TradingUI : MonoBehaviour
 
     public Trade[] trades;
     private PlayerController player;
+    public bool isShowing;
 
     private void Awake() {
         canvas = transform.Find("Canvas");
@@ -33,15 +34,12 @@ public class TradingUI : MonoBehaviour
         tradeTemplate = tradesContent.Find("tradeTemplate");
         tradeTemplate.gameObject.SetActive(false);
         slot = tradeTemplate.Find("ItemGiven");
-        
-    }
-
-    private void Start() {
         for (int i = 0; i < trades.Length; i++) {
-        CreateItemButton(trades[i]);
+            CreateItemButton(trades[i]);
         }
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);       
     }
+    
     // Start is called before the first frame update
 
     private void CreateItemButton(Trade trade) {
