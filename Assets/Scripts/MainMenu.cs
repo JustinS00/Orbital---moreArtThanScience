@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour {
         loadingScreen.SetActive(true);
         while(!operation.isDone) {
             float progress = Mathf.Clamp01(operation.progress);
-            Debug.Log(progress);
+            //Debug.Log(progress);
             slider.value = progress;
 
             

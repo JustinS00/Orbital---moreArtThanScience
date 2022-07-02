@@ -17,4 +17,6 @@ MonoBehaviour:
     dropChance: 20
   - mobDrop: {fileID: 11400000, guid: a543fc794b2b85346b7d33a9fb3fbfef, type: 2}
     dropChance: 20
+  - mobDrop: {fileID: 11400000, guid: 3534e0432105aff4f8af3b00c539f0ef, type: 2}
+    dropChance: 100
   itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}

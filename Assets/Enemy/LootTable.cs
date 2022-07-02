@@ -22,8 +22,9 @@ public class LootTable : ScriptableObject {
         int lootProbabilitySum = 100;
         
         while (numberOfItemsToDrop > 0) {
-            int randNum = Random.Range(0, lootProbabilitySum);
+           
             foreach (Loot item in loots) {
+                int randNum = Random.Range(0, lootProbabilitySum);
                 if (randNum < item.dropChance) {
                     if (item != null) {
                         GameObject newItemDrop = Instantiate(itemDrop, position, Quaternion.identity);

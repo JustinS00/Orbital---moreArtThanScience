@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public bool showInv;
     public Inventory inventory;
+    public CraftingUI crafting;
     public ItemClass selectedItem;
     public GameObject selectedItemDisplay;
 
@@ -175,13 +176,14 @@ public class PlayerController : MonoBehaviour {
 
         // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {
-            ToggleInventory();
+            ToggleUI();
+
             TogglePause();
         }
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (showInv) {
-                ToggleInventory();
+                ToggleUI();
                 TogglePause();
             }
         }
@@ -367,10 +369,26 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void ToggleInventory() {
+
+    public void ToggleUI() {
         showInv = !showInv;
+        ToggleInventory();
+        ToggleSideUI();
+    }
+
+    public void ToggleInventory() {
         inventory.isShowing = !inventory.isShowing;
         inventory.InventoryUI.SetActive(showInv);
+    }
+
+    public void ToggleSideUI() {
+        crafting.isShowing = !crafting.isShowing;
+        if (showInv) {
+            crafting.Show(this);
+        } else {
+            crafting.Hide(this);
+        }
+        
     }
 
     public void armourDamage(int value) {
