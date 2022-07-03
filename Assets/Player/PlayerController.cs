@@ -288,7 +288,7 @@ public class PlayerController : MonoBehaviour {
             Respawn();
         } 
 
-        int curHealth = GetComponent<Health>().getHealth();
+        int curHealth = GetComponent<Health>().GetHealth();
         healthBar.SetHealth(curHealth);
         if (curHealth <= 0) {
             Respawn();
