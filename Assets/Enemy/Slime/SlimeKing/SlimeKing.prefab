@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4392574776621726782}
   - component: {fileID: 4392574776621726788}
   - component: {fileID: 7880418384214432448}
-  m_Layer: 11
+  m_Layer: 10
   m_Name: SlimeKing
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7880418384730370365}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
