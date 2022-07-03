@@ -5776,13 +5776,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1557103352}
   - component: {fileID: 1557103351}
+  - component: {fileID: 1557103353}
   m_Layer: 0
-  m_Name: EnemySpawner
+  m_Name: EntitySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1557103351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5795,9 +5796,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52634ec88b20310488d6c69e5002f621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCollection: {fileID: 11400000, guid: a299ac489af068a4bad39f2196a3d11e, type: 2}
+  entityCollection: {fileID: 11400000, guid: ddf987a9ce6ec2548a00428e62340b7f, type: 2}
   spawnInterval: 15
-  maxNumEnemies: 3
+  maxNumEntities: 5
 --- !u!4 &1557103352
 Transform:
   m_ObjectHideFlags: 0
@@ -5813,6 +5814,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1557103353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557103350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52634ec88b20310488d6c69e5002f621, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityCollection: {fileID: 11400000, guid: 14dee86ed07c6bc41ac92f11f092bd11, type: 2}
+  spawnInterval: 25
+  maxNumEntities: 4
 --- !u!1 &1589526830 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3944453673371563272, guid: 1aa29e86c0fb51943b947ad78b6e85bd, type: 3}
@@ -15012,6 +15028,10 @@ PrefabInstance:
     - target: {fileID: 1995167797868300716, guid: 2721ff9113aaf8048b385710cae76860, type: 3}
       propertyPath: m_Name
       value: SlimeKing
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995167797868300716, guid: 2721ff9113aaf8048b385710cae76860, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1995167797868300721, guid: 2721ff9113aaf8048b385710cae76860, type: 3}
       propertyPath: m_RootOrder
