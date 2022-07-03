@@ -38,7 +38,7 @@ public class PlayerCombat : MonoBehaviour {
 
         // Damage them
         foreach (Collider2D enemy in hitEnemies) {
-            if (enemy.GetComponent<Health>().canDamage(Mathf.RoundToInt(weapon.damage))) {
+            if (enemy.GetComponent<Health>().CanDamage(Mathf.RoundToInt(weapon.damage))) {
                 enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(weapon.damage));
                 weapon.reduceDurability(1);
             }

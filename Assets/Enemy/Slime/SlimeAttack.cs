@@ -6,12 +6,12 @@ public class SlimeAttack : Enemy {
 
 
     [SerializeField]
-    private float yAxisSpeedMultiplier = 2f;
+    private float maxYAxisSpeedMultiplier = 2.5f;
 
     private float lastYPos;
 
     private bool isGrounded = false;
-    private bool isJumping = false;
+    private bool isSleeping = false;
     private bool isFalling = false;
 
     // related to attack cooldown
@@ -29,12 +29,15 @@ public class SlimeAttack : Enemy {
 
     // Update is called once per frame
     void Update() {
-        base.LookAtPlayer();
+        if (!isSleeping) {
+            base.LookAtPlayer();
+        }
+
     }
 
     void FixedUpdate() {
         if (isIdle) {
-            if (Time.time >= nextAttackTime) {
+            if (Time.time >= nextAttackTime && !isSleeping) {
                 AttackPlayer();
                 nextAttackTime = Time.time + idleTime;
             }
@@ -44,18 +47,15 @@ public class SlimeAttack : Enemy {
         // just hit ground
         if (isGrounded && isFalling) {
             isFalling = false;
-            isJumping = false;
             isIdle = true;
             ChangeAnimation(Animations.Idle);
         } else if (transform.position.y > lastYPos && !isGrounded && !isIdle) {
             // going up and not grounded
             isFalling = false;
-            isJumping = true;
             ChangeAnimation(Animations.Jumping);
         } else if (transform.position.y < lastYPos && !isGrounded && !isIdle) {
             // going down and not grounded
             isFalling = true;
-            isJumping = false;
             ChangeAnimation(Animations.Falling);
         }
 
@@ -63,10 +63,14 @@ public class SlimeAttack : Enemy {
     }
 
     public override void AttackPlayer() {
-        isJumping = true;
         isIdle = false;
         int direction = base.isFlipped ? 1 : -1;
-        rb.velocity = new Vector2(speed * direction, speed * yAxisSpeedMultiplier);
+        float randYMultiplier = Random.Range(1f, maxYAxisSpeedMultiplier);
+        rb.velocity = new Vector2(speed * direction, speed * randYMultiplier);
+    }
+
+    public void ToggleSleep() {
+        this.isSleeping = !this.isSleeping;
     }
 
     private void ChangeAnimation(Animations newAnimation) {
