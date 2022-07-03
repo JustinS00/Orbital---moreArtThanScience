@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour {
@@ -8,6 +9,7 @@ public class PlayerCombat : MonoBehaviour {
 
     public Transform attackPoint;
     public LayerMask enemyLayers;
+    public LayerMask bossLayers;
 
     public float attackRange = 0.5f;
     public int attackDamage = 1;
@@ -23,6 +25,7 @@ public class PlayerCombat : MonoBehaviour {
 
     void Start() {
         enemyLayers = LayerMask.GetMask("Enemy");
+        bossLayers = LayerMask.GetMask("Boss");
     }
 
     // Update is called once per frame
@@ -35,9 +38,11 @@ public class PlayerCombat : MonoBehaviour {
         anim.SetTrigger("attack");
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitBosses = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, bossLayers);
 
+        var allHitCollider2Ds = hitEnemies.Concat(hitBosses);
         // Damage them
-        foreach (Collider2D enemy in hitEnemies) {
+        foreach (Collider2D enemy in allHitCollider2Ds) {
             if (enemy.GetComponent<Health>().CanDamage(Mathf.RoundToInt(weapon.damage))) {
                 enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(weapon.damage));
                 weapon.reduceDurability(1);
@@ -50,9 +55,11 @@ public class PlayerCombat : MonoBehaviour {
         anim.SetTrigger("attack");
         // Detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+        Collider2D[] hitBosses = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, bossLayers);
 
+        var allHitCollider2Ds = hitEnemies.Concat(hitBosses);
         // Damage them
-        foreach (Collider2D enemy in hitEnemies) {
+        foreach (Collider2D enemy in allHitCollider2Ds) {
             enemy.GetComponent<Health>().Damage(attackDamage);
             Achievement.instance.UnlockAchievement(Achievement.AchievementType.willsmith);
         }

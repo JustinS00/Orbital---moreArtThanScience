@@ -5,18 +5,19 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour {
 
     [SerializeField]
-    private EnemyCollection enemyCollection;
-    private GameObject[] enemyPrefabs;
+    private EntityCollection entityCollection;
+    private GameObject[] entityPrefabs;
 
     [SerializeField]
     private float spawnInterval = 15.0f;
 
     [SerializeField]
-    private int maxNumEnemies = 5;
+    private int maxNumEntities = 5;
 
-    private int numberOfPossibleEnemies;
+    private int numberOfPossibleEntities; 
     private Vector3 spawnLocation;
     private float randX;
+    private string tag;
 
     private GameObject player;
 
@@ -24,20 +25,21 @@ public class EnemySpawner : MonoBehaviour {
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        enemyPrefabs = enemyCollection.enemyPrefabs;
+        entityPrefabs = entityCollection.prefabs;
 
-        numberOfPossibleEnemies = enemyPrefabs.Length;
+        numberOfPossibleEntities = entityPrefabs.Length;
+        tag = entityPrefabs[0].tag;
 
-        StartCoroutine(spawnEnemy(spawnInterval, enemyPrefabs[Random.Range(0, numberOfPossibleEnemies)]));
+        StartCoroutine(spawnEntity(spawnInterval, entityPrefabs[Random.Range(0, numberOfPossibleEntities)]));
     }
 
-    private IEnumerator spawnEnemy(float interval, GameObject enemy) {
+    private IEnumerator spawnEntity(float interval, GameObject entity) {
        
 
         yield return new WaitForSeconds(interval);
 
-        randX = Random.Range(-15.5f, 15.5f);
-        // to make the range [-20.5, -10.5], [10.5, 20.5] so don't spawn right beside player
+        randX = Random.Range(-25.5f, 25.5f);
+        // make spawn out of camera
         if (randX > 0) {
             randX += 5.0f;
         } else {
@@ -47,11 +49,11 @@ public class EnemySpawner : MonoBehaviour {
         spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
          //TODO: if player is in town or if time is day / do not spawn
         if (Physics2D.OverlapCircle(spawnLocation, 1.0f) == null && player.transform.position.y <= 128) {
-            GameObject newEnemy = Instantiate(enemy, spawnLocation, Quaternion.identity);
+            GameObject newEntity = Instantiate(entity, spawnLocation, Quaternion.identity);
         }
 
-        //limits number of enemies spawned to maxNumEnemies
-        yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag("Enemy").Length < maxNumEnemies);
-        StartCoroutine(spawnEnemy(spawnInterval, enemyPrefabs[Random.Range(0, numberOfPossibleEnemies)]));
+        //limits number of enemies spawned to maxNumEntities
+        yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag(tag).Length < maxNumEntities);
+        StartCoroutine(spawnEntity(spawnInterval, entityPrefabs[Random.Range(0, numberOfPossibleEntities)]));
     }
 }
