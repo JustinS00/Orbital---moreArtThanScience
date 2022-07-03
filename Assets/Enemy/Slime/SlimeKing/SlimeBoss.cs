@@ -19,7 +19,7 @@ public class SlimeBoss : MonoBehaviour {
     [SerializeField]
     private float spinChance = 1f;
     private int maxNumberOfProjectiles = 3;
-    [SerializeField] 
+    [SerializeField]
     private Transform spawnPoint;
 
     private float maxLaunchForce = 5f;
