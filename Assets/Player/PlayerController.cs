@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         //Hotbar
-        onGround = -0.1f <= rb.velocity.y && rb.velocity.y <= 0.1f;
+        onGround = -0.01f <= rb.velocity.y && rb.velocity.y <= 0.01f;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0) {
             selectionIndex = (selectionIndex + 1) % inventory.inventoryWidth;
