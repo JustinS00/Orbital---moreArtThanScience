@@ -19,6 +19,7 @@ public class SettingsMenu : MonoBehaviour
             Debug.Log("new settings");
             instance = this;
             instance.difficulty = GameDifficulty.medium;
+            DontDestroyOnLoad(gameObject);
         }
     }
      
