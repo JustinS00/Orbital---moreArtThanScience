@@ -120,6 +120,13 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+
+        if (gameManager.isGamePaused()) {
+            if (showInv) {
+                ToggleUI();
+            }
+            return;
+        }
         //Hotbar
         onGround = -0.01f <= rb.velocity.y && rb.velocity.y <= 0.01f;
 
@@ -177,16 +184,9 @@ public class PlayerController : MonoBehaviour {
         // Toggle Inventory
         if (Input.GetKeyDown(KeyCode.E)) {
             ToggleUI();
-
-            TogglePause();
         }
+ 
 
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (showInv) {
-                ToggleUI();
-                TogglePause();
-            }
-        }
 
         helmet = inventory.GetHelmet();
         chestplate = inventory.GetChestplate();
@@ -402,11 +402,4 @@ public class PlayerController : MonoBehaviour {
         health.Heal(consumable.healthAdded);
     }
 
-    private bool gameIsPausedFromPlayer;
-    private void TogglePause() {
-        gameIsPausedFromPlayer = !gameIsPausedFromPlayer;
-        if (gameIsPausedFromPlayer != gameManager.isGamePaused())
-            gameManager.TogglePause();
-
-    }
 }
