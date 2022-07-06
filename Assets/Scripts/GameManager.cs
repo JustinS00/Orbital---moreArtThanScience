@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        Debug.Log(SettingsMenu.instance.difficulty);
+        //Debug.Log(OptionsMenu.instance.difficulty);
     }
 
     public void TogglePause() {
@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour {
         } else {
             Time.timeScale = 1;
         }
-
     }
 
     public bool isGamePaused() {

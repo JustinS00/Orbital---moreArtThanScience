@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     private GameObject pauseMenuUI;
     private GameManager gameManager;
     private bool gameIsPausedFromOthers;
+    private OptionsMenu optionsMenu;
 
     // Update is called once per frame
 
@@ -59,6 +60,11 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame() {
         Debug.Log("Quiting Game");
         Application.Quit();
+    }
+
+    public void OpenOptionsMenu() {
+        optionsMenu = Resources.FindObjectsOfTypeAll<OptionsMenu>()[0]; 
+        optionsMenu.gameObject.SetActive(true);
     }
 
 }

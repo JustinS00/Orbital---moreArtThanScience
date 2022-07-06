@@ -8,9 +8,11 @@ public class Merchant : NPC
     private TradingUI tradeUI;
     private PlayerController player;
     private string message = "Press 'E' to trade";
+    private GameManager gameManager;
 
     private void Awake() {
         tradeUI = GameObject.Find("Trading UI").GetComponent<TradingUI>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     public override void startAction(PlayerController player) {
         PopUp.ShowPopUp_Static(message);
@@ -23,6 +25,9 @@ public class Merchant : NPC
     }
 
     public void Update() {
+        if (gameManager.isGamePaused()) {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.E)) {
             ToggleTradeUI();
         }

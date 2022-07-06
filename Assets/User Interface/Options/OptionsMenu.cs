@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SettingsMenu : MonoBehaviour
+public class OptionsMenu : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static SettingsMenu instance;
+    public static OptionsMenu instance;
     public GameDifficulty difficulty;
     public enum GameDifficulty {easy, medium, hard};
     public static float EasyMultiplier = 0.75f;
@@ -19,6 +19,7 @@ public class SettingsMenu : MonoBehaviour
             Debug.Log("new settings");
             instance = this;
             instance.difficulty = GameDifficulty.medium;
+            gameObject.SetActive(false);
             DontDestroyOnLoad(gameObject);
         }
     }
