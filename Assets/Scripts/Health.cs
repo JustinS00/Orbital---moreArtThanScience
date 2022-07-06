@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour {
 
     [SerializeField]
-    private int health = 100;
+    private int health = 40;
 
     [SerializeField]
     private float invincibilityDurationSeconds = 1.0f;
@@ -13,9 +13,11 @@ public class Health : MonoBehaviour {
 
     private Animator anim;
 
-    private int MAX_HEALTH = 100;
+    private int MAX_HEALTH = 40;
 
     public int protectionValue;
+
+    private float HEAL_COOLDOWN = 1.0f;
 
     void Start() {
         anim = GetComponent<Animator>();
@@ -31,12 +33,16 @@ public class Health : MonoBehaviour {
         this.health = health;
     }
 
+    public void SetFullHealth() {
+        this.health = this.MAX_HEALTH;
+    }
+
     public int GetHealth() {
         return this.health;
     }
 
-    public void SetFullHealth() {
-        this.health = this.MAX_HEALTH;
+    public int GetMaxHealth() {
+        return this.MAX_HEALTH;
     }
 
     public float GetHealthPercentage() {
@@ -55,16 +61,18 @@ public class Health : MonoBehaviour {
         if (damage < 0) {
             throw new System.ArgumentOutOfRangeException("No negative damage");
         }
-
-        int newDamage = Mathf.RoundToInt(damage * (100 - 2 * protectionValue) / 100.0f);
-        this.health -= newDamage;
-
+        
+     
+        float newDamage = Mathf.RoundToInt(damage * (100 - 2 * protectionValue) / 100.0f);
+        
         // Armour durability related
         if (gameObject.tag == "Player") {
             int durabilityLost = Mathf.Max(1, damage / 10);
             GetComponent<PlayerController>().armourDamage(durabilityLost);
+            newDamage *= OptionsMenu.instance.GetMultiplier();
         }
 
+        this.health -= Mathf.RoundToInt(newDamage); 
         Debug.Log(this.name + "got hit");
         // hit animation
         anim.SetTrigger("damaged");
@@ -75,15 +83,20 @@ public class Health : MonoBehaviour {
         }
     }
 
-    public void Heal(int heal) {
-        if (heal < 0) {
+    public void Heal(int health) {
+        if (health < 0) {
             throw new System.ArgumentOutOfRangeException("No negative damage");
         }
 
-        if (health + heal > MAX_HEALTH) {
-            this.health = MAX_HEALTH;
-        } else {
-            this.health += heal;
+        StartCoroutine(AddHealth(health));
+    }
+
+
+    public IEnumerator AddHealth(int health) {
+        for (int i = 0; i < health; i++)
+        {
+            this.health = Mathf.Min(MAX_HEALTH, this.health + 1);
+            yield return new WaitForSeconds(HEAL_COOLDOWN);
         }
     }
 

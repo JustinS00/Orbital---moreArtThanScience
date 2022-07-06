@@ -37,7 +37,10 @@ public class Inventory : MonoBehaviour {
     [HideInInspector] public GameObject[,] uiSlots;
     [HideInInspector] public GameObject[] armourSlotsUI;
 
-    private int THRESHOLD = 20; //slot size
+
+    private int REFERENCE_RESOLUTION = 800;
+    private int REFERENCE_THRESHOLD = 20; //slot size
+    private int threshold = 20;
     private InventorySlot movingSlot;
     private bool isMovingItem;
 
@@ -190,6 +193,7 @@ public class Inventory : MonoBehaviour {
 
 
     private void Update() {
+        threshold = (Screen.width / REFERENCE_RESOLUTION) * REFERENCE_THRESHOLD;
         if (isShowing) {
             itemCursor.SetActive(isMovingItem);
             itemCursor.transform.position = Input.mousePosition;
@@ -303,7 +307,7 @@ public class Inventory : MonoBehaviour {
         for (int i = 0; i < inventoryWidth; i++) {
             for (int j = 0; j < inventoryHeight; j++) {
                 float currDistance = Vector2.Distance(uiSlots[i, j].transform.position, Input.mousePosition);
-                if (Input.mousePosition != null && uiSlots[i, j].transform.position != null && currDistance <= THRESHOLD && currDistance <= distance) {
+                if (Input.mousePosition != null && uiSlots[i, j].transform.position != null && currDistance <= threshold && currDistance <= distance) {
                     slot = new Vector2Int(i, j);
                     distance = currDistance;
                 }
@@ -311,7 +315,7 @@ public class Inventory : MonoBehaviour {
         }
         for (int i = 0; i < NO_PIECES_OF_ARMOUR; i++) {
             float currDistance = Vector2.Distance(armourSlotsUI[i].transform.position, Input.mousePosition);
-            if (Input.mousePosition != null && armourSlotsUI[i].transform.position != null && currDistance <= THRESHOLD) {
+            if (Input.mousePosition != null && armourSlotsUI[i].transform.position != null && currDistance <= threshold) {
                 slot = new Vector2Int(i, -1);
                 distance = currDistance;
             }

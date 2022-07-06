@@ -7,8 +7,7 @@ public class Nurse : NPC
     private string message = "Go closer to the Nurse to heal";
 
     public override void startAction(PlayerController player) {
-        player.healthBar.SetMaxHealth(player.maxHealth);
-        player.health.SetFullHealth();
+        player.health.Heal(player.health.GetMaxHealth() - player.health.GetHealth());
         PopUp.ShowPopUp_Static(message);
     }
     public override void stopAction(PlayerController player) {

@@ -120,7 +120,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
-
         if (gameManager.isGamePaused()) {
             if (showInv) {
                 ToggleUI();
@@ -187,7 +186,6 @@ public class PlayerController : MonoBehaviour {
         }
  
 
-
         helmet = inventory.GetHelmet();
         chestplate = inventory.GetChestplate();
         leggings = inventory.GetLeggings();
@@ -221,7 +219,8 @@ public class PlayerController : MonoBehaviour {
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
 
         //destroy or place blocks
-        if (!showInv) { //unity does not support covariant, will have to do a lot of type casting
+        //unity does not support covariant, will have to do a lot of type casting
+        if (!showInv) {
             if (hit) {
                 //terrain.destroyBlock(mousePos.x, mousePos.y);
                 if (selectedItem) {
@@ -386,7 +385,6 @@ public class PlayerController : MonoBehaviour {
         } else {
             crafting.Hide(this);
         }
-        
     }
 
     public void armourDamage(int value) {

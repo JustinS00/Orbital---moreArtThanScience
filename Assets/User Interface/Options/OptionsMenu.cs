@@ -8,8 +8,8 @@ public class OptionsMenu : MonoBehaviour
     public static OptionsMenu instance;
     public GameDifficulty difficulty;
     public enum GameDifficulty {easy, medium, hard};
-    public static float EasyMultiplier = 0.75f;
-    public static float MediumMultiplier = 1f;
+    public static float EasyMultiplier = 0.50f;
+    public static float MediumMultiplier = 1.0f;
     public static float HardMultiplier = 1.5f;
 
     void Awake() {

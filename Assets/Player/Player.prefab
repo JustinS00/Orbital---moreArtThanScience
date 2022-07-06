@@ -1000,6 +1000,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showInv: 0
   inventory: {fileID: 4873271426336679123}
+  crafting: {fileID: 0}
   selectedItem: {fileID: 11400000, guid: 2295e3656d53f7946a0a5c5d2ddd0103, type: 2}
   selectedItemDisplay: {fileID: 47858753}
   helmetDisplay: {fileID: 3587950714008308531}
@@ -1020,8 +1021,8 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   onGround: 0
-  maxHealth: 100
-  currentHealth: 0
+  maxHealth: 40
+  currentHealth: 40
   healthBar: {fileID: 0}
   health: {fileID: 0}
   spawnPos: {x: 0, y: 0}
@@ -1063,22 +1064,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   starter_equipment:
   - {fileID: 11400000, guid: 296b45a0ddf238b41a9f4a3f65552e0f, type: 2}
-  - {fileID: 11400000, guid: 00696dfacf4f6e64e80fc220762cfb31, type: 2}
-  - {fileID: 11400000, guid: 61de4d9479bfffc4e9564616d006a358, type: 2}
-  - {fileID: 11400000, guid: edb180ab9e3b5ba4386615a2644c99f8, type: 2}
-  - {fileID: 11400000, guid: e64fcb80b245c28418d3ffac57023aeb, type: 2}
-  - {fileID: 11400000, guid: 2295e3656d53f7946a0a5c5d2ddd0103, type: 2}
-  - {fileID: 11400000, guid: 49a74290c00e9454ba8565612e84dfea, type: 2}
+  - {fileID: 11400000, guid: 975b9a83c3b69a54b8d703a891924e15, type: 2}
   - {fileID: 11400000, guid: 33d5fb87d3203e34e8f734ab350b03d5, type: 2}
   - {fileID: 11400000, guid: 9b793bb9be6d1c948bef4faa7b8ab38f, type: 2}
   - {fileID: 11400000, guid: b7aa679ae2d6b5540a7be093b1810e96, type: 2}
   - {fileID: 11400000, guid: 7cdbd073c6f757a45a2235d54391a0e4, type: 2}
-  - {fileID: 11400000, guid: 95e4e53fb9719724db5c717d40fb3261, type: 2}
-  - {fileID: 11400000, guid: e4881485f67147e479e7f0e6287678f9, type: 2}
-  - {fileID: 11400000, guid: 28f86c8fed74e6a40935ef8d5190cdef, type: 2}
-  - {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+  - {fileID: 11400000, guid: ddb53d23023cebf42bb5d63fef678c5e, type: 2}
+  - {fileID: 11400000, guid: f5e989ac00240c44a88ced73df263af1, type: 2}
+  - {fileID: 11400000, guid: 0df4ad5f6c7ce074abd418a496b11491, type: 2}
+  - {fileID: 11400000, guid: 0ed9708b479d3ea4fab415009b825056, type: 2}
+  - {fileID: 11400000, guid: 49a74290c00e9454ba8565612e84dfea, type: 2}
+  starting_blocks:
+  - {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+  - {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+  - {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
+  - {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
+  - {fileID: 11400000, guid: 1862ea7880732074db360993eb0b3825, type: 2}
+  - {fileID: 11400000, guid: abf3c35a14e04a84e90dce7bb2961db7, type: 2}
   apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
-  arrow: {fileID: 0}
+  arrow: {fileID: 11400000, guid: 021486dde9e477f4a8c936c041dd23c7, type: 2}
   isShowing: 1
   InventoryUI: {fileID: 0}
   HotbarUI: {fileID: 0}
@@ -1109,8 +1113,11 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
+  bossLayers:
+    serializedVersion: 2
+    m_Bits: 0
   attackRange: 0.2
-  attackDamage: 10
+  attackDamage: 1
   arrowCollection: {fileID: 11400000, guid: cd8d3840af7062f44986d6b596e653ed, type: 2}
 --- !u!114 &1639873188
 MonoBehaviour:
@@ -1124,7 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62786b0da2fc5a8409d58c97c3c99225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 40
   invincibilityDurationSeconds: 1
   isInvincible: 0
   protectionValue: 0
