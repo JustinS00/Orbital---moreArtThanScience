@@ -169,7 +169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032659869}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.931, y: 0.01, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1016,6 +1016,8 @@ MonoBehaviour:
   leggings: {fileID: 0}
   boots: {fileID: 0}
   armourProtectionValue: 0
+  speed: 1
+  currentDamage: 0
   selectionIndex: 0
   hotBarSelector: {fileID: 0}
   moveSpeed: 5
@@ -1084,6 +1086,7 @@ MonoBehaviour:
   apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
   arrow: {fileID: 11400000, guid: 021486dde9e477f4a8c936c041dd23c7, type: 2}
   isShowing: 1
+  itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}
   InventoryUI: {fileID: 0}
   HotbarUI: {fileID: 0}
   inventorySlotPrefab: {fileID: 8566277836835497527, guid: 77598743b1251754891b011467a709ff, type: 3}
@@ -1091,6 +1094,10 @@ MonoBehaviour:
   chestplateSlotPrefab: {fileID: 1161552749414641862, guid: 4e557d9fd9c2f4c4a9855cac0b974ae5, type: 3}
   leggingsSlotPrefab: {fileID: 8566277836835497527, guid: efca46a7ddbd5e7409453069d757b16b, type: 3}
   bootsSlotPrefab: {fileID: 8566277836835497527, guid: 051b1407db7753b4cb501ceb16055c0b, type: 3}
+  health: {fileID: 0}
+  strength: {fileID: 0}
+  armour: {fileID: 0}
+  speed: {fileID: 0}
   inventoryWidth: 9
   inventoryHeight: 4
   hotbarUISlots: []
