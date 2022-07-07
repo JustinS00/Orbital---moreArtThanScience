@@ -10,6 +10,7 @@ public class Inventory : MonoBehaviour {
     public ConsumableClass apple;
     public ArrowClass arrow;
     public bool isShowing;
+    public GameObject itemDrop;
 
     private Vector2 offsetInv = new Vector2(-160, -110);
     private Vector2 offsetHotbar = new Vector2(-160, 0);
@@ -24,6 +25,10 @@ public class Inventory : MonoBehaviour {
     public GameObject chestplateSlotPrefab;
     public GameObject leggingsSlotPrefab;
     public GameObject bootsSlotPrefab;
+    public GameObject health;
+    public GameObject strength;
+    public GameObject armour;
+    public GameObject speed;
 
     [HideInInspector] public int inventoryWidth = 9;
     [HideInInspector] public int inventoryHeight = 4;
@@ -37,9 +42,9 @@ public class Inventory : MonoBehaviour {
     [HideInInspector] public GameObject[,] uiSlots;
     [HideInInspector] public GameObject[] armourSlotsUI;
 
-
+    private GameObject player;
     private int REFERENCE_RESOLUTION = 800;
-    private int REFERENCE_THRESHOLD = 20; //slot size
+    private int REFERENCE_THRESHOLD = 30; //slot size
     private int threshold = 20;
     private InventorySlot movingSlot;
     private bool isMovingItem;
@@ -55,6 +60,7 @@ public class Inventory : MonoBehaviour {
         uiSlots = new GameObject[inventoryWidth, inventoryHeight];
         hotbarUISlots = new GameObject[inventoryWidth];
         armourSlotsUI = new GameObject[NO_PIECES_OF_ARMOUR];
+        player = GameObject.Find("Player");
         SetupUI();
         UpdateInventoryUI();
         isShowing = false;
@@ -104,6 +110,19 @@ public class Inventory : MonoBehaviour {
             armourSlotsUI[i].transform.GetChild(2).gameObject.SetActive(false);
         }
     }
+
+    void UpdateStats() {
+        try {
+            health.transform.GetChild(1).GetComponent<Text>().text = player.GetComponent<PlayerController>().GetComponent<Health>().GetHealth().ToString();
+            strength.transform.GetChild(1).GetComponent<Text>().text = player.GetComponent<PlayerController>().currentDamage.ToString();
+            armour.transform.GetChild(1).GetComponent<Text>().text = player.GetComponent<PlayerController>().armourProtectionValue.ToString();
+            speed.transform.GetChild(1).GetComponent<Text>().text = player.GetComponent<PlayerController>().speed.ToString();
+        } catch {
+            Debug.Log("Player has not spawn");
+        }
+    }
+
+
 
     void UpdateInventoryUI() {
         //Update main inventory
@@ -216,6 +235,7 @@ public class Inventory : MonoBehaviour {
             }
         }
         UpdateInventoryUI();
+        UpdateStats();
     }
 
 
@@ -300,7 +320,6 @@ public class Inventory : MonoBehaviour {
     }
 
     private Vector2Int GetClosestSlot() {
-
         Vector2Int slot = new Vector2Int(-1, -1);
         float distance = float.MaxValue;
         //Debug.Log("Called GetClosestSlot()");
@@ -320,6 +339,7 @@ public class Inventory : MonoBehaviour {
                 distance = currDistance;
             }
         }
+        Debug.Log(slot);
         return slot;
     }
 
@@ -375,6 +395,7 @@ public class Inventory : MonoBehaviour {
         Vector2Int pos = GetClosestSlot();
         if (pos == new Vector2Int(-1, -1)) {
             // click outside inventory, either add back to inventory or (-> this) throw away (To be implemented)
+            DropItems();
             return false;
         }
         bool isArmourSlot = pos.y < 0;
@@ -486,6 +507,7 @@ public class Inventory : MonoBehaviour {
     private bool EndItemMoveSingle() {
         Vector2Int pos = GetClosestSlot();
         if (pos == new Vector2Int(-1, -1)) {
+            DropItems();
             return false;
         }
         InventorySlot originalSlot = inventory[pos.x, pos.y];
@@ -503,10 +525,20 @@ public class Inventory : MonoBehaviour {
         } else {
             isMovingItem = true;
         }
-
         UpdateInventoryUI();
         return true;
     }
+
+    private void DropItems() {
+        Vector3 location = player.transform.position + new Vector3(1,0,0);
+        GameObject newItemDrop = Instantiate(itemDrop, location, Quaternion.identity);
+        newItemDrop.GetComponent<SpriteRenderer>().sprite = movingSlot.item.itemSprite;
+        newItemDrop.GetComponent<ItemDropCollider>().item = movingSlot.item;
+        newItemDrop.GetComponent<ItemDropCollider>().quantity = movingSlot.quantity;
+        movingSlot = null;
+        isMovingItem = false;
+    }
+
     #endregion
 
     #region Getters

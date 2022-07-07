@@ -11,7 +11,7 @@ public class PlayerCombat : MonoBehaviour {
     public LayerMask enemyLayers;
     public LayerMask bossLayers;
 
-    public float attackRange = 0.5f;
+    public float attackRange = 1f;
     public int attackDamage = 1;
 
     #region Bow/Arrow Related

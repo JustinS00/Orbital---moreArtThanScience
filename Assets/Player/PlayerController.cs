@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour {
     public BootsClass boots;
 
     public int armourProtectionValue;
+    public float speed = 1.0f;
+    public float currentDamage;
 
     public int selectionIndex = 0;
     public GameObject hotBarSelector;
@@ -45,8 +47,6 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Health")]
     public int maxHealth = 40;
-    public int currentHealth;
-
     public HealthBar healthBar;
     public Health health;
 
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour {
     public Vector2Int mousePos;
     private Vector2Int currentTarget;
     private float DEFAULT_MINING_SPEED = 2;
-
+    private int playerRange = 5;
     //public Terrain terrain;
     public GameManager gameManager;
     public PlayerCombat playerCombat;
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        Vector2 movement = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+        Vector2 movement = new Vector2(horizontal * moveSpeed * speed, rb.velocity.y);
         rb.velocity = movement;
         /*
         to make into knockback script
@@ -162,22 +162,29 @@ public class PlayerController : MonoBehaviour {
                 selectedItem = selected.item;
                 if (selectedItem.itemName == "diamond_ore")
                     Achievement.instance.UnlockAchievement(Achievement.AchievementType.diamondhands);
-            } else {
+            }
+            else {
                 selectedItem = null;
             }
         }
 
         if (selectedItem != null) {
+            currentDamage = 0;
             selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = selectedItem.itemSprite;
             selectedItemDisplay.transform.localScale = Vector3.one * 0.5f;
             if (selectedItem.itemType == ItemClass.ItemType.equipment) {
                 EquipmentClass equipment = (EquipmentClass) selectedItem;
                 if (equipment.equipmentType == EquipmentClass.EquipmentType.tool || equipment.equipmentType == EquipmentClass.EquipmentType.weapon) {
                     selectedItemDisplay.transform.localScale = Vector3.one;
+                    if (equipment.equipmentType == EquipmentClass.EquipmentType.weapon) {
+                        currentDamage = ((WeaponClass) equipment).damage;
+                    }
+    
                 }
             }
         } else {
             selectedItemDisplay.GetComponent<SpriteRenderer>().sprite = null;
+            currentDamage = 1;
         }
 
         // Toggle Inventory
@@ -218,7 +225,7 @@ public class PlayerController : MonoBehaviour {
         mousePos.x = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).x - 0.5f);
         mousePos.y = Mathf.RoundToInt(Camera.main.ScreenToWorldPoint(Input.mousePosition).y - 0.5f);
 
-        //destroy or place blocks
+        //destroy, place blocks and hitting
         //unity does not support covariant, will have to do a lot of type casting
         if (!showInv) {
             if (hit) {
@@ -241,7 +248,7 @@ public class PlayerController : MonoBehaviour {
                                     playerCombat.Shoot(bow, arrow);
                                 }
                             }
-                        } else if (tempEquipment.equipmentType == EquipmentClass.EquipmentType.tool) {
+                        } else if (tempEquipment.equipmentType == EquipmentClass.EquipmentType.tool && Vector2.Distance(transform.position, mousePos) <= playerRange) {
                             ToolClass tool = (ToolClass) tempEquipment;
                             mineBlock(mousePos.x, mousePos.y, tool);
                         }
@@ -252,12 +259,11 @@ public class PlayerController : MonoBehaviour {
                 } else {
                     TryHit(mousePos.x, mousePos.y);
                 }
-            } else if (place && selectedItem != null) {
+            } else if (place && selectedItem != null  && Vector2.Distance(transform.position, mousePos) <= playerRange) {
                 if (selectedItem.itemType == ItemClass.ItemType.block) {
                     //check not placing on player
                     int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
                     int maxX = Mathf.CeilToInt(GetComponent<Transform>().position.x);
-
                     int minY = Mathf.CeilToInt(GetComponent<Transform>().position.y - 1);
                     int maxY = Mathf.FloorToInt(GetComponent<Transform>().position.y + 1);
 
@@ -397,7 +403,7 @@ public class PlayerController : MonoBehaviour {
     private void Consume(ConsumableClass consumable, int selectionIndex) {
         nextEatTime = Time.time + eatRate;
         inventory.RemoveFromHotBar(consumable, selectionIndex);
-        health.Heal(consumable.healthAdded);
+        health.Heal(Mathf.Min(maxHealth - GetComponent<Health>().GetHealth(),consumable.healthAdded));
     }
 
 }
