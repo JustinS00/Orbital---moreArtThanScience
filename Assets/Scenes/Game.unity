@@ -1648,7 +1648,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1747037435}
   itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}
-  portal: {fileID: 2608222001867238224, guid: 9f5ef6efe15132d4997e8b8ce7df9a1b, type: 3}
   seed: 100
   worldSize: 500
   worldHeight: 128
@@ -2135,7 +2134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1747037435}
-  portal: {fileID: 2608222001867238224, guid: 9f5ef6efe15132d4997e8b8ce7df9a1b, type: 3}
   blocksCollection: {fileID: 11400000, guid: 72de6673147141b4c957e2979a08c9b5, type: 2}
 --- !u!1 &640086571
 GameObject:
@@ -4124,6 +4122,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9216715648138389218, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216715648138389218, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216715648138389218, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
 --- !u!224 &1494440729 stripped
@@ -4799,6 +4809,7 @@ MonoBehaviour:
   terrain: {fileID: 486374319}
   cam: {fileID: 1315311852}
   town: {fileID: 616143995}
+  portal: {fileID: 2608222001867238224, guid: 9f5ef6efe15132d4997e8b8ce7df9a1b, type: 3}
   spawnPos: {x: 0, y: 0}
 --- !u!4 &1747037436
 Transform:

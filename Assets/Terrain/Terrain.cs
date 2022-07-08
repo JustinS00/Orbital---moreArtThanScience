@@ -17,7 +17,6 @@ public class Terrain : MonoBehaviour {
 
     public GameManager gameManager;
     public GameObject itemDrop;
-    public Portal portal;
 
     [Header("World Settings")]
     public float seed;
@@ -122,7 +121,7 @@ public class Terrain : MonoBehaviour {
         GenerateNoiseTexture(diamondTexture, diamondRarity, (float) diamondVeinSize);
         //GenerateChunks();
         GenerateTerrain();
-        SpawnPortal();
+
 
         /*
         for (int x = 0; x < worldSize; x++) {
@@ -219,13 +218,7 @@ public class Terrain : MonoBehaviour {
         //worldBlocksMap.Apply();
     }
 
-    private void SpawnPortal() {
-        Portal newPortal = Instantiate(portal);
-        newPortal.transform.SetParent(this.transform, false);
-        newPortal.SetMessage("Press 'T' to travel to Town Area");
-        newPortal.SetLocation(new Vector2(50, 211));
-        newPortal.transform.localPosition = new Vector2(spawnX, spawnY + 3);
-    }
+
 
     #endregion
 
