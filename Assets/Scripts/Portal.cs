@@ -5,9 +5,14 @@ using UnityEngine;
 public class Portal : MonoBehaviour {   
 
     private string message;
+    private string enableMessage;
+    private string disableMessage;
+
     private Vector2 toLocation;
     private PlayerController player;
     private bool inRange;
+    private bool portalIsOn;
+
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
@@ -26,16 +31,30 @@ public class Portal : MonoBehaviour {
         }      
     }
 
-    public void SetMessage(string message) {
-        this.message = message;
+    public void SetEnableMessage(string message) {
+        this.enableMessage = message;
+    }
+
+    public void SetDisableMessage(string message) {
+        this.disableMessage = message;
     }
 
     public void SetLocation(Vector2 location) {
         this.toLocation = location;
     }
 
+    public void TogglePortalOn() {
+        this.message = enableMessage;
+        portalIsOn = true;
+    }
+
+    public void TogglePortalOff() {
+        this.message = disableMessage;
+        portalIsOn = false;
+    }
+
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.T) && inRange) {
+        if (Input.GetKeyDown(KeyCode.T) && inRange && portalIsOn) {
             player.moveTo(toLocation);
         }
     }

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     public Terrain terrain;
     public CameraController cam;
     public Town town;
+    public Portal portal;
 
     public Vector2 spawnPos;
 
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour {
         player.Spawn();
         cam.moveTo(spawnPos);
         town.StartTerrainGeneration();
+        SpawnPortalTerrain();
+        SpawnPortalTown();
     }
 
     void FixedUpdate() {
@@ -53,5 +56,25 @@ public class GameManager : MonoBehaviour {
 
     public int getTime() {
         return Mathf.RoundToInt(timeElapsed % secondsPerGameDay);
+    }
+
+    private void SpawnPortalTerrain() {
+        Portal newPortal = Instantiate(portal);
+        newPortal.transform.SetParent(terrain.transform, false);
+        newPortal.SetEnableMessage("Press 'T' to travel to Town Area");
+        newPortal.SetDisableMessage("Portal is disabled");
+        newPortal.SetLocation(new Vector2(50, 211));
+        newPortal.transform.localPosition = spawnPos + new Vector2(0,3);
+        newPortal.TogglePortalOn();
+    }
+    
+    private void SpawnPortalTown() {
+        Portal newPortal = Instantiate(portal);
+        newPortal.transform.SetParent(town.transform, false);
+        newPortal.SetEnableMessage("Press 'T' to travel to Wilderness");
+        newPortal.SetDisableMessage("Portal is disabled");
+        newPortal.SetLocation(spawnPos);
+        newPortal.transform.localPosition = new Vector2(60, 13);
+        newPortal.TogglePortalOn();
     }
 }

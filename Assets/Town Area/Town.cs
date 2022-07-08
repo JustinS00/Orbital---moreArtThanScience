@@ -6,7 +6,6 @@ public class Town : MonoBehaviour
 {
 
     public GameManager gameManager;
-    public Portal portal;
     
     [Header("Town Settings")]
     private int townSize = 100;
@@ -35,15 +34,7 @@ public class Town : MonoBehaviour
         GenerateBorder();
         GenerateStructures();
         SpawnNPCs();
-        SpawnPortal();
-    }
 
-    private void SpawnPortal() {
-        Portal newPortal = Instantiate(portal);
-        newPortal.transform.SetParent(this.transform, false);
-        newPortal.SetMessage("Press 'T' to travel to Wildeness");
-        newPortal.SetLocation(new Vector2(250, 100));
-        newPortal.transform.localPosition = new Vector2(60, 13);
     }
 
     private void GenerateFlatTerrain() {
