@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour {
     private float spawnInterval = 15.0f;
 
     [SerializeField]
-    private int maxNumEntities = 5;
+    private int maxNumEntities;
 
     private int numberOfPossibleEntities; 
     private Vector3 spawnLocation;
@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour {
         } else {
             randX -= 5.0f;
         }
-
+        maxNumEntities = OptionsMenu.instance.GetHostileMobCap();
         spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
          //TODO: if player is in town or if time is day / do not spawn
         if (Physics2D.OverlapCircle(spawnLocation, 1.0f) == null && player.transform.position.y <= 128) {

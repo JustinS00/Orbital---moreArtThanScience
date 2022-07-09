@@ -1024,7 +1024,6 @@ MonoBehaviour:
   jumpForce: 10
   onGround: 0
   maxHealth: 40
-  currentHealth: 40
   healthBar: {fileID: 0}
   health: {fileID: 0}
   spawnPos: {x: 0, y: 0}
