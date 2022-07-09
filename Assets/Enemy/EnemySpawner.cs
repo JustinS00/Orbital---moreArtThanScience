@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour {
     private int numberOfPossibleEntities; 
     private Vector3 spawnLocation;
     private float randX;
-    private string tag;
+    private string currentTag;
 
     private GameObject player;
 
@@ -28,14 +28,12 @@ public class EnemySpawner : MonoBehaviour {
         entityPrefabs = entityCollection.prefabs;
 
         numberOfPossibleEntities = entityPrefabs.Length;
-        tag = entityPrefabs[0].tag;
+        currentTag = entityPrefabs[0].tag;
 
         StartCoroutine(spawnEntity(spawnInterval, entityPrefabs[Random.Range(0, numberOfPossibleEntities)]));
     }
 
     private IEnumerator spawnEntity(float interval, GameObject entity) {
-       
-
         yield return new WaitForSeconds(interval);
 
         randX = Random.Range(-25.5f, 25.5f);
@@ -53,7 +51,7 @@ public class EnemySpawner : MonoBehaviour {
         }
 
         //limits number of enemies spawned to maxNumEntities
-        yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag(tag).Length < maxNumEntities);
+        yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag(currentTag).Length < maxNumEntities);
         StartCoroutine(spawnEntity(spawnInterval, entityPrefabs[Random.Range(0, numberOfPossibleEntities)]));
     }
 }
