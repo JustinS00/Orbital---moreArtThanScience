@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 
@@ -25,6 +26,7 @@ public class Terrain : MonoBehaviour {
     private int heightAddition = 64;
     private int heightMulitplier = 5;
     public int dirtLayerHeight = 5;
+    private int groundLayer;
 
 
     [Header("Generation Settings")]
@@ -104,6 +106,7 @@ public class Terrain : MonoBehaviour {
         worldBlocksMap.Apply();
         */
 
+        groundLayer = LayerMask.NameToLayer("Blocks");
         seed = Random.Range(-100000, 100000);
         spawnX = worldSize / 2;
         if (noiseTexture == null) {
@@ -315,6 +318,7 @@ public class Terrain : MonoBehaviour {
             newBlock.GetComponent<SpriteRenderer>().sprite = block.itemSprite;
             newBlock.name = block.itemName;
             newBlock.transform.position = new Vector2(x + 0.5f, y + 0.5f);
+            newBlock.layer = groundLayer;
 
             worldBlocks.Add(newBlock.transform.position - (Vector3.one * 0.5f));
             worldBlocksObject.Add(newBlock);
