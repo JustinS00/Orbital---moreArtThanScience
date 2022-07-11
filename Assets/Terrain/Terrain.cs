@@ -38,6 +38,10 @@ public class Terrain : MonoBehaviour {
 
     [Header("Blocks")]
     public BlocksCollection blocksCollection;
+    public Material dirtMaterial;
+    public Material stoneMaterial;
+    public Material logMaterial;
+    public Material emptyMaterial;
 
     [Header("Surface Features Settings")]
     public float treeChance = 0.03f;
@@ -295,6 +299,15 @@ public class Terrain : MonoBehaviour {
         return null;
     }
 
+    public GameObject GetObject(int x, int y) {
+        if (worldBlocks.Contains(new Vector2(x, y)) && x >= 0 && x <= worldSize && y >= 0 && y <= worldHeight) {
+            Vector2 pos = new Vector2(x, y);
+            GameObject block = worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))];
+            return block;
+        }
+        return null;
+    }
+
     public void placeBlock(int x, int y, BlockClass block) {
         if (x == spawnX & y > spawnY) {
             spawnY = y;
@@ -312,7 +325,16 @@ public class Terrain : MonoBehaviour {
             newBlock.name = block.itemName;
             newBlock.transform.position = new Vector2(x + 0.5f, y + 0.5f);
             newBlock.layer = groundLayer;
+            string itemName = block.itemName;
 
+            if (itemName == "dirt" || itemName == "grass_block") {
+                newBlock.GetComponent<ParticleSystemRenderer>().sharedMaterial = dirtMaterial;
+            } else if (itemName == "stone" || itemName.Contains("ore")) {
+                newBlock.GetComponent<ParticleSystemRenderer>().sharedMaterial = stoneMaterial;
+            } else if (itemName == "log") {
+                newBlock.GetComponent<ParticleSystemRenderer>().sharedMaterial = logMaterial;
+            }
+            
             worldBlocks.Add(newBlock.transform.position - (Vector3.one * 0.5f));
             worldBlocksObject.Add(newBlock);
             worldBlockClasses.Add(block);
