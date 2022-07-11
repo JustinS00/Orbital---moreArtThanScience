@@ -339,7 +339,7 @@ public class Inventory : MonoBehaviour {
                 distance = currDistance;
             }
         }
-        Debug.Log(slot);
+        //Debug.Log(slot);
         return slot;
     }
 

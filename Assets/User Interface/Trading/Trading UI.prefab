@@ -121,7 +121,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 796441760}
   m_HandleRect: {fileID: 796441759}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -957,7 +957,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7939213705582936188}
   - component: {fileID: 1311924872}
-  - component: {fileID: 1787252851456773225}
   m_Layer: 0
   m_Name: Trading UI
   m_TagString: Untagged
@@ -982,27 +981,6 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1311924872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7806802396094608709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec8d05fac17d1c24c8c2c758bd3b60a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trades:
-  - itemRecieve:
-      item: {fileID: 11400000, guid: ac297b99d0213c6409f5762b8c3be42b, type: 2}
-      quantity: 1
-    itemsGiven:
-    - item: {fileID: 11400000, guid: 1862ea7880732074db360993eb0b3825, type: 2}
-      quantity: 1
-    - item: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
-      quantity: 1
---- !u!114 &1787252851456773225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

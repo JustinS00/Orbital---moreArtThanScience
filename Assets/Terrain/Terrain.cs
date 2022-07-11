@@ -18,6 +18,7 @@ public class Terrain : MonoBehaviour {
 
     public GameManager gameManager;
     public GameObject itemDrop;
+    public GameObject blockPrefab;
 
     [Header("World Settings")]
     public float seed;
@@ -300,16 +301,8 @@ public class Terrain : MonoBehaviour {
         }
 
         if (canPlace(x, y)) {
-            //lighting remove lighting if tile is placed
-            /*
-            RemoveLightSource(x,y);
-            */
-            //Normal Code
-            GameObject newBlock = new GameObject();
-            //int chunkCoordinate = getChunkNo(x, y);
-            //newBlock.transform.parent = worldChunks[chunkCoordinate].transform;
+            GameObject newBlock = Instantiate(blockPrefab);
             newBlock.transform.parent = this.transform;
-            newBlock.AddComponent<SpriteRenderer>();
             if (block.isSolid) {
                 newBlock.AddComponent<BoxCollider2D>();
                 newBlock.GetComponent<BoxCollider2D>().size = Vector2.one;
@@ -384,6 +377,7 @@ public class Terrain : MonoBehaviour {
                     }
                 }
             }
+            obj.GetComponent<ParticleSystem>().Play();
             Destroy(obj.gameObject);
             worldBlocksObject.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));
             worldBlockClasses.RemoveAt(worldBlocks.IndexOf(new Vector2(x, y)));

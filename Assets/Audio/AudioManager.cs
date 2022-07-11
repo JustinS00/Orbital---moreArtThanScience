@@ -21,7 +21,9 @@ public class AudioManager : MonoBehaviour {
     public float soundVolume;
     public bool onSound = true;
 
-    private float time = 0f;
+    private float musicTime = 0f;
+    private float soundTime;
+    private Sound currentSound;
 
     void Awake() {
         if (instance != null) {
@@ -62,31 +64,48 @@ public class AudioManager : MonoBehaviour {
         Debug.Log("Play Music");
         int randIndex = UnityEngine.Random.Range(0, music.Length);
         Sound sound = music[randIndex];
-        time = sound.source.clip.length;
+        musicTime = sound.source.clip.length;
         PlayMusic(sound.name);
 
     }
 
     private void Update() {
-        if (time <= 0) {
+        if (musicTime <= 0) {
             PlayMusic();
         }
-        time -= Time.deltaTime;
+        if (soundTime <= 0) {
+            try {
+                currentSound.source.Stop();
+                soundTime = 0;
+            } catch {
+
+            }
+        }
+        musicTime -= Time.deltaTime;
+        soundTime -= Time.deltaTime;
     }
 
     public void PlayMusic(string name) {
-        Play(name, music);
+        Play(name, music, 0);
     }
 
     public void PlaySound(string name) {
-        Play(name, sounds);
+        Play(name, sounds, 0);
     }
 
-    private void Play(string name, Sound[] array) {
+    public void PlaySoundFor(string name, float time) {
+        Play(name, sounds, time);
+    }
+
+    private void Play(string name, Sound[] array, float time) {
         Sound sound = Array.Find(array, sound => sound.name == name);
-        if (sound != null) {
+        if (sound != null && time == 0) {
             sound.source.Play();
             Debug.Log("Currently playing: " + name);
+        } else if (sound != null && time != 0) {
+            soundTime = time;
+            currentSound = sound;
+            sound.source.Play();
         } else {
             Debug.LogWarning("Audio clip: " + name + " not found!");
         }

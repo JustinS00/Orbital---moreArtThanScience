@@ -334,7 +334,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5146012241768015543}
   - component: {fileID: 1589526832}
-  - component: {fileID: 1391489001207306039}
   m_Layer: 0
   m_Name: Crafting UI
   m_TagString: Untagged
@@ -518,48 +517,6 @@ MonoBehaviour:
     - item: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
       quantity: 2
     - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
-      quantity: 1
-  isShowing: 0
---- !u!114 &1391489001207306039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3944453673371563272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b9b3039bd7682d49aa40f0a68ea1763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trades:
-  - itemRecieve:
-      item: {fileID: 11400000, guid: 4110acd63f6b10748acfa2fd57ffb78c, type: 2}
-      quantity: 4
-    itemsGiven:
-    - item: {fileID: 11400000, guid: abf3c35a14e04a84e90dce7bb2961db7, type: 2}
-      quantity: 1
-  - itemRecieve:
-      item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
-      quantity: 4
-    itemsGiven:
-    - item: {fileID: 11400000, guid: 4110acd63f6b10748acfa2fd57ffb78c, type: 2}
-      quantity: 2
-  - itemRecieve:
-      item: {fileID: 11400000, guid: 021486dde9e477f4a8c936c041dd23c7, type: 2}
-      quantity: 1
-    itemsGiven:
-    - item: {fileID: 11400000, guid: dcb70a64a2f6c9d4491ef0850ac31e1c, type: 2}
-      quantity: 1
-    - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
-      quantity: 1
-    - item: {fileID: 11400000, guid: 3534e0432105aff4f8af3b00c539f0ef, type: 2}
-      quantity: 1
-  - itemRecieve:
-      item: {fileID: 11400000, guid: dcb70a64a2f6c9d4491ef0850ac31e1c, type: 2}
-      quantity: 4
-    itemsGiven:
-    - item: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
       quantity: 1
   isShowing: 0
 --- !u!1 &3992720172788287638
