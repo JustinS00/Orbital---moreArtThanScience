@@ -65,6 +65,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: music3
+    clip: {fileID: 8300000, guid: 7864cb3f09108294db28b5ffed540408, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: music4
+    clip: {fileID: 8300000, guid: 1ab50919fe29cb947a487beea920cf23, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   sounds:
   - name: SIU
     clip: {fileID: 8300000, guid: 5b5e26cb1ad6b1247bb02ccf5af7a8bc, type: 3}
@@ -80,6 +92,24 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: technoblade
     clip: {fileID: 8300000, guid: 4f2e49ca9e70a304b8a815a2552f0719, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: chop_wood
+    clip: {fileID: 8300000, guid: 96e9accf0cfd9404b85d9b0f5b907806, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: dig_dirt
+    clip: {fileID: 8300000, guid: ff19314c4ddf20d489c5a29c1f2a547d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: mining
+    clip: {fileID: 8300000, guid: 0bc90a61068b17e458bd4e12e3419062, type: 3}
     volume: 1
     pitch: 1
     loop: 0

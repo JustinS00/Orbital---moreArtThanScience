@@ -64,8 +64,10 @@ public class PlayerController : MonoBehaviour {
 
     //Mining, breaking of blocks
     private float timeElapsedBlockBreak = 0f;
+    private float blockSoundTimer = 0f;
     private float eatRate = 2.0f;
     private float nextEatTime;
+
 
     /*
     to make into knockback script
@@ -357,6 +359,7 @@ public class PlayerController : MonoBehaviour {
             if (tool) {
                 isPreferredTool = (block.preferredTool == ToolType.all || block.preferredTool == tool.toolType || tool.toolType == ToolType.all);
                 miningSpeed = isPreferredTool ? tool.miningSpeed : DEFAULT_MINING_SPEED;
+                playBlockSound(block, miningSpeed);
             }
             timeElapsedBlockBreak += Time.deltaTime * 1 / miningSpeed;
             if (timeElapsedBlockBreak > block.hardness) {
@@ -370,6 +373,22 @@ public class PlayerController : MonoBehaviour {
             currentTarget = target;
             timeElapsedBlockBreak = 0f;
         }
+    }
+    
+
+    //block breaking sound should be coming from the block class itself but wgt
+    private void playBlockSound(BlockClass block, float time) {
+        if (blockSoundTimer <= 0) {
+            blockSoundTimer = time;
+            if (block.itemName == "dirt" || block.itemName == "grass_block") {
+                AudioManager.instance.PlaySoundFor("dig_dirt",time);
+            } else if (block.itemName == "wooden_plank" || block.itemName == "log") {
+                AudioManager.instance.PlaySoundFor("chop_wood", time);
+            } else if (block.itemName == "stone" || block.itemName.Contains("ore")) {
+                AudioManager.instance.PlaySoundFor("mining", time);
+            }
+        }
+        blockSoundTimer -= Time.deltaTime;
     }
 
 
