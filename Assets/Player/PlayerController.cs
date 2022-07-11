@@ -353,6 +353,7 @@ public class PlayerController : MonoBehaviour {
     public void mineBlock(int x, int y, ToolClass tool) {
         Vector2Int target = new Vector2Int(x, y);
         BlockClass block = gameManager.terrain.GetBlock(x, y);
+        GameObject obj = gameManager.terrain.GetObject(x,y);
         if (target == currentTarget && block != null && block.isBreakable) {
             bool isPreferredTool = false;
             float miningSpeed = DEFAULT_MINING_SPEED;
@@ -360,6 +361,7 @@ public class PlayerController : MonoBehaviour {
                 isPreferredTool = (block.preferredTool == ToolType.all || block.preferredTool == tool.toolType || tool.toolType == ToolType.all);
                 miningSpeed = isPreferredTool ? tool.miningSpeed : DEFAULT_MINING_SPEED;
                 playBlockSound(block, miningSpeed);
+                obj.GetComponent<ParticleSystem>().Play();
             }
             timeElapsedBlockBreak += Time.deltaTime * 1 / miningSpeed;
             if (timeElapsedBlockBreak > block.hardness) {

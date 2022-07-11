@@ -1857,6 +1857,10 @@ MonoBehaviour:
   terrainFreq: 0
   noiseTexture: {fileID: 0}
   blocksCollection: {fileID: 11400000, guid: 72de6673147141b4c957e2979a08c9b5, type: 2}
+  dirtMaterial: {fileID: 2100000, guid: 70431f137ead82a4080380dece097fcb, type: 2}
+  stoneMaterial: {fileID: 2100000, guid: 25d96b0a929483140a0824ebf7fc9c0e, type: 2}
+  logMaterial: {fileID: 2100000, guid: e9129c931f4f310439ede130515567e4, type: 2}
+  emptyMaterial: {fileID: 2100000, guid: b3d2af2315c8e294abb87cd0c574c20b, type: 2}
   treeChance: 0
   minTreeHeight: 4
   maxTreeHeight: 12
@@ -3354,7 +3358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7626364247881248122, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000076293945
+      value: -0.000009536743
       objectReference: {fileID: 0}
     - target: {fileID: 9174493073026180351, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3370,6 +3374,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9216715647993563548, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216715647993563548, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9216715648138389218, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
@@ -3386,7 +3394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9216715648584967886, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0000038146973
+      value: -0.000011444092
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
