@@ -31,6 +31,10 @@ public class Enemy : MonoBehaviour {
     [SerializeField]
     private LootTable lootTable;
 
+    public AudioSource idleSound;
+    public AudioSource damagedSound;
+    private float soundChance = 0.003f;
+    
     // Start is called before the first frame update
     protected void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -43,6 +47,7 @@ public class Enemy : MonoBehaviour {
     void Update() {
         LookAtPlayer();
         AttackPlayer();
+        PlayIdleSound();
     }
 
     private void SetEnemyValues() {
@@ -100,6 +105,7 @@ public class Enemy : MonoBehaviour {
     private void Attack() {
         if (target != null) {
             target.GetComponent<Health>().Damage(damage);
+            PlayIdleSound();
         }
     }
 
@@ -107,6 +113,24 @@ public class Enemy : MonoBehaviour {
         if (lootTable) {
             int randNumItems = Random.Range(0, data.maxItemsToDrop + 1);
             lootTable.generateLoot(randNumItems, transform.position);
+        }
+    }
+
+    public void PlayDamagedSound() {
+        try {
+            damagedSound.Play();
+        } catch {
+            Debug.Log("this does not have damaged audio source attached");
+        }
+    }
+
+    public void PlayIdleSound() {
+        if (Random.value <= soundChance) {
+            try {
+                idleSound.Play();
+            } catch {
+                Debug.Log("this does not have idle audio source attached");
+            }
         }
     }
 }
