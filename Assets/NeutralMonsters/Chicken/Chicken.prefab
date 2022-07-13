@@ -156,6 +156,7 @@ MonoBehaviour:
   maxDistanceFromPlayer: 100
   idleSound: {fileID: 1137131125714887854}
   damagedSound: {fileID: 8772644777037409317}
+  type: 1
 --- !u!114 &8224251699247917944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +249,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -344,7 +345,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0

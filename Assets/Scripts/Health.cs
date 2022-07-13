@@ -110,6 +110,7 @@ public class Health : MonoBehaviour {
         if (GetComponent<Enemy>()) {
             GetComponent<Enemy>().MakeLoot();
             GetComponent<Enemy>().PlayDamagedSound();
+            MobStats.instance.addKill(GetComponent<Enemy>().type);
             Destroy(gameObject);
             //gameObject.SetActive(false);
         }
@@ -117,8 +118,9 @@ public class Health : MonoBehaviour {
         if (GetComponent<NeutralMonster>()) {
             GetComponent<NeutralMonster>().MakeLoot();
             GetComponent<NeutralMonster>().PlayDamagedSound();
-            //Destroy(gameObject);
-            gameObject.SetActive(false);
+            MobStats.instance.addKill(GetComponent<NeutralMonster>().type);
+            Destroy(gameObject);
+            //gameObject.SetActive(false);
         }
         Debug.Log("Die");
     }

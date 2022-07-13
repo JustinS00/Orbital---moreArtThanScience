@@ -31,6 +31,7 @@ public class NeutralMonster : MonoBehaviour {
 
     public AudioSource idleSound;
     public AudioSource damagedSound;
+    public MobType type;
 
     // Start is called before the first frame update
     void Start() {

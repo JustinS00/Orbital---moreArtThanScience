@@ -34,6 +34,8 @@ public class Enemy : MonoBehaviour {
     public AudioSource idleSound;
     public AudioSource damagedSound;
     private float soundChance = 0.003f;
+
+    public MobType type;
     
     // Start is called before the first frame update
     protected void Start() {

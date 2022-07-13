@@ -427,6 +427,7 @@ MonoBehaviour:
   lootTable: {fileID: 11400000, guid: 7f87fed713303ac4f9e6e282bccfa53d, type: 2}
   idleSound: {fileID: 2844412488968929322}
   damagedSound: {fileID: 5660344504730689841}
+  type: 3
 --- !u!114 &4885779288866532331
 MonoBehaviour:
   m_ObjectHideFlags: 0
