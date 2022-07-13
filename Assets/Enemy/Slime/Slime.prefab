@@ -169,6 +169,7 @@ MonoBehaviour:
   lootTable: {fileID: 0}
   idleSound: {fileID: 2981842018791844910}
   damagedSound: {fileID: -4449745401584338333}
+  type: 5
   maxYAxisSpeedMultiplier: 2.5
 --- !u!114 &5884324239718369080
 MonoBehaviour:

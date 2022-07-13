@@ -488,6 +488,7 @@ MonoBehaviour:
   lootTable: {fileID: 11400000, guid: 3da54149722795c4699051f67167bfa2, type: 2}
   idleSound: {fileID: 7429895710219870155}
   damagedSound: {fileID: 6133816754598127426}
+  type: 4
 --- !u!114 &1164388890820825013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,7 +561,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -656,7 +657,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
