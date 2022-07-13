@@ -23,6 +23,7 @@ public class SkeletonAttack : Enemy {
     void Update() {
         base.LookAtPlayer();
         AttackPlayer();
+        PlayIdleSound();
     }
 
     public override void AttackPlayer() {

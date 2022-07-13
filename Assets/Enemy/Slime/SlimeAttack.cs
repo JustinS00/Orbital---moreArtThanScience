@@ -32,6 +32,7 @@ public class SlimeAttack : Enemy {
         if (!isSleeping) {
             base.LookAtPlayer();
         }
+        PlayIdleSound();
 
     }
 

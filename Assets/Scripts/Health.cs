@@ -73,6 +73,12 @@ public class Health : MonoBehaviour {
         }
 
         this.health -= Mathf.RoundToInt(newDamage); 
+        if (GetComponent<Enemy>()) {
+            GetComponent<Enemy>().PlayDamagedSound();
+        } 
+        if (GetComponent<NeutralMonster>()) {
+            GetComponent<NeutralMonster>().PlayDamagedSound();
+        } 
         Debug.Log(this.name + "got hit");
         // hit animation
         anim.SetTrigger("damaged");
@@ -103,12 +109,14 @@ public class Health : MonoBehaviour {
     private void Die() {
         if (GetComponent<Enemy>()) {
             GetComponent<Enemy>().MakeLoot();
+            GetComponent<Enemy>().PlayDamagedSound();
             Destroy(gameObject);
             //gameObject.SetActive(false);
         }
         // probably can make this better by seperating into a makeloot script instead of duplicating
         if (GetComponent<NeutralMonster>()) {
             GetComponent<NeutralMonster>().MakeLoot();
+            GetComponent<NeutralMonster>().PlayDamagedSound();
             //Destroy(gameObject);
             gameObject.SetActive(false);
         }

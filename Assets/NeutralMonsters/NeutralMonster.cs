@@ -29,6 +29,9 @@ public class NeutralMonster : MonoBehaviour {
     private int minMoveTime = 2;
     private int maxMoveTime = 5;
 
+    public AudioSource idleSound;
+    public AudioSource damagedSound;
+
     // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -80,6 +83,13 @@ public class NeutralMonster : MonoBehaviour {
             if (rand <= 2) {
                 rb.velocity = Vector2.zero;
                 int timeToIdle = Random.Range(minIdleTime, maxIdleTime);
+                if (timeToIdle == minIdleTime) {
+                    try {
+                        idleSound.Play();
+                    } catch {
+                        Debug.Log("this does not have idle audio source attached");
+                    }
+                }
                 yield return new WaitForSeconds(timeToIdle);
             } else {
                 // direction == 1 right, else left
@@ -116,6 +126,14 @@ public class NeutralMonster : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Neutral Monster") {
             Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+    }
+
+    public void PlayDamagedSound() {
+        try {
+            damagedSound.Play();
+        } catch {
+            Debug.Log("this does not have damaged audio source attached");
         }
     }
 }
