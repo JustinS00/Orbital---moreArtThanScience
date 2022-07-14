@@ -3199,7 +3199,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 431505017734525333, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000020980835
+      value: 0.000005722046
       objectReference: {fileID: 0}
     - target: {fileID: 1015399155586681789, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3371,7 +3371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7626364247881248122, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000020980835
+      value: 0.000005722046
       objectReference: {fileID: 0}
     - target: {fileID: 9174493073026180351, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3407,7 +3407,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9216715648584967886, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000009536743
+      value: -0.000017166138
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
@@ -4607,11 +4607,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c48d09f15b3a54f9094b6c2562da7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tick: 120
+  tick: 360
   seconds: 0
   mins: 0
   hours: 8
-  days: 1
+  days: 0
+  night: 0
   SUN_SET_START_TIME: 18
   SUN_SET_DURATION: 2
   SUN_RISE_START_TIME: 6

@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //Debug.Log(OptionsMenu.instance.difficulty);
+        //Debug.Log(DayNightCycle.instance.isNight());
+        //DayNightCycle.instance.DisplayTime();
     }
 
     public void TogglePause() {

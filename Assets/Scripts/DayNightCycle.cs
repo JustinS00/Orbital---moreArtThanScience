@@ -13,6 +13,8 @@ public class DayNightCycle : MonoBehaviour {
     public int mins;
     public int hours = 8;
     public int days = 0;
+    public bool night;
+    public static DayNightCycle instance;
 
 
     public static int SECONDS_IN_MIN = 60;
@@ -27,10 +29,16 @@ public class DayNightCycle : MonoBehaviour {
     //public TextMeshProUGUI dayDisplay;
     public Volume postProcessingVolume;
 
-
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
+        }
+    }
     // Start is called before the first frame update
     void Start() {
-        postProcessingVolume = gameObject.GetComponent<Volume>();
+        instance.postProcessingVolume = gameObject.GetComponent<Volume>();
     }
 
     // Update is called once per frame
@@ -40,16 +48,16 @@ public class DayNightCycle : MonoBehaviour {
     }
 
     private void CalculateTime() {
-        seconds += Time.fixedDeltaTime * tick;
-        if (seconds >= 60) {
-            seconds -= 60;
-            mins += 1;
-        } if (mins >= 60) {
-            mins -= 60;
-            hours += 1;
-        } if (hours >= 24) {
-            hours -= 24;
-            days += 1;
+        instance.seconds += Time.fixedDeltaTime * tick;
+        if (instance.seconds >= 60) {
+            instance.seconds %= 60;
+            instance.mins += 1;
+        } if (instance.mins >= 60) {
+            instance.mins %= 60;
+            instance.hours += 1;
+        } if (instance.hours >= 24) {
+            instance.hours %= 24;
+            instance.days += 1;
         }
 
         ControlLighting();
@@ -57,17 +65,24 @@ public class DayNightCycle : MonoBehaviour {
 
     public void ControlLighting() {
 
-        if (hours >= SUN_SET_START_TIME && hours < SUN_SET_START_TIME + SUN_SET_DURATION )
+        if (instance.hours >= SUN_SET_START_TIME && instance.hours < SUN_SET_START_TIME + SUN_SET_DURATION )
         {
-            postProcessingVolume.weight =  ((float) ((hours - SUN_SET_START_TIME) * MINS_IN_HOUR + mins)) / (SUN_SET_DURATION * MINS_IN_HOUR); 
+            instance.postProcessingVolume.weight =  ((float) ((instance.hours - SUN_SET_START_TIME) * MINS_IN_HOUR + instance.mins)) / (SUN_SET_DURATION * MINS_IN_HOUR); 
+            instance.night = true;
         }
      
-        if (hours >= SUN_RISE_START_TIME && hours < SUN_RISE_START_TIME + SUN_RISE_DURATION) {
-            postProcessingVolume.weight = 1 - ((float) ((hours - SUN_RISE_START_TIME) * MINS_IN_HOUR + mins)) / (SUN_RISE_DURATION * MINS_IN_HOUR);
+        if (instance.hours >= SUN_RISE_START_TIME && instance.hours < SUN_RISE_START_TIME + SUN_RISE_DURATION) {
+            instance.postProcessingVolume.weight = 1 - ((float) ((instance.hours - SUN_RISE_START_TIME) * MINS_IN_HOUR + instance.mins)) / (SUN_RISE_DURATION * MINS_IN_HOUR);
+            instance.night = false;
         }
+
     }
 
-    private void DisplayTime() {
+    public void DisplayTime() {
         //Debug.Log(string.Format("Day {0}, Hours {1}, Mins {2}, Seconds {3}", days, hours, mins, seconds));
+    }
+
+    public bool isNight() {
+        return instance.night;
     }
 }
