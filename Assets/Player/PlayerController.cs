@@ -68,14 +68,10 @@ public class PlayerController : MonoBehaviour {
     private float eatRate = 2.0f;
     private float nextEatTime;
 
-
-    /*
-    to make into knockback script
-    public float knockback = 30;
-    private float knockbackLength;
-    private float knockbackCount;
-    private bool knockFromRight;
-    */
+    [Header("Knockback")]
+    [SerializeField] private float knockbackStrength = 5f;
+    [SerializeField] private float knockbackTime = 0.3f;
+    private bool knockbacked;
 
     public void Spawn() {
         rb = GetComponent<Rigidbody2D>();
@@ -95,7 +91,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Respawn() {
         Achievement.instance.UnlockAchievement(Achievement.AchievementType.emotionaldamage);
-        
+
         //not clearing inventory for now
         GetComponent<Transform>().position = spawnPos;
         healthBar.SetMaxHealth(maxHealth);
@@ -103,22 +99,10 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        Vector2 movement = new Vector2(horizontal * moveSpeed * speed, rb.velocity.y);
-        rb.velocity = movement;
-        /*
-        to make into knockback script
-        if (knockbackCount <= 0) {
-            
-        } else {
-            if (knockFromRight) {
-                rb.velocity = new Vector2(-knockback, knockback/3);
-            } else { 
-                rb.velocity = new Vector2(knockback, knockback/3);
-            }
-            knockbackCount--;
+        if (!knockbacked) {
+            Vector2 movement = new Vector2(horizontal * moveSpeed * speed, rb.velocity.y);
+            rb.velocity = movement;
         }
-        */
-
     }
 
     private void Update() {
@@ -164,8 +148,7 @@ public class PlayerController : MonoBehaviour {
                 selectedItem = selected.item;
                 if (selectedItem.itemName == "diamond_ore")
                     Achievement.instance.UnlockAchievement(Achievement.AchievementType.diamondhands);
-            }
-            else {
+            } else {
                 selectedItem = null;
             }
         }
@@ -181,7 +164,7 @@ public class PlayerController : MonoBehaviour {
                     if (equipment.equipmentType == EquipmentClass.EquipmentType.weapon) {
                         currentDamage = ((WeaponClass) equipment).damage;
                     }
-    
+
                 }
             }
         } else {
@@ -193,7 +176,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.E)) {
             ToggleUI();
         }
- 
+
 
         helmet = inventory.GetHelmet();
         chestplate = inventory.GetChestplate();
@@ -201,11 +184,13 @@ public class PlayerController : MonoBehaviour {
         boots = inventory.GetBoots();
 
         // Movement and action
-        horizontal = Input.GetAxis("Horizontal");
-        jump = Input.GetAxis("Jump");
-        hit = Input.GetMouseButton(0);
-        place = Input.GetMouseButton(1);
-        siu = Input.GetKeyDown(KeyCode.UpArrow);
+        if (!knockbacked) {
+            horizontal = Input.GetAxis("Horizontal");
+            jump = Input.GetAxis("Jump");
+            hit = Input.GetMouseButton(0);
+            place = Input.GetMouseButton(1);
+            siu = Input.GetKeyDown(KeyCode.UpArrow);
+        }
 
         anim.SetFloat("horizontal", horizontal);
         anim.SetBool("siu", siu);
@@ -243,7 +228,7 @@ public class PlayerController : MonoBehaviour {
                                 playerCombat.Attack(weapon);
                             } else {
                                 BowClass bow = (BowClass) tempEquipment;
-                                ItemClass arrowItem =  inventory.HasItemInInventoryByString("arrow");
+                                ItemClass arrowItem = inventory.HasItemInInventoryByString("arrow");
                                 if (arrowItem != null && playerCombat.canFire()) {
                                     inventory.RemoveItemFromInventory(arrowItem, 1);
                                     ArrowClass arrow = (ArrowClass) arrowItem; //of type mob drop not arrow
@@ -261,7 +246,7 @@ public class PlayerController : MonoBehaviour {
                 } else {
                     TryHit(mousePos.x, mousePos.y);
                 }
-            } else if (place && selectedItem != null  && Vector2.Distance(transform.position, mousePos) <= playerRange) {
+            } else if (place && selectedItem != null && Vector2.Distance(transform.position, mousePos) <= playerRange) {
                 if (selectedItem.itemType == ItemClass.ItemType.block) {
                     //check not placing on player
                     int minX = Mathf.FloorToInt(GetComponent<Transform>().position.x);
@@ -291,7 +276,7 @@ public class PlayerController : MonoBehaviour {
         if (GetComponent<Transform>().position.y < 0) {
             Achievement.instance.UnlockAchievement(Achievement.AchievementType.luna);
             Respawn();
-        } 
+        }
 
         int curHealth = GetComponent<Health>().GetHealth();
         healthBar.SetHealth(curHealth);
@@ -353,7 +338,7 @@ public class PlayerController : MonoBehaviour {
     public void mineBlock(int x, int y, ToolClass tool) {
         Vector2Int target = new Vector2Int(x, y);
         BlockClass block = gameManager.terrain.GetBlock(x, y);
-        GameObject obj = gameManager.terrain.GetObject(x,y);
+        GameObject obj = gameManager.terrain.GetObject(x, y);
         if (target == currentTarget && block != null && block.isBreakable) {
             bool isPreferredTool = false;
             float miningSpeed = DEFAULT_MINING_SPEED;
@@ -376,14 +361,14 @@ public class PlayerController : MonoBehaviour {
             timeElapsedBlockBreak = 0f;
         }
     }
-    
+
 
     //block breaking sound should be coming from the block class itself but wgt
     private void playBlockSound(BlockClass block, float time) {
         if (blockSoundTimer <= 0) {
             blockSoundTimer = time;
             if (block.itemName == "dirt" || block.itemName == "grass_block") {
-                AudioManager.instance.PlaySoundFor("dig_dirt",time);
+                AudioManager.instance.PlaySoundFor("dig_dirt", time);
             } else if (block.itemName == "wooden_plank" || block.itemName == "log") {
                 AudioManager.instance.PlaySoundFor("chop_wood", time);
             } else if (block.itemName == "stone" || block.itemName.Contains("ore")) {
@@ -424,7 +409,22 @@ public class PlayerController : MonoBehaviour {
     private void Consume(ConsumableClass consumable, int selectionIndex) {
         nextEatTime = Time.time + eatRate;
         inventory.RemoveFromHotBar(consumable, selectionIndex);
-        health.Heal(Mathf.Min(maxHealth - GetComponent<Health>().GetHealth(),consumable.healthAdded));
+        health.Heal(Mathf.Min(maxHealth - GetComponent<Health>().GetHealth(), consumable.healthAdded));
     }
 
+    public void Knockback(Transform t)
+    {
+        Debug.Log("knockback player");
+        Vector3 dir = transform.position  - t.position;
+        knockbacked = true;
+        rb.velocity = (dir.normalized * knockbackStrength);
+        StartCoroutine(UnKnockback());
+    }
+
+    private IEnumerator UnKnockback()
+    {
+        yield return new WaitForSeconds(knockbackTime);
+        rb.velocity = Vector3.zero;
+        knockbacked = false;
+    }
 }

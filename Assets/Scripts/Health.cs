@@ -55,16 +55,15 @@ public class Health : MonoBehaviour {
         return true;
     }
 
-    public void Damage(int damage) {
+    public void Damage(int damage, GameObject fromGameObject) {
         if (isInvincible) return;
 
         if (damage < 0) {
             throw new System.ArgumentOutOfRangeException("No negative damage");
         }
-        
-     
+
         float newDamage = Mathf.RoundToInt(damage * (100 - 2 * protectionValue) / 100.0f);
-        
+
         // Armour durability related
         if (gameObject.tag == "Player") {
             int durabilityLost = Mathf.Max(1, damage / 10);
@@ -72,17 +71,25 @@ public class Health : MonoBehaviour {
             newDamage *= OptionsMenu.instance.GetMultiplier();
         }
 
-        this.health -= Mathf.RoundToInt(newDamage); 
+        this.health -= Mathf.RoundToInt(newDamage);
         if (GetComponent<Enemy>()) {
             GetComponent<Enemy>().PlayDamagedSound();
-        } 
+        }
         if (GetComponent<NeutralMonster>()) {
             GetComponent<NeutralMonster>().PlayDamagedSound();
-        } 
-        Debug.Log(this.name + "got hit");
+        }
         // hit animation
         anim.SetTrigger("damaged");
 
+        // knockback
+        if (this.gameObject.CompareTag("Player")) {
+            PlayerController playerController = GetComponent<PlayerController>();
+            StartCoroutine(KnockPlayer(playerController, fromGameObject));
+        } else if (this.gameObject.CompareTag("Enemy")) {
+            Debug.Log("knock enemy");
+            Enemy enemy = GetComponent<Enemy>();
+            StartCoroutine(KnockEnemy(enemy, fromGameObject));
+        }
         // add IFrame
         if (!isInvincible) {
             StartCoroutine(BecomeTemporarilyInvincible());
@@ -99,8 +106,7 @@ public class Health : MonoBehaviour {
 
 
     public IEnumerator AddHealth(int health) {
-        for (int i = 0; i < health; i++)
-        {
+        for (int i = 0; i < health; i++) {
             this.health = Mathf.Min(MAX_HEALTH, this.health + 1);
             yield return new WaitForSeconds(HEAL_COOLDOWN);
         }
@@ -130,5 +136,15 @@ public class Health : MonoBehaviour {
         yield return new WaitForSeconds(invincibilityDurationSeconds);
 
         isInvincible = false;
+    }
+
+    private IEnumerator KnockPlayer(PlayerController playerController, GameObject fromGameObject) {
+        yield return new WaitForSeconds(0.1f);
+        playerController.Knockback(fromGameObject.transform);
+    }
+
+    private IEnumerator KnockEnemy(Enemy enemy, GameObject fromGameObject) {
+        yield return new WaitForSeconds(0.1f);
+        enemy.Knockback(fromGameObject.transform);
     }
 }

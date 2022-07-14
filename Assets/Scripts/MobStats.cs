@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum MobType {cow, chicken, pig, skeleton, zombie, slime};
+public enum MobType {cow, chicken, pig, skeleton, zombie, slime, slimeking};
 
 public class MobStats: MonoBehaviour
 {
@@ -44,7 +44,10 @@ public class MobStats: MonoBehaviour
                 break;    
              case MobType.slime:
                 instance.kills[5] += 1;
-                break;   
+                break;
+            case MobType.slimeking:
+                instance.kills[6] += 1;
+                break;
             default:
                 break;         
         }       

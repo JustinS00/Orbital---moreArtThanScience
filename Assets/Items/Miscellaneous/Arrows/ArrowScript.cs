@@ -40,7 +40,7 @@ public class ArrowScript : MonoBehaviour {
 
         string colliderTag = other.gameObject.tag;
         if (colliderTag == "Player" || colliderTag == "Enemy" || colliderTag == "Neutral Monster") {
-            other.gameObject.GetComponent<Health>().Damage(arrowData.damage);
+            other.gameObject.GetComponent<Health>().Damage(arrowData.damage, this.gameObject);
         }
     }
 
