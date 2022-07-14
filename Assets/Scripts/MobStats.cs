@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum MobType {cow, chicken, pig, skeleton, zombie, slime};
+public enum MobType { cow, chicken, pig, skeleton, zombie, slime, slimeking };
 
-public class MobStats: MonoBehaviour
-{
-   
+public class MobStats : MonoBehaviour {
+
     public static MobStats instance;
     public int[] kills;
-    private int noOfMobs = 6;
+    private int noOfMobs;
 
     public void Awake() {
         if (instance == null) {
+            noOfMobs = MobType.GetNames(typeof(MobType)).Length;
             kills = new int[noOfMobs];
             instance = this;
         } else {
@@ -23,7 +23,12 @@ public class MobStats: MonoBehaviour
 
 
     public void addKill(MobType type) {
-        switch(type) {
+        instance.kills[(int) type] += 2;
+        if (instance.kills[(int) MobType.pig] == 2) {
+            Achievement.instance.UnlockAchievement(Achievement.AchievementType.technoblade);
+        }
+        /*
+        switch (type) {
             case MobType.cow:
                 instance.kills[0] += 1;
                 break;
@@ -44,10 +49,14 @@ public class MobStats: MonoBehaviour
                 break;    
              case MobType.slime:
                 instance.kills[5] += 1;
-                break;   
+                break;
+            case MobType.slimeking:
+                instance.kills[6] += 1;
+                break;
             default:
                 break;         
-        }       
+        }   
+        */
     }
 
 }

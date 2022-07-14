@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: -5559045186674872917}
   m_Layer: 10
   m_Name: SlimeKing
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,12 +165,16 @@ MonoBehaviour:
   damage: 5
   speed: 1.5
   data: {fileID: 11400000, guid: 15bdc9e971ff83e49afe41f3e7b74fe1, type: 2}
-  maxDistanceFromPlayer: 50
-  isRanged: 0
   deathEffect: {fileID: 0}
   lootTable: {fileID: 0}
   idleSound: {fileID: -4683126102855919869}
   damagedSound: {fileID: -5559045186674872917}
+  knockbackStrength: 5
+  knockbackTime: 0.6
+  freezeTime: 1
+  type: 6
+  maxDistanceFromPlayer: 50
+  isRanged: 0
   maxYAxisSpeedMultiplier: 2
 --- !u!114 &4392574776621726788
 MonoBehaviour:

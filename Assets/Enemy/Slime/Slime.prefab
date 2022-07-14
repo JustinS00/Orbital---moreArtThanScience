@@ -163,13 +163,16 @@ MonoBehaviour:
   damage: 5
   speed: 1.5
   data: {fileID: 11400000, guid: 813ad5d471737344e87a1950f0003350, type: 2}
-  maxDistanceFromPlayer: 50
-  isRanged: 0
   deathEffect: {fileID: 0}
   lootTable: {fileID: 0}
   idleSound: {fileID: 2981842018791844910}
   damagedSound: {fileID: -4449745401584338333}
+  knockbackStrength: 5
+  knockbackTime: 0.6
+  freezeTime: 1
   type: 5
+  maxDistanceFromPlayer: 50
+  isRanged: 0
   maxYAxisSpeedMultiplier: 2.5
 --- !u!114 &5884324239718369080
 MonoBehaviour:

@@ -44,7 +44,7 @@ public class PlayerCombat : MonoBehaviour {
         // Damage them
         foreach (Collider2D enemy in allHitCollider2Ds) {
             if (enemy.GetComponent<Health>().CanDamage(Mathf.RoundToInt(weapon.damage))) {
-                enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(weapon.damage));
+                enemy.GetComponent<Health>().Damage(Mathf.RoundToInt(weapon.damage), this.gameObject);
                 weapon.reduceDurability(1);
             }
         }
@@ -60,7 +60,7 @@ public class PlayerCombat : MonoBehaviour {
         var allHitCollider2Ds = hitEnemies.Concat(hitBosses);
         // Damage them
         foreach (Collider2D enemy in allHitCollider2Ds) {
-            enemy.GetComponent<Health>().Damage(attackDamage);
+            enemy.GetComponent<Health>().Damage(attackDamage, this.gameObject);
             Achievement.instance.UnlockAchievement(Achievement.AchievementType.willsmith);
         }
     }
