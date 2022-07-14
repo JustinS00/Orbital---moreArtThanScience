@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4a959074a97dc8459a17d3235519df1, type: 3}
   m_Name: BossCollection
   m_EditorClassIdentifier: 
-  prefabs: []
+  prefabs:
+  - {fileID: 1995167797868300716, guid: 2721ff9113aaf8048b385710cae76860, type: 3}

@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour {
     public Vector2 spawnPos;
 
     private bool gamePaused = false;
-    private float timeElapsed = 0f;
-    private int dayNo = 0;
+    [SerializeField] private float timeElapsed = 0f;
+    [SerializeField] private int dayNo = 0;
     private int secondsPerGameDay = 1200;
 
     // Start is called before the first frame update

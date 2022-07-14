@@ -9,10 +9,11 @@ public class MobStats : MonoBehaviour {
 
     public static MobStats instance;
     public int[] kills;
-    private int noOfMobs = 6;
+    private int noOfMobs;
 
     public void Awake() {
         if (instance == null) {
+            noOfMobs = MobType.GetNames(typeof(MobType)).Length;
             kills = new int[noOfMobs];
             instance = this;
         } else {
