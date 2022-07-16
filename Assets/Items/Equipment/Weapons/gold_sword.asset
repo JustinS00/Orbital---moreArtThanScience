@@ -17,9 +17,9 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 77a0c37f85b18724bb87ffb13e61cc5a, type: 3}
   isStackable: 0
   maxItemsPerStack: 1
-  equipmentType: 0
+  equipmentType: 2
   durability: 33
   durabilityRemaining: 33
   weaponType: 0
   damage: 4
-  swordTier: 0
+  swordTier: 3

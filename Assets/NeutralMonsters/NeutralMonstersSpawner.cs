@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour {
+public class NeutralMonstersSpawner : MonoBehaviour {
 
     [SerializeField]
     private EntityCollection entityCollection;
     private GameObject[] entityPrefabs;
 
     [SerializeField]
-    private float spawnInterval = 15.0f;
+    private float spawnInterval = 25.0f;
 
     [SerializeField]
     private int maxNumEntities;
@@ -33,8 +33,6 @@ public class EnemySpawner : MonoBehaviour {
         StartCoroutine(spawnEntity(spawnInterval, entityPrefabs[Random.Range(0, numberOfPossibleEntities)]));
     }
 
-
-
     private IEnumerator spawnEntity(float interval, GameObject entity) {
         yield return new WaitForSeconds(interval);
 
@@ -45,14 +43,12 @@ public class EnemySpawner : MonoBehaviour {
         } else {
             randX -= 5.0f;
         }
-        maxNumEntities = OptionsMenu.instance.GetHostileMobCap();
+
         spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
-         //TODO: if player is in town or if time is day / do not spawn
-        if (Physics2D.OverlapCircle(spawnLocation, 1.0f) == null && player.transform.position.y <= 128 && DayNightCycle.instance.isNight()) {
+        if (Physics2D.OverlapCircle(spawnLocation, 1.0f) == null && player.transform.position.y <= 128) {
             GameObject newEntity = Instantiate(entity, spawnLocation, Quaternion.identity);
         }
 
-        //limits number of enemies spawned to maxNumEntities
         yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag(currentTag).Length < maxNumEntities);
         StartCoroutine(spawnEntity(spawnInterval, entityPrefabs[Random.Range(0, numberOfPossibleEntities)]));
     }

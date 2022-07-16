@@ -29,6 +29,7 @@ public class DayNightCycle : MonoBehaviour {
     //public TextMeshProUGUI dayDisplay;
     public Volume postProcessingVolume;
 
+
     void Awake() {
         if (instance == null) {
             instance = this;
@@ -61,6 +62,10 @@ public class DayNightCycle : MonoBehaviour {
         }
 
         ControlLighting();
+    }
+
+    public int GetDayNo() {
+        return instance.days;
     }
 
     public void ControlLighting() {

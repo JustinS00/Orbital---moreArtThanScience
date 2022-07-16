@@ -22,4 +22,4 @@ MonoBehaviour:
   durabilityRemaining: 131
   toolType: 2
   toolTier: 1
-  miningSpeed: 0
+  miningSpeed: 0.95

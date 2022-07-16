@@ -140,7 +140,8 @@ public class Health : MonoBehaviour {
 
     private IEnumerator KnockPlayer(PlayerController playerController, GameObject fromGameObject) {
         yield return new WaitForSeconds(0.1f);
-        playerController.Knockback(fromGameObject.transform);
+        if (playerController != null && fromGameObject != null)
+            playerController.Knockback(fromGameObject.transform);
     }
 
     private IEnumerator KnockEnemy(Enemy enemy, GameObject fromGameObject) {

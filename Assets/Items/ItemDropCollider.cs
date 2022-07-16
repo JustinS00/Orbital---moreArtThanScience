@@ -37,7 +37,7 @@ public class ItemDropCollider : MonoBehaviour {
                     Destroy(col.gameObject);
                 }
             }
-        } else if (col.gameObject.CompareTag("Enemy")) {
+        } else if (col.gameObject.CompareTag("Enemy") || col.gameObject.CompareTag("Neutral Monster") || col.gameObject.CompareTag("Boss")) {
             Physics2D.IgnoreCollision(col.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
         }
     }

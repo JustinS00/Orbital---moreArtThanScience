@@ -27,7 +27,7 @@ public class BossSpawner : MonoBehaviour {
     }
 
     void Update() {
-        int dayNo = gameManager.getDayNo();
+        int dayNo = DayNightCycle.instance.GetDayNo();
         if (MobStats.instance.kills[(int) MobType.slimeking] == 0) {
             if (dayNo >= 10 && dayNo % 5 == 0 && GameObject.FindGameObjectsWithTag("Boss").Length == 0) {
                 Debug.Log(dayNo);
@@ -39,8 +39,13 @@ public class BossSpawner : MonoBehaviour {
                 }
                 if (player.transform.position.y <= 128) {
                     GameObject newEntity = Instantiate(slimeking, spawnLocation, Quaternion.identity);
+                    gameManager.DisablePortals();
                 }
             }
+        }
+
+        if (GameObject.FindGameObjectsWithTag("Boss").Length == 0) {
+            gameManager.EnablePortals();
         }
     }
 }

@@ -383,8 +383,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.010991573, y: 0.043966174}
-  m_Size: {x: 0.6378478, y: 1.7651038}
+  m_Offset: {x: 0.010991573, y: 0.07828987}
+  m_Size: {x: 0.6378478, y: 1.8795159}
   m_Direction: 0
 --- !u!95 &-8964131372458676788
 Animator:
@@ -421,13 +421,16 @@ MonoBehaviour:
   damage: 5
   speed: 1.5
   data: {fileID: 11400000, guid: de23241a6ccc3934e89cccfd19333536, type: 2}
-  maxDistanceFromPlayer: 50
-  isRanged: 0
   deathEffect: {fileID: 0}
   lootTable: {fileID: 11400000, guid: 7f87fed713303ac4f9e6e282bccfa53d, type: 2}
   idleSound: {fileID: 2844412488968929322}
   damagedSound: {fileID: 5660344504730689841}
+  knockbackStrength: 5
+  knockbackTime: 0.6
+  freezeTime: 1
   type: 3
+  maxDistanceFromPlayer: 50
+  isRanged: 0
 --- !u!114 &4885779288866532331
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class SlimeBoss : MonoBehaviour {
     [SerializeField]
     private float spinChance = 1f;
     private int maxNumberOfProjectiles = 3;
+
     [SerializeField]
     private Transform spawnPoint;
 
@@ -65,7 +66,8 @@ public class SlimeBoss : MonoBehaviour {
     }
 
     private IEnumerator SpawnSlimes(int numberOfProjectiles) {
-        if (numberOfProjectiles > 0) {
+        int maxNumEntities = OptionsMenu.instance.GetHostileMobCap();
+        if (numberOfProjectiles > 0 && GameObject.FindGameObjectsWithTag("Enemy").Length < maxNumEntities) {
             GameObject slime = Instantiate(slimeProjectilePrefab, spawnPoint.position, Quaternion.identity);
 
             int direction = Random.Range(0, 1.0f) > 0.5 ? 1 : -1;

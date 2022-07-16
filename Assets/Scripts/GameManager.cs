@@ -8,13 +8,13 @@ public class GameManager : MonoBehaviour {
     public CameraController cam;
     public Town town;
     public Portal portal;
+    private Portal terrainPortal;
+    private Portal townPortal;
 
     public Vector2 spawnPos;
 
     private bool gamePaused = false;
-    [SerializeField] private float timeElapsed = 0f;
-    [SerializeField] private int dayNo = 0;
-    private int secondsPerGameDay = 1200;
+
 
     // Start is called before the first frame update
     void Awake() {
@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        timeElapsed += Time.deltaTime;
-        dayNo = Mathf.FloorToInt(timeElapsed / secondsPerGameDay);
     }
 
     // Update is called once per frame
@@ -52,31 +50,37 @@ public class GameManager : MonoBehaviour {
         return gamePaused;
     }
 
-    public int getDayNo() {
-        return this.dayNo;
-    }
-
-    public int getTime() {
-        return Mathf.RoundToInt(timeElapsed % secondsPerGameDay);
-    }
-
     private void SpawnPortalTerrain() {
         Portal newPortal = Instantiate(portal);
         newPortal.transform.SetParent(terrain.transform, false);
         newPortal.SetEnableMessage("Press 'T' to travel to Town Area");
-        newPortal.SetDisableMessage("Portal is disabled");
+        newPortal.SetDisableMessage("Portal is disabled. To enable kill the Boss Monster");
         newPortal.SetLocation(new Vector2(50, 211));
         newPortal.transform.localPosition = spawnPos + new Vector2(0,3);
         newPortal.TogglePortalOn();
+        terrainPortal = newPortal;
     }
     
     private void SpawnPortalTown() {
         Portal newPortal = Instantiate(portal);
         newPortal.transform.SetParent(town.transform, false);
         newPortal.SetEnableMessage("Press 'T' to travel to Wilderness");
-        newPortal.SetDisableMessage("Portal is disabled");
+        newPortal.SetDisableMessage("Portal is disabled. To enable kill the Boss Monster");
         newPortal.SetLocation(spawnPos);
         newPortal.transform.localPosition = new Vector2(60, 13);
         newPortal.TogglePortalOn();
+        townPortal = newPortal;
     }
+
+    public void DisablePortals() {
+        terrainPortal.TogglePortalOff();
+        townPortal.TogglePortalOff();
+    }
+
+    public void EnablePortals() {
+        terrainPortal.TogglePortalOn();
+        townPortal.TogglePortalOn();
+    }
+
+
 }
