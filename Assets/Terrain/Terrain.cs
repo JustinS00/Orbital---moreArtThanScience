@@ -285,9 +285,32 @@ public class Terrain : MonoBehaviour {
 
     #region Functions
     public bool canPlace(int x, int y) {
-        if (x >= 0 && x < worldSize && y >= 0 && y < worldHeight)
+        if (x >= 0 && x < worldSize && y >= 0 && y < worldHeight) {
+            string[] tags = {"Player","Enemy","Neutral Monster", "Boss"};
+            GameObject[] characters = FindGameObjectsWithTags(tags);
+            foreach (GameObject obj in characters) {
+                try {
+                    Transform pos = obj.GetComponent<Transform>();
+                    Bounds bounds = obj.GetComponent<Collider2D>().bounds;
+                    Debug.Log(bounds);
+                    if (bounds.Contains(new Vector2(x,y)) || bounds.Contains(new Vector2(x + 0.5f,y + 0.5f)) || bounds.Contains(new Vector2(x + 1f,y + 1f)))
+                        return false;
+                } catch {
+                    Debug.Log(obj + "does not have collider");
+                }
+            }
             return !worldBlocks.Contains(new Vector2(x, y));
+        }
+            
         return false;
+    }
+
+    private GameObject[] FindGameObjectsWithTags(string[] tags) {
+        List<GameObject> lst = new List<GameObject>();
+        foreach (string tag in tags){
+            lst.AddRange(GameObject.FindGameObjectsWithTag(tag));
+        }
+        return lst.ToArray();
     }
 
     public BlockClass GetBlock(int x, int y) {

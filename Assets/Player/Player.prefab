@@ -1031,6 +1031,8 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   playerCombat: {fileID: 1639873183}
   apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
+  knockbackStrength: 5
+  knockbackTime: 0.3
 --- !u!95 &6179212869121307435
 Animator:
   serializedVersion: 4
