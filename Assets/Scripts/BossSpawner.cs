@@ -30,13 +30,14 @@ public class BossSpawner : MonoBehaviour {
         int dayNo = DayNightCycle.instance.GetDayNo();
         if (MobStats.instance.kills[(int) MobType.slimeking] == 0) {
             if (dayNo >= 10 && dayNo % 5 == 0 && GameObject.FindGameObjectsWithTag("Boss").Length == 0) {
-                Debug.Log(dayNo);
                 int slimekingIndex = (int) BossType.slimeking;
                 GameObject slimeking = entityPrefabs[slimekingIndex];
+
                 spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
                 while (Physics2D.OverlapCircle(spawnLocation, 1.0f) != null) {
                     spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
                 }
+
                 if (player.transform.position.y <= 128) {
                     GameObject newEntity = Instantiate(slimeking, spawnLocation, Quaternion.identity);
                     gameManager.DisablePortals();

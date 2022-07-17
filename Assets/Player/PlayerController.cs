@@ -412,17 +412,14 @@ public class PlayerController : MonoBehaviour {
         health.Heal(Mathf.Min(maxHealth - GetComponent<Health>().GetHealth(), consumable.healthAdded));
     }
 
-    public void Knockback(Transform t)
-    {
-        Debug.Log("knockback player");
-        Vector3 dir = transform.position  - t.position;
+    public void Knockback(Transform t) {
+        Vector3 dir = transform.position - t.position;
         knockbacked = true;
         rb.velocity = (dir.normalized * knockbackStrength);
         StartCoroutine(UnKnockback());
     }
 
-    private IEnumerator UnKnockback()
-    {
+    private IEnumerator UnKnockback() {
         yield return new WaitForSeconds(knockbackTime);
         rb.velocity = Vector3.zero;
         knockbacked = false;
