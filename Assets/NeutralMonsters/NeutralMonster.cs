@@ -68,7 +68,8 @@ public class NeutralMonster : MonoBehaviour {
 
     public void MakeLoot() {
         if (lootTable) {
-            lootTable.generateLoot(data.maxItemsToDrop + 1, transform.position);
+            int randNumItems = Random.Range(0, data.maxItemsToDrop + 1);
+            lootTable.GenerateLoot(randNumItems, transform.position);
         }
     }
 

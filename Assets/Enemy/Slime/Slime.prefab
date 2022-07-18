@@ -164,7 +164,7 @@ MonoBehaviour:
   speed: 1.5
   data: {fileID: 11400000, guid: 813ad5d471737344e87a1950f0003350, type: 2}
   deathEffect: {fileID: 0}
-  lootTable: {fileID: 0}
+  lootTable: {fileID: 11400000, guid: 8b3916028fb248b4e832cada5174fb94, type: 2}
   idleSound: {fileID: 2981842018791844910}
   damagedSound: {fileID: -4449745401584338333}
   knockbackStrength: 5
