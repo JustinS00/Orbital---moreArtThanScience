@@ -75,7 +75,9 @@ public class PlayerCombat : MonoBehaviour {
         int arrowTypeIndex = (int) arrow.arrowType;
         GameObject arrowToFire = arrowCollection.arrowPrefabs[arrowTypeIndex];
 
-        GameObject arrowShot = Instantiate(arrowToFire, attackPoint.position, attackPoint.rotation);
+        int dir = direction.x > 0 ? 1 : -1;
+        Vector3 arrowPosition = transform.position + dir * Vector3.right;
+        GameObject arrowShot = Instantiate(arrowToFire, arrowPosition, attackPoint.rotation);
         arrowShot.GetComponent<Rigidbody2D>().velocity = direction * arrowLaunchForce;
     }
 
