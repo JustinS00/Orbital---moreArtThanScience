@@ -16,19 +16,23 @@ public class FlyingBoss : FlyingAI {
     private AIPath pathfinder;
     #endregion
 
-    #region Skill Related
-    private bool _rage = false;
-
+    #region Pre-Rage
     [SerializeField] private GameObject cursedCloth;
     [SerializeField] private int maxAddsToSpawn = 5;
     [SerializeField] private int spawnCooldown = 10;
     private float nextTimeToSpawn;
+    #endregion
+
+    #region Post-Rage
+    private bool _rage = false;
 
     [SerializeField] private float dashCooldown = 10f;
+    [SerializeField] private float dashDuration = 2f;
     private bool startDashing = false;
     private float nextTimeToHitPlayer = 0f;
     [SerializeField] private int dashDamage = 8;
     private bool isDashing = false;
+    private int dashPower = 2;
     #endregion
 
     private new void Start() {
@@ -75,9 +79,9 @@ public class FlyingBoss : FlyingAI {
         pathfinder.canMove = false;
         int directionX = player.transform.position.x > transform.position.x ? 1 : -1;
         destinationSetter.Dash(directionX);
-        rb.velocity = new Vector2(directionX * transform.localScale.x * 2, transform.localScale.y);
+        rb.velocity = new Vector2(directionX * transform.localScale.x * dashPower, transform.localScale.y);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(dashDuration);
         isDashing = false;
         pathfinder.canMove = true;
         Physics2D.IgnoreCollision(playerCollider2D, thisCollider2D, false);

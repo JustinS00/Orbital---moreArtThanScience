@@ -56,11 +56,11 @@ public class GameManager : MonoBehaviour {
         newPortal.SetEnableMessage("Press 'T' to travel to Town Area");
         newPortal.SetDisableMessage("Portal is disabled. To enable kill the Boss Monster");
         newPortal.SetLocation(new Vector2(50, 211));
-        newPortal.transform.localPosition = spawnPos + new Vector2(0,3);
+        newPortal.transform.localPosition = spawnPos + new Vector2(0, 3);
         newPortal.TogglePortalOn();
         terrainPortal = newPortal;
     }
-    
+
     private void SpawnPortalTown() {
         Portal newPortal = Instantiate(portal);
         newPortal.transform.SetParent(town.transform, false);

@@ -8,7 +8,6 @@ public class FlyingAI : Enemy {
 
     protected new void Start() {
         base.Start();
-        //AttackPlayer();
     }
 
     // Update is called once per frame

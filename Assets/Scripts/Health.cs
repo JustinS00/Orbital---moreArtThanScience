@@ -128,7 +128,6 @@ public class Health : MonoBehaviour {
             Destroy(gameObject);
             //gameObject.SetActive(false);
         }
-        Debug.Log("Die");
     }
 
     private IEnumerator BecomeTemporarilyInvincible() {
