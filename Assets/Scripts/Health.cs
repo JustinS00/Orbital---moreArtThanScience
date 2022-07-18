@@ -46,7 +46,7 @@ public class Health : MonoBehaviour {
     }
 
     public float GetHealthPercentage() {
-        return this.health / this.MAX_HEALTH;
+        return 1.0f * this.health / this.MAX_HEALTH;
     }
 
     public bool CanDamage(int damage) {
@@ -128,7 +128,6 @@ public class Health : MonoBehaviour {
             Destroy(gameObject);
             //gameObject.SetActive(false);
         }
-        Debug.Log("Die");
     }
 
     private IEnumerator BecomeTemporarilyInvincible() {

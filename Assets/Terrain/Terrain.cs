@@ -231,7 +231,7 @@ public class Terrain : MonoBehaviour {
     #endregion
 
     #region Update
-    
+
     /**
     private void Update() {
         RefreshChunks();
@@ -286,14 +286,14 @@ public class Terrain : MonoBehaviour {
     #region Functions
     public bool canPlace(int x, int y) {
         if (x >= 0 && x < worldSize && y >= 0 && y < worldHeight) {
-            string[] tags = {"Player","Enemy","Neutral Monster", "Boss"};
+            string[] tags = { "Player", "Enemy", "Neutral Monster", "Boss" };
             GameObject[] characters = FindGameObjectsWithTags(tags);
             foreach (GameObject obj in characters) {
                 try {
                     Transform pos = obj.GetComponent<Transform>();
                     Bounds bounds = obj.GetComponent<Collider2D>().bounds;
                     Debug.Log(bounds);
-                    if (bounds.Contains(new Vector2(x,y)) || bounds.Contains(new Vector2(x + 0.5f,y + 0.5f)) || bounds.Contains(new Vector2(x + 1f,y + 1f)))
+                    if (bounds.Contains(new Vector2(x, y)) || bounds.Contains(new Vector2(x + 0.5f, y + 0.5f)) || bounds.Contains(new Vector2(x + 1f, y + 1f)))
                         return false;
                 } catch {
                     Debug.Log(obj + "does not have collider");
@@ -301,13 +301,13 @@ public class Terrain : MonoBehaviour {
             }
             return !worldBlocks.Contains(new Vector2(x, y));
         }
-            
+
         return false;
     }
 
     private GameObject[] FindGameObjectsWithTags(string[] tags) {
         List<GameObject> lst = new List<GameObject>();
-        foreach (string tag in tags){
+        foreach (string tag in tags) {
             lst.AddRange(GameObject.FindGameObjectsWithTag(tag));
         }
         return lst.ToArray();
@@ -357,7 +357,7 @@ public class Terrain : MonoBehaviour {
             } else if (itemName == "log") {
                 newBlock.GetComponent<ParticleSystemRenderer>().sharedMaterial = logMaterial;
             }
-            
+
             worldBlocks.Add(newBlock.transform.position - (Vector3.one * 0.5f));
             worldBlocksObject.Add(newBlock);
             worldBlockClasses.Add(block);
@@ -385,8 +385,8 @@ public class Terrain : MonoBehaviour {
         newBlock.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.7f, 0.7f);
         newBlock.transform.position = new Vector2(x + 0.5f, y + 0.5f);
     }
-    
-    
+
+
     private bool blockIsSurfaceBlock(int x, int y) {
         BlockClass block = GetBlock(x, y);
         if (block) {
@@ -402,7 +402,7 @@ public class Terrain : MonoBehaviour {
             Vector2 pos = new Vector2(x, y);
             GameObject obj = worldBlocksObject[worldBlocks.IndexOf(new Vector2(x, y))];
             BlockClass block = worldBlockClasses[worldBlocks.IndexOf(new Vector2(x, y))];
-            
+
             if (blockIsSurfaceBlock(x, y + 1))
                 mineBlock(x, y + 1, true);
             //worldBlocksMap.SetPixel(x,y, Color.white);

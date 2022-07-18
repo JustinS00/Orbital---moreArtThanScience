@@ -130,7 +130,6 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Knockback(Transform t) {
-        Debug.Log("knockback enemy sciript");
         Vector3 dir = transform.position - t.position;
         knockbacked = true;
         rb.velocity = (dir.normalized * knockbackStrength);
