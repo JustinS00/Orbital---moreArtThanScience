@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95ad59ce22d9d94f8303b8938ec7c4a, type: 3}
-  m_Name: SlimeKingData
+  m_Script: {fileID: 11500000, guid: 4e9fe77e65c638b40b00c894b06dfaa5, type: 3}
+  m_Name: Slime Ball
   m_EditorClassIdentifier: 
-  health: 50
-  damage: 10
-  speed: 3
-  maxItemsToDrop: 64
+  itemType: 3
+  itemName: slime_ball
+  itemSprite: {fileID: 21300000, guid: 042ba44213873440189f87f4b4b88ae7, type: 3}
+  isStackable: 1
+  maxItemsPerStack: 64
+  healthAdded: 50

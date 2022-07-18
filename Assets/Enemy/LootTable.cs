@@ -16,13 +16,13 @@ public class LootTable : ScriptableObject {
     public GameObject itemDrop;
 
 
-    public void generateLoot(int numberOfItemsToDrop, Vector2 position) {
+    public void GenerateLoot(int numberOfItemsToDrop, Vector2 position) {
         if (numberOfItemsToDrop == 0) return;
 
         int lootProbabilitySum = 100;
-        
+
         while (numberOfItemsToDrop > 0) {
-           
+
             foreach (Loot item in loots) {
                 int randNum = Random.Range(0, lootProbabilitySum);
                 if (randNum < item.dropChance) {

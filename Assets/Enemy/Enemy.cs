@@ -107,7 +107,8 @@ public class Enemy : MonoBehaviour {
     public void MakeLoot() {
         if (lootTable) {
             int randNumItems = Random.Range(0, data.maxItemsToDrop + 1);
-            lootTable.generateLoot(randNumItems, transform.position);
+            Debug.Log(randNumItems);
+            lootTable.GenerateLoot(randNumItems, transform.position);
         }
     }
 

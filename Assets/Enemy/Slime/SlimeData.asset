@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SlimeData
   m_EditorClassIdentifier: 
   health: 10
-  damage: 10
+  damage: 5
   speed: 3
-  maxItemsToDrop: 3
+  maxItemsToDrop: 4
