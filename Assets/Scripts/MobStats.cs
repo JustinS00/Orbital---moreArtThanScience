@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum MobType { cow, chicken, pig, skeleton, zombie, slime, slimeking};
+public enum MobType { cow, chicken, pig, skeleton, zombie, slime, slimeking, cursedcloth, clothboss};
 
 public class MobStats : MonoBehaviour {
 

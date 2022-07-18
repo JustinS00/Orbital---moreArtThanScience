@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 public class FlyingAI : Enemy {
     // Start is called before the first frame update
-    private new void Start() {
+
+    protected new void Start() {
         base.Start();
-        AttackPlayer();
+        //AttackPlayer();
     }
 
     // Update is called once per frame
-    void Update() {
+    protected void Update() {
         base.LookAtPlayer();
-    }
-
-    public override void AttackPlayer() {
-        
     }
 }

@@ -46,7 +46,7 @@ public class Health : MonoBehaviour {
     }
 
     public float GetHealthPercentage() {
-        return this.health / this.MAX_HEALTH;
+        return 1.0f * this.health / this.MAX_HEALTH;
     }
 
     public bool CanDamage(int damage) {
