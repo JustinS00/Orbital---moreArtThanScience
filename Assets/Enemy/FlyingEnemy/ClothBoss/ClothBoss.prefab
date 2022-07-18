@@ -112,7 +112,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &2175976442944693594
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -173,6 +173,9 @@ MonoBehaviour:
   cursedCloth: {fileID: 2387704375992474588, guid: 29c0e80f468b66d4496d2476abb65bec, type: 3}
   maxAddsToSpawn: 5
   spawnCooldown: 10
+  dashCooldown: 10
+  dashDuration: 2
+  dashDamage: 8
 --- !u!114 &2175976442944693590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  drawGizmos: 1
+  drawGizmos: 0
   detailedGizmos: 0
   startEndModifier:
     addPoints: 0
