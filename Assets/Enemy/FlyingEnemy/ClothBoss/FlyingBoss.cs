@@ -29,7 +29,6 @@ public class FlyingBoss : FlyingAI {
     [SerializeField] private float dashCooldown = 10f;
     [SerializeField] private float dashDuration = 2f;
     private bool startDashing = false;
-    private float nextTimeToHitPlayer = 0f;
     [SerializeField] private int dashDamage = 8;
     private bool isDashing = false;
     private int dashPower = 2;
@@ -89,7 +88,7 @@ public class FlyingBoss : FlyingAI {
         StartCoroutine(DashCoroutine());
     }
 
-    private void OnTriggerEnter2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if (isDashing && collision.gameObject.CompareTag("Player")) {
             Physics2D.IgnoreCollision(playerCollider2D, thisCollider2D, true);
             player.GetComponent<Health>().Damage(dashDamage, this.gameObject);
