@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,11 @@ public class BossSpawner : MonoBehaviour {
 
     private GameObject player;
 
+    private int clothBossSpawnDay = Int32.MaxValue;
+
     enum BossType {
         slimeking,
-        flyboss
+        clothBoss
     }
 
     // Start is called before the first frame update
@@ -45,8 +48,30 @@ public class BossSpawner : MonoBehaviour {
             }
         }
 
+        if (MobStats.instance.kills[(int) MobType.clothboss] == 0) {
+            if (dayNo >= clothBossSpawnDay && dayNo % 5 == 0 GameObject.FindGameObjectsWithTag("Boss").Length == 0)
+            {
+                int clothBossIndex = (int) BossType.clothBoss;
+                GameObject clothBoss = entityPrefabs[clothBossIndex];
+
+                spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
+                while (Physics2D.OverlapCircle(spawnLocation, 1.0f) != null) {
+                    spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
+                }
+
+                if (player.transform.position.y <= 128) {
+                    GameObject newEntity = Instantiate(clothBoss, spawnLocation, Quaternion.identity);
+                    gameManager.DisablePortals();
+                }
+            }
+        }
+
         if (GameObject.FindGameObjectsWithTag("Boss").Length == 0) {
             gameManager.EnablePortals();
         }
+    }
+
+    public void SetClothBossSpawnDay(int dayNo) {
+        clothBossSpawnDay = Math.Min(clothBossSpawnDay, dayNo);
     }
 }
