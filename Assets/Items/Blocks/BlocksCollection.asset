@@ -24,5 +24,7 @@ MonoBehaviour:
   iron_ore: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
   gold_ore: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
   diamond_ore: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+  brick_red: {fileID: 11400000, guid: 042e1f687c7ddb941938c3d251d8a99a, type: 2}
+  brick_grey: {fileID: 11400000, guid: 28ff19ab0e1a55b41944b7916e05b204, type: 2}
   bedrock: {fileID: 11400000, guid: e93965a5782432d4f999ef83c6fc917e, type: 2}
   boundary: {fileID: 11400000, guid: 664fe0d573c276a41baf736860cfb0e6, type: 2}

@@ -27,7 +27,14 @@ public class BlocksCollection : ScriptableObject
     public BlockClass diamond_ore;
     #endregion
 
+    #region Decoration Blocks
+    public BlockClass brick_red;
+    public BlockClass brick_grey;
+    #endregion
+    
+    #region Unbreakable Blocks
     public BlockClass bedrock;
     public BlockClass boundary;
+    #endregion
 
 }

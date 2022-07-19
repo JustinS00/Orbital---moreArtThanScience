@@ -66,6 +66,7 @@ public class PlayerCombat : MonoBehaviour {
     }
 
     public void Shoot(BowClass bow, ArrowClass arrow) {
+        bow.reduceDurability(1);
         nextArrowLaunchTime = Time.time + bow.fireRate / 60;
 
         Vector2 bowPosition = transform.position;

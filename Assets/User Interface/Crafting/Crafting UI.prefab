@@ -318,7 +318,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1725513128623988326}
   m_HandleRect: {fileID: 6166397740631091541}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -518,6 +518,142 @@ MonoBehaviour:
       quantity: 2
     - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
       quantity: 1
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 682fa14f9d8a51c4386b6233ff474815, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
+      quantity: 5
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 97d17c5282ed6734b9069196747ce9a3, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
+      quantity: 8
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 9cdd31d7fb361e048a6c7194c51f6f64, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
+      quantity: 7
+  - itemRecieve:
+      item: {fileID: 11400000, guid: a41ea965b40047e429ad606d3afd5684, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
+      quantity: 4
+  - itemRecieve:
+      item: {fileID: 11400000, guid: ba80dc4f88b9e584e846004fb9ffac11, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 3
+    - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
+      quantity: 2
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 8e94d54a070a83947b14b353b24a8da8, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 1
+    - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
+      quantity: 2
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 407e88a84afd78f449aa8fefd0dfa481, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 3
+    - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
+      quantity: 2
+  - itemRecieve:
+      item: {fileID: 11400000, guid: ce40221c89663a244ac2bef85f96af80, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 2
+    - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
+      quantity: 1
+  - itemRecieve:
+      item: {fileID: 11400000, guid: b8b90fb2910d11d45822ae9937971d45, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 5
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 62662ca9ee1748a49848092535d6757f, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 8
+  - itemRecieve:
+      item: {fileID: 11400000, guid: a75bdff19ab23a94e88961e886b31ff9, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 7
+  - itemRecieve:
+      item: {fileID: 11400000, guid: f8374ce3e892f0341ba28aa970f84254, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 4
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 61de4d9479bfffc4e9564616d006a358, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 3
+    - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
+      quantity: 2
+  - itemRecieve:
+      item: {fileID: 11400000, guid: e64fcb80b245c28418d3ffac57023aeb, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 1
+    - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
+      quantity: 2
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 5ef3b6aff718c494aa43e3c536b5650c, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 3
+    - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
+      quantity: 2
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 49a74290c00e9454ba8565612e84dfea, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 2
+    - item: {fileID: 11400000, guid: a86ebba515805f7418752227a81eec48, type: 2}
+      quantity: 1
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 95e4e53fb9719724db5c717d40fb3261, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 5
+  - itemRecieve:
+      item: {fileID: 11400000, guid: e4881485f67147e479e7f0e6287678f9, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 8
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 28f86c8fed74e6a40935ef8d5190cdef, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 7
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 124f5d0c56896e8489867fed38fe807d, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 4
   isShowing: 0
 --- !u!1 &3992720172788287638
 GameObject:
@@ -985,7 +1121,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -20, y: 0.000019431114}
+  m_AnchoredPosition: {x: -20, y: -0.000030517578}
   m_SizeDelta: {x: 350, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2616337638362922656
@@ -1233,6 +1369,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4497280598644390053, guid: 77598743b1251754891b011467a709ff, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 2230732570650464555, guid: d24df3a756918e54493e1229efef401c, type: 3}
+    - target: {fileID: 4497280598644390053, guid: 77598743b1251754891b011467a709ff, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5896852413038467830, guid: 77598743b1251754891b011467a709ff, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1343,6 +1487,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4497280598644390053, guid: 77598743b1251754891b011467a709ff, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 2230732570650464555, guid: d24df3a756918e54493e1229efef401c, type: 3}
     - target: {fileID: 5896852413038467830, guid: 77598743b1251754891b011467a709ff, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
