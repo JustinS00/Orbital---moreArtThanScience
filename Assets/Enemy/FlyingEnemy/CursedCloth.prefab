@@ -129,7 +129,7 @@ MonoBehaviour:
   knockbackStrength: 5
   knockbackTime: 0.6
   freezeTime: 1
-  type: 0
+  type: 7
   maxDistanceFromPlayer: 50
   isRanged: 0
 --- !u!114 &2387704375992474589
@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+  isBoss: 0
 --- !u!95 &3731915648819069333
 Animator:
   serializedVersion: 4

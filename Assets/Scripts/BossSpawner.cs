@@ -49,8 +49,7 @@ public class BossSpawner : MonoBehaviour {
         }
 
         if (MobStats.instance.kills[(int) MobType.clothboss] == 0) {
-            if (dayNo >= clothBossSpawnDay && dayNo % 5 == 0 GameObject.FindGameObjectsWithTag("Boss").Length == 0)
-            {
+            if (dayNo >= clothBossSpawnDay && dayNo % 5 == 0 && GameObject.FindGameObjectsWithTag("Boss").Length == 0) {
                 int clothBossIndex = (int) BossType.clothBoss;
                 GameObject clothBoss = entityPrefabs[clothBossIndex];
 
