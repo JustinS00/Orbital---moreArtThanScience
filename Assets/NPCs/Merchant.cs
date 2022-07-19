@@ -17,9 +17,15 @@ public class Merchant : NPC
     public override void startAction(PlayerController player) {
         PopUp.ShowPopUp_Static(message);
         this.player = player;
+        if (player.showInv) {
+            ToggleTradeUI();
+        }
     
     }
     public override void stopAction(PlayerController player) {
+        if (isShowing) {
+            ToggleTradeUI();
+        }
         this.player = null;
         PopUp.HidePopUp_Static();
     }

@@ -36,6 +36,12 @@ public class Enemy : MonoBehaviour {
     [SerializeField] private int maxDistanceFromPlayer = 50;
     [SerializeField] private bool isRanged = false;
 
+
+    protected float jumpForce = 5f;
+    protected float stuckTime = 1f;
+    protected bool onGround;
+
+
     // Start is called before the first frame update
     protected void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -49,6 +55,13 @@ public class Enemy : MonoBehaviour {
         LookAtPlayer();
         AttackPlayer();
         PlayIdleSound();
+        onGround = -0.05f <= rb.velocity.y && rb.velocity.y <= 0.05f;
+        if (onGround) {
+            StartCoroutine(TryJump());
+        } else {
+            StopCoroutine(TryJump());
+        }
+       
     }
 
     private void SetEnemyValues() {
@@ -74,6 +87,22 @@ public class Enemy : MonoBehaviour {
             transform.Rotate(0f, 180f, 0f);
             isFlipped = true;
         }
+    }
+
+
+    protected void Jump() {
+        if (onGround) {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + jumpForce);
+            onGround = false;            
+        }
+    }
+
+    protected IEnumerator TryJump() {
+        Vector3 lastPos = transform.position;
+        yield return new WaitForSeconds(stuckTime);
+        if (-0.1 < (transform.position.x - lastPos.x) && (transform.position.x - lastPos.x) < 0.1) {
+            Jump();
+        }      
     }
 
     public virtual void AttackPlayer() {
@@ -143,4 +172,5 @@ public class Enemy : MonoBehaviour {
         yield return new WaitForSeconds(freezeTime);
         knockbacked = false;
     }
+
 }

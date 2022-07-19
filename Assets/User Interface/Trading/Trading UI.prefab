@@ -121,7 +121,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 796441760}
   m_HandleRect: {fileID: 796441759}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1001,6 +1001,70 @@ MonoBehaviour:
       quantity: 1
     - item: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
       quantity: 1
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
+      quantity: 2
+    itemsGiven:
+    - item: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
+      quantity: 16
+    - item: {fileID: 11400000, guid: 2f0a2a0a2dc9d8b4f90f13c24a2743e2, type: 2}
+      quantity: 4
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 2
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
+      quantity: 16
+    - item: {fileID: 11400000, guid: 2f0a2a0a2dc9d8b4f90f13c24a2743e2, type: 2}
+      quantity: 8
+  - itemRecieve:
+      item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 2
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
+      quantity: 32
+    - item: {fileID: 11400000, guid: 2f0a2a0a2dc9d8b4f90f13c24a2743e2, type: 2}
+      quantity: 32
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 042e1f687c7ddb941938c3d251d8a99a, type: 2}
+      quantity: 16
+    itemsGiven:
+    - item: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
+      quantity: 64
+    - item: {fileID: 11400000, guid: 2f0a2a0a2dc9d8b4f90f13c24a2743e2, type: 2}
+      quantity: 32
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 28ff19ab0e1a55b41944b7916e05b204, type: 2}
+      quantity: 16
+    itemsGiven:
+    - item: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
+      quantity: 64
+    - item: {fileID: 11400000, guid: 2f0a2a0a2dc9d8b4f90f13c24a2743e2, type: 2}
+      quantity: 32
+  - itemRecieve:
+      item: {fileID: 11400000, guid: ad9f3ba35a40387438306b12ffcebf72, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: b306edfcd1a6c054b89cfe916fdc67d4, type: 2}
+      quantity: 8
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 975b9a83c3b69a54b8d703a891924e15, type: 2}
+      quantity: 1
+    itemsGiven:
+    - item: {fileID: 11400000, guid: abf3c35a14e04a84e90dce7bb2961db7, type: 2}
+      quantity: 8
+    - item: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
+      quantity: 32
+  - itemRecieve:
+      item: {fileID: 11400000, guid: 021486dde9e477f4a8c936c041dd23c7, type: 2}
+      quantity: 16
+    itemsGiven:
+    - item: {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
+      quantity: 8
+    - item: {fileID: 11400000, guid: 2f0a2a0a2dc9d8b4f90f13c24a2743e2, type: 2}
+      quantity: 8
+    - item: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
+      quantity: 8
 --- !u!1001 &48571429166055144
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -78,6 +78,7 @@ public class TradingUI : MonoBehaviour
             if (haveItemsRequired) {
                 RemoveItems(player, trade.itemsGiven);
                 AddItems(player, trade.itemRecieve);
+                Achievement.instance.UnlockAchievement(Achievement.AchievementType.besttrade);
                 ToolTip.HideToolTip_Static();
             } else {
                 ToolTip.ShowToolTip_Static("  Insufficent Items");

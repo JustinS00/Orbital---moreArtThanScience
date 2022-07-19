@@ -24,6 +24,12 @@ public class SkeletonAttack : Enemy {
         base.LookAtPlayer();
         AttackPlayer();
         PlayIdleSound();
+        onGround = -0.05f <= rb.velocity.y && rb.velocity.y <= 0.05f;
+        if (onGround) {
+            StartCoroutine(TryJump());
+        } else {
+            StopCoroutine(TryJump());
+        }
     }
 
     public override void AttackPlayer() {

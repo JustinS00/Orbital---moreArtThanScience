@@ -18,8 +18,8 @@ MonoBehaviour:
   isStackable: 0
   maxItemsPerStack: 0
   equipmentType: 2
-  durability: 1
-  durabilityRemaining: 1
+  durability: 384
+  durabilityRemaining: 384
   weaponType: 1
   damage: 0
   fireRate: 60

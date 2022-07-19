@@ -1857,20 +1857,20 @@ MonoBehaviour:
   worldSize: 500
   worldHeight: 128
   dirtLayerHeight: 5
-  surfaceValue: 0
-  caveFreq: 0
-  terrainFreq: 0
+  surfaceValue: 0.2
+  caveFreq: 0.03
+  terrainFreq: 0.1
   noiseTexture: {fileID: 0}
   blocksCollection: {fileID: 11400000, guid: 72de6673147141b4c957e2979a08c9b5, type: 2}
   dirtMaterial: {fileID: 2100000, guid: 70431f137ead82a4080380dece097fcb, type: 2}
   stoneMaterial: {fileID: 2100000, guid: 25d96b0a929483140a0824ebf7fc9c0e, type: 2}
   logMaterial: {fileID: 2100000, guid: e9129c931f4f310439ede130515567e4, type: 2}
   emptyMaterial: {fileID: 2100000, guid: b3d2af2315c8e294abb87cd0c574c20b, type: 2}
-  treeChance: 0
+  treeChance: 0.03
   minTreeHeight: 4
   maxTreeHeight: 12
-  mushroomChance: 0
-  grassChance: 0
+  mushroomChance: 0.02
+  grassChance: 0.03
   apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
   appleChance: 0.05
   coalOreHeight: 128
@@ -2841,6 +2841,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1311924872, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
+      propertyPath: trades.Array.data[6].itemRecieve.item
+      value: 
+      objectReference: {fileID: 11400000, guid: 65ea095e19dbd9d4eab73731d2610188, type: 2}
     - target: {fileID: 1269390434543951402, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3199,7 +3203,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 431505017734525333, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000076293945
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 1015399155586681789, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3371,7 +3375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7626364247881248122, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000076293945
+      value: 0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 9174493073026180351, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3407,7 +3411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9216715648584967886, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000017166138
+      value: -0.000009536743
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
@@ -4611,7 +4615,7 @@ MonoBehaviour:
   seconds: 0
   mins: 0
   hours: 8
-  days: 0
+  days: 6
   night: 0
   SUN_SET_START_TIME: 18
   SUN_SET_DURATION: 2
@@ -13353,7 +13357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6786682197438670502, guid: eac1c08ea695b0d4bbe56b8ebe141766, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6786682197438670520, guid: eac1c08ea695b0d4bbe56b8ebe141766, type: 3}
       propertyPath: m_RootOrder
