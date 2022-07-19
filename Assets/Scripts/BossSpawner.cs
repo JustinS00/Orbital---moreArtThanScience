@@ -72,6 +72,6 @@ public class BossSpawner : MonoBehaviour {
     }
 
     public void SetClothBossSpawnDay(int dayNo) {
-        clothBossSpawnDay = dayNo;
+        clothBossSpawnDay = Math.Min(clothBossSpawnDay, dayNo);
     }
 }
