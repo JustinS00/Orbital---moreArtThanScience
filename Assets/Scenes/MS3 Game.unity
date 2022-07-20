@@ -2841,10 +2841,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1311924872, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
-      propertyPath: trades.Array.data[6].itemRecieve.item
-      value: 
-      objectReference: {fileID: 11400000, guid: 65ea095e19dbd9d4eab73731d2610188, type: 2}
     - target: {fileID: 1269390434543951402, guid: 50bee296f24892b41baf359d2bdaebe6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3203,7 +3199,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 431505017734525333, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000038146973
+      value: 0.000005722046
       objectReference: {fileID: 0}
     - target: {fileID: 1015399155586681789, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3375,7 +3371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7626364247881248122, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000038146973
+      value: 0.000005722046
       objectReference: {fileID: 0}
     - target: {fileID: 9174493073026180351, guid: 1107f58ca0a591941959e5384ca5cc1e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -13357,7 +13353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6786682197438670502, guid: eac1c08ea695b0d4bbe56b8ebe141766, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6786682197438670520, guid: eac1c08ea695b0d4bbe56b8ebe141766, type: 3}
       propertyPath: m_RootOrder
@@ -13615,9 +13611,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2387704375992474580, guid: 29c0e80f468b66d4496d2476abb65bec, type: 3}
-      propertyPath: isBoss
-      value: 0
+    - target: {fileID: 1006528813, guid: 29c0e80f468b66d4496d2476abb65bec, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2387704375992474580, guid: 29c0e80f468b66d4496d2476abb65bec, type: 3}
       propertyPath: target
@@ -13670,10 +13666,6 @@ PrefabInstance:
     - target: {fileID: 2387704375992474588, guid: 29c0e80f468b66d4496d2476abb65bec, type: 3}
       propertyPath: m_Name
       value: CursedCloth
-      objectReference: {fileID: 0}
-    - target: {fileID: 2387704375992474588, guid: 29c0e80f468b66d4496d2476abb65bec, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29c0e80f468b66d4496d2476abb65bec, type: 3}
@@ -13897,6 +13889,10 @@ PrefabInstance:
     - target: {fileID: 2175976442944693596, guid: 52b643cf2c6c6b9459b60b13fb3ffe39, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2175976442944693597, guid: 52b643cf2c6c6b9459b60b13fb3ffe39, type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52b643cf2c6c6b9459b60b13fb3ffe39, type: 3}

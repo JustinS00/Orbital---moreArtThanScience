@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ClothBossTable
   m_EditorClassIdentifier: 
   loots:
-  - mobDrop: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
-    dropChance: 100
+  - mobDrop: {fileID: 11400000, guid: 6a120ad604fcff249941a86459fc8012, type: 2}
+    maxDropPerItem: 8
+    dropChance: 50
   itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}
