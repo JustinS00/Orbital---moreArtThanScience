@@ -434,25 +434,25 @@ MonoBehaviour:
       item: {fileID: 11400000, guid: 33d5fb87d3203e34e8f734ab350b03d5, type: 2}
       quantity: 1
     itemsGiven:
-    - item: {fileID: 11400000, guid: c9382dfaba1456742b8922a5f12c9923, type: 2}
+    - item: {fileID: 11400000, guid: d3e4ed3a674c23f4f8c61e1ea8cf6ff4, type: 2}
       quantity: 5
   - itemRecieve:
       item: {fileID: 11400000, guid: 9b793bb9be6d1c948bef4faa7b8ab38f, type: 2}
       quantity: 1
     itemsGiven:
-    - item: {fileID: 11400000, guid: c9382dfaba1456742b8922a5f12c9923, type: 2}
+    - item: {fileID: 11400000, guid: d3e4ed3a674c23f4f8c61e1ea8cf6ff4, type: 2}
       quantity: 8
   - itemRecieve:
       item: {fileID: 11400000, guid: b7aa679ae2d6b5540a7be093b1810e96, type: 2}
       quantity: 1
     itemsGiven:
-    - item: {fileID: 11400000, guid: c9382dfaba1456742b8922a5f12c9923, type: 2}
+    - item: {fileID: 11400000, guid: d3e4ed3a674c23f4f8c61e1ea8cf6ff4, type: 2}
       quantity: 7
   - itemRecieve:
       item: {fileID: 11400000, guid: 7cdbd073c6f757a45a2235d54391a0e4, type: 2}
       quantity: 1
     itemsGiven:
-    - item: {fileID: 11400000, guid: c9382dfaba1456742b8922a5f12c9923, type: 2}
+    - item: {fileID: 11400000, guid: d3e4ed3a674c23f4f8c61e1ea8cf6ff4, type: 2}
       quantity: 4
   - itemRecieve:
       item: {fileID: 11400000, guid: 00696dfacf4f6e64e80fc220762cfb31, type: 2}
