@@ -77,6 +77,18 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: music5
+    clip: {fileID: 8300000, guid: df6419c5269d15d4c94a962ec37b5224, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: music6
+    clip: {fileID: 8300000, guid: ff06719d87726c742acd6af36dc63477, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   sounds:
   - name: SIU
     clip: {fileID: 8300000, guid: 5b5e26cb1ad6b1247bb02ccf5af7a8bc, type: 3}

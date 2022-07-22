@@ -255,13 +255,18 @@ public class Inventory : MonoBehaviour {
                     inventory[x, y].quantity += 1;
                     UpdateInventoryUI();
                     return true;
-                } else if (inventory[x, y] == null) {
+                }
+            }
+        } 
+        for (int y = 0; y < inventoryHeight; y++) {
+            for (int x = 0; x < inventoryWidth; x++) {
+                if (inventory[x, y] == null) {
                     inventory[x, y] = new InventorySlot(item, 1);
                     UpdateInventoryUI();
                     return true;
                 }
             }
-        } //inventory is full
+        }//inventory is full
         return false;
     }
 

@@ -27,6 +27,7 @@ public class BossSpawner : MonoBehaviour {
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         entityPrefabs = entityCollection.prefabs;
+        clothBossSpawnDay = 10;
     }
 
     void Update() {
@@ -43,7 +44,7 @@ public class BossSpawner : MonoBehaviour {
 
                 if (player.transform.position.y <= 128) {
                     GameObject newEntity = Instantiate(slimeking, spawnLocation, Quaternion.identity);
-                    gameManager.DisablePortals();
+                    clothBossSpawnDay += 5;
                 }
             }
         }
@@ -60,12 +61,13 @@ public class BossSpawner : MonoBehaviour {
 
                 if (player.transform.position.y <= 128) {
                     GameObject newEntity = Instantiate(clothBoss, spawnLocation, Quaternion.identity);
-                    gameManager.DisablePortals();
                 }
             }
         }
 
-        if (GameObject.FindGameObjectsWithTag("Boss").Length == 0) {
+        if (GameObject.FindGameObjectsWithTag("Boss").Length > 0) {
+            gameManager.DisablePortals();
+        } else {
             gameManager.EnablePortals();
         }
     }
