@@ -7,13 +7,13 @@ public class ItemDropCollider : MonoBehaviour {
     public bool touchingOtherDrop;
     public ItemClass item;
     public int quantity;
+    private float destroyTimer = 300.0f;
 
-    /*
-    Ignore triggers/collision for other layers
+
     private void Start() {
-        Physics2D.IgnoreLayerCollision(7, 8, true);
+        Destroy(gameObject, destroyTimer);
     }
-    */
+
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {

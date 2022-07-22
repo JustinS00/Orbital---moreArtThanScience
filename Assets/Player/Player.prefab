@@ -1076,7 +1076,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f5e989ac00240c44a88ced73df263af1, type: 2}
   - {fileID: 11400000, guid: 0df4ad5f6c7ce074abd418a496b11491, type: 2}
   - {fileID: 11400000, guid: 0ed9708b479d3ea4fab415009b825056, type: 2}
-  - {fileID: 11400000, guid: 49a74290c00e9454ba8565612e84dfea, type: 2}
   starting_blocks:
   - {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
   - {fileID: 11400000, guid: 9e5823f2818e7cb4e8d780a395578260, type: 2}
