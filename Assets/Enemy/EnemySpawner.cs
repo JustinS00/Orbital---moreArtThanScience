@@ -8,7 +8,6 @@ public class EnemySpawner : MonoBehaviour {
     private EntityCollection entityCollection;
     private GameObject[] entityPrefabs;
     private int numberOfNormalMonsters = 2;
-    private float checkInterval = 10f;
 
     [SerializeField]
     private float spawnInterval = 15.0f;
