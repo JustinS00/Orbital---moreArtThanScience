@@ -1032,7 +1032,7 @@ MonoBehaviour:
   playerCombat: {fileID: 1639873183}
   apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
   knockbackStrength: 5
-  knockbackTime: 0.3
+  knockbackTime: 0.5
 --- !u!95 &6179212869121307435
 Animator:
   serializedVersion: 4
@@ -1084,6 +1084,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e27056d5960bdf544bde0adfc9d3b11a, type: 2}
   - {fileID: 11400000, guid: 1862ea7880732074db360993eb0b3825, type: 2}
   - {fileID: 11400000, guid: abf3c35a14e04a84e90dce7bb2961db7, type: 2}
+  - {fileID: 11400000, guid: 2f0a2a0a2dc9d8b4f90f13c24a2743e2, type: 2}
   apple: {fileID: 11400000, guid: cd1517d506c971140bc47ed2f65f6542, type: 2}
   arrow: {fileID: 11400000, guid: 021486dde9e477f4a8c936c041dd23c7, type: 2}
   isShowing: 1
