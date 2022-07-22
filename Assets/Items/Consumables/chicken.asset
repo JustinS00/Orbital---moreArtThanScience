@@ -15,6 +15,6 @@ MonoBehaviour:
   itemType: 3
   itemName: chicken
   itemSprite: {fileID: 21300000, guid: 87b0be14180e9be4681e14b64915d462, type: 3}
-  isStackable: 0
+  isStackable: 1
   maxItemsPerStack: 10
   healthAdded: 20

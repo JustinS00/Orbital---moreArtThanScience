@@ -14,7 +14,7 @@ public class BossSpawner : MonoBehaviour {
     private float randX;
     private string currentTag;
 
-    private GameObject player;
+    private PlayerController player;
 
     private int clothBossSpawnDay = Int32.MaxValue;
 
@@ -25,7 +25,7 @@ public class BossSpawner : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         entityPrefabs = entityCollection.prefabs;
         clothBossSpawnDay = 10;
     }
@@ -36,7 +36,7 @@ public class BossSpawner : MonoBehaviour {
             if (dayNo >= 10 && dayNo % 5 == 0 && GameObject.FindGameObjectsWithTag("Boss").Length == 0) {
                 int slimekingIndex = (int) BossType.slimeking;
                 GameObject slimeking = entityPrefabs[slimekingIndex];
-
+                player.moveTo(player.spawnPos);
                 spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
                 while (Physics2D.OverlapCircle(spawnLocation, 1.0f) != null) {
                     spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
@@ -53,7 +53,7 @@ public class BossSpawner : MonoBehaviour {
             if (dayNo >= clothBossSpawnDay && dayNo % 5 == 0 && GameObject.FindGameObjectsWithTag("Boss").Length == 0) {
                 int clothBossIndex = (int) BossType.clothBoss;
                 GameObject clothBoss = entityPrefabs[clothBossIndex];
-
+                player.moveTo(player.spawnPos);
                 spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
                 while (Physics2D.OverlapCircle(spawnLocation, 1.0f) != null) {
                     spawnLocation = new Vector3(player.transform.position.x + randX, player.transform.position.y + 10, 0);
@@ -72,7 +72,4 @@ public class BossSpawner : MonoBehaviour {
         }
     }
 
-    public void SetClothBossSpawnDay(int dayNo) {
-        clothBossSpawnDay = Math.Min(clothBossSpawnDay, dayNo);
-    }
 }
