@@ -55,7 +55,9 @@ public class EnemySpawner : MonoBehaviour {
         }
 
         //limits number of enemies spawned to maxNumEntities
-        yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag(currentTag).Length < maxNumEntities);
+        yield return new WaitUntil(() =>
+            (GameObject.FindGameObjectsWithTag(currentTag).Length < maxNumEntities &&
+             GameObject.FindGameObjectsWithTag("Boss").Length == 0));
         StartCoroutine(spawnEntity(spawnInterval, entityPrefabs[Random.Range(0, numberOfPossibleEntities)]));
     }
 
