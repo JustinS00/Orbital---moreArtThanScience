@@ -49,7 +49,9 @@ public class NeutralMonstersSpawner : MonoBehaviour {
             GameObject newEntity = Instantiate(entity, spawnLocation, Quaternion.identity);
         }
 
-        yield return new WaitUntil(() => GameObject.FindGameObjectsWithTag(currentTag).Length < maxNumEntities);
+        yield return new WaitUntil(() =>
+            (GameObject.FindGameObjectsWithTag(currentTag).Length < maxNumEntities &&
+             GameObject.FindGameObjectsWithTag("Boss").Length == 0));
         StartCoroutine(spawnEntity(spawnInterval, entityPrefabs[Random.Range(0, numberOfPossibleEntities)]));
     }
 }
