@@ -31,8 +31,6 @@ public class MobStats : MonoBehaviour {
 
         if (type == MobType.slimeking) {
             entitySpawner.GetComponent<EnemySpawner>().EnableSlime();
-            int dayNo = DayNightCycle.instance.GetDayNo();
-            entitySpawner.GetComponent<BossSpawner>().SetClothBossSpawnDay(dayNo + 10);
         }
 
         if (type == MobType.clothboss) {

@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        player.spawnPos = new Vector2(terrain.spawnX, terrain.spawnY + 2);
     }
 
     // Update is called once per frame
