@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loots:
   - mobDrop: {fileID: 11400000, guid: 8b62c344b0af2414eb63114582324f78, type: 2}
+    maxDropPerItem: 1
     dropChance: 20
   - mobDrop: {fileID: 11400000, guid: ab101e017b2800446b57850ea9d9bafd, type: 2}
-    dropChance: 50
+    maxDropPerItem: 3
+    dropChance: 30
   itemDrop: {fileID: 4250807238708547090, guid: e0e7d0011f1111149ab531bb418c3aa9, type: 3}

@@ -52,8 +52,10 @@ public class FlyingBoss : FlyingAI {
             if (health.GetHealthPercentage() < 0.5) {
                 Rage();
             } else {
-                if (Time.time > nextTimeToSpawn && GameObject.FindGameObjectsWithTag("Enemy").Length < maxAddsToSpawn) {
-                    Instantiate(cursedCloth, transform.position, Quaternion.identity);
+                int maxNumEntities = OptionsMenu.instance.GetHostileMobCap();
+                if (Time.time > nextTimeToSpawn && GameObject.FindGameObjectsWithTag("Enemy").Length < maxNumEntities) {
+                    GameObject cloth = Instantiate(cursedCloth, transform.position, Quaternion.identity);
+                    cloth.SetActive(true);
                     nextTimeToSpawn = Time.time + spawnCooldown;
                 }
             }

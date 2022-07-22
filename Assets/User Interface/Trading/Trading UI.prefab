@@ -1042,7 +1042,7 @@ MonoBehaviour:
     - item: {fileID: 11400000, guid: 2f0a2a0a2dc9d8b4f90f13c24a2743e2, type: 2}
       quantity: 32
   - itemRecieve:
-      item: {fileID: 11400000, guid: ad9f3ba35a40387438306b12ffcebf72, type: 2}
+      item: {fileID: 11400000, guid: 65ea095e19dbd9d4eab73731d2610188, type: 2}
       quantity: 1
     itemsGiven:
     - item: {fileID: 11400000, guid: b306edfcd1a6c054b89cfe916fdc67d4, type: 2}
@@ -1065,6 +1065,12 @@ MonoBehaviour:
       quantity: 8
     - item: {fileID: 11400000, guid: 85f199f7d3c62aa409bc9203744a72b5, type: 2}
       quantity: 8
+  - itemRecieve:
+      item: {fileID: 11400000, guid: cf01089772c5ed04b8da6fad19290bb8, type: 2}
+      quantity: 8
+    itemsGiven:
+    - item: {fileID: 11400000, guid: 6a120ad604fcff249941a86459fc8012, type: 2}
+      quantity: 1
 --- !u!1001 &48571429166055144
 PrefabInstance:
   m_ObjectHideFlags: 0
