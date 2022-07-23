@@ -103,7 +103,13 @@ public class TradingUI : MonoBehaviour
 
     private void AddItems(PlayerController player, ItemSet item) {
         ItemClass newItem = Instantiate(item.item);
-        player.inventory.AddedItems(newItem, item.quantity);
+        int quantityAdded = player.inventory.AddedItems(newItem, item.quantity);
+        if (quantityAdded < item.quantity) {
+            GameObject newItemDrop = Instantiate(player.inventory.itemDrop,player.transform.position, Quaternion.identity);
+            newItemDrop.GetComponent<SpriteRenderer>().sprite = item.item.itemSprite;
+            newItemDrop.GetComponent<ItemDropCollider>().item = item.item;
+            newItemDrop.GetComponent<ItemDropCollider>().quantity = item.quantity - quantityAdded;
+        }
     }
 
 

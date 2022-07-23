@@ -75,8 +75,8 @@ public class Terrain : MonoBehaviour {
     private List<GameObject> worldBlocksObject = new List<GameObject>();
     private List<BlockClass> worldBlockClasses = new List<BlockClass>();
 
-    private int spawnX = 0;
-    private int spawnY = 0;
+    public int spawnX = 0;
+    public int spawnY = 0;
 
 
     #region Initialisation
@@ -292,11 +292,11 @@ public class Terrain : MonoBehaviour {
                 try {
                     Transform pos = obj.GetComponent<Transform>();
                     Bounds bounds = obj.GetComponent<Collider2D>().bounds;
-                    Debug.Log(bounds);
+                    //Debug.Log(bounds);
                     if (bounds.Contains(new Vector2(x, y)) || bounds.Contains(new Vector2(x + 0.5f, y + 0.5f)) || bounds.Contains(new Vector2(x + 1f, y + 1f)))
                         return false;
                 } catch {
-                    Debug.Log(obj + "does not have collider");
+                    //Debug.Log(obj + "does not have collider");
                 }
             }
             return !worldBlocks.Contains(new Vector2(x, y));
