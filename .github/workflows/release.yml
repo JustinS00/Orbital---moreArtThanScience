@@ -10,6 +10,7 @@ env:
 jobs:
   buildAllPlatforms:
     name: Build for ${{ matrix.targetPlatform }} 🎮
+    permissions: write-all
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
