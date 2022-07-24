@@ -5,17 +5,16 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class TradingUI : MonoBehaviour
-{   
+public class TradingUI : MonoBehaviour {
 
     private Transform canvas;
-    private Transform tradeUI;  
+    private Transform tradeUI;
     private Transform scrollRect;
     private Transform view;
     private Transform tradesContent;
     private Transform tradeTemplate;
     private Transform slot;
-    
+
 
     private int itemGivenXOffset = -30;
     private int itemGivenMultiplierRow = 40;
@@ -33,26 +32,26 @@ public class TradingUI : MonoBehaviour
         tradeTemplate = tradesContent.Find("tradeTemplate");
         tradeTemplate.gameObject.SetActive(false);
         slot = tradeTemplate.Find("ItemGiven");
-        
+
     }
 
     private void Start() {
         for (int i = 0; i < trades.Length; i++) {
-        CreateItemButton(trades[i]);
+            CreateItemButton(trades[i]);
         }
         gameObject.SetActive(false);
     }
     // Start is called before the first frame update
 
     private void CreateItemButton(Trade trade) {
-        Transform tradeItemTransform = Instantiate(tradeTemplate, tradesContent);      
+        Transform tradeItemTransform = Instantiate(tradeTemplate, tradesContent);
         //tradeItemRectTransform.anchoredPosition = new Vector3(x, y);
 
-        tradeItemTransform.Find("ItemRecieved").Find("Image").GetComponent<Image>().sprite= trade.itemRecieve.item.itemSprite;
+        tradeItemTransform.Find("ItemRecieved").Find("Image").GetComponent<Image>().sprite = trade.itemRecieve.item.itemSprite;
         tradeItemTransform.Find("ItemRecieved").Find("Quantity").GetComponent<Text>().text = trade.itemRecieve.quantity.ToString();
         tradeItemTransform.Find("ItemRecieved").Find("EquipmentDurabilityBar").gameObject.SetActive(false);
         tradeItemTransform.Find("ItemGiven").gameObject.SetActive(false);
-        
+
 
         for (int i = 0; i < trade.itemsGiven.Length; i++) {
             ItemClass item = trade.itemsGiven[i].item;
@@ -61,8 +60,8 @@ public class TradingUI : MonoBehaviour
             Transform newSlot = Instantiate(slot, tradeItemTransform);
             RectTransform newSlotRectTransform = newSlot.GetComponent<RectTransform>();
             newSlotRectTransform.anchoredPosition = new Vector3(itemGivenXOffset + i * itemGivenMultiplierRow, itemGivenYOffset);
-            
-            newSlot.Find("Image").GetComponent<Image>().sprite= item.itemSprite;
+
+            newSlot.Find("Image").GetComponent<Image>().sprite = item.itemSprite;
             newSlot.Find("Quantity").GetComponent<Text>().text = quantity.ToString();
             newSlot.Find("EquipmentDurabilityBar").gameObject.SetActive(false);
         }
@@ -81,13 +80,13 @@ public class TradingUI : MonoBehaviour
                 Achievement.instance.UnlockAchievement(Achievement.AchievementType.besttrade);
                 ToolTip.HideToolTip_Static();
             } else {
-                ToolTip.ShowToolTip_Static("  Insufficent Items");
+                ToolTip.ShowToolTip_Static("  Insufficient Items");
             }
         }
     }
 
     private bool FindItems(PlayerController player, ItemSet[] items) {
-        foreach(ItemSet item in items) {
+        foreach (ItemSet item in items) {
             if (!player.inventory.HasItemInInventory(item.item, item.quantity)) {
                 return false;
             }
@@ -96,7 +95,7 @@ public class TradingUI : MonoBehaviour
     }
 
     private void RemoveItems(PlayerController player, ItemSet[] items) {
-        foreach(ItemSet item in items) {
+        foreach (ItemSet item in items) {
             player.inventory.RemoveItemFromInventory(item.item, item.quantity);
         }
     }
@@ -105,7 +104,7 @@ public class TradingUI : MonoBehaviour
         ItemClass newItem = Instantiate(item.item);
         int quantityAdded = player.inventory.AddedItems(newItem, item.quantity);
         if (quantityAdded < item.quantity) {
-            GameObject newItemDrop = Instantiate(player.inventory.itemDrop,player.transform.position, Quaternion.identity);
+            GameObject newItemDrop = Instantiate(player.inventory.itemDrop, player.transform.position, Quaternion.identity);
             newItemDrop.GetComponent<SpriteRenderer>().sprite = item.item.itemSprite;
             newItemDrop.GetComponent<ItemDropCollider>().item = item.item;
             newItemDrop.GetComponent<ItemDropCollider>().quantity = item.quantity - quantityAdded;

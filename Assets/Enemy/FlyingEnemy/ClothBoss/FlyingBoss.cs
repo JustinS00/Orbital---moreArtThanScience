@@ -18,7 +18,6 @@ public class FlyingBoss : FlyingAI {
 
     #region Pre-Rage
     [SerializeField] private GameObject cursedCloth;
-    [SerializeField] private int maxAddsToSpawn = 4;
     [SerializeField] private int spawnCooldown = 15;
     private float nextTimeToSpawn;
     #endregion
