@@ -1,7 +1,7 @@
 # Orbital---moreArtThanScience
 
 Download instructions:
-1.  Open the download link and download StandaloneWindows64.zip
+1.  Click on Releases and download StandaloneWindows64.zip
 2.  Extract the zip into your desktop
 3.  Open the extracted folder and open the StandaloneWindows64.exe
 4.  Once the application is open, you will be brought to the Main Menu Page
